@@ -1,14 +1,20 @@
 import React, { FC } from 'react';
 import './App.css';
 
+const newElement = (): void =>{
+  return console.log("test");
+}
+
+
 const App: FC = () => {
-  
   return <div className="App">
     <h1>Fahrtenbuch</h1>
     <div className="header">
       <div className="inputContainer">
         <input type="text"
         placeholder="Kennzeichen"
+        name ="kennzeichen"
+        //value{kennzeichen}
       /><br></br>
       <input type="text"
         placeholder="Fahrer:in"
@@ -28,7 +34,7 @@ const App: FC = () => {
       />
       </div>
       
-      <button>Hinzufügen</button>  {/* Button der später die eingabe der Liste hinzufügt */}
+      <button onClick={newElement}>Hinzufügen </button>  {/* Button der später die eingabe der Liste hinzufügt */}
       <button>Download</button>    {/* Download Datei als json  */}
     </div>
   </div>
