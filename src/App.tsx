@@ -1,6 +1,7 @@
 import React, {ChangeEvent, FC, useState} from 'react';
 import './App.css';
 import {IInformation} from "./interfaces";
+import DriverList from "./Components/DriverList";
 
 const App: FC = () => {
   const [plate, setPlate] = useState<string>("");
@@ -10,18 +11,6 @@ const App: FC = () => {
   const [reason, setReason] = useState<string>("");
   const [day, setDay] = useState<string>("");
   const [rideList, setRideList] = useState<IInformation[]>([]);
-
-  const addRide = (): void => {
-    const newRide = {numberplate: plate, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
-    setRideList([...rideList, newRide])
-    setPlate("");
-    setDriver("");
-    setBegin(0);
-    setEnd(0);
-    setReason("");
-    setDay("");
-    console.log(rideList);
-  }
 
   const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
     switch(event.target.name){
@@ -44,6 +33,24 @@ const App: FC = () => {
         setDay(event.target.value)
             break;
     }
+  }
+
+  const addRide = (): void => {
+    const newRide = {numberplate: plate, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
+    setRideList([...rideList, newRide])
+    setPlate("");
+    setDriver("");
+    setBegin(0);
+    setEnd(0);
+    setReason("");
+    setDay("");
+    console.log(rideList); //TODO => console.log später entfernen
+  }
+
+  const completeRide = (numberplateToDelete:string): void => {
+    setRideList(rideList.filter((plate)=> {
+      return plate.numberplate != numberplateToDelete
+    }))
   }
 
   return <div className="App">
@@ -81,9 +88,9 @@ const App: FC = () => {
         value = {end}
         onChange={handleChange}
       /><br></br>
-
-
       {/* Das mit den <br> kann so nicht bleiben I´m very sure! */}
+
+
       <input type="text"
         placeholder="Reisezweck"
         name = "reason"
@@ -99,9 +106,16 @@ const App: FC = () => {
         onChange={handleChange}
       />
       </div>
-      
-      <button onClick={addRide}>Hinzufügen </button>  {/* Button der später die eingabe der Liste hinzufügt */}
-      <button>Download</button>    {/* Download Datei als json  */}
+      <div className="button">
+        <button onClick={addRide}>Hinzufügen </button>  {/* Button der später die eingabe der Liste hinzufügt */}
+        <button>Download</button>    {/* Download Datei als json  */}
+      </div>
+
+    </div>
+    <div className="rideList">
+      {rideList.map((ride, rI) => (
+          <DriverList numberplate={ride.numberplate} rideDriver={ride.rideDriver} rideBegin={ride.rideBegin} rideEnd={ride.rideEnd} rideReason={ride.rideReason} rideDay={ride.rideDay}/>
+      ))}
     </div>
   </div>
 }
