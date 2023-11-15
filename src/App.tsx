@@ -12,6 +12,7 @@ const App: FC = () => {
   const [day, setDay] = useState<string>("");
   const [rideList, setRideList] = useState<IInformation[]>([]);
 
+  //Eingabe
   const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
     switch(event.target.name){
       case "plate":
@@ -34,7 +35,7 @@ const App: FC = () => {
             break;
     }
   }
-
+//Die Eingabe wird an ein Array übergeben
   const addRide = (): void => {
     const newRide = {numberplate: plate, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
     setRideList([...rideList, newRide])
@@ -44,14 +45,36 @@ const App: FC = () => {
     setEnd(0);
     setReason("");
     setDay("");
-    console.log(rideList); //TODO => console.log später entfernen
   }
 
+  //Löschen
   const completeRide = (numberplateToDelete:string): void => {
     setRideList(rideList.filter((plate)=> {
       return plate.numberplate != numberplateToDelete
     }))
   }
+
+  //todo Array soll in lokalem Speicher von Browser gespeichert werden
+  const saveInBrowser = (): void => {
+
+  }
+
+
+  //todo Download als JSON REACT LIBRARY
+  const downloadList = (): void => {
+    let element = document.createElement('a');
+    let text = JSON.stringify(rideList);
+    element.setAttribute('href', 'rideList:text/plain; charset=utf-8'+ encodeURIComponent(text));
+    element.setAttribute('download', 'fahrtenbuch.json');
+    element.style.display='none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
+
+
+
+
 
   return <div className="App">
     <h1>Fahrtenbuch</h1>
@@ -88,7 +111,6 @@ const App: FC = () => {
         value = {end}
         onChange={handleChange}
       /><br></br>
-      {/* Das mit den <br> kann so nicht bleiben I´m very sure! */}
 
 
       <input type="text"
@@ -108,16 +130,17 @@ const App: FC = () => {
       </div>
       <div className="button">
         <button onClick={addRide}>Hinzufügen </button>  {/* Button der später die eingabe der Liste hinzufügt */}
-        <button>Download</button>    {/* Download Datei als json  */}
+        <button onClick={downloadList}>Download</button>    {/* Download Datei als json  */}
       </div>
 
     </div>
     <div className="rideList">
       {rideList.map((ride, rI) => (
-          <DriverList numberplate={ride.numberplate} rideDriver={ride.rideDriver} rideBegin={ride.rideBegin} rideEnd={ride.rideEnd} rideReason={ride.rideReason} rideDay={ride.rideDay}/>
+          <DriverList ride={ride} completeRide={completeRide}/>
       ))}
     </div>
   </div>
+  //todo <br> entfernen => Bootstrap
 }
 
 export default App;

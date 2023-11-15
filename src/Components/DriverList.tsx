@@ -2,16 +2,12 @@ import React from "react";
 import {IInformation} from "../interfaces";
 
 interface Props {
-    plate: string;
-    driver: IInformation;
-    begin: IInformation;
-    end: IInformation;
-    reason: IInformation;
-    day: IInformation;
+    ride: IInformation;
     completeRide(numberplateToDelete: string): void;
 }
 
-const DriverList = ({numberplate, rideDriver, rideBegin, rideEnd, rideReason, rideDay}: IInformation) => {
+//Ausgabe Inhalt Array
+const DriverList = ({ride: {numberplate, rideDriver, rideBegin, rideEnd, rideReason, rideDay}, completeRide}: Props) => {
     return(
         <div className='driver'>
             <div className='content'>
@@ -23,7 +19,7 @@ const DriverList = ({numberplate, rideDriver, rideBegin, rideEnd, rideReason, ri
                 <span>{rideDay}</span>
             </div>
             <button onClick={() =>{
-                return;
+                completeRide(numberplate);
             }}>Löschen</button>
         </div>
     );
