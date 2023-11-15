@@ -23,7 +23,7 @@ const App: FC = () => {
     setDay("");
     console.log(rideList);
   }
-
+  // todo: Event klick Eintragen der Daten in Array
 
 
   return <div className="App">
