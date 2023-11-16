@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useState} from 'react';
+import React, {ChangeEvent, FC, useState, useEffect} from 'react';
 import './App.css';
 import {IInformation} from "./interfaces";
 import DriverList from "./Components/DriverList";
@@ -11,6 +11,7 @@ const App: FC = () => {
   const [reason, setReason] = useState<string>("");
   const [day, setDay] = useState<string>("");
   const [rideList, setRideList] = useState<IInformation[]>([]);
+
 
   //Eingabe
   const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
@@ -59,14 +60,14 @@ const App: FC = () => {
   const saveInBrowser = (): void => {
     localStorage.setItem('rideList', JSON.stringify(rideList));
   }
-console.log(localStorage);
-  //Aufrufen Lokaler Speicher
-  // const fromBrowser = () => {
-  //   const items: string = JSON.parse(localStorage.getItem('rideList'));
-  //   if (items) {
-  //     setRideList(rideList);
-  //   }
-  // }, []);
+
+  //Daten aus Lokelem speicher holen
+  const getFromBrowser = (): void => {
+    const ausgabe = JSON.parse(localStorage.getItem('rideList')||'{}');
+    return ausgabe;
+  }
+
+
 
   //Daten werden in json datei zum Download bereitgestellt
   const exportData = () => {
@@ -143,6 +144,7 @@ console.log(localStorage);
           <DriverList ride={ride} completeRide={completeRide}/>
       ))}
     </div>
+
   </div>
   //todo <br> entfernen => Bootstrap
 }
