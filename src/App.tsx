@@ -3,6 +3,8 @@ import './App.css';
 import {IInformation} from "./interfaces";
 import DriverList from "./Components/DriverList";
 import "bootstrap/dist/css/bootstrap.min.css";
+import uuid from 'react-uuid';
+
 
 const App: FC = () => {
   const [plate, setPlate] = useState<string>("");
@@ -12,7 +14,7 @@ const App: FC = () => {
   const [reason, setReason] = useState<string>("");
   const [day, setDay] = useState<string>("");
   const [rideList, setRideList] = useState<IInformation[]>([]);
-
+  const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
 
   //Eingabe
   const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
@@ -37,18 +39,38 @@ const App: FC = () => {
             break;
     }
   }
+
 //Die Eingabe wird an ein Array übergeben
-  const addRide = (): void => {
-    const newRide = {numberplate: plate, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
-    setRideList([...rideList, newRide])
+  const addRide = () => {
+    const newRide = {id:uuid(), numberplate: plate, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
+    setRideList([...rideList, newRide]);
     setPlate("");
     setDriver("");
     setBegin(0);
     setEnd(0);
     setReason("");
     setDay("");
-    saveInBrowser();
+    //saveInBrowser();
+    console.log(newRide);
   }
+
+  // loaded fromLocalStorage wird bei deklaration false gesetzt. Hier wird aus false True was das aufrufen der beiden Funktionen zur folge hat
+  //todo useEffect LESEN
+  useEffect(() => {
+    if (!loadedFromLocalStorage) {
+      setLoadedFromLocalStorage(true);
+      setRideList(getFromBrowser());
+    }
+  }, [loadedFromLocalStorage]);
+
+  // loadedFromLocalStorage ruft das erneute speichern auf
+  useEffect(() => {
+    if(loadedFromLocalStorage){
+      saveInBrowser();
+    }
+
+  }, [loadedFromLocalStorage, rideList]);
+
 
   //Löschen
   const completeRide = (numberplateToDelete:string): void => {
@@ -56,6 +78,15 @@ const App: FC = () => {
       return plate.numberplate != numberplateToDelete
     }))
   }
+
+  //todo => Löschen via id nicht mehr numberplate
+
+  // const completeRideZwei = (idToDelete:string): void => {
+  //   setRideList(rideList.filter((plate)=> {
+  //     return plate.numberplate != idToDelete
+  //   }))
+  // }
+
 
   //Speichern in Lokalem Speicher von Browser
   const saveInBrowser = (): void => {
@@ -68,8 +99,6 @@ const App: FC = () => {
     return ausgabe;
   }
 
-
-
   //Daten werden in json datei zum Download bereitgestellt
   const exportData = () => {
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
@@ -80,13 +109,6 @@ const App: FC = () => {
     link.download = "rideList.json";
     link.click();
   }
-//todo useEffect LESEN
-  useEffect(() => {
-    if (rideList.length === 0 && getFromBrowser()) {
-      setRideList(getFromBrowser());
-    }
-  }, []);
-
 
   return <div className="App">
     <h1>Fahrtenbuch</h1>
