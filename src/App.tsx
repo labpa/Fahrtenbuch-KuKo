@@ -81,9 +81,10 @@ const App: FC = () => {
 
   //todo => Löschen via id nicht mehr numberplate
 
-  // const completeRideZwei = (idToDelete:string): void => {
-  //   setRideList(rideList.filter((plate)=> {
-  //     return plate.numberplate != idToDelete
+  // const completeRide = (idToDelete:string): void => {
+  //   setRideList(rideList.filter((id)=> {
+  //     return id != idToDelete
+  //
   //   }))
   // }
 
