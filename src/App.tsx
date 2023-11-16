@@ -2,6 +2,7 @@ import React, {ChangeEvent, FC, useState, useEffect} from 'react';
 import './App.css';
 import {IInformation} from "./interfaces";
 import DriverList from "./Components/DriverList";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App: FC = () => {
   const [plate, setPlate] = useState<string>("");
@@ -62,8 +63,8 @@ const App: FC = () => {
   }
 
   //Daten aus Lokelem speicher holen
-  const getFromBrowser = (): void => {
-    const ausgabe = JSON.parse(localStorage.getItem('rideList')||'{}');
+  const getFromBrowser = (): IInformation[] => {
+    const ausgabe = JSON.parse(localStorage.getItem('rideList')||'[]');
     return ausgabe;
   }
 
@@ -79,6 +80,12 @@ const App: FC = () => {
     link.download = "rideList.json";
     link.click();
   }
+//todo useEffect LESEN
+  useEffect(() => {
+    if (rideList.length === 0 && getFromBrowser()) {
+      setRideList(getFromBrowser());
+    }
+  }, []);
 
 
   return <div className="App">
