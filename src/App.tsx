@@ -45,6 +45,7 @@ const App: FC = () => {
     setEnd(0);
     setReason("");
     setDay("");
+    saveInBrowser();
   }
 
   //Löschen
@@ -54,26 +55,29 @@ const App: FC = () => {
     }))
   }
 
-  //todo Array soll in lokalem Speicher von Browser gespeichert werden
+  //Speichern in Lokalem Speicher von Browser
   const saveInBrowser = (): void => {
-
+    localStorage.setItem('rideList', JSON.stringify(rideList));
   }
+console.log(localStorage);
+  //Aufrufen Lokaler Speicher
+  // const fromBrowser = () => {
+  //   const items: string = JSON.parse(localStorage.getItem('rideList'));
+  //   if (items) {
+  //     setRideList(rideList);
+  //   }
+  // }, []);
 
-
-  //todo Download als JSON REACT LIBRARY
-  const downloadList = (): void => {
-    let element = document.createElement('a');
-    let text = JSON.stringify(rideList);
-    element.setAttribute('href', 'rideList:text/plain; charset=utf-8'+ encodeURIComponent(text));
-    element.setAttribute('download', 'fahrtenbuch.json');
-    element.style.display='none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+  //Daten werden in json datei zum Download bereitgestellt
+  const exportData = () => {
+    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+        JSON.stringify(rideList)
+    )}`;
+    const link = document.createElement("a");
+    link.href = jsonString;
+    link.download = "rideList.json";
+    link.click();
   }
-
-
-
 
 
   return <div className="App">
@@ -129,8 +133,8 @@ const App: FC = () => {
       />
       </div>
       <div className="button">
-        <button onClick={addRide}>Hinzufügen </button>  {/* Button der später die eingabe der Liste hinzufügt */}
-        <button onClick={downloadList}>Download</button>    {/* Download Datei als json  */}
+        <button onClick={addRide}>Hinzufügen </button>  {/* Eingabe */}
+        <button onClick={exportData}>Download</button>    {/* Download Datei als json  */}
       </div>
 
     </div>
