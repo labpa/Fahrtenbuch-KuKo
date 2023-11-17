@@ -2,7 +2,8 @@ import React, {ChangeEvent, FC, useState, useEffect} from 'react';
 import './App.css';
 import {IInformation} from "./interfaces";
 import DriverList from "./Components/DriverList";
-import "bootstrap/dist/css/bootstrap.min.css";
+import'bootswatch/dist/pulse/bootstrap.min.css';
+// import "bootstrap/dist/css/bootstrap.min.css";
 import uuid from 'react-uuid';
 
 
@@ -112,71 +113,126 @@ const App: FC = () => {
   }
 
   return <div className="App">
-    <h1>Fahrtenbuch</h1>
+    <h1 className={"text-center"}>Fahrtenbuch</h1>
     <div className="header">
-      <div className="inputContainer">
+      <div className="container-sm">
 
 
-        <input type="text"
-        placeholder="Kennzeichen"
-        name ="plate"
-        value = {plate}
-        onChange = {handleChange}
-      /><br></br>
 
 
-      <input type="text"
-        placeholder="Fahrer:in"
-        name = "driver"
-        value = {driver}
-        onChange = {handleChange}
-      /><br></br>
+        <div className="container text-center">
+          <div className="row align-items-center">
+            <div className="col">
+              <label className="col-form-label col-form-label-lg mt-4" htmlFor="inputLarge" >Kennzeichen</label>
+            </div>
+            <div className="col">
+              <input id="inputLarge" className="form-control form-control-lg" type="text"
+                     placeholder="Kennzeichen"
+                     name ="plate"
+                     value = {plate}
+                     onChange = {handleChange}
+              />
+            </div>
+          </div>
+        </div>
 
-      <input type="number"
-        placeholder="Kilometerstand Beginn"
-        name = "begin"
-        value= {begin}
-        onChange = {handleChange}
-      /><br></br>
-
-
-      <input type="number"
-        placeholder="Kilometerstand Ende"
-        name = "end"
-        value = {end}
-        onChange={handleChange}
-      /><br></br>
-
-
-      <input type="text"
-        placeholder="Reisezweck"
-        name = "reason"
-        value = {reason}
-        onChange={handleChange}
-      /><br></br>
-
-
-      <input type="date"
-        placeholder="Datum"
-        name = "day"
-        value = {day}
-        onChange={handleChange}
-      />
-      </div>
-      <div className="button">
-        <button onClick={addRide}>Hinzufügen </button>  {/* Eingabe */}
-        <button onClick={exportData}>Download</button>    {/* Download Datei als json  */}
+      <div className="container text-center">
+        <div className="row align-items-center">
+          <div className="col">
+            <label className="col-form-label col-form-label-lg mt-4" htmlFor="inputLarge" >Fahrer:in</label>
+          </div>
+          <div className="col">
+            <input id="inputLarge" className="form-control form-control-lg" type="text"
+                   placeholder="Fahrer:in"
+                   name = "driver"
+                   value = {driver}
+                   onChange = {handleChange}
+            />
+          </div>
+        </div>
       </div>
 
-    </div>
+        <div className={"container text-center"}>
+          <div className={"row align-items-center"}>
+            <div className={"col"}>
+              <label className="col-form-label col-form-label-lg mt-4" htmlFor="inputLarge" >Kilometerstand Beginn</label>
+            </div>
+            <div className={"col"}>
+              <input id="inputLarge" className="form-control form-control-lg" type="number"
+                     placeholder="Kilometerstand Beginn"
+                     name = "begin"
+                     value= {begin}
+                     onChange = {handleChange}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={"container text-center"}>
+          <div className={"row align-items-center"}>
+            <div className={"col"}>
+              <label className="col-form-label col-form-label-lg mt-4" htmlFor="inputLarge" >Kilometerstand Ende</label>
+            </div>
+            <div className={"col"}>
+              <input id="inputLarge" className="form-control form-control-lg" type="number"
+                     placeholder="Kilometerstand Ende"
+                     name = "end"
+                     value = {end}
+                     onChange={handleChange}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={"container text-center"}>
+          <div className={"row align-items-center"}>
+            <div className={"col"}>
+              <label className="col-form-label col-form-label-lg mt-4" htmlFor="inputLarge" >Reisezweck</label>
+            </div>
+            <div className={"col"}>
+              <input id="inputLarge" className="form-control form-control-lg" type="text"
+                     placeholder="Reisezweck"
+                     name = "reason"
+                     value = {reason}
+                     onChange={handleChange}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={"container text-center"}>
+          <div className={"row align-items-center"}>
+            <div className={"col"}>
+              <label className="col-form-label col-form-label-lg mt-4" htmlFor="inputLarge" >Datum</label>
+            </div>
+            <div className={"col"}>
+              <input id="inputLarge" className="form-control form-control-lg" type="date"
+                     placeholder="Datum"
+                     name = "day"
+                     value = {day}
+                     onChange={handleChange}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={"btn-group"} role={"group"}>
+          <div className={"text-center"}>
+            <button className="btn btn-primary" type="button" onClick={addRide}>Hinzufügen </button>  {/* Eingabe */}
+            <button className="btn btn-primary" type="button" onClick={exportData}>Download</button>    {/* Download Datei als json  */}
+          </div>
+        </div>
+
+
     <div className="rideList">
       {rideList.map((ride, rI) => (
           <DriverList ride={ride} completeRide={completeRide}/>
       ))}
     </div>
 
+    </div>
   </div>
-  //todo <br> entfernen => Bootstrap
+</div>
 }
 
 export default App;
