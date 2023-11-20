@@ -10,3 +10,19 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Idee
 Die Idee ist das bereits in Javascript bestehende Fahrtenbuch in einer React App neu zu erstellen. Dieses mal auch mit CSS.
+
+## TODO
+### Löschen
++ löschen mit ID nicht mehr mit dem Kennzeichen
+
+### Download
++ PDF export
+
+### Upload
++ text aus hochgeladener datei pars text to json
+
+### add PWA
++ progressive web app -> pwa
+
+## zu verstehen
+### useEffect
