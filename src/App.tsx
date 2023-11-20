@@ -51,8 +51,7 @@ const App: FC = () => {
     setEnd(0);
     setReason("");
     setDay("");
-    //saveInBrowser();
-    console.log(newRide);
+    console.log("HIER ->" + plate);
   }
 
   // loaded fromLocalStorage wird bei deklaration false gesetzt. Hier wird aus false True was das aufrufen der beiden Funktionen zur folge hat
@@ -221,6 +220,15 @@ const App: FC = () => {
             <button className="btn btn-primary" type="button" onClick={addRide}>Hinzufügen </button>  {/* Eingabe */}
             <button className="btn btn-primary" type="button" onClick={exportData}>Download</button>    {/* Download Datei als json  */}
           </div>
+        </div>
+
+
+        {/*//todo JSON liste läst sich hochladen und wird ausgegeben*/}
+        <div>
+          <input type={"file"}
+                 id={"formFile"}
+                 className={"form-control"}
+          />
         </div>
 
 
