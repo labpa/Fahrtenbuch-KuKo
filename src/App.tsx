@@ -16,6 +16,8 @@ const App: FC = () => {
   const [day, setDay] = useState<string>("");
   const [rideList, setRideList] = useState<IInformation[]>([]);
   const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
+  const [id, setId] = useState<string>("");
+  const [files, setFiles] = useState("");
 
   //Eingabe
   const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
@@ -45,13 +47,13 @@ const App: FC = () => {
   const addRide = () => {
     const newRide = {id:uuid(), numberplate: plate, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
     setRideList([...rideList, newRide]);
+    setId("");
     setPlate("");
     setDriver("");
     setBegin(0);
     setEnd(0);
     setReason("");
     setDay("");
-    console.log("HIER ->" + plate);
   }
 
   // loaded fromLocalStorage wird bei deklaration false gesetzt. Hier wird aus false True was das aufrufen der beiden Funktionen zur folge hat
@@ -72,21 +74,12 @@ const App: FC = () => {
   }, [loadedFromLocalStorage, rideList]);
 
 
-  //Löschen
-  const completeRide = (numberplateToDelete:string): void => {
-    setRideList(rideList.filter((plate)=> {
-      return plate.numberplate != numberplateToDelete
-    }))
-  }
-
-  //todo => Löschen via id nicht mehr numberplate
-
-  // const completeRide = (idToDelete:string): void => {
-  //   setRideList(rideList.filter((id)=> {
-  //     return id != idToDelete
-  //
-  //   }))
-  // }
+  //Löschen -> Löscht über die id
+   const completeRide = (idToDelete:string):void => {
+    setRideList(rideList.filter((id) => {
+      return id.id != idToDelete
+     }))
+   }
 
 
   //Speichern in Lokalem Speicher von Browser
@@ -110,6 +103,17 @@ const App: FC = () => {
     link.download = "rideList.json";
     link.click();
   }
+
+  //Daten werden als PDF gespeichert
+  const exportPdf = () => {
+     console.log("Download als PDF");
+  }
+
+  //JSON dateien lassen sich hochladen
+  const uploadData = () => {
+    console.log("Irgendwann werden hier die hochgeladenen Daten angezeigt");
+  }
+
 
   return <div className="App">
     <h1 className={"text-center"}>Fahrtenbuch</h1>
@@ -218,7 +222,10 @@ const App: FC = () => {
         <div className={"btn-group"} role={"group"}>
           <div className={"text-center"}>
             <button className="btn btn-primary" type="button" onClick={addRide}>Hinzufügen </button>  {/* Eingabe */}
-            <button className="btn btn-primary" type="button" onClick={exportData}>Download</button>    {/* Download Datei als json  */}
+            <button className="btn btn-primary" type="button" onClick={exportData}>JSON </button>
+            <button className="btn btn-primary" type="button" onClick={exportPdf}>PDF</button>
+
+
           </div>
         </div>
 
@@ -228,10 +235,12 @@ const App: FC = () => {
           <input type={"file"}
                  id={"formFile"}
                  className={"form-control"}
+
           />
+
         </div>
 
-
+{/*//Ausgabe der */}
     <div className="rideList">
       {rideList.map((ride, rI) => (
           <DriverList ride={ride} completeRide={completeRide}/>
