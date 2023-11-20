@@ -105,14 +105,20 @@ const App: FC = () => {
   }
 
   //Daten werden als PDF gespeichert
-  const exportPdf = () => {
+  cgionst exportPdf = () => {
      console.log("Download als PDF");
   }
 
   //JSON dateien lassen sich hochladen
-  const uploadData = () => {
-    console.log("Irgendwann werden hier die hochgeladenen Daten angezeigt");
-  }
+
+  // const handleChange = (e: string) => {
+  //   const fileReader = new FileReader();
+  //   fileReader.readAsText(e.target.files[0], "UTF-8");
+  //   fileReader.onload = e => {
+  //     console.log("e.target.result", e.target.result);
+  //     setFiles(e.target.result);
+  //   };
+  // };
 
 
   return <div className="App">
@@ -221,11 +227,9 @@ const App: FC = () => {
 
         <div className={"btn-group"} role={"group"}>
           <div className={"text-center"}>
-            <button className="btn btn-primary" type="button" onClick={addRide}>Hinzufügen </button>  {/* Eingabe */}
-            <button className="btn btn-primary" type="button" onClick={exportData}>JSON </button>
-            <button className="btn btn-primary" type="button" onClick={exportPdf}>PDF</button>
-
-
+              <button className="btn btn-primary" type="button" onClick={addRide}>Hinzufügen </button>  {/* Eingabe */}
+              <button className="btn btn-primary" type="button" onClick={exportData}>JSON </button>
+              <button className="btn btn-primary" type="button" onClick={exportPdf}>PDF</button>
           </div>
         </div>
 
@@ -235,6 +239,7 @@ const App: FC = () => {
           <input type={"file"}
                  id={"formFile"}
                  className={"form-control"}
+                 onChange={handleChange}
 
           />
 
