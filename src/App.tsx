@@ -3,8 +3,9 @@ import './App.css';
 import {IInformation} from "./interfaces";
 import DriverList from "./Components/DriverList";
 import'bootswatch/dist/pulse/bootstrap.min.css';
-// import "bootstrap/dist/css/bootstrap.min.css";
 import uuid from 'react-uuid';
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { PDFViewer } from '@react-pdf/renderer';
 
 
 const App: FC = () => {
@@ -18,6 +19,42 @@ const App: FC = () => {
   const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
   const [id, setId] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
+
+
+  // Create styles
+  const styles = StyleSheet.create({
+    page: {
+      flexDirection: 'row',
+      backgroundColor: '#E4E4E4'
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+      flexGrow: 1
+    }
+  });
+
+// Create Document Component
+  const MyDocument = () => (
+      <Document>
+        <Page size="A4" style={styles.page}>
+          <View style={styles.section}>
+            <Text>Section #1</Text>
+          </View>
+          <View style={styles.section}>
+            <Text>Section #2</Text>
+          </View>
+        </Page>
+      </Document>
+  );
+
+
+
+
+
+
+
+
 
 
   //Eingabe
@@ -124,7 +161,10 @@ const App: FC = () => {
 
    //Layout oder so
   return <div className="App">
+
+
     <h1 className={"text-center"}>Fahrtenbuch</h1>
+
     <div className="header">
       <div className="container-sm">
 
@@ -236,16 +276,21 @@ const App: FC = () => {
         </div>
 
 
-        {/*//todo JSON liste läst sich hochladen und wird ausgegeben*/}
+        {/*json upload feld*/}
         <div>
           <input type={"file"}
                  id={"formFile"}
                  className={"form-control"}
                  onChange={uploadData}
-
           />
-
         </div>
+
+        <div className={"container-xxl"}>
+          <PDFViewer>
+            <MyDocument />
+          </PDFViewer>
+        </div>
+
 
 {/*//Ausgabe der */}
     <div className="rideList">
@@ -254,9 +299,14 @@ const App: FC = () => {
       ))}
     </div>
 
+
+
     </div>
+
   </div>
+
 </div>
+
 }
 
 export default App;
