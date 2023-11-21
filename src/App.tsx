@@ -19,6 +19,7 @@ const App: FC = () => {
   const [id, setId] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
 
+
   //Eingabe
   const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
     switch(event.target.name){
@@ -73,14 +74,12 @@ const App: FC = () => {
 
   }, [loadedFromLocalStorage, rideList]);
 
-
   //Löschen -> Löscht über die id
    const completeRide = (idToDelete:string):void => {
     setRideList(rideList.filter((id) => {
       return id.id != idToDelete
      }))
    }
-
 
   //Speichern in Lokalem Speicher von Browser
   const saveInBrowser = (): void => {
@@ -104,7 +103,7 @@ const App: FC = () => {
     link.click();
   }
 
-  //Daten werden als PDF gespeichert
+  //todo Daten werden als PDF gespeichert
   const exportPdf = () => {
      console.log("Download als PDF");
   }
@@ -115,15 +114,15 @@ const App: FC = () => {
     if(e.target?.files && e.target.files.length > 0){
       fileReader.readAsText(e.target?.files[0], "UTF-8");
       fileReader.onload = e => {
-        console.log("e.target.result", e.target?.result);
         setFiles(e.target?.result);
+        if(e.target?.result){
+          setRideList(JSON.parse(e.target?.result.toString()));
+        }
       };
-    }
+    };
   };
 
-
-
-
+   //Layout oder so
   return <div className="App">
     <h1 className={"text-center"}>Fahrtenbuch</h1>
     <div className="header">
