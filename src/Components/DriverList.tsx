@@ -24,7 +24,7 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
                 <p>Tag</p>
                 <span>{rideDay}</span>
             </div>
-            <button className="btn btn-primary" type="button" onClick={() =>{
+            <button onClick={() =>{
                 completeRide(id);
             }}>Löschen</button>
         </div>

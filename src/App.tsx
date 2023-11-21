@@ -21,40 +21,32 @@ const App: FC = () => {
   const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
 
 
-  // Create styles
-  const styles = StyleSheet.create({
-    page: {
-      flexDirection: 'row',
-      backgroundColor: '#E4E4E4'
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-      flexGrow: 1
-    }
-  });
+  // // Create styles
+  // const styles = StyleSheet.create({
+  //   page: {
+  //     flexDirection: 'row',
+  //     backgroundColor: '#E4E4E4'
+  //   },
+  //   section: {
+  //     margin: 10,
+  //     padding: 10,
+  //     flexGrow: 1
+  //   }
+  // });
 
 // Create Document Component
-  const MyDocument = () => (
-      <Document>
-        <Page size="A4" style={styles.page}>
-          <View style={styles.section}>
-            <Text>Section #1</Text>
-          </View>
-          <View style={styles.section}>
-            <Text>Section #2</Text>
-          </View>
-        </Page>
-      </Document>
-  );
-
-
-
-
-
-
-
-
+//   const MyDocument = () => (
+//       <Document>
+//         <Page size="A4" style={styles.page}>
+//           <View style={styles.section}>
+//             <Text>Section #1</Text>
+//           </View>
+//           <View style={styles.section}>
+//             <Text>Section #2</Text>
+//           </View>
+//         </Page>
+//       </Document>
+//   );
 
 
   //Eingabe
@@ -161,135 +153,167 @@ const App: FC = () => {
 
    //Layout oder so
   return <div className="App">
+  {/*return <div className="App">*/}
 
-
-    <h1 className={"text-center"}>Fahrtenbuch</h1>
-
-    <div className="header">
-      <div className="container-sm">
-
-
-
-
-        <div className="container text-center">
-          <div className="row align-items-center">
-            <div className="col">
-              <label className="col-form-label col-form-label-lg mt-4" htmlFor="inputLarge" >Kennzeichen</label>
+    <div className={"border"}>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <div className="d-flex justify-content-center">
+              <div><h1>Fahrtenbuch</h1></div>
             </div>
-            <div className="col">
-              <input id="inputLarge" className="form-control form-control-lg" type="text"
-                     placeholder="Kennzeichen"
-                     name ="plate"
-                     value = {plate}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div className={"border"}>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <div className="d-flex justify-content-center">
+              <div className={"col-form-label mt-4"}>
+                <label >Kennzeichen</label>
+              </div>
+              <div>
+                <input type="text"
+                       placeholder="Kennzeichen"
+                       className={"form-control"}
+                       name ="plate"
+                       value = {plate}
+                       onChange = {handleChange}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          <div className="d-flex justify-content-center">
+            <div>
+              <label className={"col-form-label mt-4"}>Fahrer:in</label>
+            </div>
+
+            <div>
+              <input type="text"
+                     placeholder="Fahrer:in"
+                     className={"form-control"}
+                     name = "driver"
+                     value = {driver}
                      onChange = {handleChange}
               />
             </div>
           </div>
         </div>
-
-      <div className="container text-center">
-        <div className="row align-items-center">
-          <div className="col">
-            <label className="col-form-label col-form-label-lg mt-4" htmlFor="inputLarge" >Fahrer:in</label>
-          </div>
-          <div className="col">
-            <input id="inputLarge" className="form-control form-control-lg" type="text"
-                   placeholder="Fahrer:in"
-                   name = "driver"
-                   value = {driver}
-                   onChange = {handleChange}
-            />
-          </div>
-        </div>
       </div>
+    </div>
 
-        <div className={"container text-center"}>
-          <div className={"row align-items-center"}>
-            <div className={"col"}>
-              <label className="col-form-label col-form-label-lg mt-4" htmlFor="inputLarge" >Kilometerstand Beginn</label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div>
+              <label>Kilometerstand Beginn</label>
             </div>
-            <div className={"col"}>
-              <input id="inputLarge" className="form-control form-control-lg" type="number"
+            <div>
+              <input type="number"
                      placeholder="Kilometerstand Beginn"
                      name = "begin"
                      value= {begin}
                      onChange = {handleChange}
               />
             </div>
-          </div>
-        </div>
 
-        <div className={"container text-center"}>
-          <div className={"row align-items-center"}>
-            <div className={"col"}>
-              <label className="col-form-label col-form-label-lg mt-4" htmlFor="inputLarge" >Kilometerstand Ende</label>
+
+
+
+            <div>
+              <label>Kilometerstand Ende</label>
             </div>
-            <div className={"col"}>
-              <input id="inputLarge" className="form-control form-control-lg" type="number"
+            <div>
+              <input type="number"
                      placeholder="Kilometerstand Ende"
                      name = "end"
                      value = {end}
                      onChange={handleChange}
               />
             </div>
-          </div>
-        </div>
 
-        <div className={"container text-center"}>
-          <div className={"row align-items-center"}>
-            <div className={"col"}>
-              <label className="col-form-label col-form-label-lg mt-4" htmlFor="inputLarge" >Reisezweck</label>
+
+
+            <div>
+              <label>Reisezweck</label>
             </div>
-            <div className={"col"}>
-              <input id="inputLarge" className="form-control form-control-lg" type="text"
+            <div>
+              <input type="text"
                      placeholder="Reisezweck"
                      name = "reason"
                      value = {reason}
                      onChange={handleChange}
               />
             </div>
-          </div>
-        </div>
 
-        <div className={"container text-center"}>
-          <div className={"row align-items-center"}>
-            <div className={"col"}>
-              <label className="col-form-label col-form-label-lg mt-4" htmlFor="inputLarge" >Datum</label>
+
+
+            <div>
+              <label>Datum</label>
             </div>
-            <div className={"col"}>
-              <input id="inputLarge" className="form-control form-control-lg" type="date"
+            <div>
+              <input type="date"
                      placeholder="Datum"
                      name = "day"
                      value = {day}
                      onChange={handleChange}
               />
             </div>
-          </div>
-        </div>
 
-        <div className={"btn-group"} role={"group"}>
-          <div className={"text-center"}>
-              <button className="btn btn-primary" type="button" onClick={addRide}>Hinzufügen </button>  {/* Eingabe */}
-              <button className="btn btn-primary" type="button" onClick={exportData}>JSON </button>
-              <button className="btn btn-primary" type="button" onClick={exportPdf}>PDF</button>
+
+          <div>
+              <button type={"button"} className={"btn btn-outline-primary"} onClick={addRide}>Hinzufügen </button>  {/* Eingabe */}
+              <button type={"button"} className={"btn btn-outline-primary"} onClick={exportData}>JSON </button>
+              <button type={"button"} className={"btn btn-outline-primary"} onClick={exportPdf}>PDF</button>
           </div>
-        </div>
+
 
 
         {/*json upload feld*/}
         <div>
           <input type={"file"}
                  id={"formFile"}
-                 className={"form-control"}
                  onChange={uploadData}
           />
         </div>
 
-        <div className={"container-xxl"}>
-          <PDFViewer>
-            <MyDocument />
-          </PDFViewer>
-        </div>
+        {/*<div className={"container-xxl"}>*/}
+        {/*  <PDFViewer>*/}
+        {/*    <MyDocument />*/}
+        {/*  </PDFViewer>*/}
+        {/*</div>*/}
 
 
 {/*//Ausgabe der */}
@@ -301,9 +325,7 @@ const App: FC = () => {
 
 
 
-    </div>
 
-  </div>
 
 </div>
 
