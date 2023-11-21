@@ -17,7 +17,7 @@ const App: FC = () => {
   const [rideList, setRideList] = useState<IInformation[]>([]);
   const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
   const [id, setId] = useState<string>("");
-  const [files, setFiles] = useState("");
+  const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
 
   //Eingabe
   const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
@@ -105,20 +105,23 @@ const App: FC = () => {
   }
 
   //Daten werden als PDF gespeichert
-  cgionst exportPdf = () => {
+  const exportPdf = () => {
      console.log("Download als PDF");
   }
 
   //JSON dateien lassen sich hochladen
+  const uploadData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fileReader = new FileReader();
+    if(e.target?.files && e.target.files.length > 0){
+      fileReader.readAsText(e.target?.files[0], "UTF-8");
+      fileReader.onload = e => {
+        console.log("e.target.result", e.target?.result);
+        setFiles(e.target?.result);
+      };
+    }
+  };
 
-  // const handleChange = (e: string) => {
-  //   const fileReader = new FileReader();
-  //   fileReader.readAsText(e.target.files[0], "UTF-8");
-  //   fileReader.onload = e => {
-  //     console.log("e.target.result", e.target.result);
-  //     setFiles(e.target.result);
-  //   };
-  // };
+
 
 
   return <div className="App">
@@ -239,7 +242,7 @@ const App: FC = () => {
           <input type={"file"}
                  id={"formFile"}
                  className={"form-control"}
-                 onChange={handleChange}
+                 onChange={uploadData}
 
           />
 
