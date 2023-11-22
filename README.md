@@ -24,3 +24,8 @@ Die Idee ist das bereits in Javascript bestehende Fahrtenbuch in einer React App
 
 ## zu verstehen
 ### useEffect
+
+## Dokumentation
+
+### GUI
+![Fahrtenbuch.png](img%2FFahrtenbuch.png)
