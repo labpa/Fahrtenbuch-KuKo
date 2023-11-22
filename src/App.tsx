@@ -126,8 +126,8 @@ const App: FC = () => {
 
    //Layout oder so
   return <div className="App">
-    <div className={"container-sm"}>
-      <div className={"border"}>
+    <div className={"container text-center"}>
+
 
         {/*Überschrift -> Fahrtenbuch*/}
         <div className="d-flex justify-content-center">
@@ -138,137 +138,114 @@ const App: FC = () => {
           </div>
         </div>
 
-        {/*Kennzeichen*/}
-        <div className="row">
-          <div className="col">
-            <div className="d-flex justify-content-center">
-              <div>
-                <label className={"col-form-label mt-0"}>Kennzeichen</label>
-              </div>
-
-              {/*Inputfield Kennzeichen*/}
-              <div>
-                <input type="text"
-                       placeholder="Kennzeichen"
-                       className={"form-control"}
-                       name ="plate"
-                       value = {plate}
-                       onChange = {handleChange}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/*Fahrer:in*/}
-        <div className="row">
-          <div className="col">
-            <div className="d-flex justify-content-center">
-              <div>
-                <label className={"col-form-label mt-0"}>Fahrer:in</label>
-              </div>
-
-              {/*Inputfield Fahrer:in*/}
-              <div>
-                <input type="text"
-                       placeholder="Fahrer:in"
-                       className={"form-control"}
-                       name = "driver"
-                       value = {driver}
-                       onChange = {handleChange}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/*Kilometerstand Beginn*/}
+      {/*Kennzeichen*/}
+      <div className={"container text-center"}>
         <div className={"row"}>
           <div className={"col"}>
-            <div className="d-flex justify-content-center">
-              <div>
-                <label className={"col-form-label mt-0"}>Kilometerstand Beginn</label>
-              </div>
-
-              {/*Inputfield Kilometerstand Beginn*/}
-              <div>
-                <input type="number"
-                       placeholder="Kilometerstand Beginn"
-                       className={"form-control"}
-                       name = "begin"
-                       value= {begin}
-                       onChange = {handleChange}
-                />
-              </div>
-            </div>
+            <label className={"col-form-label mt-0"}>Kennzeichen</label>
+          </div>
+          <div className={"col"}>
+            <input type="text"
+                   placeholder="Kennzeichen"
+                   className={"form-control"}
+                   name ="plate"
+                   value = {plate}
+                   onChange = {handleChange}
+            />
           </div>
         </div>
+      </div>
 
-        {/*Kilometerstand Ende*/}
+      {/*Fahrer:in*/}
+      <div className={"container text-center"}>
         <div className={"row"}>
           <div className={"col"}>
-            <div className={"d-flex justify-content-center"}>
-              <div>
-                <label className={"col-form-label mt-0"}>Kilometerstand Ende</label>
-              </div>
-
-              {/*  Inputfield Kilometerstand Ende*/}
-              <div>
-                <input type="number"
-                       placeholder="Kilometerstand Ende"
-                       className={"form-control"}
-                       name = "end"
-                       value = {end}
-                       onChange={handleChange}
-                />
-              </div>
-            </div>
+            <label className={"col-form-label mt-0"}>Fahrer:in</label>
+          </div>
+          <div className={"col"}>
+            <input type="text"
+                   placeholder="Fahrer:in"
+                   className={"form-control"}
+                   name = "driver"
+                   value = {driver}
+                   onChange = {handleChange}
+            />
           </div>
         </div>
+      </div>
 
-        {/*Reisezweck*/}
+      {/*Kilometerstand Beginn*/}
+      <div className={"container text-center"}>
         <div className={"row"}>
           <div className={"col"}>
-            <div className={"d-flex justify-content-center"}>
-              <div>
-                <label className={"col-form-label mt-0"}>Reisezweck</label>
-              </div>
-
-              {/*  Insertfield Reisezweck*/}
-              <div>
-                <input type="text"
-                       placeholder="Reisezweck"
-                       className={"form-control"}
-                       name = "reason"
-                       value = {reason}
-                       onChange={handleChange}
-                />
-              </div>
-            </div>
+            <label className={"col-form-label mt-0"}>Kilometerstand Beginn</label>
+          </div>
+          <div className={"col"}>
+            <input type="number"
+                   placeholder="Kilometerstand Beginn"
+                   className={"form-control"}
+                   name = "begin"
+                   value= {begin}
+                   onChange = {handleChange}
+            />
           </div>
         </div>
+      </div>
 
-        {/*Datum*/}
+      {/*Kilometerstand Ende*/}
+      <div className={"container text-center"}>
         <div className={"row"}>
           <div className={"col"}>
-            <div className={"d-flex justify-content-center"}>
-              <div>
-                <label className={"col-form-label mt-4"}>Datum</label>
-              </div>
-
-              {/*Inputfield Datum*/}
-              <div>
-                <input type="date"
-                       placeholder="Datum"
-                       className={"form-control"}
-                       name = "day"
-                       value = {day}
-                       onChange={handleChange}
-                />
-              </div>
-            </div>
+            <label className={"col-form-label mt-0"}>Kilometerstand Ende</label>
+          </div>
+          <div className={"col"}>
+            <input type="number"
+                   placeholder="Kilometerstand Ende"
+                   className={"form-control"}
+                   name = "end"
+                   value = {end}
+                   onChange={handleChange}
+            />
           </div>
         </div>
+      </div>
+
+      {/*Reisezweck*/}
+      <div className={"container text-center"}>
+        <div className={"row"}>
+          <div className={"col"}>
+            <label className={"col-form-label mt-0"}>Fahrzweck</label>
+          </div>
+          <div className={"col"}>
+            <input type="text"
+                   placeholder="Reisezweck"
+                   className={"form-control"}
+                   name = "reason"
+                   value = {reason}
+                   onChange={handleChange}
+            />
+          </div>
+        </div>
+      </div>
+
+
+      <div className={"container text-center"}>
+        <div className={"row"}>
+          <div className={"col"}>
+            <label className={"col-form-label mt-0"}>Datum</label>
+          </div>
+          <div className={"col"}>
+            <input type="date"
+                   placeholder="Datum"
+                   className={"form-control"}
+                   name = "day"
+                   value = {day}
+                   onChange={handleChange}
+            />
+          </div>
+        </div>
+      </div>
+
 
         {/*Button*/}
         <div className={"row"}>
@@ -293,22 +270,26 @@ const App: FC = () => {
             </div>
           </div>
         </div>
+        <hr className={"border border-primary border-3 opacity-75"}/>
 
       </div>
-    </div>
+
+
 
     {/*Ausgabe der Liste -> Extra Container*/}
     <div className={"container-sm"}>
-      <div className={"border"}>
           <div className="rideList">
             {rideList.map((ride, rI) => (
                 <DriverList ride={ride} completeRide={completeRide}/>
             ))}
           </div>
-        </div>
     </div>
 
+
 </div>
+
+
+
 
 }
 

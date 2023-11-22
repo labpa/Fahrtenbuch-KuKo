@@ -23,10 +23,15 @@ Eingabemöglichkeiten des Fahrtenbuchs
 ![Fahrtenbuch_Ausgabe.png](img%2FFahrtenbuch_Ausgabe.png)
 Ausgabe der Liste unterhalb der Eingabe
 
+#### Zwischenstand
+![Zwischenstand-Eingabe.png](img%2FZwischenstand-Eingabe.png)
+Zwischenstand Eingabemöglichkeit mit Bootstrap
+
+![Zwischenstand-Liste.png](img%2FZwischenstand-Liste.png)
+Zwischenstand Ausgabe der Liste unterhalb der Eingabe
+
 
 ## TODO
-### Datum
-+ Anzeigen des Datums nach Deutschem standard
 
 ### Download
 + PDF export

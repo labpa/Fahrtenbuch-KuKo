@@ -69,8 +69,8 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
                             }}>Löschen</button>
                         </div>
                     </div>
-
                 </div>
+                <hr className={"border border-primary border-3 opacity-75"}/>
             </div>
         </div>
     );
