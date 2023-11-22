@@ -1,5 +1,6 @@
 import React from "react";
 import {IInformation} from "../interfaces";
+import dayjs from "dayjs";
 
 interface Props {
     ride: IInformation;
@@ -22,7 +23,7 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
                 <p>Grund</p>
                 <span>{rideReason}</span>
                 <p>Tag</p>
-                <span>{rideDay}</span>
+                <span>{dayjs(rideDay).format("D . M . YYYY")}</span>
             </div>
             <button onClick={() =>{
                 completeRide(id);

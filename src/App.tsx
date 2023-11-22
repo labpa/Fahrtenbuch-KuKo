@@ -5,6 +5,7 @@ import DriverList from "./Components/DriverList";
 import'bootswatch/dist/pulse/bootstrap.min.css';
 import uuid from 'react-uuid';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import dayjs from "dayjs";
 import { PDFViewer } from '@react-pdf/renderer';
 
 
@@ -214,23 +215,6 @@ const App: FC = () => {
         </div>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
