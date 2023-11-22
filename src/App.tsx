@@ -126,7 +126,7 @@ const App: FC = () => {
 
    //Layout oder so
   return <div className="App">
-    <div className={"container text-center"}>
+    <div className={"container-sm"}>
 
 
         {/*Überschrift -> Fahrtenbuch*/}
@@ -139,7 +139,7 @@ const App: FC = () => {
         </div>
 
       {/*Kennzeichen*/}
-      <div className={"container text-center"}>
+      <div className={"container text-end"}>
         <div className={"row"}>
           <div className={"col"}>
             <label className={"col-form-label mt-0"}>Kennzeichen</label>
@@ -157,7 +157,7 @@ const App: FC = () => {
       </div>
 
       {/*Fahrer:in*/}
-      <div className={"container text-center"}>
+      <div className={"container text-end"}>
         <div className={"row"}>
           <div className={"col"}>
             <label className={"col-form-label mt-0"}>Fahrer:in</label>
@@ -175,7 +175,7 @@ const App: FC = () => {
       </div>
 
       {/*Kilometerstand Beginn*/}
-      <div className={"container text-center"}>
+      <div className={"container text-end"}>
         <div className={"row"}>
           <div className={"col"}>
             <label className={"col-form-label mt-0"}>Kilometerstand Beginn</label>
@@ -193,7 +193,7 @@ const App: FC = () => {
       </div>
 
       {/*Kilometerstand Ende*/}
-      <div className={"container text-center"}>
+      <div className={"container text-end"}>
         <div className={"row"}>
           <div className={"col"}>
             <label className={"col-form-label mt-0"}>Kilometerstand Ende</label>
@@ -211,7 +211,7 @@ const App: FC = () => {
       </div>
 
       {/*Reisezweck*/}
-      <div className={"container text-center"}>
+      <div className={"container text-end"}>
         <div className={"row"}>
           <div className={"col"}>
             <label className={"col-form-label mt-0"}>Fahrzweck</label>
@@ -229,7 +229,7 @@ const App: FC = () => {
       </div>
 
 
-      <div className={"container text-center"}>
+      <div className={"container text-end"}>
         <div className={"row"}>
           <div className={"col"}>
             <label className={"col-form-label mt-0"}>Datum</label>
