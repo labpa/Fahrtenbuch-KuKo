@@ -22,34 +22,6 @@ const App: FC = () => {
   const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
 
 
-  // // Create styles
-  // const styles = StyleSheet.create({
-  //   page: {
-  //     flexDirection: 'row',
-  //     backgroundColor: '#E4E4E4'
-  //   },
-  //   section: {
-  //     margin: 10,
-  //     padding: 10,
-  //     flexGrow: 1
-  //   }
-  // });
-
-// Create Document Component
-//   const MyDocument = () => (
-//       <Document>
-//         <Page size="A4" style={styles.page}>
-//           <View style={styles.section}>
-//             <Text>Section #1</Text>
-//           </View>
-//           <View style={styles.section}>
-//             <Text>Section #2</Text>
-//           </View>
-//         </Page>
-//       </Document>
-//   );
-
-
   //Eingabe
   const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
     switch(event.target.name){
@@ -154,29 +126,27 @@ const App: FC = () => {
 
    //Layout oder so
   return <div className="App">
-  {/*return <div className="App">*/}
+    <div className={"container-sm"}>
+      <div className={"border"}>
 
-    <div className={"border"}>
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <div className="d-flex justify-content-center">
+        {/*Überschrift -> Fahrtenbuch*/}
+        <div className="d-flex justify-content-center">
+          <div className={"row"}>
+            <div className={"col"}>
               <div><h1>Fahrtenbuch</h1></div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-
-    <div className={"border"}>
-      <div className="container">
+        {/*Kennzeichen*/}
         <div className="row">
           <div className="col">
             <div className="d-flex justify-content-center">
-              <div className={"col-form-label mt-4"}>
-                <label >Kennzeichen</label>
+              <div>
+                <label className={"col-form-label mt-0"}>Kennzeichen</label>
               </div>
+
+              {/*Inputfield Kennzeichen*/}
               <div>
                 <input type="text"
                        placeholder="Kennzeichen"
@@ -189,127 +159,154 @@ const App: FC = () => {
             </div>
           </div>
         </div>
-      </div>
 
-    </div>
+        {/*Fahrer:in*/}
+        <div className="row">
+          <div className="col">
+            <div className="d-flex justify-content-center">
+              <div>
+                <label className={"col-form-label mt-0"}>Fahrer:in</label>
+              </div>
 
-
-    <div className="container">
-      <div className="row">
-        <div className="col">
-          <div className="d-flex justify-content-center">
-            <div>
-              <label className={"col-form-label mt-4"}>Fahrer:in</label>
-            </div>
-
-            <div>
-              <input type="text"
-                     placeholder="Fahrer:in"
-                     className={"form-control"}
-                     name = "driver"
-                     value = {driver}
-                     onChange = {handleChange}
-              />
+              {/*Inputfield Fahrer:in*/}
+              <div>
+                <input type="text"
+                       placeholder="Fahrer:in"
+                       className={"form-control"}
+                       name = "driver"
+                       value = {driver}
+                       onChange = {handleChange}
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
+        {/*Kilometerstand Beginn*/}
+        <div className={"row"}>
+          <div className={"col"}>
+            <div className="d-flex justify-content-center">
+              <div>
+                <label className={"col-form-label mt-0"}>Kilometerstand Beginn</label>
+              </div>
 
-
-
-
-
-      <div>
-              <label>Kilometerstand Beginn</label>
+              {/*Inputfield Kilometerstand Beginn*/}
+              <div>
+                <input type="number"
+                       placeholder="Kilometerstand Beginn"
+                       className={"form-control"}
+                       name = "begin"
+                       value= {begin}
+                       onChange = {handleChange}
+                />
+              </div>
             </div>
-            <div>
-              <input type="number"
-                     placeholder="Kilometerstand Beginn"
-                     name = "begin"
-                     value= {begin}
-                     onChange = {handleChange}
-              />
+          </div>
+        </div>
+
+        {/*Kilometerstand Ende*/}
+        <div className={"row"}>
+          <div className={"col"}>
+            <div className={"d-flex justify-content-center"}>
+              <div>
+                <label className={"col-form-label mt-0"}>Kilometerstand Ende</label>
+              </div>
+
+              {/*  Inputfield Kilometerstand Ende*/}
+              <div>
+                <input type="number"
+                       placeholder="Kilometerstand Ende"
+                       className={"form-control"}
+                       name = "end"
+                       value = {end}
+                       onChange={handleChange}
+                />
+              </div>
             </div>
+          </div>
+        </div>
 
+        {/*Reisezweck*/}
+        <div className={"row"}>
+          <div className={"col"}>
+            <div className={"d-flex justify-content-center"}>
+              <div>
+                <label className={"col-form-label mt-0"}>Reisezweck</label>
+              </div>
 
-
-
-            <div>
-              <label>Kilometerstand Ende</label>
+              {/*  Insertfield Reisezweck*/}
+              <div>
+                <input type="text"
+                       placeholder="Reisezweck"
+                       className={"form-control"}
+                       name = "reason"
+                       value = {reason}
+                       onChange={handleChange}
+                />
+              </div>
             </div>
-            <div>
-              <input type="number"
-                     placeholder="Kilometerstand Ende"
-                     name = "end"
-                     value = {end}
-                     onChange={handleChange}
-              />
+          </div>
+        </div>
+
+        {/*Datum*/}
+        <div className={"row"}>
+          <div className={"col"}>
+            <div className={"d-flex justify-content-center"}>
+              <div>
+                <label className={"col-form-label mt-4"}>Datum</label>
+              </div>
+
+              {/*Inputfield Datum*/}
+              <div>
+                <input type="date"
+                       placeholder="Datum"
+                       className={"form-control"}
+                       name = "day"
+                       value = {day}
+                       onChange={handleChange}
+                />
+              </div>
             </div>
+          </div>
+        </div>
 
-
-
-            <div>
-              <label>Reisezweck</label>
-            </div>
-            <div>
-              <input type="text"
-                     placeholder="Reisezweck"
-                     name = "reason"
-                     value = {reason}
-                     onChange={handleChange}
-              />
-            </div>
-
-
-
-            <div>
-              <label>Datum</label>
-            </div>
-            <div>
-              <input type="date"
-                     placeholder="Datum"
-                     name = "day"
-                     value = {day}
-                     onChange={handleChange}
-              />
-            </div>
-
-
-          <div>
+        {/*Button*/}
+        <div className={"row"}>
+          <div className={"col"}>
+            <div className={"d-flex justify-content-center"}>
               <button type={"button"} className={"btn btn-outline-primary"} onClick={addRide}>Hinzufügen </button>  {/* Eingabe */}
               <button type={"button"} className={"btn btn-outline-primary"} onClick={exportData}>JSON </button>
               <button type={"button"} className={"btn btn-outline-primary"} onClick={exportPdf}>PDF</button>
+            </div>
           </div>
-
-
-
-        {/*json upload feld*/}
-        <div>
-          <input type={"file"}
-                 id={"formFile"}
-                 onChange={uploadData}
-          />
         </div>
 
-        {/*<div className={"container-xxl"}>*/}
-        {/*  <PDFViewer>*/}
-        {/*    <MyDocument />*/}
-        {/*  </PDFViewer>*/}
-        {/*</div>*/}
+        {/*Upload*/}
+        <div className={"row"}>
+          <div className={"col"}>
+            <div className={"d-flex justify-content-center"}>
+              <input type={"file"}
+                     className={"form-control"}
+                     id={"formFile"}
+                     onChange={uploadData}
+              />
+            </div>
+          </div>
+        </div>
 
-
-{/*//Ausgabe der */}
-    <div className="rideList">
-      {rideList.map((ride, rI) => (
-          <DriverList ride={ride} completeRide={completeRide}/>
-      ))}
+      </div>
     </div>
 
-
-
-
+    {/*Ausgabe der Liste -> Extra Container*/}
+    <div className={"container-sm"}>
+      <div className={"border"}>
+          <div className="rideList">
+            {rideList.map((ride, rI) => (
+                <DriverList ride={ride} completeRide={completeRide}/>
+            ))}
+          </div>
+        </div>
+    </div>
 
 </div>
 

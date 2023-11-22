@@ -12,22 +12,66 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
     return(
         <div className='driver'>
             <div className='content'>
-                <p>Nummernschild:</p>
-                <span>{numberplate}</span>
-                <p>Fahrer:in: </p>
-                <span>{rideDriver}</span>
-                <p>KM stand Beginn</p>
-                <span>{rideBegin}</span>
-                <p>KM stand Ende</p>
-                <span>{rideEnd}</span>
-                <p>Grund</p>
-                <span>{rideReason}</span>
-                <p>Tag</p>
-                <span>{dayjs(rideDay).format("D . M . YYYY")}</span>
+
+                <div className={"row"}>
+                    <div className={"col"}>
+                        <div className={"d-flex justify-content-center"}>
+                            <label className={"col-form-label mt-4"}>Kennzeichen:</label>
+                            <span className={"col-form-label mt-4"}>{numberplate}</span>
+                        </div>
+                    </div>
+                </div>
+                <div className={"row"}>
+                    <div className={"col"}>
+                        <div className={"d-flex justify-content-center"}>
+                            <label>Fahrer:in:</label>
+                            <span>{rideDriver}</span>
+                        </div>
+                    </div>
+                </div>
+                <div className={"row"}>
+                    <div className={"col"}>
+                        <div className={"d-flex justify-content-center"}>
+                            <label>KM Beginn:</label>
+                            <span>{rideBegin}</span>
+                        </div>
+                    </div>
+                </div>
+                <div className={"row"}>
+                    <div className={"col"}>
+                        <div className={"d-flex justify-content-center"}>
+                            <label>KM Ende:</label>
+                            <span>{rideEnd}</span>
+                        </div>
+                    </div>
+                </div>
+                <div className={"row"}>
+                    <div className={"col"}>
+                        <div className={"d-flex justify-content-center"}>
+                            <label>Grund der Fahrt:</label>
+                            <span>{rideReason}</span>
+                        </div>
+                    </div>
+                </div>
+                <div className={"row"}>
+                    <div className={"col"}>
+                        <div className={"d-flex justify-content-center"}>
+                            <label>Tag der Fahrt:</label>
+                            <span>{dayjs(rideDay).format("D.M.YYYY")}</span>
+                        </div>
+                    </div>
+                </div>
+                <div className={"row"}>
+                    <div className={"col"}>
+                        <div className={"d-flex justify-content-center"}>
+                            <button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
+                                completeRide(id);
+                            }}>Löschen</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <button onClick={() =>{
-                completeRide(id);
-            }}>Löschen</button>
         </div>
     );
 }
