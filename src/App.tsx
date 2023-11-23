@@ -6,7 +6,8 @@ import'bootswatch/dist/pulse/bootstrap.min.css';
 import uuid from 'react-uuid';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import dayjs from "dayjs";
-import { PDFViewer } from '@react-pdf/renderer';
+import Select from 'react-select';
+
 
 
 const App: FC = () => {
@@ -20,6 +21,20 @@ const App: FC = () => {
   const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
   const [id, setId] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
+
+
+  const names : any= [
+    { value: "peter", label: "Peter" },
+    { value: "margit", label: "Margit" },
+    { value: "leticia", label: "Leticia" },
+    { value: "domian", label: "Domian" },
+    { value: "daniel", label: "Daniel" },
+  ];
+
+
+
+
+
 
 
   //Eingabe
@@ -45,6 +60,11 @@ const App: FC = () => {
             break;
     }
   }
+
+  const test = (selectedOption: any) => {
+    console.log("test", selectedOption);
+  }
+
 
 //Die Eingabe wird an ein Array übergeben
   const addRide = () => {
@@ -128,6 +148,9 @@ const App: FC = () => {
   return <div className="App">
     <div className={"container-sm"}>
 
+
+
+
       <hr className={"border border-primary border-3 opacity-75"}/>
         {/*Überschrift -> Fahrtenbuch*/}
         <div className="d-flex justify-content-center">
@@ -157,6 +180,23 @@ const App: FC = () => {
         </div>
       </div>
 
+      {/*Fahrer:in mit Auswahl*/}
+      <div className={"container text-end p-2"}>
+        <div className={"row"}>
+          <div className={"col"}>
+            <label className={"col-form-label mt-2"}>Fahrer:in</label>
+          </div>
+          <div className={"col p-2"}>
+            <Select options={names}
+                    placeholder={"Name"}
+                    // name={"driver"}
+                    // value={"driver"}
+                    onChange={test}
+            />
+          </div>
+        </div>
+      </div>
+
       {/*Fahrer:in*/}
       <div className={"container text-end p-2"}>
         <div className={"row"}>
@@ -167,13 +207,14 @@ const App: FC = () => {
             <input type="text"
                    placeholder="Fahrer:in"
                    className={"form-control"}
-                   name = "driver"
+                   name ="driver"
                    value = {driver}
                    onChange = {handleChange}
             />
           </div>
         </div>
       </div>
+
 
       {/*Kilometerstand Beginn*/}
       <div className={"container text-end p-2"}>
