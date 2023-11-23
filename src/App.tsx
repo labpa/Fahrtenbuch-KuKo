@@ -128,7 +128,7 @@ const App: FC = () => {
   return <div className="App">
     <div className={"container-sm"}>
 
-
+      <hr className={"border border-primary border-3 opacity-75"}/>
         {/*Überschrift -> Fahrtenbuch*/}
         <div className="d-flex justify-content-center">
           <div className={"row"}>
@@ -137,6 +137,7 @@ const App: FC = () => {
             </div>
           </div>
         </div>
+      <hr className={"border border-primary border-3 opacity-75"}/>
 
       {/*Kennzeichen*/}
       <div className={"container text-end p-2"}>
