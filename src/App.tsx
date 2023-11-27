@@ -22,7 +22,7 @@ const App: FC = () => {
   const [id, setId] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
 
-
+  //
   const names : any= [
     { value: "peter", label: "Peter" },
     { value: "margit", label: "Margit" },
@@ -31,8 +31,11 @@ const App: FC = () => {
     { value: "daniel", label: "Daniel" },
   ];
 
-
-
+  const test = (selectedOption: any) => {
+    console.log("test", selectedOption);
+  }
+// entweder neue handle change select
+// oder allgemeine funktion wo propertie und value zu ändern rein kommt und extra evalue abfängt
 
 
 
@@ -61,11 +64,6 @@ const App: FC = () => {
     }
   }
 
-  const test = (selectedOption: any) => {
-    console.log("test", selectedOption);
-  }
-
-
 //Die Eingabe wird an ein Array übergeben
   const addRide = () => {
     const newRide = {id:uuid(), numberplate: plate, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
@@ -78,6 +76,9 @@ const App: FC = () => {
     setReason("");
     setDay("");
   }
+
+
+
 
   // loaded fromLocalStorage wird bei deklaration false gesetzt. Hier wird aus false True was das aufrufen der beiden Funktionen zur folge hat
   //todo useEffect LESEN
@@ -148,10 +149,9 @@ const App: FC = () => {
   return <div className="App">
     <div className={"container-sm"}>
 
-
-
-
+      {/*streifen*/}
       <hr className={"border border-primary border-3 opacity-75"}/>
+
         {/*Überschrift -> Fahrtenbuch*/}
         <div className="d-flex justify-content-center">
           <div className={"row"}>
@@ -160,6 +160,8 @@ const App: FC = () => {
             </div>
           </div>
         </div>
+
+      {/*streifen*/}
       <hr className={"border border-primary border-3 opacity-75"}/>
 
       {/*Kennzeichen*/}
@@ -181,10 +183,13 @@ const App: FC = () => {
       </div>
 
       {/*Fahrer:in mit Auswahl*/}
-      <div className={"container text-end p-2"}>
+      <div className={"container text-center p-2"}>
         <div className={"row"}>
           <div className={"col"}>
-            <label className={"col-form-label mt-2"}>Fahrer:in</label>
+            <div className={"text-end"}>
+              <label className={"col-form-label mt-2"}>Fahrer:in</label>
+            </div>
+
           </div>
           <div className={"col p-2"}>
             <Select options={names}

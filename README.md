@@ -33,18 +33,25 @@ Zwischenstand Ausgabe der Liste unterhalb der Eingabe
 
 ## TODO
 
+### Funktionalität
++ enum Kennzeichen
++ Speichern Kilometer entsprechend zu einem Nummernschild
++ KM Ende wird als neuer KM stand gespeichert
++ + Bei Auswahl Nummernschild anzeige KM-Beginn automatisch aktuellen KM stand
+
 ### Download
 + PDF export
 
 ### add PWA
 + progressive web app -> pwa
+### 
 
 ## zu verstehen
 ### useEffect
 
 
 ## Erstellen
-+ Zuerste wurde die React App generiert.
++ Zuerst wurde die React App generiert.
   `yarn create react-app . --template typescript`
 + App Starten:
   `yarn start`

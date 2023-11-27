@@ -9,6 +9,17 @@ interface Props {
 
 //Ausgabe Inhalt Array
 const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rideReason, rideDay}, completeRide}: Props) => {
+
+    const distance = () => {
+        let distanz: number= 0;
+        if(rideEnd >= rideBegin){
+            distanz = rideEnd - rideBegin;
+            return distanz;
+        } else {
+            return "Ungültig";
+        }
+    }
+
     return(
         <div className='driver'>
             <div className='content'>
@@ -45,6 +56,19 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
                         </div>
                     </div>
                 </div>
+
+                <div className={"row"}>
+                    <div className={"col p-1"}>
+                        <div className={"d-flex justify-content-center"}>
+                            <label>Gefahrene Kilometer:&nbsp;&nbsp;</label>
+                            <span>{distance()}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
                 <div className={"row"}>
                     <div className={"col p-1"}>
                         <div className={"d-flex justify-content-center"}>
