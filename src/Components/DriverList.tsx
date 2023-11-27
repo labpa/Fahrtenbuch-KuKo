@@ -8,13 +8,23 @@ interface Props {
 }
 
 //Ausgabe Inhalt Array
-const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rideReason, rideDay}, completeRide}: Props) => {
+const DriverList = ({ride, completeRide}: Props) => {
 
     const distance = () => {
         let distanz: number= 0;
-        if(rideEnd >= rideBegin){
-            distanz = rideEnd - rideBegin;
+        let beginn : number= parseInt(String(ride.rideBegin));
+        let end : number= parseInt(String(ride.rideEnd));
+        if(end >= beginn){
+            distanz = end - beginn;
             return distanz;
+        } else {
+            return "Ungültig";
+        }
+    }
+
+    const distanceZwei = () => {
+        if(parseInt(String(ride.rideEnd)) >= parseInt(String(ride.rideBegin))){
+            return parseInt(String(ride.rideEnd)) - parseInt(String(ride.rideBegin));
         } else {
             return "Ungültig";
         }
@@ -28,7 +38,7 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
                     <div className={"col p-1"}>
                         <div className={"d-flex justify-content-center"}>
                             <label>Kennzeichen:&nbsp;&nbsp;</label>
-                            <span>{numberplate}</span>
+                            <span>{ride.numberplate}</span>
                         </div>
                     </div>
                 </div>
@@ -36,7 +46,7 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
                     <div className={"col p-1"}>
                         <div className={"d-flex justify-content-center"}>
                             <label>Fahrer:in:&nbsp;&nbsp;</label>
-                            <span>{rideDriver}</span>
+                            <span>{ride.rideDriver}</span>
                         </div>
                     </div>
                 </div>
@@ -44,7 +54,7 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
                     <div className={"col p-1"}>
                         <div className={"d-flex justify-content-center"}>
                             <label>KM Beginn:&nbsp;&nbsp;</label>
-                            <span>{rideBegin}</span>
+                            <span>{ride.rideBegin}</span>
                         </div>
                     </div>
                 </div>
@@ -52,7 +62,7 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
                     <div className={"col p-1"}>
                         <div className={"d-flex justify-content-center"}>
                             <label>KM Ende:&nbsp;&nbsp;</label>
-                            <span>{rideEnd}</span>
+                            <span>{ride.rideEnd}</span>
                         </div>
                     </div>
                 </div>
@@ -62,6 +72,7 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
                         <div className={"d-flex justify-content-center"}>
                             <label>Gefahrene Kilometer:&nbsp;&nbsp;</label>
                             <span>{distance()}</span>
+                            <span>{distanceZwei()}</span>
                         </div>
                     </div>
                 </div>
@@ -73,7 +84,7 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
                     <div className={"col p-1"}>
                         <div className={"d-flex justify-content-center"}>
                             <label className={"text-"}>Grund der Fahrt:&nbsp;&nbsp;</label>
-                            <span className={"text-end"}>{rideReason}</span>
+                            <span className={"text-end"}>{ride.rideReason}</span>
                         </div>
                     </div>
                 </div>
@@ -81,7 +92,7 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
                     <div className={"col p-1"}>
                         <div className={"d-flex justify-content-center"}>
                             <label>Tag der Fahrt:&nbsp;&nbsp;</label>
-                            <span>{dayjs(rideDay).format("D.M.YYYY")}</span>
+                            <span>{dayjs(ride.rideDay).format("D.M.YYYY")}</span>
                         </div>
                     </div>
                 </div>
@@ -89,7 +100,7 @@ const DriverList = ({ride: {id, numberplate, rideDriver, rideBegin, rideEnd, rid
                     <div className={"col p-2"}>
                         <div className={"d-flex justify-content-center"}>
                             <button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
-                                completeRide(id);
+                                completeRide(ride.id);
                             }}>Löschen</button>
                         </div>
                     </div>

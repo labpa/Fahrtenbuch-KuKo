@@ -4,7 +4,6 @@ import {IInformation} from "./interfaces";
 import DriverList from "./Components/DriverList";
 import'bootswatch/dist/pulse/bootstrap.min.css';
 import uuid from 'react-uuid';
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import dayjs from "dayjs";
 import Select from 'react-select';
 
@@ -23,12 +22,10 @@ const App: FC = () => {
   const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
 
   //
-  const names : any= [
-    { value: "peter", label: "Peter" },
-    { value: "margit", label: "Margit" },
-    { value: "leticia", label: "Leticia" },
-    { value: "domian", label: "Domian" },
-    { value: "daniel", label: "Daniel" },
+  const cars : any= [
+    { value: "b-sp-1234", label: "OPEL  " +" B-SP-1234" },
+    { value: "hh-op-4321", label: "FORD  " + " HH-OP-4321" },
+    { value: "s-os-1312", label:"KIA  " + "S-OS-1312" },
   ];
 
   const test = (selectedOption: any) => {
@@ -94,7 +91,6 @@ const App: FC = () => {
     if(loadedFromLocalStorage){
       saveInBrowser();
     }
-
   }, [loadedFromLocalStorage, rideList]);
 
   //Löschen -> Löscht über die id
@@ -103,7 +99,7 @@ const App: FC = () => {
       return id.id != idToDelete
      }))
    }
-
+console.log(rideList);
   //Speichern in Lokalem Speicher von Browser
   const saveInBrowser = (): void => {
     localStorage.setItem('rideList', JSON.stringify(rideList));
@@ -182,20 +178,20 @@ const App: FC = () => {
         </div>
       </div>
 
-      {/*Fahrer:in mit Auswahl*/}
+      {/* Kennzeichen mit Auswahl*/}
       <div className={"container text-center p-2"}>
         <div className={"row"}>
           <div className={"col"}>
             <div className={"text-end"}>
-              <label className={"col-form-label mt-2"}>Fahrer:in</label>
+              <label className={"col-form-label mt-2"}>Fahrzeug</label>
             </div>
 
           </div>
           <div className={"col p-2"}>
-            <Select options={names}
-                    placeholder={"Name"}
-                    // name={"driver"}
-                    // value={"driver"}
+            <Select options={cars}
+                    name={"car"}
+                    // value={car}
+                    placeholder={"Fahrzeug"}
                     onChange={test}
             />
           </div>
