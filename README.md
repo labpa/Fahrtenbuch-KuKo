@@ -42,11 +42,21 @@ Zwischenstand Ausgabe der Liste unterhalb der Eingabe
 ### Download
 + PDF export
 
-### PWA
+### PWA - progressive web app
 + Bedeutet das eine Anwendung eigenschaften einer Native und einer Web App vereint
 + Ermöglicht Plattformunabhängigkeit
-+ 
-+ progressive web app -> pwa
+
+1. Download von Chrome
+2. Generate a Lighthouse report
+3. manifest.jason angepasst
+ + https://app-manifest.firebaseapp.com/
+4. Icon ausgewählt - Neue Images in passenden größen erstellt - Entsprechende Images hochgeladen und in manifest.jason angepasst
+ + https://imageresizer.com/de
+5. maskable erstellt und hochgeladen -> manifest.json
+ + https://maskable.app/editor
+6. `yarn run build`
+7. upload build Ordner bei Netlify
+  + https://fahrtenbuch.netlify.app/
 
 ### 
 
