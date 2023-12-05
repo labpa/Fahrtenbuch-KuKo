@@ -42,8 +42,12 @@ Zwischenstand Ausgabe der Liste unterhalb der Eingabe
 ### Download
 + PDF export
 
-### add PWA
+### PWA
++ Bedeutet das eine Anwendung eigenschaften einer Native und einer Web App vereint
++ Ermöglicht Plattformunabhängigkeit
++ 
 + progressive web app -> pwa
+
 ### 
 
 ## zu verstehen
