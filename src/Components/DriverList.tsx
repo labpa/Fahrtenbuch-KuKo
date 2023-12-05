@@ -10,19 +10,19 @@ interface Props {
 //Ausgabe Inhalt Array
 const DriverList = ({ride, completeRide}: Props) => {
 
-    const distance = () => {
-        let distanz: number= 0;
-        let beginn : number= parseInt(String(ride.rideBegin));
-        let end : number= parseInt(String(ride.rideEnd));
-        if(end >= beginn){
-            distanz = end - beginn;
-            return distanz;
-        } else {
-            return "Ungültig";
-        }
-    }
+    // const distance = () => {
+    //     let distanz: number= 0;
+    //     let beginn : number= parseInt(String(ride.rideBegin));
+    //     let end : number= parseInt(String(ride.rideEnd));
+    //     if(end >= beginn){
+    //         distanz = end - beginn;
+    //         return distanz;
+    //     } else {
+    //         return "Ungültig";
+    //     }
+    // }
 
-    const distanceZwei = () => {
+    const distance = () => {
         if(parseInt(String(ride.rideEnd)) >= parseInt(String(ride.rideBegin))){
             return parseInt(String(ride.rideEnd)) - parseInt(String(ride.rideBegin));
         } else {
@@ -72,7 +72,7 @@ const DriverList = ({ride, completeRide}: Props) => {
                         <div className={"d-flex justify-content-center"}>
                             <label>Gefahrene Kilometer:&nbsp;&nbsp;</label>
                             <span>{distance()}</span>
-                            <span>{distanceZwei()}</span>
+                            {/*<span>{distanceZwei()}</span>*/}
                         </div>
                     </div>
                 </div>
