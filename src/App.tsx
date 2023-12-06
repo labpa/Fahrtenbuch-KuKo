@@ -6,8 +6,8 @@ import'bootswatch/dist/pulse/bootstrap.min.css';
 import uuid from 'react-uuid';
 import dayjs from "dayjs";
 import Select from 'react-select';
-
-
+import {selectOptions} from "@testing-library/user-event/dist/select-options";
+import Navbar from "./Components/Navbar/Navbar";
 
 const App: FC = () => {
   const [plate, setPlate] = useState<string>("");
@@ -20,21 +20,18 @@ const App: FC = () => {
   const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
   const [id, setId] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
+  const [car, setCar] = useState<string>("");
 
   //
-  const cars : any= [
-    { value: "b-sp-1234", label: "OPEL  " +" B-SP-1234" },
-    { value: "hh-op-4321", label: "FORD  " + " HH-OP-4321" },
-    { value: "s-os-1312", label:"KIA  " + "S-OS-1312" },
+  const cars = [
+    { value: "b-sp-1234", label: "B-SP-1234" },
+    { value: "hh-op-4321", label: "HH-OP-4321" },
+    { value: "s-os-1312", label: "S-OS-1312" },
   ];
 
   const test = (selectedOption: any) => {
-    console.log("test", selectedOption);
+    console.log(selectedOption);
   }
-// entweder neue handle change select
-// oder allgemeine funktion wo propertie und value zu ändern rein kommt und extra evalue abfängt
-
-
 
 
   //Eingabe
@@ -43,9 +40,12 @@ const App: FC = () => {
       case "plate":
         setPlate(event.target.value)
             break;
+      // case "car":
+      //   setCar(selectedOption)
+      //       break;
       case "driver":
         setDriver(event.target.value)
-            break
+            break;
       case "begin":
         setBegin(event.target.value)
             break;
@@ -93,13 +93,13 @@ const App: FC = () => {
     }
   }, [loadedFromLocalStorage, rideList]);
 
-  //Löschen -> Löscht über die id
+  //Löschen → Löscht über die id
    const completeRide = (idToDelete:string):void => {
     setRideList(rideList.filter((id) => {
-      return id.id != idToDelete
+      return id.id !== idToDelete
      }))
    }
-console.log(rideList);
+
   //Speichern in Lokalem Speicher von Browser
   const saveInBrowser = (): void => {
     localStorage.setItem('rideList', JSON.stringify(rideList));
@@ -144,6 +144,10 @@ console.log(rideList);
    //Layout oder so
   return <div className="App">
     <div className={"container-sm"}>
+
+        <div>
+            <Navbar />
+        </div>
 
       {/*streifen*/}
       <hr className={"border border-primary border-3 opacity-75"}/>
@@ -190,10 +194,17 @@ console.log(rideList);
           <div className={"col p-2"}>
             <Select options={cars}
                     name={"car"}
-                    // value={car}
                     placeholder={"Fahrzeug"}
-                    onChange={test}
+                    onChange = {test}
             />
+
+            {/*<select className={"form-select"} onChange={test}>*/}
+            {/*  {cars.map(car =>(*/}
+            {/*    <option value={car.value}>{car.label}</option>*/}
+            {/*  ))}*/}
+            {/*</select>*/}
+
+
           </div>
         </div>
       </div>
@@ -322,8 +333,6 @@ console.log(rideList);
         <hr className={"border border-primary border-3 opacity-75"}/>
 
       </div>
-
-
 
     {/*Ausgabe der Liste -> Extra Container*/}
     <div className={"container-sm"}>
