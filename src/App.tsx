@@ -149,9 +149,6 @@ const App: FC = () => {
             <Navbar />
         </div>
 
-      {/*streifen*/}
-      <hr className={"border border-primary border-3 opacity-75"}/>
-
         {/*Überschrift -> Fahrtenbuch*/}
         <div className="d-flex justify-content-center">
           <div className={"row"}>
