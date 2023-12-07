@@ -5,7 +5,7 @@ import DriverList from "./Components/DriverList";
 import'bootswatch/dist/pulse/bootstrap.min.css';
 import uuid from 'react-uuid';
 import dayjs from "dayjs";
-import Select from 'react-select';
+import Select, { Options } from 'react-select';
 import {selectOptions} from "@testing-library/user-event/dist/select-options";
 import Navbar from "./Components/Navbar/Navbar";
 
@@ -23,14 +23,14 @@ const App: FC = () => {
   const [car, setCar] = useState<string>("");
 
   //
-  const cars = [
+  const cars: Options<any> = [
     { value: "b-sp-1234", label: "B-SP-1234" },
     { value: "hh-op-4321", label: "HH-OP-4321" },
     { value: "s-os-1312", label: "S-OS-1312" },
   ];
 
-  const test = (selectedOption: any) => {
-    console.log(selectedOption);
+  const handleChangeCar = (selectedOption: any) => {
+    setCar(selectedOption.value);
   }
 
 
@@ -191,8 +191,9 @@ const App: FC = () => {
           <div className={"col p-2"}>
             <Select options={cars}
                     name={"car"}
+                    value={cars?.find(c => c.value === car)}
                     placeholder={"Fahrzeug"}
-                    onChange = {test}
+                    onChange = {handleChangeCar}
             />
 
             {/*<select className={"form-select"} onChange={test}>*/}
