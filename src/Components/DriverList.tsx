@@ -20,6 +20,12 @@ const DriverList = ({ride, completeRide}: Props) => {
         }
     }
 
+
+//Letzte Fahrt
+
+    // todo https://dev.to/collegewap/how-to-filter-an-array-of-objects-in-react-2n33
+
+
     return(
         <div className='driver'>
             <div className='content'>

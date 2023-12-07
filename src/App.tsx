@@ -24,12 +24,15 @@ const App: FC = () => {
   const [id, setId] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
   const [car, setCar] = useState<string>("");
-
+  const [filteredRides, setFilteredRides] = useState(rideList);
   //
   const cars: Options<any> = [
     { value: "B-SP-1234", label: "B-SP-1234" },
     { value: "HH-OP-4321", label: "HH-OP-4321" },
     { value: "S-OS-1312", label: "S-OS-1312" },
+    { value: "NT-BE-4321", label: "NT-BE-4321" },
+    { value: "F-OG-8721", label: "F-OG-8721"},
+    { value: "L-OL-4365", label: "L-OL-4365"},
   ];
 
   const handleChangeCar = (selectedOption: any) => {
@@ -77,7 +80,6 @@ const App: FC = () => {
     setDay("");
   }
 
-
   // loaded fromLocalStorage wird bei deklaration false gesetzt. Hier wird aus false True was das aufrufen der beiden Funktionen zur folge hat
   //todo useEffect LESEN
   useEffect(() => {
@@ -101,17 +103,46 @@ const App: FC = () => {
      }))
    }
 
+
+
+
+
+
+
+
+
+
+
+
+  // <div>
+  //   {rideList.filter(person => person.rideEnd > 60).map(filteredPerson => (
+  //       <li>
+  //         {filteredPerson.fahrzeug}
+  //       </li>
+  //   ))}
+  // </div>
+  //
+
+
+
+
+
+
+
+
+
+
   //Speichern in lokalem Speicher von Browser
   const saveInBrowser = (): void => {
     localStorage.setItem('rideList', JSON.stringify(rideList));
   }
 
-  //Daten aus Lokelem speicher holen
+  //Daten aus lokelem speicher holen
   const getFromBrowser = (): IInformation[] => {
     const ausgabe = JSON.parse(localStorage.getItem('rideList')||'[]');
     return ausgabe;
   }
-console.log(rideList);
+
   //Daten werden in json datei zum Download bereitgestellt
   const exportData = () => {
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
@@ -121,11 +152,6 @@ console.log(rideList);
     link.href = jsonString;
     link.download = "rideList.json";
     link.click();
-  }
-
-  //todo Daten werden als PDF gespeichert
-  const exportPdf = () => {
-     console.log("Download als PDF");
   }
 
   //JSON dateien lassen sich hochladen
@@ -221,7 +247,6 @@ console.log(rideList);
           </div>
         </div>
       </div>
-
 
       {/*Kilometerstand Beginn*/}
       <div className={"container text-end p-2"}>
@@ -325,6 +350,22 @@ console.log(rideList);
             </div>
           </div>
         </div>
+
+
+
+
+
+      {/*todo!!!!!!*/}
+      {/*<div>*/}
+      {/*  <button onClick={testZwei}>Ausgabe Letzte Kilometer</button>*/}
+      {/*</div>*/}
+
+
+
+
+
+
+
         <hr className={"border border-primary border-3 opacity-75"}/>
 
       </div>
@@ -337,6 +378,8 @@ console.log(rideList);
             ))}
           </div>
     </div>
+
+
 
 
 
