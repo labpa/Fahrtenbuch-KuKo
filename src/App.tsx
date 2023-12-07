@@ -27,15 +27,14 @@ const App: FC = () => {
 
   //
   const cars: Options<any> = [
-    { value: "b-sp-1234", label: "B-SP-1234" },
-    { value: "hh-op-4321", label: "HH-OP-4321" },
-    { value: "s-os-1312", label: "S-OS-1312" },
+    { value: "B-SP-1234", label: "B-SP-1234" },
+    { value: "HH-OP-4321", label: "HH-OP-4321" },
+    { value: "S-OS-1312", label: "S-OS-1312" },
   ];
 
   const handleChangeCar = (selectedOption: any) => {
     setCar(selectedOption.value);
   }
-
 
   //Eingabe
   const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
@@ -66,18 +65,17 @@ const App: FC = () => {
 
 //Die Eingabe wird an ein Array übergeben
   const addRide = () => {
-    const newRide = {id:uuid(), numberplate: plate, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
+    const newRide = {id:uuid(), numberplate: plate, fahrzeug:car, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
     setRideList([...rideList, newRide]);
     setId("");
     setPlate("");
+    setCar("");
     setDriver("");
     setBegin(0);
     setEnd(0);
     setReason("");
     setDay("");
   }
-
-
 
 
   // loaded fromLocalStorage wird bei deklaration false gesetzt. Hier wird aus false True was das aufrufen der beiden Funktionen zur folge hat
@@ -103,7 +101,7 @@ const App: FC = () => {
      }))
    }
 
-  //Speichern in Lokalem Speicher von Browser
+  //Speichern in lokalem Speicher von Browser
   const saveInBrowser = (): void => {
     localStorage.setItem('rideList', JSON.stringify(rideList));
   }
@@ -113,7 +111,7 @@ const App: FC = () => {
     const ausgabe = JSON.parse(localStorage.getItem('rideList')||'[]');
     return ausgabe;
   }
-
+console.log(rideList);
   //Daten werden in json datei zum Download bereitgestellt
   const exportData = () => {
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
@@ -141,7 +139,7 @@ const App: FC = () => {
           setRideList(JSON.parse(e.target?.result.toString()));
         }
       };
-    };
+    }
   };
 
    //Layout oder so
@@ -152,7 +150,7 @@ const App: FC = () => {
         {/*    <Navbar />*/}
         {/*</div>*/}
 
-        {/*Überschrift -> Fahrtenbuch*/}
+        {/*Überschrift → Fahrtenbuch*/}
         <div className="d-flex justify-content-center">
           <div className={"row"}>
             <div className={"col p-2"}>
@@ -165,22 +163,22 @@ const App: FC = () => {
       <hr className={"border border-primary border-3 opacity-75"}/>
 
       {/*Kennzeichen*/}
-      <div className={"container text-end p-2"}>
-        <div className={"row"}>
-          <div className={"col"}>
-            <label className={"col-form-label mt-2"}>Kennzeichen</label>
-          </div>
-          <div className={"col p-2"}>
-            <input type="text"
-                   placeholder="Kennzeichen"
-                   className={"form-control"}
-                   name ="plate"
-                   value = {plate}
-                   onChange = {handleChange}
-            />
-          </div>
-        </div>
-      </div>
+      {/*<div className={"container text-end p-2"}>*/}
+      {/*  <div className={"row"}>*/}
+      {/*    <div className={"col"}>*/}
+      {/*      <label className={"col-form-label mt-2"}>Kennzeichen</label>*/}
+      {/*    </div>*/}
+      {/*    <div className={"col p-2"}>*/}
+      {/*      <input type="text"*/}
+      {/*             placeholder="Kennzeichen"*/}
+      {/*             className={"form-control"}*/}
+      {/*             name ="plate"*/}
+      {/*             value = {plate}*/}
+      {/*             onChange = {handleChange}*/}
+      {/*      />*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
 
       {/* Kennzeichen mit Auswahl*/}
       <div className={"container text-center p-2"}>
@@ -192,20 +190,16 @@ const App: FC = () => {
 
           </div>
           <div className={"col p-2"}>
-            <Select options={cars}
-                    name={"car"}
-                    value={cars?.find(c => c.value === car)}
-                    placeholder={"Fahrzeug"}
-                    onChange = {handleChangeCar}
-            />
-
-            {/*<select className={"form-select"} onChange={test}>*/}
-            {/*  {cars.map(car =>(*/}
-            {/*    <option value={car.value}>{car.label}</option>*/}
-            {/*  ))}*/}
-            {/*</select>*/}
-
-
+            <div className={"form-group"}>
+              <Select className={"form-select"}
+                      id={"exampleSelect1"}
+                      options={cars}
+                      name={"car"}
+                      value={cars?.find(c => c.value === car)}
+                      placeholder={"Fahrzeug"}
+                      onChange = {handleChangeCar}
+              />
+            </div>
           </div>
         </div>
       </div>

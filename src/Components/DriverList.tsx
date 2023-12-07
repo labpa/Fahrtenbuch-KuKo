@@ -24,23 +24,23 @@ const DriverList = ({ride, completeRide}: Props) => {
         <div className='driver'>
             <div className='content'>
 
-                <div className={"row"}>
-                    <div className={"col p-1"}>
-                        <div className={"d-flex justify-content-center"}>
-                            <label>Kennzeichen:&nbsp;&nbsp;</label>
-                            <span>{ride.numberplate}</span>
-                        </div>
-                    </div>
-                </div>
-
                 {/*<div className={"row"}>*/}
                 {/*    <div className={"col p-1"}>*/}
                 {/*        <div className={"d-flex justify-content-center"}>*/}
-                {/*            <label>Fahrzeug:&nbsp;&nbsp;</label>*/}
-                {/*            <span>{ride.car}</span>*/}
+                {/*            <label>Kennzeichen:&nbsp;&nbsp;</label>*/}
+                {/*            <span>{ride.numberplate}</span>*/}
                 {/*        </div>*/}
                 {/*    </div>*/}
                 {/*</div>*/}
+
+                <div className={"row"}>
+                    <div className={"col p-1"}>
+                        <div className={"d-flex justify-content-center"}>
+                            <label>Fahrzeug:&nbsp;&nbsp;</label>
+                            <span>{ride.fahrzeug}</span>
+                        </div>
+                    </div>
+                </div>
 
 
 
