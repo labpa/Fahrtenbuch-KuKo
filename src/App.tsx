@@ -8,6 +8,9 @@ import dayjs from "dayjs";
 import Select from 'react-select';
 import {selectOptions} from "@testing-library/user-event/dist/select-options";
 import Navbar from "./Components/Navbar/Navbar";
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import Fahrtenbuch from "./Components/pages/Fahrtenbuch";
+import Dokumentation from "./Components/pages/Dokumentation";
 
 const App: FC = () => {
   const [plate, setPlate] = useState<string>("");
@@ -145,9 +148,9 @@ const App: FC = () => {
   return <div className="App">
     <div className={"container-sm"}>
 
-        <div>
-            <Navbar />
-        </div>
+        {/*<div>*/}
+        {/*    <Navbar />*/}
+        {/*</div>*/}
 
         {/*Überschrift -> Fahrtenbuch*/}
         <div className="d-flex justify-content-center">
