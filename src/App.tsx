@@ -1,16 +1,10 @@
-import React, {ChangeEvent, FC, useState, useEffect} from 'react';
+import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import './App.css';
 import {IInformation} from "./interfaces";
 import DriverList from "./Components/DriverList";
-import'bootswatch/dist/pulse/bootstrap.min.css';
+import 'bootswatch/dist/pulse/bootstrap.min.css';
 import uuid from 'react-uuid';
-import dayjs from "dayjs";
-import Select, { Options } from 'react-select';
-import {selectOptions} from "@testing-library/user-event/dist/select-options";
-import Navbar from "./Components/Navbar/Navbar";
-import {BrowserRouter as Router, Route} from "react-router-dom";
-import Fahrtenbuch from "./Components/pages/Fahrtenbuch";
-import Dokumentation from "./Components/pages/Dokumentation";
+import Select, {Options} from 'react-select';
 
 const App: FC = () => {
   const [plate, setPlate] = useState<string>("");
@@ -21,11 +15,11 @@ const App: FC = () => {
   const [day, setDay] = useState<string>("");
   const [rideList, setRideList] = useState<IInformation[]>([]);
   const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
-  const [id, setId] = useState<string>("");
   const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
   const [car, setCar] = useState<string>("");
-  const [filteredRides, setFilteredRides] = useState(rideList);
-  //
+  //const [filteredRides, setFilteredRides] = useState(rideList);
+  const test = "";
+
   const cars: Options<any> = [
     { value: "B-SP-1234", label: "B-SP-1234" },
     { value: "HH-OP-4321", label: "HH-OP-4321" },
@@ -36,8 +30,11 @@ const App: FC = () => {
   ];
 
   const handleChangeCar = (selectedOption: any) => {
+    // let test = selectedOption.value;
+    // console.log(test);
     setCar(selectedOption.value);
   }
+
 
   //Eingabe
   const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
@@ -66,11 +63,10 @@ const App: FC = () => {
     }
   }
 
-//Die Eingabe wird an ein Array übergeben
+//Eingabe wird an Array übergeben
   const addRide = () => {
     const newRide = {id:uuid(), numberplate: plate, fahrzeug:car, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
     setRideList([...rideList, newRide]);
-    setId("");
     setPlate("");
     setCar("");
     setDriver("");
@@ -106,26 +102,17 @@ const App: FC = () => {
 
 
 
-
-
-
-
-
-
-
-
-  // <div>
-  //   {rideList.filter(person => person.rideEnd > 60).map(filteredPerson => (
-  //       <li>
-  //         {filteredPerson.fahrzeug}
-  //       </li>
-  //   ))}
-  // </div>
+  // const lastKm = () => {
+  //    let i = 0;
+  //    console.log(rideList);
+  //    while(i < rideList.length){
+  //      if (rideList.find(c => c.numberplate = cars)) {
+  //      }
+  //      console.log(rideList.find(c => c.rideEnd));
+  //      i++
+  //    }
   //
-
-
-
-
+  // }
 
 
 
@@ -137,10 +124,9 @@ const App: FC = () => {
     localStorage.setItem('rideList', JSON.stringify(rideList));
   }
 
-  //Daten aus lokelem speicher holen
+  //Daten aus lokalem speicher holen
   const getFromBrowser = (): IInformation[] => {
-    const ausgabe = JSON.parse(localStorage.getItem('rideList')||'[]');
-    return ausgabe;
+    return JSON.parse(localStorage.getItem('rideList') || '[]');
   }
 
   //Daten werden in json datei zum Download bereitgestellt
@@ -332,7 +318,7 @@ const App: FC = () => {
                 <button type={"button"} className={"btn btn-outline-primary px"} onClick={exportData}>JSON </button>
               </div>
               {/*<div className={"p-3"}>*/}
-              {/*  <button type={"button"} className={"btn btn-outline-primary px"} onClick={exportPdf}>PDF</button>*/}
+              {/*  <button type={"button"} className={"btn btn-outline-primary px"} onClick={lastKm}>Letzte Fahrt</button>*/}
               {/*</div>*/}
             </div>
           </div>
@@ -351,21 +337,6 @@ const App: FC = () => {
           </div>
         </div>
 
-
-
-
-
-      {/*todo!!!!!!*/}
-      {/*<div>*/}
-      {/*  <button onClick={testZwei}>Ausgabe Letzte Kilometer</button>*/}
-      {/*</div>*/}
-
-
-
-
-
-
-
         <hr className={"border border-primary border-3 opacity-75"}/>
 
       </div>
@@ -374,7 +345,7 @@ const App: FC = () => {
     <div className={"container-sm"}>
           <div className="rideList">
             {rideList.map((ride, rI) => (
-                <DriverList ride={ride} completeRide={completeRide}/>
+                <DriverList ride={ride}  completeRide={completeRide}/>
             ))}
           </div>
     </div>
