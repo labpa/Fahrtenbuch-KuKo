@@ -5,6 +5,7 @@ import DriverList from "./Components/DriverList";
 import 'bootswatch/dist/pulse/bootstrap.min.css';
 import uuid from 'react-uuid';
 import Select, {Options} from 'react-select';
+import {selectOptions} from "@testing-library/user-event/dist/select-options";
 
 const App: FC = () => {
   const [plate, setPlate] = useState<string>("");
@@ -67,7 +68,7 @@ const App: FC = () => {
   const addRide = () => {
     const newRide = {id:uuid(), numberplate: plate, fahrzeug:car, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
     setRideList([...rideList, newRide]);
-    setPlate("");
+    // setPlate("");
     setCar("");
     setDriver("");
     setBegin(0);
@@ -102,21 +103,22 @@ const App: FC = () => {
 
 
 
-  // const lastKm = () => {
-  //    let i = 0;
-  //    console.log(rideList);
-  //    while(i < rideList.length){
-  //      if (rideList.find(c => c.numberplate = cars)) {
-  //      }
-  //      console.log(rideList.find(c => c.rideEnd));
-  //      i++
-  //    }
-  //
-  // }
+  const lastKm = (selectedOption : any) => {
+ let carRideList = rideList.filter( rli => rli.fahrzeug === car);
+ let carKms = carRideList.map(crl => crl.rideEnd);
+ // let test = parseInt(carKms, 10);
+ // let maxKms = Math.max(carKms);
+    console.log(carRideList);
+    console.log(typeof carKms);
+  }
+//todo carKms = Object -> Math.max
 
 
-
-
+//Filter Komplette ride list Nummernschild Alle Nummernschilder
+  //Erstelle
+  // let carRideList = rideList.filter(rli => rli.numberPlate === deinAutoNumberPlate)
+  // let carKms = carRideList.map(crli => crli.km)
+  // let maxKms = Math.max(...carKms)
 
 
   //Speichern in lokalem Speicher von Browser
@@ -317,9 +319,9 @@ const App: FC = () => {
               <div className={"p-3"}>
                 <button type={"button"} className={"btn btn-outline-primary px"} onClick={exportData}>JSON </button>
               </div>
-              {/*<div className={"p-3"}>*/}
-              {/*  <button type={"button"} className={"btn btn-outline-primary px"} onClick={lastKm}>Letzte Fahrt</button>*/}
-              {/*</div>*/}
+              <div className={"p-3"}>
+                <button type={"button"} className={"btn btn-outline-primary px"} onClick={lastKm}>Letzte Fahrt</button>
+              </div>
             </div>
           </div>
         </div>
