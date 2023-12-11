@@ -1,6 +1,5 @@
 export interface IInformation {
     id:string;
-    numberplate: string;
     fahrzeug:string;
     rideDriver: string;
     rideBegin: number;

@@ -10,7 +10,6 @@ interface Props {
 //Ausgabe Inhalt Array
 const DriverList = ({ride, completeRide}: Props) => {
 
-
 //Berechnung Distanz
     const distance = () => {
         if(parseInt(String(ride.rideEnd)) >= parseInt(String(ride.rideBegin))){
@@ -20,24 +19,10 @@ const DriverList = ({ride, completeRide}: Props) => {
         }
     }
 
-
-//Letzte Fahrt
-
-    // todo https://dev.to/collegewap/how-to-filter-an-array-of-objects-in-react-2n33
-
-
     return(
         <div className='driver'>
             <div className='content'>
 
-                {/*<div className={"row"}>*/}
-                {/*    <div className={"col p-1"}>*/}
-                {/*        <div className={"d-flex justify-content-center"}>*/}
-                {/*            <label>Kennzeichen:&nbsp;&nbsp;</label>*/}
-                {/*            <span>{ride.numberplate}</span>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
 
                 <div className={"row"}>
                     <div className={"col p-1"}>
@@ -47,15 +32,6 @@ const DriverList = ({ride, completeRide}: Props) => {
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
 
                 <div className={"row"}>
                     <div className={"col p-1"}>
@@ -87,13 +63,9 @@ const DriverList = ({ride, completeRide}: Props) => {
                         <div className={"d-flex justify-content-center"}>
                             <label>Gefahrene Kilometer:&nbsp;&nbsp;</label>
                             <span>{distance()}</span>
-                            {/*<span>{distanceZwei()}</span>*/}
                         </div>
                     </div>
                 </div>
-
-
-
 
                 <div className={"row"}>
                     <div className={"col p-1"}>

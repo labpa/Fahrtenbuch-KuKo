@@ -18,9 +18,8 @@ const App: FC = () => {
   const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
   const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
   const [car, setCar] = useState<string>("");
-  //const [filteredRides, setFilteredRides] = useState(rideList);
-  const test = "";
 
+  //Array mit den Fahrzeugen
   const cars: Options<any> = [
     { value: "B-SP-1234", label: "B-SP-1234" },
     { value: "HH-OP-4321", label: "HH-OP-4321" },
@@ -30,12 +29,15 @@ const App: FC = () => {
     { value: "L-OL-4365", label: "L-OL-4365"},
   ];
 
+  //Eingabe auswahl aus Array cary
   const handleChangeCar = (selectedOption: any) => {
-    // let test = selectedOption.value;
-    // console.log(test);
     setCar(selectedOption.value);
   }
 
+  const versuch = (selectOption: any) => {
+    handleChangeCar(selectOption);
+    lastKm();
+  }
 
   //Eingabe
   const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
@@ -43,9 +45,6 @@ const App: FC = () => {
       case "plate":
         setPlate(event.target.value)
             break;
-      // case "car":
-      //   setCar(selectedOption)
-      //       break;
       case "driver":
         setDriver(event.target.value)
             break;
@@ -66,9 +65,8 @@ const App: FC = () => {
 
 //Eingabe wird an Array übergeben
   const addRide = () => {
-    const newRide = {id:uuid(), numberplate: plate, fahrzeug:car, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
+    const newRide = {id:uuid(), fahrzeug:car, rideDriver: driver, rideBegin: begin, rideEnd: end, rideReason: reason, rideDay: day }
     setRideList([...rideList, newRide]);
-    // setPlate("");
     setCar("");
     setDriver("");
     setBegin(0);
@@ -78,7 +76,6 @@ const App: FC = () => {
   }
 
   // loaded fromLocalStorage wird bei deklaration false gesetzt. Hier wird aus false True was das aufrufen der beiden Funktionen zur folge hat
-  //todo useEffect LESEN
   useEffect(() => {
     if (!loadedFromLocalStorage) {
       setLoadedFromLocalStorage(true);
@@ -100,26 +97,14 @@ const App: FC = () => {
      }))
    }
 
-
-
-
-  const lastKm = (selectedOption : any) => {
+// ermittelt den letzten km stand einer fahrzeuges
+  const lastKm = () => {
  let carRideList = rideList.filter( rli => rli.fahrzeug === car);
  let carKms = carRideList.map(crl => crl.rideEnd);
- // let test = parseInt(carKms, 10);
- // let maxKms = Math.max(carKms);
-    console.log(carRideList);
-    console.log(typeof carKms);
+ let maxKms = Math.max(...carKms);
+ console.log(maxKms);
+    setBegin(maxKms);
   }
-//todo carKms = Object -> Math.max
-
-
-//Filter Komplette ride list Nummernschild Alle Nummernschilder
-  //Erstelle
-  // let carRideList = rideList.filter(rli => rli.numberPlate === deinAutoNumberPlate)
-  // let carKms = carRideList.map(crli => crli.km)
-  // let maxKms = Math.max(...carKms)
-
 
   //Speichern in lokalem Speicher von Browser
   const saveInBrowser = (): void => {
@@ -156,7 +141,7 @@ const App: FC = () => {
     }
   };
 
-   //Layout oder so
+   //Darstellung
   return <div className="App">
     <div className={"container-sm"}>
 
@@ -176,24 +161,6 @@ const App: FC = () => {
       {/*streifen*/}
       <hr className={"border border-primary border-3 opacity-75"}/>
 
-      {/*Kennzeichen*/}
-      {/*<div className={"container text-end p-2"}>*/}
-      {/*  <div className={"row"}>*/}
-      {/*    <div className={"col"}>*/}
-      {/*      <label className={"col-form-label mt-2"}>Kennzeichen</label>*/}
-      {/*    </div>*/}
-      {/*    <div className={"col p-2"}>*/}
-      {/*      <input type="text"*/}
-      {/*             placeholder="Kennzeichen"*/}
-      {/*             className={"form-control"}*/}
-      {/*             name ="plate"*/}
-      {/*             value = {plate}*/}
-      {/*             onChange = {handleChange}*/}
-      {/*      />*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-
       {/* Kennzeichen mit Auswahl*/}
       <div className={"container text-center p-2"}>
         <div className={"row"}>
@@ -211,7 +178,7 @@ const App: FC = () => {
                       name={"car"}
                       value={cars?.find(c => c.value === car)}
                       placeholder={"Fahrzeug"}
-                      onChange = {handleChangeCar}
+                      onChange = {versuch}
               />
             </div>
           </div>
@@ -352,18 +319,7 @@ const App: FC = () => {
           </div>
     </div>
 
-
-
-
-
-
-
-
-
 </div>
-
-
-
 
 }
 
