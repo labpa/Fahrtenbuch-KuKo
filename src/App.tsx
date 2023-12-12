@@ -145,9 +145,6 @@ const App: FC = () => {
   return <div className="App">
     <div className={"container-sm"}>
 
-        {/*<div>*/}
-        {/*    <Navbar />*/}
-        {/*</div>*/}
 
         {/*Überschrift → Fahrtenbuch*/}
         <div className="d-flex justify-content-center">
