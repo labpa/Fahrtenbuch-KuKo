@@ -5,9 +5,6 @@ import DriverList from "./Components/DriverList";
 import 'bootswatch/dist/pulse/bootstrap.min.css';
 import uuid from 'react-uuid';
 import Select, {Options} from 'react-select';
-import {Link} from "react-router-dom";
-import About from "./About";
-import Contact from "./Contact";
 
 const Fahrtenbuch: FC = () => {
     const [plate, setPlate] = useState<string>("");
@@ -144,38 +141,25 @@ const Fahrtenbuch: FC = () => {
     };
 
 
-
-
-
     return <div className={"container-sm"}>
-
-
-            {/*Überschrift → Fahrtenbuch*/}
-            <div className="d-flex justify-content-center">
-                <div className={"row"}>
-                    <div className={"col p-2"}>
-                        <div><h1>Fahrtenbuch</h1></div>
-                    </div>
+        <div className="d-flex justify-content-center">
+            <div className={"row"}>
+                <div className={"col p-2"}>
+                    <div><h1>Fahrtenbuch</h1></div>
                 </div>
             </div>
+        </div>
 
+        {/*streifen*/}
+        <hr className={"border border-primary border-3 opacity-75"}/>
 
-            <div>
-                <Link to={"home"}>Fahrtenbuch</Link>
-                <Link to={"about"}>Click to view About page</Link>
-                <Link to={"contact"}>Click to view Contact page</Link>
-            </div>
-
-            {/*streifen*/}
-            <hr className={"border border-primary border-3 opacity-75"}/>
-
-            {/* Kennzeichen mit Auswahl*/}
-            <div className={"container text-center p-2"}>
-                <div className={"row"}>
-                    <div className={"col"}>
-                        <div className={"text-end"}>
-                            <label className={"col-form-label mt-2"}>Fahrzeug</label>
-                        </div>
+        {/* Kennzeichen mit Auswahl*/}
+        <div className={"container text-center p-2"}>
+            <div className={"row"}>
+                <div className={"col"}>
+                    <div className={"text-end"}>
+                        <label className={"col-form-label mt-2"}>Fahrzeug</label>
+                    </div>
 
                     </div>
                     <div className={"col p-2"}>

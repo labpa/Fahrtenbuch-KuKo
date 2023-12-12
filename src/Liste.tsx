@@ -1,14 +1,14 @@
 import React, {FC} from "react";
 import Navbar from "./Components/navbar";
 
-const Contact: FC  = () => {
+const Liste: FC = () => {
 
 
     return <div className={"container-sm"}>
         <div className="d-flex justify-content-center">
             <div className={"row"}>
                 <div className={"col p-2"}>
-                    <div><h1>Kontakt</h1></div>
+                    <div><h1>Liste</h1></div>
                 </div>
             </div>
         </div>
@@ -17,4 +17,4 @@ const Contact: FC  = () => {
 
     </div>
 }
-export default Contact;
+export default Liste;
