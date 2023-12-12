@@ -163,15 +163,18 @@ const Fahrtenbuch: FC = () => {
 
                     </div>
                     <div className={"col p-2"}>
-                        <div className={"form-group"}>
-                            <Select className={"form-select"}
-                                    id={"exampleSelect1"}
-                                    options={cars}
-                                    name={"car"}
-                                    value={cars?.find(c => c.value === car)}
-                                    placeholder={"Fahrzeug"}
-                                    onChange = {versuch}
-                            />
+                        <div className={"form-group row"}>
+                            <div className={"form-label mt-4"}>
+                                <Select className={"exampleSelect1"}
+                                        id={"exampleSelect1"}
+                                        options={cars}
+                                        name={"car"}
+                                        value={cars?.find(c => c.value === car)}
+                                        placeholder={"Fahrzeug"}
+                                        onChange = {versuch}
+                                />
+                            </div>
+
                         </div>
                     </div>
                 </div>

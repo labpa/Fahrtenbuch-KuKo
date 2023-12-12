@@ -42,9 +42,6 @@ const App: FC = () => {
       </div>
 
     </div>
-
-
-
 </div>
 
 }
