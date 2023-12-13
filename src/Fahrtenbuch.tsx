@@ -5,6 +5,7 @@ import DriverList from "./Components/DriverList";
 import 'bootswatch/dist/pulse/bootstrap.min.css';
 import uuid from 'react-uuid';
 import Select, {Options} from 'react-select';
+import {selectOptions} from "@testing-library/user-event/dist/select-options";
 
 const Fahrtenbuch: FC = () => {
     const [plate, setPlate] = useState<string>("");
@@ -17,6 +18,7 @@ const Fahrtenbuch: FC = () => {
     const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
     const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
     const [car, setCar] = useState<string>("");
+    const [versuch, setVersuch] = useState<boolean>(false);
 
     //Array mit den Fahrzeugen
     const cars: Options<any> = [
@@ -30,13 +32,22 @@ const Fahrtenbuch: FC = () => {
 
     //Eingabe auswahl aus Array cary
     const handleChangeCar = (selectedOption: any) => {
-        setCar(selectedOption.value);
+        setCar(selectedOption.value)
     }
 
-    const versuch = (selectOption: any) => {
-        handleChangeCar(selectOption);
-        lastKm();
-    }
+
+    // const handleChangeCar = (selectedOption: any) => {
+    //     useEffect(() => {
+    //         if(setCar(selectedOption.value)){
+    //             lastKm();
+    //         }
+    //     })
+    // }
+
+
+
+
+
 
     //Eingabe
     const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
@@ -171,7 +182,7 @@ const Fahrtenbuch: FC = () => {
                                         name={"car"}
                                         value={cars?.find(c => c.value === car)}
                                         placeholder={"Fahrzeug"}
-                                        onChange = {versuch}
+                                        onChange = {handleChangeCar}
                                 />
                             </div>
 
