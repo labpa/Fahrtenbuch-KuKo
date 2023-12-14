@@ -24,10 +24,8 @@ const App: FC = () => {
       <Navbar/>
 
 
-
     </div>
     <Routes>
-      {/*<Route path={"*"} element={<App/>}/>*/}
       <Route path={"/home"} element={<Fahrtenbuch/>}/>
       <Route path={"/liste"} element={<Liste/>}/>
       <Route path={"/contact"} element={<Contact/>}/>
@@ -38,10 +36,9 @@ const App: FC = () => {
         <Link to={"/home"}>
           <img src={auto}/>
         </Link>
-
       </div>
-
     </div>
+
 </div>
 
 }

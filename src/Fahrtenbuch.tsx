@@ -18,7 +18,7 @@ const Fahrtenbuch: FC = () => {
     const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
     const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
     const [car, setCar] = useState<string>("");
-    const [versuch, setVersuch] = useState<boolean>(false);
+
 
     //Array mit den Fahrzeugen
     const cars: Options<any> = [
@@ -30,24 +30,17 @@ const Fahrtenbuch: FC = () => {
         { value: "L-OL-4365", label: "L-OL-4365"},
     ];
 
-    //Eingabe auswahl aus Array cary
+    // Eingabe auswahl aus Array cary
     const handleChangeCar = (selectedOption: any) => {
         setCar(selectedOption.value)
     }
 
-
-    // const handleChangeCar = (selectedOption: any) => {
-    //     useEffect(() => {
-    //         if(setCar(selectedOption.value)){
-    //             lastKm();
-    //         }
-    //     })
-    // }
-
-
-
-
-
+    //useEffect bezieht sich auf handleChangeCar -> car Wenn sich car verändert wird lastKm() ausgeführt
+    useEffect(() => {
+        if(car){
+            lastKm();
+        }
+    },[car])
 
     //Eingabe
     const handleChange = (event: ChangeEvent <HTMLInputElement>): void => {
@@ -112,7 +105,6 @@ const Fahrtenbuch: FC = () => {
         let carRideList = rideList.filter( rli => rli.fahrzeug === car);
         let carKms = carRideList.map(crl => crl.rideEnd);
         let maxKms = Math.max(...carKms);
-        console.log(maxKms);
         setBegin(maxKms);
     }
 
@@ -151,7 +143,7 @@ const Fahrtenbuch: FC = () => {
         }
     };
 
-
+    //return
     return <div className={"container-sm"}>
         <div className="d-flex justify-content-center">
             <div className={"row"}>
@@ -175,7 +167,6 @@ const Fahrtenbuch: FC = () => {
                     </div>
                     <div className={"col p-2"}>
                         <div className={"form-group row"}>
-                            <div className={"form-label mt-4"}>
                                 <Select className={"exampleSelect1"}
                                         id={"exampleSelect1"}
                                         options={cars}
@@ -185,8 +176,6 @@ const Fahrtenbuch: FC = () => {
                                         onChange = {handleChangeCar}
                                 />
                             </div>
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -291,9 +280,6 @@ const Fahrtenbuch: FC = () => {
                         </div>
                         <div className={"p-3"}>
                             <button type={"button"} className={"btn btn-outline-primary px"} onClick={exportData}>JSON </button>
-                        </div>
-                        <div className={"p-3"}>
-                            <button type={"button"} className={"btn btn-outline-primary px"} onClick={lastKm}>Letzte Fahrt</button>
                         </div>
                     </div>
                 </div>
