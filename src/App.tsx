@@ -19,7 +19,7 @@ const App: FC = () => {
 
 
    //Darstellung
-  return <div className="App">
+  return <div className="container-sm">
     <div className={"container-sm"}>
       <Navbar/>
 

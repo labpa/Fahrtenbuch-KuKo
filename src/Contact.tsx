@@ -1,8 +1,11 @@
-import React, {FC} from "react";
-import Navbar from "./Components/navbar";
+import React, {ChangeEvent, FC, useEffect, useState} from 'react';
+import './App.css';
+import {IInformation} from "./interfaces";
+import 'bootswatch/dist/pulse/bootstrap.min.css';
+import Ausgabe from "./Components/ausgabe";
+
 
 const Contact: FC  = () => {
-
 
     return <div className={"container-sm"}>
         <div className="d-flex justify-content-center">
@@ -12,9 +15,6 @@ const Contact: FC  = () => {
                 </div>
             </div>
         </div>
-
-        <hr className={"border border-primary border-3 opacity-75"}/>
-
     </div>
 }
 export default Contact;

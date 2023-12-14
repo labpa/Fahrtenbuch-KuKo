@@ -5,7 +5,7 @@ import DriverList from "./Components/DriverList";
 import 'bootswatch/dist/pulse/bootstrap.min.css';
 import uuid from 'react-uuid';
 import Select, {Options} from 'react-select';
-import {selectOptions} from "@testing-library/user-event/dist/select-options";
+
 
 const Fahrtenbuch: FC = () => {
     const [plate, setPlate] = useState<string>("");
@@ -298,17 +298,19 @@ const Fahrtenbuch: FC = () => {
                 </div>
             </div>
 
+
             <hr className={"border border-primary border-3 opacity-75"}/>
 
 
-    {/*Ausgabe der Liste -> Extra Container*/}
-    <div className={"container-sm"}>
-        <div className="rideList">
-            {rideList.map((ride, rI) => (
-                <DriverList ride={ride}  completeRide={completeRide}/>
-            ))}
-        </div>
-    </div>
+         {/*Ausgabe der Liste -> Extra Container*/}
+         <div className={"container-sm"}>
+                <div className="rideList">
+                    {rideList.map((ride, rI) => (
+                       <DriverList ride={ride}  completeRide={completeRide}/>
+                   ))}
+                </div>
+         </div>
+
 
 </div>
 }
