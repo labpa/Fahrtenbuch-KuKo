@@ -4,10 +4,10 @@ import {IInformation} from "./interfaces";
 import 'bootswatch/dist/pulse/bootstrap.min.css';
 import dayjs from "dayjs";
 
-
 const Liste: FC  = () => {
     const [rideList, setRideList] = useState<IInformation[]>([]);
     const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
+    const [search, setSearch] = useState('');
 
     // loaded fromLocalStorage wird bei deklaration false gesetzt. Hier wird aus false True was das aufrufen der beiden Funktionen zur folge hat
     useEffect(() => {
@@ -41,7 +41,6 @@ const Liste: FC  = () => {
         return JSON.parse(localStorage.getItem('rideList') || '[]');
     }
 
-    console.log(rideList); //data in Tutorial => rideList
 
 
 
@@ -54,8 +53,19 @@ const Liste: FC  = () => {
             </div>
         </div>
 
+        {/*Suchfeld*/}
+        <input className={"form-control me-sm-2"}
+               placeholder={"Suchen"}
+               onChange={(e) => setSearch(e.target.value)}
+        />
+
         {/*streifen*/}
         <hr className={"border border-primary border-3 opacity-75"}/>
+
+
+
+
+
         <div className={"content"}>
             <table className={"table table-hover"}>
                 <thead>
@@ -71,13 +81,23 @@ const Liste: FC  = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {rideList.map((item)=>(
-                    <tr>
-                        <td>{item.rideDay}</td>
+                {rideList.filter((item) => {
+                    return search.toLowerCase() === ''
+                    ? item
+                    : item.rideDriver.toLowerCase().includes(search) ||
+                    item.fahrzeug.toLowerCase().includes(search) ||
+                    item.rideReason.toLowerCase().includes(search)||
+                    item.rideBegin.toString().includes(search) ||
+                    item.rideEnd.toString().includes(search) ||
+                    item.rideDay.includes(search)
+
+                }).map((item)=>(
+                    <tr key={item.id}>
+                        <td>{item.fahrzeug}</td>
                         <td>{item.rideDriver}</td>
-                        <td>{item.rideReason}</td>
                         <td>{item.rideBegin}</td>
-                        <td>Distanz</td>
+                        <td>{item.rideEnd}</td>
+                        <td>{item.rideEnd - item.rideBegin}</td>
                         <td>{item.rideReason}</td>
                         <td>{dayjs(item.rideDay).format("D.M.YYYY")}</td>
                         <td><button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
@@ -88,9 +108,6 @@ const Liste: FC  = () => {
                 </tbody>
             </table>
         </div>
-
-
-
     </div>
 }
 export default Liste;

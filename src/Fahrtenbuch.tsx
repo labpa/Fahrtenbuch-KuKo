@@ -306,7 +306,7 @@ const Fahrtenbuch: FC = () => {
          <div className={"container-sm"}>
                 <div className="rideList">
                     {rideList.map((ride, rI) => (
-                       <DriverList ride={ride}  completeRide={completeRide}/>
+                       <DriverList ride={ride} key={ride.id} completeRide={completeRide}/>
                    ))}
                 </div>
          </div>
