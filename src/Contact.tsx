@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import './App.css';
 import {IInformation} from "./interfaces";
 import 'bootswatch/dist/pulse/bootstrap.min.css';
-import Ausgabe from "./Components/ausgabe";
+
 
 
 const Contact: FC  = () => {

@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import './App.css';
 import {IInformation} from "./interfaces";
 import 'bootswatch/dist/pulse/bootstrap.min.css';
-import Ausgabe from "./Components/ausgabe";
+import dayjs from "dayjs";
 
 
 const Liste: FC  = () => {
@@ -41,6 +41,10 @@ const Liste: FC  = () => {
         return JSON.parse(localStorage.getItem('rideList') || '[]');
     }
 
+    console.log(rideList); //data in Tutorial => rideList
+
+
+
     return <div className={"container-sm"}>
         <div className="d-flex justify-content-center">
             <div className={"row"}>
@@ -63,28 +67,28 @@ const Liste: FC  = () => {
                     <th scope={"col"}>Gefahrene Kilometer</th>
                     <th scope={"col"}>Grund der Fahrt</th>
                     <th scope={"col"}>Tag der Fahrt</th>
+                    <th></th>
                 </tr>
                 </thead>
+                <tbody>
+                {rideList.map((item)=>(
+                    <tr>
+                        <td>{item.rideDay}</td>
+                        <td>{item.rideDriver}</td>
+                        <td>{item.rideReason}</td>
+                        <td>{item.rideBegin}</td>
+                        <td>Distanz</td>
+                        <td>{item.rideReason}</td>
+                        <td>{dayjs(item.rideDay).format("D.M.YYYY")}</td>
+                        <td><button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
+                            completeRide(item.id);
+                        }}>Löschen</button></td>
+                    </tr>
+                ))}
+                </tbody>
             </table>
         </div>
 
-
-
-
-
-
-
-
-
-
-        {/*Ausgabe der Liste -> Extra Container*/}
-        <div className={"container-sm"}>
-            <div className="rideList">
-                {rideList.map((ride, rI) => (
-                    <Ausgabe ride={ride}  completeRide={completeRide}/>
-                ))}
-            </div>
-        </div>
 
 
     </div>
