@@ -41,6 +41,7 @@ const Liste: FC  = () => {
         return JSON.parse(localStorage.getItem('rideList') || '[]');
     }
 
+    console.log(search);
 
 
 
@@ -63,9 +64,6 @@ const Liste: FC  = () => {
         <hr className={"border border-primary border-3 opacity-75"}/>
 
 
-
-
-
         <div className={"content"}>
             <table className={"table table-hover"}>
                 <thead>
@@ -82,7 +80,7 @@ const Liste: FC  = () => {
                 </thead>
                 <tbody>
                 {rideList.filter((item) => {
-                    return search.toLowerCase() === ''
+                    return search.toLowerCase() && search === ''
                     ? item
                     : item.rideDriver.toLowerCase().includes(search) ||
                     item.fahrzeug.toLowerCase().includes(search) ||
@@ -90,7 +88,6 @@ const Liste: FC  = () => {
                     item.rideBegin.toString().includes(search) ||
                     item.rideEnd.toString().includes(search) ||
                     item.rideDay.includes(search)
-
                 }).map((item)=>(
                     <tr key={item.id}>
                         <td>{item.fahrzeug}</td>

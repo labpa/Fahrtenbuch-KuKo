@@ -310,8 +310,6 @@ const Fahrtenbuch: FC = () => {
                    ))}
                 </div>
          </div>
-
-
 </div>
 }
 export default Fahrtenbuch;
