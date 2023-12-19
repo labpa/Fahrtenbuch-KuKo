@@ -1,5 +1,4 @@
 import React, {FC} from 'react';
-import 'bootswatch/dist/pulse/bootstrap.min.css';
 
 const Contact: FC  = () => {
 
