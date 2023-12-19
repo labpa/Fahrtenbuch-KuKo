@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import './App.css';
 import {IInformation} from "./interfaces";
 import 'bootswatch/dist/pulse/bootstrap.min.css';
@@ -41,10 +41,6 @@ const Liste: FC  = () => {
         return JSON.parse(localStorage.getItem('rideList') || '[]');
     }
 
-    console.log(search);
-
-
-
     return <div className={"container-sm"}>
         <div className="d-flex justify-content-center">
             <div className={"row"}>
@@ -80,7 +76,7 @@ const Liste: FC  = () => {
                 </thead>
                 <tbody>
                 {rideList.filter((item) => {
-                    return search.toLowerCase() && search === ''
+                    return search.toLowerCase() === ''
                     ? item
                     : item.rideDriver.toLowerCase().includes(search) ||
                     item.fahrzeug.toLowerCase().includes(search) ||

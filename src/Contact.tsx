@@ -1,9 +1,5 @@
-import React, {ChangeEvent, FC, useEffect, useState} from 'react';
-import './App.css';
-import {IInformation} from "./interfaces";
+import React, {FC} from 'react';
 import 'bootswatch/dist/pulse/bootstrap.min.css';
-
-
 
 const Contact: FC  = () => {
 
