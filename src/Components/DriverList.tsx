@@ -1,6 +1,7 @@
 import React from "react";
 import {IInformation} from "../interfaces";
 import dayjs from "dayjs";
+import { Link } from "react-router-dom";
 
 interface Props {
     ride: IInformation;
@@ -18,6 +19,10 @@ const DriverList = ({ride, completeRide}: Props) => {
             return "Ungültig";
         }
     }
+const change = () => {
+        console.log("Bearbeiten");
+}
+
 
     return(
         <div className='driver'>
@@ -84,11 +89,19 @@ const DriverList = ({ride, completeRide}: Props) => {
                     </div>
                 </div>
                 <div className={"row"}>
-                    <div className={"col p-2"}>
+                    <div className={"col"}>
                         <div className={"d-flex justify-content-center"}>
-                            <button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
-                                completeRide(ride.id);
-                            }}>Löschen</button>
+                            <div className={"p-3"}>
+                                <button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
+                                    completeRide(ride.id);
+                                }}>Löschen</button>
+                            </div>
+                            <div className={"p-3"}>
+                                <Link to={"/update"}>
+                                    <button type={"button"} className={"btn btn-outline-primary"}>Bearbeiten</button>
+                                </Link>
+
+                            </div>
                         </div>
                     </div>
                 </div>

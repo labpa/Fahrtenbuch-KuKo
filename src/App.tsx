@@ -7,6 +7,7 @@ import Liste from "./Liste";
 import Contact from "./Contact";
 import Navbar from "./Components/navbar";
 import Dashboard from "./dashboard";
+import Update from "./update";
 
 const App: FC = () => {
 
@@ -20,6 +21,7 @@ const App: FC = () => {
       <Route path={"/home"} element={<Fahrtenbuch/>}/>
       <Route path={"/liste"} element={<Liste/>}/>
       <Route path={"/contact"} element={<Contact/>}/>
+      <Route path={"/update"} element={<Update/>}/>
     </Routes>
 
 </div>

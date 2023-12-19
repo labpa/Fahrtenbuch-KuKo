@@ -82,9 +82,9 @@ const Liste: FC  = () => {
                 {rideList.filter((item) => {
                     return search.toLowerCase() === ''
                     ? item
-                    : item.rideDriver.toLowerCase().includes(search) ||
-                    item.fahrzeug.toLowerCase().includes(search) ||
-                    item.rideReason.toLowerCase().includes(search)||
+                    : item.rideDriver.toLowerCase().includes(search.toLowerCase()) ||
+                    item.fahrzeug.toLowerCase().includes(search.toLowerCase()) ||
+                    item.rideReason.toLowerCase().includes(search.toLowerCase())||
                     item.rideBegin.toString().includes(search) ||
                     item.rideEnd.toString().includes(search) ||
                     item.rideDay.includes(search)

@@ -99,6 +99,9 @@ const Fahrtenbuch: FC = () => {
         }))
     }
 
+    //Bearbeiten
+
+
 // ermittelt den letzten km stand einer fahrzeuges
     const lastKm = () => {
         let carRideList = rideList.filter( rli => rli.fahrzeug === car);
