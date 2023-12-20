@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 
 interface Props {
     ride: IInformation;
-    completeRide(numberplateToDelete: string): void;
+    deleteRide(numberplateToDelete: string): void;
+    updateRide(toChange: string):void;
 }
 
 //Ausgabe Inhalt Array
-const DriverList = ({ride, completeRide}: Props) => {
+const DriverList = ({ride, deleteRide, updateRide}: Props) => {
 
 //Berechnung Distanz
     const distance = () => {
@@ -19,9 +20,6 @@ const DriverList = ({ride, completeRide}: Props) => {
             return "Ungültig";
         }
     }
-const change = () => {
-        console.log("Bearbeiten");
-}
 
 
     return(
@@ -93,12 +91,14 @@ const change = () => {
                         <div className={"d-flex justify-content-center"}>
                             <div className={"p-3"}>
                                 <button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
-                                    completeRide(ride.id);
+                                    deleteRide(ride.id);
                                 }}>Löschen</button>
                             </div>
                             <div className={"p-3"}>
                                 <Link to={"/update"}>
-                                    <button type={"button"} className={"btn btn-outline-primary"}>Bearbeiten</button>
+                                    <button type={"button"} className={"btn btn-outline-primary"} onClick={() => {
+                                        updateRide(ride.id);
+                                    }}>Bearbeiten</button>
                                 </Link>
 
                             </div>

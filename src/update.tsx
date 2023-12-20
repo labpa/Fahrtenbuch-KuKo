@@ -1,24 +1,51 @@
 import React, {FC, useEffect, useState} from 'react';
-// import axios from 'axios';
-// import Select from "react-select";
-// import {useParams} from "react-router-dom";
+import {IInformation} from "./interfaces";
 
-const update : FC = () => {
+
+const Update: FC = () => {
+    const [rideList, setRideList] = useState<IInformation[]>([]);
+    const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
+
+
+    //Daten aus lokalem speicher holen
+    const getFromBrowser = (): IInformation[] => {
+        return JSON.parse(localStorage.getItem('rideList') || '[]');
+    }
+
+
+    //Speichern in lokalem Speicher von Browser
+    const saveInBrowser = (): void => {
+        localStorage.setItem('rideList', JSON.stringify(rideList));
+    }
+
+
+
+    // loaded fromLocalStorage wird bei deklaration false gesetzt. Hier wird aus false True was das aufrufen der beiden Funktionen zur folge hat
+    useEffect(() => {
+        if (!loadedFromLocalStorage) {
+            setLoadedFromLocalStorage(true);
+            setRideList(getFromBrowser());
+        }
+    }, [loadedFromLocalStorage]);
+
+    // loadedFromLocalStorage ruft das erneute speichern auf
+    useEffect(() => {
+        if(loadedFromLocalStorage){
+            saveInBrowser();
+        }
+    }, [loadedFromLocalStorage, rideList]);
+
+
+
+    //todo Funktion die Speichert und änderungen dem State übergibt
     const save = () => {
         console.log("Speichern");
     }
 
 
-    // const updates = () => {
-    //     const {id} = useParams();
-    //     useEffect(() => {
-    //         axios.get('http://localhost:3000/home' + id)
-    //             .then(res => console.log(res))
-    //             .catch(err => console.log(err))
-    //     }, [])
-    // }
 
-//todo https://www.youtube.com/watch?v=CUyU_ySLnIM (IDK! -> lieber noch mal weitersuchen)
+
+
 
     return <div className={"container-sm"}>
         <div className="d-flex justify-content-center">
@@ -28,6 +55,11 @@ const update : FC = () => {
                 </div>
             </div>
         </div>
+
+
+
+
+
         {/*Fahrer:in*/}
         <div className={"container text-end p-2"}>
             <div className={"row"}>
@@ -121,12 +153,7 @@ const update : FC = () => {
                 </div>
             </div>
         </div>
-
-
-
-
-
     </div>
 }
 
-export default update;
+export default Update;

@@ -14,6 +14,7 @@ const Fahrtenbuch: FC = () => {
     const [reason, setReason] = useState<string>("");
     const [day, setDay] = useState<string>("");
     const [rideList, setRideList] = useState<IInformation[]>([]);
+    const [updateRideList, setUpdateRideList] = useState<IInformation[]>([]);
     const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
     const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
     const [car, setCar] = useState<string>("");
@@ -93,13 +94,19 @@ const Fahrtenbuch: FC = () => {
     }, [loadedFromLocalStorage, rideList]);
 
     //Löschen → Löscht über die id
-    const completeRide = (idToDelete:string):void => {
+    const deleteRide = (idToDelete:string):void => {
         setRideList(rideList.filter((id) => {
             return id.id !== idToDelete
         }))
     }
 
-    //Bearbeiten
+    //Bearbeiten todo das muss vermutlich wieder raus
+    const updateRide = (idToUpdate:string):void => {
+        setRideList(rideList.filter((id) => {
+            console.log(idToUpdate);
+            return id.id !== idToUpdate
+        }))
+    }
 
 
 // ermittelt den letzten km stand einer fahrzeuges
@@ -308,7 +315,7 @@ const Fahrtenbuch: FC = () => {
          <div className={"container-sm"}>
                 <div className="rideList">
                     {rideList.map((ride, rI) => (
-                       <DriverList ride={ride} key={ride.id} completeRide={completeRide}/>
+                       <DriverList ride={ride} key={ride.id} deleteRide={deleteRide} updateRide={updateRide}/>
                    ))}
                 </div>
          </div>

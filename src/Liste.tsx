@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 
 const Liste: FC  = () => {
     const [rideList, setRideList] = useState<IInformation[]>([]);
+    const [updateRideList, setUpdateRideList] = useState<IInformation[]>([]);
     const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
     const [search, setSearch] = useState('');
 
@@ -24,7 +25,7 @@ const Liste: FC  = () => {
     }, [loadedFromLocalStorage, rideList]);
 
     //Löschen → Löscht über die id
-    const completeRide = (idToDelete:string):void => {
+    const deleteRide = (idToDelete:string):void => {
         setRideList(rideList.filter((id) => {
             return id.id !== idToDelete
         }))
@@ -40,9 +41,13 @@ const Liste: FC  = () => {
         return JSON.parse(localStorage.getItem('rideList') || '[]');
     }
 
-    const details = () => {
-        console.log("Details");
+    const handleEdit = (idToChange:string):void => {
+
     }
+
+
+
+
 
 
     return <div className={"container-sm"}>
@@ -75,7 +80,7 @@ const Liste: FC  = () => {
                     <th scope={"col"}>KM Fahrt</th>
                     <th scope={"col"}>Grund</th>
                     <th scope={"col"}>Datum</th>
-                    <th></th>
+                    <th> Aktion</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -98,8 +103,14 @@ const Liste: FC  = () => {
                         <td>{item.rideReason}</td>
                         <td>{dayjs(item.rideDay).format("D.M.YYYY")}</td>
                         <td><button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
-                            completeRide(item.id);
+                            deleteRide(item.id);
                         }}>Löschen</button></td>
+                        <td><button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
+                        console.log(item.id);
+                        }}>ConsoleLog ID</button>
+                        </td>
+                        <td><button type={"button"} className={"btn btn-outline-primary"} onClick={() => handleEdit(item.id)}>Bearbeiten</button>
+                        </td>
                     </tr>
                 ))}
                 </tbody>
