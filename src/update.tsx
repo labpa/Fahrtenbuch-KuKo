@@ -8,6 +8,7 @@ const Update: FC = () => {
     const [updateRideList, setUpdateRideList] = useState<IInformation[]>([]); //Neuer State
 
 
+console.log(updateRideList);
 
     //Daten aus lokalem speicher holen
     const getFromBrowser = (): IInformation[] => {
@@ -44,6 +45,8 @@ const Update: FC = () => {
         console.log("Speichern");
     }
 
+
+
     return <div className={"container-sm"}>
         <div className="d-flex justify-content-center">
             <div className={"row"}>
@@ -52,10 +55,6 @@ const Update: FC = () => {
                 </div>
             </div>
         </div>
-
-
-
-
 
         {/*Fahrer:in*/}
         <div className={"container text-end p-2"}>
@@ -146,11 +145,21 @@ const Update: FC = () => {
                 <div className={"d-flex justify-content-center"}>
                     <div className={"p-3"}>
                         <Button variant={"outline-dark"} onClick={save}>Speichern</Button>
-
                     </div>
                 </div>
             </div>
         </div>
+
+        {/*<hr/>*/}
+        {/*<div>*/}
+        {/*    {rideList.filter((item) => {*/}
+        {/*        return item.id;*/}
+        {/*    })}*/}
+        {/*</div>*/}
+
+
+
+
     </div>
 }
 
