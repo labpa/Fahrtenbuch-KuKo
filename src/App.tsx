@@ -1,19 +1,20 @@
 import React, {FC} from 'react';
 import './App.css';
-import 'bootswatch/dist/pulse/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {Routes, Route} from "react-router-dom";
 import Fahrtenbuch from "./Fahrtenbuch";
 import Liste from "./Liste";
 import Contact from "./Contact";
-import Navbar from "./Components/navbar";
+// import Navbar from "./Components/navbar";
 import Dashboard from "./dashboard";
 import Update from "./update";
+import Navbarzwei from "./Components/navbarzwei";
 
 const App: FC = () => {
 
   return <div className="container-sm">
     <div className={"container-sm"}>
-      <Navbar/>
+      <Navbarzwei/>
     </div>
 
     <Routes>

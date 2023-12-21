@@ -1,5 +1,7 @@
 import {NavLink} from "react-router-dom";
 
+
+
 const Navbar = () => {
     return (
         <nav className={"navbar navbar-expand-lg bg-primary"} data-bs-theme={"dark"}>
