@@ -1,11 +1,11 @@
 import React, {FC, useEffect, useState} from 'react';
 import {IInformation} from "./interfaces";
-import {useParams} from "react-router-dom";
-
+import Button from "react-bootstrap/Button";
 
 const Update: FC = () => {
     const [rideList, setRideList] = useState<IInformation[]>([]);
     const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
+    const [updateRideList, setUpdateRideList] = useState<IInformation[]>([]); //Neuer State
 
 
 
@@ -145,7 +145,8 @@ const Update: FC = () => {
             <div className={"col"}>
                 <div className={"d-flex justify-content-center"}>
                     <div className={"p-3"}>
-                        <button type={"button"} className={"btn btn-outline-primary px mb "} onClick={save}>Speichern</button>  {/* Eingabe */}
+                        <Button variant={"outline-dark"} onClick={save}>Speichern</Button>
+
                     </div>
                 </div>
             </div>

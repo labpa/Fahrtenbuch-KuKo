@@ -2,6 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import './App.css';
 import {IInformation} from "./interfaces";
 import dayjs from "dayjs";
+import Button from 'react-bootstrap/Button';
 
 const Liste: FC  = () => {
     const [rideList, setRideList] = useState<IInformation[]>([]);
@@ -66,7 +67,7 @@ const Liste: FC  = () => {
         />
 
         {/*streifen*/}
-        <hr className={"border border-primary border-3 opacity-75"}/>
+        <hr className={"border-end border-dark border-5 opacity-75"}/>
 
 
         <div className={"content"}>
@@ -102,9 +103,9 @@ const Liste: FC  = () => {
                         <td>{item.rideEnd - item.rideBegin}</td>
                         <td>{item.rideReason}</td>
                         <td>{dayjs(item.rideDay).format("D.M.YYYY")}</td>
-                        <td><button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
+                        <td><Button variant={"outline-dark"} onClick={() =>{
                             deleteRide(item.id);
-                        }}>Löschen</button></td>
+                        }}>Löschen</Button></td>
                         {/*<td><button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{*/}
                         {/*console.log(item.id);*/}
                         {/*}}>ConsoleLog ID</button>*/}

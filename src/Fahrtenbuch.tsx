@@ -4,6 +4,7 @@ import {IInformation} from "./interfaces";
 import DriverList from "./Components/DriverList";
 import uuid from 'react-uuid';
 import Select, {Options} from 'react-select';
+import Button from "react-bootstrap/Button";
 
 
 const Fahrtenbuch: FC = () => {
@@ -163,7 +164,8 @@ const Fahrtenbuch: FC = () => {
         </div>
 
         {/*streifen*/}
-        <hr className={"border border-primary border-3 opacity-75"}/>
+        <hr className={"border-end border-dark border-5 opacity-75"}/>
+
 
         {/* Kennzeichen mit Auswahl*/}
         <div className={"container text-center p-2"}>
@@ -285,10 +287,10 @@ const Fahrtenbuch: FC = () => {
                 <div className={"col"}>
                     <div className={"d-flex justify-content-center"}>
                         <div className={"p-3"}>
-                            <button type={"button"} className={"btn btn-outline-primary px mb "} onClick={addRide}>Hinzufügen </button>  {/* Eingabe */}
+                            <Button variant={"outline-dark"} onClick={addRide}>Hinzufügen</Button>
                         </div>
                         <div className={"p-3"}>
-                            <button type={"button"} className={"btn btn-outline-primary px"} onClick={exportData}>JSON </button>
+                            <Button variant={"outline-dark"} onClick={exportData}>Download</Button>
                         </div>
                     </div>
                 </div>
@@ -308,7 +310,7 @@ const Fahrtenbuch: FC = () => {
             </div>
 
 
-            <hr className={"border border-primary border-3 opacity-75"}/>
+        <hr className={"border-end border-dark border-5 opacity-75"}/>
 
 
          {/*Ausgabe der Liste -> Extra Container*/}

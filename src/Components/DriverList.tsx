@@ -2,6 +2,7 @@ import React from "react";
 import {IInformation} from "../interfaces";
 import dayjs from "dayjs";
 import { Link, useParams } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 interface Props {
     ride: IInformation;
@@ -13,7 +14,7 @@ interface Props {
 
 //Ausgabe Inhalt Array
 const DriverList = ({ride, deleteRide, updateRide}: Props) => {
-
+     let { userId } = useParams();
 
 //Berechnung Distanz
     const distance = () => {
@@ -93,19 +94,21 @@ const DriverList = ({ride, deleteRide, updateRide}: Props) => {
                     <div className={"col"}>
                         <div className={"d-flex justify-content-center"}>
                             <div className={"p-3"}>
-                                <button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
+                                <Button variant={"outline-dark"} onClick={() =>{
                                     deleteRide(ride.id);
-                                }}>Löschen</button>
+                                }}>Löschen</Button>
                             </div>
                             <div className={"p-3"}>
                                 <Link to={`/update/${ride.id}`} >
-                                    <button type={"button"} className={"btn btn-outline-primary"}>Bearbeiten</button>
+                                {/*<Link to={`/update/:userId}`} >*/}
+                                    <Button variant={"outline-dark"}>Bearbeiten</Button>
                                 </Link>
                             </div>
+
                         </div>
                     </div>
                 </div>
-                <hr className={"border border-primary border-3 opacity-75"}/>
+                <hr className={"border-end border-dark border-5 opacity-75"}/>
             </div>
         </div>
     );

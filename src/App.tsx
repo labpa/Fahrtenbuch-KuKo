@@ -9,11 +9,12 @@ import Contact from "./Contact";
 import Dashboard from "./dashboard";
 import Update from "./update";
 import Navbarzwei from "./Components/navbarzwei";
+import Button from 'react-bootstrap/Button';
 
 const App: FC = () => {
 
-  let {userId} = useParams();
-  console.log(userId);
+
+
 
   return <div className="container-sm">
     <div className={"container-sm"}>
@@ -25,7 +26,8 @@ const App: FC = () => {
       <Route path={"/home"} element={<Fahrtenbuch/>}/>
       <Route path={"/liste"} element={<Liste/>}/>
       <Route path={"/contact"} element={<Contact/>}/>
-      <Route path={"/update/${ride.id}"} element={<Update/>}/>
+      {/*/!*<Route path={"/update/${ride.id}"} element={<Update/>}/>*!/ ride.id wird als Parameter der url angehängt allerdings ohne useParams zu verwenden*/}
+      <Route path={"/update/:userId"} element={<Update/>}/>
     </Routes>
 
 </div>
