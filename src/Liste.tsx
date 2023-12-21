@@ -3,10 +3,10 @@ import './App.css';
 import {IInformation} from "./interfaces";
 import dayjs from "dayjs";
 import Button from 'react-bootstrap/Button';
+import {Link} from "react-router-dom";
 
 const Liste: FC  = () => {
     const [rideList, setRideList] = useState<IInformation[]>([]);
-    const [updateRideList, setUpdateRideList] = useState<IInformation[]>([]);
     const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
     const [search, setSearch] = useState('');
 
@@ -106,12 +106,12 @@ const Liste: FC  = () => {
                         <td><Button variant={"outline-dark"} onClick={() =>{
                             deleteRide(item.id);
                         }}>Löschen</Button></td>
-                        {/*<td><button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{*/}
-                        {/*console.log(item.id);*/}
-                        {/*}}>ConsoleLog ID</button>*/}
-                        {/*</td>*/}
-                        {/*<td><button type={"button"} className={"btn btn-outline-primary"} onClick={() => handleEdit(item.id)}>Bearbeiten</button>*/}
-                        {/*</td>*/}
+                        <td>
+                            <Link to={`/update/${item.id}`} >
+                                {/*<Link to={`/update/:userId}`} >*/}
+                                <Button variant={"outline-dark"}>Bearbeiten</Button>
+                            </Link>
+                        </td>
                     </tr>
                 ))}
                 </tbody>
