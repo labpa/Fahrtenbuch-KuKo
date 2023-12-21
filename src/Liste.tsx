@@ -105,12 +105,12 @@ const Liste: FC  = () => {
                         <td><button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
                             deleteRide(item.id);
                         }}>Löschen</button></td>
-                        <td><button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{
-                        console.log(item.id);
-                        }}>ConsoleLog ID</button>
-                        </td>
-                        <td><button type={"button"} className={"btn btn-outline-primary"} onClick={() => handleEdit(item.id)}>Bearbeiten</button>
-                        </td>
+                        {/*<td><button type={"button"} className={"btn btn-outline-primary"} onClick={() =>{*/}
+                        {/*console.log(item.id);*/}
+                        {/*}}>ConsoleLog ID</button>*/}
+                        {/*</td>*/}
+                        {/*<td><button type={"button"} className={"btn btn-outline-primary"} onClick={() => handleEdit(item.id)}>Bearbeiten</button>*/}
+                        {/*</td>*/}
                     </tr>
                 ))}
                 </tbody>

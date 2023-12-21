@@ -1,10 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
 import {IInformation} from "./interfaces";
+import {useParams} from "react-router-dom";
 
 
 const Update: FC = () => {
     const [rideList, setRideList] = useState<IInformation[]>([]);
     const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
+
 
 
     //Daten aus lokalem speicher holen
@@ -41,11 +43,6 @@ const Update: FC = () => {
     const save = () => {
         console.log("Speichern");
     }
-
-
-
-
-
 
     return <div className={"container-sm"}>
         <div className="d-flex justify-content-center">

@@ -6,10 +6,9 @@ import Navbar from 'react-bootstrap/Navbar';
 
 const NavbarZwei = () => {
     return (
-        <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme={"dark"}>
+        <Navbar expand="lg" className="bg-body-tertiary" bg={"dark"} data-bs-theme={"dark"}>
             <Container>
-                <Navbar.Brand><NavLink to={"/"}>App</NavLink>
-                </Navbar.Brand>
+                <Navbar.Brand href={"/"}>App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">

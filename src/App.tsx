@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, useParams} from "react-router-dom";
 import Fahrtenbuch from "./Fahrtenbuch";
 import Liste from "./Liste";
 import Contact from "./Contact";
@@ -11,6 +11,9 @@ import Update from "./update";
 import Navbarzwei from "./Components/navbarzwei";
 
 const App: FC = () => {
+
+  let {userId} = useParams();
+  console.log(userId);
 
   return <div className="container-sm">
     <div className={"container-sm"}>
@@ -22,7 +25,7 @@ const App: FC = () => {
       <Route path={"/home"} element={<Fahrtenbuch/>}/>
       <Route path={"/liste"} element={<Liste/>}/>
       <Route path={"/contact"} element={<Contact/>}/>
-      <Route path={"/update"} element={<Update/>}/>
+      <Route path={"/update/${ride.id}"} element={<Update/>}/>
     </Routes>
 
 </div>
