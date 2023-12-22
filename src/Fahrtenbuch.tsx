@@ -5,6 +5,7 @@ import DriverList from "./Components/DriverList";
 import uuid from 'react-uuid';
 import Select, {Options} from 'react-select';
 import Button from "react-bootstrap/Button";
+import {useParams} from "react-router-dom";
 
 
 const Fahrtenbuch: FC = () => {
@@ -19,6 +20,7 @@ const Fahrtenbuch: FC = () => {
     const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
     const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
     const [car, setCar] = useState<string>("");
+    let {drId} = useParams();
 
 
     //Array mit den Fahrzeugen
@@ -162,7 +164,7 @@ const Fahrtenbuch: FC = () => {
                 </div>
             </div>
         </div>
-
+        <div>Fahrer ID: {drId}</div>
         {/*streifen*/}
         <hr className={"border-end border-dark border-5 opacity-75"}/>
 

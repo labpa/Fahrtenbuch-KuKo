@@ -42,14 +42,6 @@ const Liste: FC  = () => {
         return JSON.parse(localStorage.getItem('rideList') || '[]');
     }
 
-    const handleEdit = (idToChange:string):void => {
-
-    }
-
-
-
-
-
 
     return <div className={"container-sm"}>
         <div className="d-flex justify-content-center">

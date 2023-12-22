@@ -27,7 +27,7 @@ const App: FC = () => {
       <Route path={"/liste"} element={<Liste/>}/>
       <Route path={"/contact"} element={<Contact/>}/>
       {/*/!*<Route path={"/update/${ride.id}"} element={<Update/>}/>*!/ ride.id wird als Parameter der url angehängt allerdings ohne useParams zu verwenden*/}
-      <Route path={"/update/:userId"} element={<Update/>}/>
+      <Route path={"/update/:drId"} element={<Update/>}/>
     </Routes>
 
 </div>

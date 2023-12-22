@@ -1,14 +1,18 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {IInformation} from "./interfaces";
 import Button from "react-bootstrap/Button";
+import {useParams} from "react-router-dom";
+import {ValueContainer} from "react-select/animated";
+
+
 
 const Update: FC = () => {
+
+
     const [rideList, setRideList] = useState<IInformation[]>([]);
     const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
-    const [updateRideList, setUpdateRideList] = useState<IInformation[]>([]); //Neuer State
-
-
-console.log(updateRideList);
+    let {drId} = useParams();
+    const [driver, setDriver] = useState<string>("");
 
     //Daten aus lokalem speicher holen
     const getFromBrowser = (): IInformation[] => {
@@ -16,12 +20,31 @@ console.log(updateRideList);
     }
 
 
+    // todo hier weiter!!
+    useEffect(() => {
+        let getData = JSON.parse(localStorage.getItem('rideList') || '[]');
+        if(getData.find((entry: any) => entry.id === drId)){
+            let datensatz = getData.find((entry: any) => entry.id === drId);
+            // {rideList.map((item)=>(
+            //         item.rideDay,
+            //         item.rideDriver,
+            //         item.rideReason,
+            //         item.rideBegin,
+            //         item.rideReason
+            //
+            // ))}
+            console.log(datensatz);
+        }else {
+            console.log("No Data!")
+        }
+    }, [drId]);
+
+
+
     //Speichern in lokalem Speicher von Browser
     const saveInBrowser = (): void => {
         localStorage.setItem('rideList', JSON.stringify(rideList));
     }
-
-
 
     // loaded fromLocalStorage wird bei deklaration false gesetzt. Hier wird aus false True was das aufrufen der beiden Funktionen zur folge hat
     useEffect(() => {
@@ -38,14 +61,10 @@ console.log(updateRideList);
         }
     }, [loadedFromLocalStorage, rideList]);
 
-
-
     //todo Funktion die Speichert und änderungen dem State übergibt
     const save = () => {
         console.log("Speichern");
     }
-
-
 
     return <div className={"container-sm"}>
         <div className="d-flex justify-content-center">
@@ -55,6 +74,19 @@ console.log(updateRideList);
                 </div>
             </div>
         </div>
+        {/*todo hier weiter*/}
+        {/*{rideList.map((item)=>(*/}
+        {/*    <tr>*/}
+        {/*        <td>{item.rideDay}</td>*/}
+        {/*        <td>{item.rideDriver}</td>*/}
+        {/*        <td>{item.rideReason}</td>*/}
+        {/*        <td>{item.rideBegin}</td>*/}
+        {/*        <td>Distanz</td>*/}
+        {/*        <td>{item.rideReason}</td>*/}
+        {/*    </tr>*/}
+        {/*))}*/}
+
+
 
         {/*Fahrer:in*/}
         <div className={"container text-end p-2"}>
@@ -67,6 +99,7 @@ console.log(updateRideList);
                            placeholder="Fahrer:in"
                            className={"form-control"}
                            name ="driver"
+
 
                     />
                 </div>
@@ -149,17 +182,6 @@ console.log(updateRideList);
                 </div>
             </div>
         </div>
-
-        {/*<hr/>*/}
-        {/*<div>*/}
-        {/*    {rideList.filter((item) => {*/}
-        {/*        return item.id;*/}
-        {/*    })}*/}
-        {/*</div>*/}
-
-
-
-
     </div>
 }
 

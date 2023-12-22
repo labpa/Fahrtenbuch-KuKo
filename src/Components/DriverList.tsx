@@ -1,7 +1,7 @@
 import React from "react";
 import {IInformation} from "../interfaces";
 import dayjs from "dayjs";
-import { Link, useParams } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 interface Props {
@@ -14,7 +14,8 @@ interface Props {
 
 //Ausgabe Inhalt Array
 const DriverList = ({ride, deleteRide, updateRide}: Props) => {
-     let { userId } = useParams();
+
+
 
 //Berechnung Distanz
     const distance = () => {
@@ -100,7 +101,7 @@ const DriverList = ({ride, deleteRide, updateRide}: Props) => {
                             </div>
                             <div className={"p-3"}>
                                 <Link to={`/update/${ride.id}`} >
-                                {/*<Link to={`/update/:userId}`} >*/}
+                                {/*<Link to={`/update/:drId}`} >*/}
                                     <Button variant={"outline-dark"}>Bearbeiten</Button>
                                 </Link>
                             </div>
