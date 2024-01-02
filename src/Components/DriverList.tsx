@@ -101,7 +101,6 @@ const DriverList = ({ride, deleteRide, updateRide}: Props) => {
                             </div>
                             <div className={"p-3"}>
                                 <Link to={`/update/${ride.id}`} >
-                                {/*<Link to={`/update/:drId}`} >*/}
                                     <Button variant={"outline-dark"}>Bearbeiten</Button>
                                 </Link>
                             </div>

@@ -12,7 +12,14 @@ const Update: FC = () => {
     const [rideList, setRideList] = useState<IInformation[]>([]);
     const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
     let {drId} = useParams();
-    const [driver, setDriver] = useState<string>("");
+    let [values, setValues] = useState({
+        id: drId,
+        rideDriver: "",
+        rideBegin: "",
+        rideEnd: "",
+        rideReason: "",
+        rideDay: ""
+    })
 
     //Daten aus lokalem speicher holen
     const getFromBrowser = (): IInformation[] => {
@@ -20,20 +27,19 @@ const Update: FC = () => {
     }
 
 
+
     // todo hier weiter!!
     useEffect(() => {
         let getData = JSON.parse(localStorage.getItem('rideList') || '[]');
         if(getData.find((entry: any) => entry.id === drId)){
             let datensatz = getData.find((entry: any) => entry.id === drId);
-            // {rideList.map((item)=>(
-            //         item.rideDay,
-            //         item.rideDriver,
-            //         item.rideReason,
-            //         item.rideBegin,
-            //         item.rideReason
-            //
-            // ))}
             console.log(datensatz);
+            // setValues({...values, id: getData.find((entry: any) => entry.id,
+            //     rideDriver: getData.find((entry: any) = entry.rideDriver,
+            //     rideBegin: getData.rideBegin,
+            //     rideEnd: getData.rideEnd,
+            //     rideReason: getData.rideReason,
+            //     rideDay: getData.rideDay })
         }else {
             console.log("No Data!")
         }
@@ -74,19 +80,6 @@ const Update: FC = () => {
                 </div>
             </div>
         </div>
-        {/*todo hier weiter*/}
-        {/*{rideList.map((item)=>(*/}
-        {/*    <tr>*/}
-        {/*        <td>{item.rideDay}</td>*/}
-        {/*        <td>{item.rideDriver}</td>*/}
-        {/*        <td>{item.rideReason}</td>*/}
-        {/*        <td>{item.rideBegin}</td>*/}
-        {/*        <td>Distanz</td>*/}
-        {/*        <td>{item.rideReason}</td>*/}
-        {/*    </tr>*/}
-        {/*))}*/}
-
-
 
         {/*Fahrer:in*/}
         <div className={"container text-end p-2"}>
@@ -99,6 +92,7 @@ const Update: FC = () => {
                            placeholder="Fahrer:in"
                            className={"form-control"}
                            name ="driver"
+                           // value={values.rideDriver}
 
 
                     />
@@ -151,6 +145,7 @@ const Update: FC = () => {
                            placeholder="Reisezweck"
                            className={"form-control"}
                            name = "reason"
+
                     />
                 </div>
             </div>
@@ -167,6 +162,7 @@ const Update: FC = () => {
                            placeholder="Datum"
                            className={"form-control"}
                            name = "day"
+
                     />
                 </div>
             </div>
