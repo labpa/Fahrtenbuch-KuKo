@@ -5,12 +5,11 @@ import {Routes, Route, useParams} from "react-router-dom";
 import Fahrtenbuch from "./Fahrtenbuch";
 import Liste from "./Liste";
 import Contact from "./Contact";
-// import Navbar from "./Components/navbar";
 import Dashboard from "./dashboard";
 import Update from "./update";
 import Navbarzwei from "./Components/navbarzwei";
 import Test from "./test";
-import Button from 'react-bootstrap/Button';
+
 
 const App: FC = () => {
 

@@ -93,9 +93,7 @@ const Update: FC = () => {
                            placeholder="Fahrer:in"
                            className={"form-control"}
                            name ="driver"
-                           value={values.rideDriver}
-
-
+                           defaultValue={values.rideDriver}
                     />
                 </div>
             </div>
@@ -112,8 +110,7 @@ const Update: FC = () => {
                            placeholder="Kilometerstand Beginn"
                            className={"form-control"}
                            name = "begin"
-                           value={values.rideBegin}
-
+                           defaultValue={values.rideBegin}
                     />
                 </div>
             </div>
@@ -130,8 +127,7 @@ const Update: FC = () => {
                            placeholder="Kilometerstand Ende"
                            className={"form-control"}
                            name = "end"
-                           value={values.rideEnd}
-
+                           defaultValue={values.rideEnd}
                     />
                 </div>
             </div>
@@ -148,8 +144,7 @@ const Update: FC = () => {
                            placeholder="Reisezweck"
                            className={"form-control"}
                            name = "reason"
-                           value={values.rideReason}
-
+                           defaultValue={values.rideReason}
                     />
                 </div>
             </div>
@@ -166,8 +161,7 @@ const Update: FC = () => {
                            placeholder="Datum"
                            className={"form-control"}
                            name = "day"
-                           value={values.rideDay}
-
+                           defaultValue={values.rideDay}
                     />
                 </div>
             </div>
