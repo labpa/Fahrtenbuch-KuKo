@@ -9,6 +9,7 @@ import Contact from "./Contact";
 import Dashboard from "./dashboard";
 import Update from "./update";
 import Navbarzwei from "./Components/navbarzwei";
+import Test from "./test";
 import Button from 'react-bootstrap/Button';
 
 const App: FC = () => {
@@ -28,6 +29,7 @@ const App: FC = () => {
       <Route path={"/contact"} element={<Contact/>}/>
       {/*/!*<Route path={"/update/${ride.id}"} element={<Update/>}/>*!/ ride.id wird als Parameter der url angehängt allerdings ohne useParams zu verwenden*/}
       <Route path={"/update/:drId"} element={<Update/>}/>
+      <Route path={"/test"} element={<Test/>}/>
     </Routes>
 
 </div>

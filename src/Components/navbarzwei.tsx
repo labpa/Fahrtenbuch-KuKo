@@ -14,6 +14,7 @@ const NavbarZwei = () => {
                     <Nav className="me-auto">
                         <NavLink className={"nav-link"} to={"home"}>Fahrtenbuch<span className={"visually-hidden"}>(current)</span></NavLink>
                         <NavLink className={"nav-link"} to={"/liste"}>Liste</NavLink>
+                        <NavLink className={"nav-link"} to={"/test"}>Test</NavLink>
                         <NavLink className={"nav-link"} to={"/contact"}>Contact</NavLink>
                     </Nav>
                 </Navbar.Collapse>

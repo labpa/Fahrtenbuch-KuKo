@@ -11,10 +11,8 @@ interface Props {
 }
 
 
-
 //Ausgabe Inhalt Array
 const DriverList = ({ride, deleteRide, updateRide}: Props) => {
-
 
 
 //Berechnung Distanz
