@@ -2,6 +2,10 @@ import React, {FC, useEffect, useState} from 'react';
 
 const Test: FC  = () => {
 
+    // const numbers = [1,2,3,4,5,6];
+    // const double = numbers.map((number) => number * 2);
+    // console.log(double);
+
 
     return <div className={"container-sm"}>
         <div className="d-flex justify-content-center">

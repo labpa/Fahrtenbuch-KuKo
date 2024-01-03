@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {IInformation} from "./interfaces";
 import Button from "react-bootstrap/Button";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 const Update: FC = () => {
 
@@ -24,14 +24,11 @@ const Update: FC = () => {
     }
 
 
-    // todo hier weiter!!
+    // übergibt die id des zu bearbeitenden Datensatzes und setzt Values
     useEffect(() => {
         let getData = JSON.parse(localStorage.getItem('rideList') || '[]');
         if(getData.find((entry: any) => entry.id === drId)){
             let datensatz = getData.find((entry: any) => entry.id === drId);
-            // console.log(datensatz);
-            // console.log(datensatz.id);
-            // console.log(datensatz.rideDriver);
             setValues({...values, id: datensatz.id,
                 rideDriver: datensatz.rideDriver ,
                 rideBegin: datensatz.rideBegin,
@@ -46,7 +43,19 @@ const Update: FC = () => {
 
     //Speichern in lokalem Speicher von Browser
     const saveInBrowser = (): void => {
-        localStorage.setItem('rideList', JSON.stringify(rideList));
+
+        let getData = JSON.parse(localStorage.getItem('rideList') || '[]');
+        let datensatz = getData.find((entry: any) => entry.id === drId);
+        console.log(datensatz);
+         const updateRideList = rideList.map(item => {
+             if(item.id === datensatz.id){
+                 return datensatz;
+             }
+             return item;
+         })
+        localStorage.setItem('rideList', JSON.stringify(updateRideList));
+         console.log(updateRideList);
+         console.log(rideList);
     }
 
 
@@ -65,12 +74,6 @@ const Update: FC = () => {
             saveInBrowser();
         }
     }, [loadedFromLocalStorage, rideList]);
-
-
-    //todo Funktion die Speichert und änderungen dem State übergibt
-    const save = () => {
-        console.log("Speichern");
-    }
 
 
     return <div className={"container-sm"}>
@@ -172,7 +175,10 @@ const Update: FC = () => {
             <div className={"col"}>
                 <div className={"d-flex justify-content-center"}>
                     <div className={"p-3"}>
-                        <Button variant={"outline-dark"} onClick={save}>Speichern</Button>
+                        <Link to={`/home`} >
+                            {/*<Link to={`/update/:userId}`} >*/}
+                            <Button variant={"outline-dark"}>Speichern</Button>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -164,7 +164,6 @@ const Fahrtenbuch: FC = () => {
                 </div>
             </div>
         </div>
-        <div>Fahrer ID: {drId}</div>
         {/*streifen*/}
         <hr className={"border-end border-dark border-5 opacity-75"}/>
 
