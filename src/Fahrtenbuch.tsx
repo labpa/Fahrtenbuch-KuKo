@@ -103,10 +103,9 @@ const Fahrtenbuch: FC = () => {
         }))
     }
 
-    //Bearbeiten todo das muss vermutlich wieder raus
+    //Bearbeiten
     const updateRide = (idToUpdate:string):void => {
         setRideList(rideList.filter((id) => {
-            console.log(idToUpdate);
             return id.id !== idToUpdate
         }))
     }
