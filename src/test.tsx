@@ -1,10 +1,16 @@
 import React, {FC, useEffect, useState} from 'react';
 
 const Test: FC  = () => {
+    const [showArea, setShowArea] = useState(true);
 
-    // const numbers = [1,2,3,4,5,6];
-    // const double = numbers.map((number) => number * 2);
-    // console.log(double);
+    useEffect(() => {
+        const data = window.localStorage.getItem('Beispiel');
+        if(data !== null) setShowArea(JSON.parse(data))
+    }, []);
+
+    useEffect(() => {
+        window.localStorage.setItem('Beispiel', JSON.stringify(showArea))
+    }, [showArea]);
 
 
     return <div className={"container-sm"}>
@@ -15,6 +21,27 @@ const Test: FC  = () => {
                 </div>
             </div>
         </div>
+
+        {showArea && (
+            <div>
+                <div>
+                    <h2>Test mit Local Storage!</h2>
+                    <p>Wenn ich den Button klicke soll dieser Bereich verschwinden</p>
+                </div>
+                <div>
+                    <p>
+                        <a href="https://bienensteinp.de/login">Bla Bla bLa </a>
+                    </p>
+                </div>
+                <button onClick={()=> setShowArea(false)}>
+                    Hide
+                </button>
+            </div>
+        )}
+
+        <button onClick={()=> setShowArea(true)}>Zurück</button>
+
+
     </div>
 }
 
