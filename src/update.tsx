@@ -75,7 +75,6 @@ const Update: FC = () => {
             case "day":
                 setValues({...values, rideDay: event.target.value})
         }
-
     }
 
 
@@ -109,7 +108,22 @@ const Update: FC = () => {
     }, [loadedFromLocalStorage, rideList]);
 
 
-    return <div className={"container-sm"}>
+    return <div className={"container-sm justify-content-center"}>
+
+        <div className={"d-flex justify-content-center"}>
+            <div><button>Test</button></div>
+
+        </div>
+        <div className={"d-flex justify-content-center"}>
+            <span>Test</span>
+            <input
+            />
+        </div>
+        <div className={"d-flex justify-content-center"}>
+
+        </div>
+
+
         <div className="d-flex justify-content-center">
             <div className={"row"}>
                 <div className={"col p-2"}>
@@ -119,28 +133,31 @@ const Update: FC = () => {
         </div>
 
         {/* Kennzeichen mit Auswahl*/}
-        <div className={"container text-center p-2"}>
-            <div className={"row"}>
-                <div className={"col"}>
-                    <div className={"text-end"}>
-                        <label className={"col-form-label mt-2"}>Fahrzeug</label>
-                    </div>
 
-                </div>
-                <div className={"col p-2"}>
-                    <div className={"form-group row"}>
-                        <Select className={"exampleSelect1"}
-                                id={"exampleSelect1"}
-                                options={cars}
-                                name={"car"}
-                                value={cars?.find(c => c.value === values.fahrzeug)}
-                                placeholder={"Fahrzeug"}
-                                onChange = {handleChangeCarUpdate}
-                        />
+            <div className={"container text-center p-2"}>
+                <div className={"row"}>
+                    <div className={"col"}>
+                        <div className={"text-end"}>
+                            <label className={"col-form-label mt-2"}>Fahrzeug</label>
+                        </div>
+
+                    </div>
+                    <div className={"col p-2"}>
+                        <div className={"form-group row"}>
+                            <Select className={"exampleSelect1"}
+                                    id={"exampleSelect1"}
+                                    options={cars}
+                                    name={"car"}
+                                    value={cars?.find(c => c.value === values.fahrzeug)}
+                                    placeholder={"Fahrzeug"}
+                                    onChange = {handleChangeCarUpdate}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+
 
         {/*Fahrer:in*/}
         <div className={"container text-end p-2"}>

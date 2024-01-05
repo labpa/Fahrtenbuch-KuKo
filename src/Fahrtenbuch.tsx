@@ -155,7 +155,7 @@ const Fahrtenbuch: FC = () => {
     };
 
     //return
-    return <div className={"container-sm"}>
+    return <div className={"container-sm justify-content-center"}>
         <div className="d-flex justify-content-center">
             <div className={"row"}>
                 <div className={"col p-2"}>
