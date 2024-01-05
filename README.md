@@ -72,7 +72,26 @@ Zwischenstand Ausgabe der Liste unterhalb der Eingabe
   Runs the app in the development mode.\
   Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+## Dashboard
+Für die App wurde eine Startseite das sogenannte Dashboard erstellt. Das Dashboard wird nach dem start der App als erstes angezeigt. Über das Dashboard ist es möglich entweder über klicken
+des angezeigten Fahrzeuges oder über das benutzen der Navbar zum Fahrtenbuch zu gelangen.
+![dashboard.png](img%2Fdashboard.png)
 
+Um das Dashboard als Startseite zu bekommen wurde ihm in der App.tsx über den react-router-dom der Pfad `"/"` zugewiesen dieser dann auf das `<Dashboard/>` verweist.
+
+
+
+## Navigation
+Um sich innerhalb der App bewegen zu können ist es notwendig die Navigation innerhalb der App zu ermöglichen. Dafür verwendet wurde  wurde react-router-dom 6.20.1
+### React-router-dom
++ Installation von react-router-dom
+  + `npm install react-router-dom`
+### Navbar
+
+## Speichern der Daten
+### Local Storage
+
+## Bearbeiten
 
 
 

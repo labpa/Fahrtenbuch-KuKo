@@ -20,17 +20,14 @@ const App: FC = () => {
     <div className={"container-sm"}>
       <Navbarzwei/>
     </div>
-
     <Routes>
       <Route path={"/"} element={<Dashboard/>}/>
       <Route path={"/home"} element={<Fahrtenbuch/>}/>
       <Route path={"/liste"} element={<Liste/>}/>
       <Route path={"/contact"} element={<Contact/>}/>
-      {/*/!*<Route path={"/update/${ride.id}"} element={<Update/>}/>*!/ ride.id wird als Parameter der url angehängt allerdings ohne useParams zu verwenden*/}
       <Route path={"/update/:drId"} element={<Update/>}/>
       <Route path={"/test"} element={<Test/>}/>
     </Routes>
-
 </div>
 
 }
