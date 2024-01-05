@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {IInformation} from "./interfaces";
 import Button from "react-bootstrap/Button";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Select, {Options} from "react-select";
 
 const Update: FC = () => {
@@ -214,7 +214,7 @@ const Update: FC = () => {
             </div>
         </div>
 
-
+        {/*Datum*/}
         <div className={"container text-end p-2"}>
             <div className={"row"}>
                 <div className={"col"}>
@@ -237,10 +237,9 @@ const Update: FC = () => {
             <div className={"col"}>
                 <div className={"d-flex justify-content-center"}>
                     <div className={"p-3"}>
-
-                            {/*<Link to={`/update/:userId}`} >*/}
+                        <Link to={"/liste"}>
                             <Button onClick={saveInBrowser} variant={"outline-dark"}>Speichern</Button>
-
+                        </Link>
                     </div>
                 </div>
             </div>
