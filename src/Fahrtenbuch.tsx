@@ -176,9 +176,9 @@ const Fahrtenbuch: FC = () => {
                     </div>
 
                     </div>
-                    <div className={"col p-2"}>
-                        <div className={"form-group row"}>
-                                <Select className={"exampleSelect1"}
+                        <div className={"col p-2"}>
+                            <div className={"form-group row"}>
+                                 <Select className={"exampleSelect1"}
                                         id={"exampleSelect1"}
                                         options={cars}
                                         name={"car"}
@@ -186,10 +186,10 @@ const Fahrtenbuch: FC = () => {
                                         placeholder={"Fahrzeug"}
                                         onChange = {handleChangeCar}
                                 />
-                            </div>
+                             </div>
+                         </div>
                     </div>
                 </div>
-            </div>
 
             {/*Fahrer:in*/}
             <div className={"container text-end p-2"}>

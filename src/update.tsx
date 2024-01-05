@@ -1,7 +1,8 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {IInformation} from "./interfaces";
 import Button from "react-bootstrap/Button";
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
+import Select, {Options} from "react-select";
 
 const Update: FC = () => {
 
@@ -10,12 +11,23 @@ const Update: FC = () => {
     let {drId} = useParams();
     let [values, setValues] = useState({
         id: drId,
+        fahrzeug:"",
         rideDriver: "",
         rideBegin: "",
         rideEnd: "",
         rideReason: "",
         rideDay: ""
     })
+
+    //Array mit den Fahrzeugen
+    const cars: Options<any> = [
+        { value: "B-SP-1234", label: "B-SP-1234" },
+        { value: "HH-OP-4321", label: "HH-OP-4321" },
+        { value: "S-OS-1312", label: "S-OS-1312" },
+        { value: "NT-BE-4321", label: "NT-BE-4321" },
+        { value: "F-OG-8721", label: "F-OG-8721"},
+        { value: "L-OL-4365", label: "L-OL-4365"},
+    ];
 
 
     //Daten aus lokalem speicher holen
@@ -29,7 +41,9 @@ const Update: FC = () => {
         let getData = JSON.parse(localStorage.getItem('rideList') || '[]');
         if(getData.find((entry: any) => entry.id === drId)){
             let datensatz = getData.find((entry: any) => entry.id === drId);
+            console.log(datensatz);
             setValues({...values, id: datensatz.id,
+                fahrzeug: datensatz.fahrzeug,
                 rideDriver: datensatz.rideDriver ,
                 rideBegin: datensatz.rideBegin,
                 rideEnd: datensatz.rideEnd,
@@ -40,13 +54,34 @@ const Update: FC = () => {
         }
     }, [drId]);
 
+    const handleChangeCarUpdate = (selectedOption: any) => {
+        setValues({...values, fahrzeug: selectedOption.value})
+    }
+
+    const handleChangeUpdate = (event: ChangeEvent <HTMLInputElement>): void => {
+        switch(event.target.name){
+            case "driver":
+              setValues({...values, rideDriver: event.target.value})
+                break;
+            case "begin":
+                setValues({...values, rideBegin: event.target.value})
+                break;
+            case "end":
+              setValues({...values, rideEnd: event.target.value})
+                break;
+            case "reason":
+                setValues({...values, rideReason: event.target.value})
+                break;
+            case "day":
+                setValues({...values, rideDay: event.target.value})
+        }
+
+    }
+
 
     //Speichern in lokalem Speicher von Browser
     const saveInBrowser = (): void => {
-
-        let getData = JSON.parse(localStorage.getItem('rideList') || '[]');
-        let datensatz = getData.find((entry: any) => entry.id === drId);
-        console.log(datensatz);
+        let datensatz = values;
          const updateRideList = rideList.map(item => {
              if(item.id === datensatz.id){
                  return datensatz;
@@ -54,8 +89,6 @@ const Update: FC = () => {
              return item;
          })
         localStorage.setItem('rideList', JSON.stringify(updateRideList));
-         console.log(updateRideList);
-         console.log(rideList);
     }
 
 
@@ -85,6 +118,30 @@ const Update: FC = () => {
             </div>
         </div>
 
+        {/* Kennzeichen mit Auswahl*/}
+        <div className={"container text-center p-2"}>
+            <div className={"row"}>
+                <div className={"col"}>
+                    <div className={"text-end"}>
+                        <label className={"col-form-label mt-2"}>Fahrzeug</label>
+                    </div>
+
+                </div>
+                <div className={"col p-2"}>
+                    <div className={"form-group row"}>
+                        <Select className={"exampleSelect1"}
+                                id={"exampleSelect1"}
+                                options={cars}
+                                name={"car"}
+                                value={cars?.find(c => c.value === values.fahrzeug)}
+                                placeholder={"Fahrzeug"}
+                                onChange = {handleChangeCarUpdate}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {/*Fahrer:in*/}
         <div className={"container text-end p-2"}>
             <div className={"row"}>
@@ -96,7 +153,8 @@ const Update: FC = () => {
                            placeholder="Fahrer:in"
                            className={"form-control"}
                            name ="driver"
-                           defaultValue={values.rideDriver}
+                           value={values.rideDriver}
+                           onChange={handleChangeUpdate}
                     />
                 </div>
             </div>
@@ -113,7 +171,8 @@ const Update: FC = () => {
                            placeholder="Kilometerstand Beginn"
                            className={"form-control"}
                            name = "begin"
-                           defaultValue={values.rideBegin}
+                           value={values.rideBegin}
+                           onChange={handleChangeUpdate}
                     />
                 </div>
             </div>
@@ -130,7 +189,8 @@ const Update: FC = () => {
                            placeholder="Kilometerstand Ende"
                            className={"form-control"}
                            name = "end"
-                           defaultValue={values.rideEnd}
+                           value={values.rideEnd}
+                           onChange={handleChangeUpdate}
                     />
                 </div>
             </div>
@@ -147,7 +207,8 @@ const Update: FC = () => {
                            placeholder="Reisezweck"
                            className={"form-control"}
                            name = "reason"
-                           defaultValue={values.rideReason}
+                           value={values.rideReason}
+                           onChange={handleChangeUpdate}
                     />
                 </div>
             </div>
@@ -164,7 +225,8 @@ const Update: FC = () => {
                            placeholder="Datum"
                            className={"form-control"}
                            name = "day"
-                           defaultValue={values.rideDay}
+                           value={values.rideDay}
+                           onChange={handleChangeUpdate}
                     />
                 </div>
             </div>
@@ -175,10 +237,10 @@ const Update: FC = () => {
             <div className={"col"}>
                 <div className={"d-flex justify-content-center"}>
                     <div className={"p-3"}>
-                        <Link to={`/home`} >
+
                             {/*<Link to={`/update/:userId}`} >*/}
-                            <Button variant={"outline-dark"}>Speichern</Button>
-                        </Link>
+                            <Button onClick={saveInBrowser} variant={"outline-dark"}>Speichern</Button>
+
                     </div>
                 </div>
             </div>
