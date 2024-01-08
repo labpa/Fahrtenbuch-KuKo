@@ -55,7 +55,7 @@ const Liste: FC  = () => {
         <hr className={"border-end border-dark border-5 opacity-75"}/>
 
         {/*Suchfeld*/}
-        <input className={"form-control me-sm-2"}
+        <input className={"col-sm"}
                placeholder={"Suchen"}
                onChange={(e) => setSearch(e.target.value)}
         />
