@@ -1,12 +1,15 @@
 import React, {useEffect, useState, FC, ChangeEvent} from "react";
 import { createClient } from "@supabase/supabase-js";
 import Button from "react-bootstrap/Button";
+import {ICountries} from "../interfaceCountrie";
+import uuid from "react-uuid";
 
 const supabase = createClient("https://vmklasdkediyaiuzkwvq.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZta2xhc2RrZWRpeWFpdXprd3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ3MjkxNjUsImV4cCI6MjAyMDMwNTE2NX0.XH_7TnSybIbrenc0yEbVck-MHiDFQlQ9hMyU0ofON6I");
 
 const Datenbank : FC = () => {
     const [countries, setCountries] : any = useState([]);
     const [test, setTest] : any = useState();
+    const [countrieList, setCountrieList] = useState<ICountries[]>([])
 
     useEffect(() => {
         getCountries();
@@ -15,6 +18,13 @@ const Datenbank : FC = () => {
     const getCountries = async () => {
         const { data } = await supabase.from("countries").select();
         setCountries(data);
+    }
+
+    const addCountrie =() => {
+        const newCountrie = {id:uuid(),land:test}
+        setCountrieList([]);
+        setTest("");
+        console.log(newCountrie);
     }
 
     const handleChange = (event: ChangeEvent <HTMLInputElement>) => {
@@ -44,6 +54,7 @@ const Datenbank : FC = () => {
                            placeholder="Land"
                            className={"form-control"}
                            name ="test"
+                           value={test}
                            onChange = {handleChange}
                     />
                 </div>
@@ -55,11 +66,38 @@ const Datenbank : FC = () => {
             <div className={"col"}>
                 <div className={"d-flex justify-content-center"}>
                     <div className={"p-3"}>
-                        <Button variant={"outline-dark"}>Hinzufügen</Button>
+                        <Button variant={"outline-dark"} onClick={addCountrie}>Hinzufügen</Button>
                     </div>
                 </div>
             </div>
         </div>
+
+        {/*Strich*/}
+        <hr className={"border-end border-dark border-5 opacity-75"}/>
+
+        <div className={"content"}>
+            <table className={"table table-hover"}>
+            <thead>
+            <th scope={"col"}>Land</th>
+            <th scope={"col"}>Aktion</th>
+            </thead>
+            <tbody>
+            {countries.map((country : any)=>(
+                <tr key={country.name}> {country.name}<Button variant={"outline-dark"}>Löschen</Button></tr>
+
+            ))}
+
+
+            </tbody>
+        </table>
+
+
+    </div>
+
+
+
+
+
 
 
 
