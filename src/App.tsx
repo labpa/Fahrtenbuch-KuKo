@@ -12,6 +12,7 @@ import Test from "./test";
 import Error from "./Components/error";
 import Footer from "./Components/Footer";
 import Impressum from "./Impressum";
+import Datenbank from "./Datenbank";
 
 
 const App: FC = () => {
@@ -31,6 +32,7 @@ const App: FC = () => {
       <Route path={"/update/:drId"} element={<Update/>}/>
       <Route path={"/test"} element={<Test/>}/>
       <Route path={"/impressum"} element={<Impressum/>}/>
+      <Route path={"/datenbank"} element={<Datenbank/>}/>
       <Route path={"*"} element={<Error/>}/>
     </Routes>
     <div>

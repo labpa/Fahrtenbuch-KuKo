@@ -29,7 +29,6 @@ const DriverList = ({ride, deleteRide, updateRide}: Props) => {
         <div className='driver'>
             <div className='content'>
 
-
                 <div className={"row"}>
                     <div className={"col p-1"}>
                         <div className={"d-flex justify-content-center"}>

@@ -163,9 +163,6 @@ const Fahrtenbuch: FC = () => {
                 </div>
             </div>
         </div>
-        {/*streifen*/}
-        <hr className={"border-end border-dark border-5 opacity-75"}/>
-
 
         {/* Kennzeichen mit Auswahl*/}
         <div className={"container text-center p-2"}>
@@ -296,18 +293,24 @@ const Fahrtenbuch: FC = () => {
                 </div>
             </div>
 
-            {/*Upload*/}
+
+        <hr className={"border-end border-dark border-5 opacity-75"}/>
+        {/*Upload*/}
+        <div className={"container text-end p-2"}>
             <div className={"row"}>
-                <div className={"col p-3"}>
-                    <div className={"d-flex justify-content-center"}>
-                        <input type={"file"}
-                               className={"form-control"}
-                               id={"formFile"}
-                               onChange={uploadData}
-                        />
-                    </div>
+                <div className={"col"}>
+                    <label className={"col-form-label mt-2"}>Datei Hochladen</label>
+                </div>
+                <div className={"col p-2"}>
+                    <input type={"file"}
+                           className={"form-control"}
+                           id={"formFile"}
+                           onChange={uploadData}
+                    />
                 </div>
             </div>
+        </div>
+
 
 
         <hr className={"border-end border-dark border-5 opacity-75"}/>

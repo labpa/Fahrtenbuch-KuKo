@@ -51,14 +51,16 @@ const Liste: FC  = () => {
                 </div>
             </div>
         </div>
-        {/*streifen*/}
-        <hr className={"border-end border-dark border-5 opacity-75"}/>
 
         {/*Suchfeld*/}
-        <input className={"col-sm"}
-               placeholder={"Suchen"}
-               onChange={(e) => setSearch(e.target.value)}
-        />
+        <div className={" d-flex justify-content-center"}>
+            <input className={"col-sm "}
+                   placeholder={"Suchen"}
+                   onChange={(e) => setSearch(e.target.value)}
+            />
+
+        </div>
+
 
 
         <div className={"content"}>

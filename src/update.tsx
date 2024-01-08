@@ -112,20 +112,6 @@ const Update: FC = () => {
 
     return <div className={"container-sm justify-content-center"}>
 
-        <div className={"d-flex justify-content-center"}>
-            <div><button>Test</button></div>
-
-        </div>
-        <div className={"d-flex justify-content-center"}>
-            <span>Test</span>
-            <input
-            />
-        </div>
-        <div className={"d-flex justify-content-center"}>
-
-        </div>
-
-
         <div className="d-flex justify-content-center">
             <div className={"row"}>
                 <div className={"col p-2"}>

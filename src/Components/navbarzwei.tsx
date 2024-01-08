@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 const NavbarZwei = () => {
     return (
-        <Navbar expand="lg" className="bg-body-tertiary" bg={"dark"} data-bs-theme={"dark"}>
+        <Navbar expand="lg" className="bg-body-tertiary fixed-top" bg={"dark"} data-bs-theme={"dark"}>
             <Container>
                 <Navbar.Brand href={"/"}>App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -16,6 +16,7 @@ const NavbarZwei = () => {
                         <NavLink className={"nav-link"} to={"/liste"}>Liste</NavLink>
                         <NavLink className={"nav-link"} to={"/test"}>Test</NavLink>
                         <NavLink className={"nav-link"} to={"/contact"}>Kontakt</NavLink>
+                        <NavLink className={"nav-link"} to={"/datenbank"}>Datenbankspaß</NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
