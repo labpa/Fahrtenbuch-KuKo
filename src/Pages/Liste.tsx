@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
-import './App.css';
-import {IInformation} from "./interfaces";
+import '../App.css';
+import {IInformation} from "../interfaces";
 import dayjs from "dayjs";
 import Button from 'react-bootstrap/Button';
 import {Link} from "react-router-dom";

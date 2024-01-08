@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {Link} from "react-router-dom";
-import auto from "./images/auto.jpg";
+import auto from "../images/auto.jpg";
 
 const dashboard: FC = () =>{
 

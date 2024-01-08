@@ -2,17 +2,17 @@ import React, {FC} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Routes, Route, useParams} from "react-router-dom";
-import Fahrtenbuch from "./Fahrtenbuch";
-import Liste from "./Liste";
-import Contact from "./Contact";
-import Dashboard from "./dashboard";
-import Update from "./update";
+import Fahrtenbuch from "./Pages/Fahrtenbuch";
+import Liste from "./Pages/Liste";
+import Contact from "./Pages/Contact";
+import Dashboard from "./Pages/Dashboard";
+import Update from "./Pages/Update";
 import Navbarzwei from "./Components/navbarzwei";
-import Test from "./test";
+import Test from "./Pages/Test";
 import Error from "./Components/error";
 import Footer from "./Components/Footer";
-import Impressum from "./Impressum";
-import Datenbank from "./Datenbank";
+import Impressum from "./Pages/Impressum";
+import Datenbank from "./Pages/Datenbank";
 
 
 const App: FC = () => {
