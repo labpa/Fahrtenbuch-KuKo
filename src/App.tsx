@@ -11,6 +11,7 @@ import Navbarzwei from "./Components/navbarzwei";
 import Test from "./test";
 import Error from "./Components/error";
 import Footer from "./Components/Footer";
+import Impressum from "./Impressum";
 
 
 const App: FC = () => {
@@ -29,6 +30,7 @@ const App: FC = () => {
       <Route path={"/contact"} element={<Contact/>}/>
       <Route path={"/update/:drId"} element={<Update/>}/>
       <Route path={"/test"} element={<Test/>}/>
+      <Route path={"/impressum"} element={<Impressum/>}/>
       <Route path={"*"} element={<Error/>}/>
     </Routes>
     <div>

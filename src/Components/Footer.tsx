@@ -6,51 +6,44 @@ import {Link} from "react-router-dom";
 const Footer : FC = () => {
 
     return(
-        <div>
-            <Card>
-                <Card.Body>
-                    <Card.Title>Special title treatment</Card.Title>
-                    <Card.Text>
-                        With supporting text below as a natural lead-in to additional content.
-                    </Card.Text>
-                    <div className={"row"}>
-                        <div className={"col"}>
-                            <div className={"d-flex justify-content-center"}>
-                                <div className={"p-3"}>
-                                    <Link to={"/"}>
-                                        <Button variant={"outline-dark"}>Home</Button>
-                                    </Link>
-                                </div>
-                                <div className={"p-3"}>
-                                    <Link to={"/home"}>
-                                        <Button variant={"outline-dark"}>Fahrtenbuch</Button>
-                                    </Link>
-                                </div>
-                                <div className={"p-3"}>
-                                    <Link to={"/liste"}>
-                                        <Button variant={"outline-dark"}>Liste</Button>
-                                    </Link>
-                                </div>
-                                <div className={"p-3"}>
-                                    <Link to={"/test"}>
-                                        <Button variant={"outline-dark"}>Test</Button>
-                                    </Link>
-                                </div>
-                                <div className={"p-3"}>
-                                    <Link to={"/contact"}>
-                                        <Button variant={"outline-dark"}>Kontakt</Button>
-                                    </Link>
-                                </div>
+        <div className={"container-sm"}>
+            <footer className="page-footer font-small blue pt-4 border bg-dark">
+                <div className="container-fluid text-center text-md-left">
+                    <div className="row">
+                        <div className="col-md-6 mt-md-0 mt-3">
+                            <h5 className="text-uppercase">Fahrtenbuch</h5>
+                            <p>Informationen über das Fahrtenbuch</p>
+                        </div>
 
+                        <hr className="clearfix w-100 d-md-none pb-0"/>
 
+                        <div className="col-md-3 mb-md-0 mb-3">
+                            <h5 className="text-uppercase">Fahrtenbuch</h5>
+                            <ul className="list-unstyled">
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/home">Fahrtenbuch</a></li>
+                                <li><a href="/liste">Liste</a></li>
 
-                            </div>
+                            </ul>
+                        </div>
+
+                        <div className="col-md-3 mb-md-0 mb-3">
+                            <h5 className="text-uppercase">About</h5>
+                            <ul className="list-unstyled">
+                                <li><a href="/contact">Kontakt</a></li>
+                                <li><a href="/impressum">Impressum</a></li>
+                                <li><a href="/test">Test</a></li>
+                            </ul>
                         </div>
                     </div>
+                </div>
 
+                <div className="footer-copyright text-center py-3">© 2024 Copyright:
+                    <a href="https://github.com/labpa"> Labpa</a>
+                </div>
 
-                </Card.Body>
-            </Card>
+            </footer>
+
 
         </div>
     )
