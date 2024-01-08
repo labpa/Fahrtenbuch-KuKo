@@ -9,6 +9,8 @@ import Dashboard from "./dashboard";
 import Update from "./update";
 import Navbarzwei from "./Components/navbarzwei";
 import Test from "./test";
+import Error from "./Components/error";
+import Footer from "./Components/Footer";
 
 
 const App: FC = () => {
@@ -27,7 +29,11 @@ const App: FC = () => {
       <Route path={"/contact"} element={<Contact/>}/>
       <Route path={"/update/:drId"} element={<Update/>}/>
       <Route path={"/test"} element={<Test/>}/>
+      <Route path={"*"} element={<Error/>}/>
     </Routes>
+    <div>
+      <Footer/>
+    </div>
 </div>
 
 }

@@ -3,6 +3,7 @@ import {IInformation} from "./interfaces";
 import Button from "react-bootstrap/Button";
 import {Link, useParams} from "react-router-dom";
 import Select, {Options} from "react-select";
+import Error from "./Components/error";
 
 const Update: FC = () => {
 
@@ -50,7 +51,8 @@ const Update: FC = () => {
                 rideReason: datensatz.rideReason,
                 rideDay: datensatz.rideDay })
         }else {
-            console.log("No Data!")
+            console.log("No Data!");
+
         }
     }, [drId]);
 
