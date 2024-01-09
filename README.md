@@ -93,5 +93,19 @@ Um sich innerhalb der App bewegen zu können ist es notwendig die Navigation inn
 
 ## Bearbeiten
 
+## Datenbank Supabase
+Um Daten in einer Datenbank speichern zu können habe ich mich für supabase als backend entscheiden.
 
+### ER-Diagramm
+![entwurf_ER_Diagramm.png](img%2Fentwurf_ER_Diagramm.png)
+
+### Supabase
+
+
+### App
++ erstellen von .env Datei.
+  + Über diese Datei wird die Verbindung zur Datenbank aufgebaut. Die .env Datei enthält den Public Key und die Url
++ Erstellen Ordner config
++ Erstellen SupabaseClient.js im Ordner config -> export supabase
++ import supabase auf entsprechender Seite
 
