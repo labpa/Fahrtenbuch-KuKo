@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 const Footer : FC = () => {
 
     return(
-        <div className={"container-sm fixed-bottom"} data-bs-theme={"dark"}>
+        <div className={"container-sm"} data-bs-theme={"dark"}>
             <div className={"bg-body-tertiary"}>
                 <footer className={"py-1 "}>
                     <ul className={"nav justify-content-center border-bottom pb-1 mb-1"}>

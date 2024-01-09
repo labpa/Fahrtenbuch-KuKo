@@ -2,7 +2,6 @@ import React, {useEffect, useState, FC, ChangeEvent} from "react";
 import { createClient } from "@supabase/supabase-js";
 import Button from "react-bootstrap/Button";
 import {ICountries} from "../interfaceCountrie";
-import uuid from "react-uuid";
 
 const supabase = createClient("https://vmklasdkediyaiuzkwvq.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZta2xhc2RrZWRpeWFpdXprd3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ3MjkxNjUsImV4cCI6MjAyMDMwNTE2NX0.XH_7TnSybIbrenc0yEbVck-MHiDFQlQ9hMyU0ofON6I");
 
@@ -20,11 +19,11 @@ const Datenbank : FC = () => {
         setCountries(data);
     }
 
-    const addCountrie =() => {
-        const newCountrie = {id:uuid(),land:test}
+    const addCountries =() => {
+        const newCountries = {land:test}
         setCountrieList([]);
         setTest("");
-        console.log(newCountrie);
+        console.log(newCountries);
     }
 
     const handleChange = (event: ChangeEvent <HTMLInputElement>) => {
@@ -66,7 +65,7 @@ const Datenbank : FC = () => {
             <div className={"col"}>
                 <div className={"d-flex justify-content-center"}>
                     <div className={"p-3"}>
-                        <Button variant={"outline-dark"} onClick={addCountrie}>Hinzufügen</Button>
+                        <Button variant={"outline-dark"} onClick={addCountries}>Hinzufügen</Button>
                     </div>
                 </div>
             </div>
@@ -78,48 +77,25 @@ const Datenbank : FC = () => {
         <div className={"content"}>
             <table className={"table table-hover"}>
             <thead>
-            <th scope={"col"}>Land</th>
-            <th scope={"col"}>Aktion</th>
+            <tr>
+                <th scope={"col"}>ID</th>
+                <th scope={"col"}>Land</th>
+                <th scope={"col"}>Löschen</th>
+                <th scope={"col"}>Bearbeiten</th>
+            </tr>
             </thead>
             <tbody>
             {countries.map((country : any)=>(
-                <tr key={country.name}> {country.name}<Button variant={"outline-dark"}>Löschen</Button></tr>
-
+                <tr key={country.id}>
+                    <td>{country.id}</td>
+                    <td > {country.name}</td>
+                    <td><Button variant={"outline-dark"}>Löschen</Button></td>
+                    <td><Button variant={"outline-dark"}>Bearbeiten</Button></td>
+                </tr>
             ))}
-
-
             </tbody>
         </table>
-
-
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-        {/*Strich*/}
-        <hr className={"border-end border-dark border-5 opacity-75"}/>
-        {/*Hier beginnt die Ausgabe der Daten aus Supabase*/}
-
-        <div>
-            <ul>
-                {countries.map((country : any)=>(
-                    <li key={country.name}> {country.name}</li>
-                ))}
-            </ul>
-            <ul>
-                <button>Löschen</button>
-            </ul>
-        </div>
-
     </div>)
 }
 
