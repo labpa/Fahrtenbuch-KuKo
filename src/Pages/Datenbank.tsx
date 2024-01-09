@@ -1,14 +1,74 @@
-import React, {useEffect, useState, FC, ChangeEvent} from "react";
-import { createClient } from "@supabase/supabase-js";
+import React, {useEffect, useState, FC} from "react";
 import Button from "react-bootstrap/Button";
-import {ICountries} from "../interfaceCountrie";
+import supabase from "../config/SupabaseClient";
+import {useNavigate} from "react-router-dom";
 
-const supabase = createClient("https://vmklasdkediyaiuzkwvq.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZta2xhc2RrZWRpeWFpdXprd3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ3MjkxNjUsImV4cCI6MjAyMDMwNTE2NX0.XH_7TnSybIbrenc0yEbVck-MHiDFQlQ9hMyU0ofON6I");
 
 const Datenbank : FC = () => {
     const [countries, setCountries] : any = useState([]);
-    const [test, setTest] : any = useState();
-    const [countrieList, setCountrieList] = useState<ICountries[]>([])
+
+    const [land, setLand] = useState("");
+    const [kontinent, setKontinent] = useState("");
+    const [formError, setFormError] = useState<string | null>(null);
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e:any) => {
+        e.preventDefault()
+
+        if(!land){
+            setFormError('Error')
+            return
+        }
+
+        const {data, error} = await supabase
+            .from('countries')
+            .insert([{land, kontinent}])
+            .select()
+
+        if(error){
+            console.log(error);
+        }
+        if(data){
+            console.log(data);
+            setFormError(null);
+            navigate("/datenbank");
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     useEffect(() => {
         getCountries();
@@ -18,20 +78,6 @@ const Datenbank : FC = () => {
         const { data } = await supabase.from("countries").select();
         setCountries(data);
     }
-
-    const addCountries =() => {
-        const newCountries = {land:test}
-        setCountrieList([]);
-        setTest("");
-        console.log(newCountries);
-    }
-
-    const handleChange = (event: ChangeEvent <HTMLInputElement>) => {
-        setTest(event.target.value);
-        console.log(setTest);
-    }
-
-
 
 
     return( <div className={"container-sm justify-content-center"}>
@@ -43,36 +89,48 @@ const Datenbank : FC = () => {
             </div>
         </div>
 
-        <div className={"container text-end p-2"}>
-            <div className={"row"}>
-                <div className={"col"}>
-                    <label className={"col-form-label mt-2"}>Land:</label>
-                </div>
-                <div className={"col p-2"}>
-                    <input type="text"
-                           placeholder="Land"
-                           className={"form-control"}
-                           name ="test"
-                           value={test}
-                           onChange = {handleChange}
-                    />
-                </div>
-            </div>
-        </div>
+        <form onSubmit={handleSubmit}>
+            <label htmlFor={"land"}>Land:</label>
+            <input
+                type={"text"}
+                id={"land"}
+                value={land}
+                onChange={(e)=> setLand(e.target.value)}
+            />
+            <label htmlFor={"kontinent"}>Kontinent:</label>
+            <input
+                type={"text"}
+                id={"kontinent"}
+                value={kontinent}
+                onChange={(e)=> setKontinent(e.target.value)}
+            />
+            <button>Hinzufügen</button>
 
-        {/*Button*/}
-        <div className={"row"}>
-            <div className={"col"}>
-                <div className={"d-flex justify-content-center"}>
-                    <div className={"p-3"}>
-                        <Button variant={"outline-dark"} onClick={addCountries}>Hinzufügen</Button>
-                    </div>
-                </div>
-            </div>
-        </div>
+            {formError && <p className={"error"}>{formError}</p>}
 
-        {/*Strich*/}
-        <hr className={"border-end border-dark border-5 opacity-75"}/>
+        </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div className={"content"}>
             <table className={"table table-hover"}>
@@ -80,15 +138,18 @@ const Datenbank : FC = () => {
             <tr>
                 <th scope={"col"}>ID</th>
                 <th scope={"col"}>Land</th>
+                <th scope={"col"}>Kontinent</th>
                 <th scope={"col"}>Löschen</th>
                 <th scope={"col"}>Bearbeiten</th>
+
             </tr>
             </thead>
             <tbody>
             {countries.map((country : any)=>(
                 <tr key={country.id}>
                     <td>{country.id}</td>
-                    <td > {country.name}</td>
+                    <td >{country.land}</td>
+                    <td>{country.kontinent}</td>
                     <td><Button variant={"outline-dark"}>Löschen</Button></td>
                     <td><Button variant={"outline-dark"}>Bearbeiten</Button></td>
                 </tr>
