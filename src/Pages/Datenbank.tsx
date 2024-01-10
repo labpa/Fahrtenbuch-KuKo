@@ -37,6 +37,7 @@ const Datenbank : FC = () => {
                             <td >{record.album}</td>
                             <td>{record.artist}</td>
                             <td>{record.year}</td>
+                            <td><button>Löschen</button></td>
 
                         </tr>
                     ))}

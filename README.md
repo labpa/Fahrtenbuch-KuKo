@@ -97,7 +97,15 @@ Um sich innerhalb der App bewegen zu können ist es notwendig die Navigation inn
 Um Daten in einer Datenbank speichern zu können habe ich mich für supabase als backend entscheiden.
 
 ### ER-Diagramm
+#### Entwurf
 ![entwurf_ER_Diagramm.png](img%2Fentwurf_ER_Diagramm.png)
+Erster entwurf ER-Diagramm für die Datenbank Fahrtenbuch
+
+#### Umsetzung
+![ER_Diagramm_Fahrtenbuch.png](img%2FER_Diagramm_Fahrtenbuch.png)
+ER-Diagramm mit der endgültigen Datenbank für das Fahrtenbuch
+
+
 
 ### Supabase
 
