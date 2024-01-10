@@ -108,7 +108,31 @@ ER-Diagramm mit der endgültigen Datenbank für das Fahrtenbuch
 
 
 ### Supabase
+#### Erstellen der Tabellen in Supabase
 
++ fahrzeug
+  + fahrzeug_id *uuid* **PK**
+  + created_at *timestamp*
+  + nummernschild *text*
+  + baujahr *text*
+
+
++ fahrerin
+  + fahrerin_id *uuid* **PK**
+  + created_at *timestamp*
+  + vorname *text*
+  + nachname *text*
+
+
++ fahrt
+  + fahrt_id *uuid* **PK**
+  + created_at *timestamp*
+  + fahrerin_id *uuid* **FK**
+  + fahrzeug_id *uuid* **FK**
+  + grund *text*
+  + datum *text*
+  + km-begin *int8*
+  + km-ende *int8*
 
 ### App
 + erstellen von .env Datei.
