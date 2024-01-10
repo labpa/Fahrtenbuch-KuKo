@@ -1,5 +1,6 @@
-import React, {FC, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import supabase from "../config/SupabaseClient";
+import Button from "react-bootstrap/Button";
 
 const Onlinefahrtenbuch : FC = () => {
     //fahrerin
@@ -16,8 +17,11 @@ const Onlinefahrtenbuch : FC = () => {
     //fehler
     const [formError, setFormError] = useState<string | null>(null)
 
-    console.log(vorname);
+    //Ausgabe
+    const [fahrt, setFahrt] : any = useState([]);
+console.log(datum);
 
+    //Eingabe der Daten
     const handleSubmit = async (e:any) => {
         e.preventDefault()
 
@@ -27,13 +31,10 @@ const Onlinefahrtenbuch : FC = () => {
             return;
         }
         const{data, error} = await supabase
-            .from('fahrerin')
-            .insert([{vorname, nachname}])
+            .from('fahrt')
+            .insert([{vorname, nachname, nummernschild, baujahr, grund, datum, kmBegin, kmEnde}])
             .select();
-
-
-
-
+console.log(data)
         if(error){
             console.log(error);
         }
@@ -42,6 +43,30 @@ const Onlinefahrtenbuch : FC = () => {
             setFormError(null);
         }
     }
+
+    //Abfrage der Daten
+    useEffect(() => {
+        getFahrt()
+    }, []);
+
+    const getFahrt = async () => {
+        const {data} = await supabase.from('fahrt').select();
+        setFahrt(data)
+        // console.log(data?.map(fa));
+    }
+
+    // const loeschen = async () => {
+    //
+    //     const { error } = await supabase
+    //         .from('fahrerin')
+    //         .delete()
+    //         .eq('fahrerin_id', fahrerin.filter())
+    //
+    //     if(error){
+    //         console.log(error);
+    //     }
+    // }
+
 
 
     return (
@@ -124,6 +149,51 @@ const Onlinefahrtenbuch : FC = () => {
                     <button>Hinzufügen</button>
                     {formError && <p>{formError}</p>}
                 </form>
+
+
+
+                <div className={"content"}>
+                    <table className={"table table-hover"}>
+                        <thead>
+                        <tr>
+                            <th scope={"col"}>ID</th>
+                            <th scope={"col"}>Vorname</th>
+                            <th scope={"col"}>Nachname</th>
+                            <th scope={"col"}>Nummernschild</th>
+                            <th scope={"col"}>Grund</th>
+                            <th scope={"col"}>Datum</th>
+                            <th scope={"col"}>Baujahr</th>
+                            <th scope={"col"}>KM Beginn</th>
+                            <th scope={"col"}>KM Ende</th>
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {fahrt.map((local : any)=>(
+                            <tr key={local.fahrt_id}>
+                                <td>{local.fahrt_id}</td>
+                                <td>{local.vorname}</td>
+                                <td>{local.nachname}</td>
+                                <td>{local.nummernschild}</td>
+                                <td>{local.grund}</td>
+                                <td>{local.datum}</td>
+                                <td>{local.baujahr}</td>
+                                <td>{local.kmBegin}</td>
+                                <td>{local.kmEnde}</td>
+                                {/*<td><Button variant={"outline-dark"} onClick={loeschen}>Löschen</Button></td>*/}
+
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+
+
 
 
             </div>

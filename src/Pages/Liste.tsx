@@ -25,12 +25,15 @@ const Liste: FC  = () => {
         }
     }, [loadedFromLocalStorage, rideList]);
 
+
+
     //Löschen → Löscht über die id
     const deleteRide = (idToDelete:string):void => {
         setRideList(rideList.filter((id) => {
             return id.id !== idToDelete
         }))
     }
+
 
     //Speichern in lokalem Speicher von Browser
     const saveInBrowser = (): void => {
