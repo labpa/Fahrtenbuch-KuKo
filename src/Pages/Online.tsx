@@ -156,7 +156,7 @@ console.log(data)
                     <table className={"table table-hover"}>
                         <thead>
                         <tr>
-                            <th scope={"col"}>ID</th>
+                            {/*<th scope={"col"}>ID</th>*/}
                             <th scope={"col"}>Vorname</th>
                             <th scope={"col"}>Nachname</th>
                             <th scope={"col"}>Nummernschild</th>
@@ -165,6 +165,7 @@ console.log(data)
                             <th scope={"col"}>Baujahr</th>
                             <th scope={"col"}>KM Beginn</th>
                             <th scope={"col"}>KM Ende</th>
+                            <th scope={"col"}>Löschen</th>
 
 
 
@@ -173,7 +174,7 @@ console.log(data)
                         <tbody>
                         {fahrt.map((local : any)=>(
                             <tr key={local.fahrt_id}>
-                                <td>{local.fahrt_id}</td>
+                                {/*<td>{local.fahrt_id}</td>*/}
                                 <td>{local.vorname}</td>
                                 <td>{local.nachname}</td>
                                 <td>{local.nummernschild}</td>
@@ -182,7 +183,7 @@ console.log(data)
                                 <td>{local.baujahr}</td>
                                 <td>{local.kmBegin}</td>
                                 <td>{local.kmEnde}</td>
-                                {/*<td><Button variant={"outline-dark"} onClick={loeschen}>Löschen</Button></td>*/}
+                                <td><button>Löschen</button></td>
 
                             </tr>
                         ))}
