@@ -14,8 +14,8 @@ const NavbarZwei = () => {
                     <Nav className="me-auto">
                         <NavLink className={"nav-link"} to={"home"}>Fahrtenbuch<span className={"visually-hidden"}>(current)</span></NavLink>
                         <NavLink className={"nav-link"} to={"/liste"}>Liste</NavLink>
+                        <NavLink className={"nav-link"} to={"/onlinefahrtenbuch"}>Onlinefahrtenbuch</NavLink>
                         <NavLink className={"nav-link"} to={"/test"}>Test</NavLink>
-                        <NavLink className={"nav-link"} to={"/contact"}>Kontakt</NavLink>
                         <NavLink className={"nav-link"} to={"/datenbank"}>Datenbankspaß</NavLink>
                         <NavLink className={"nav-link"} to={"/eingabe"}>Eingabe Datenbank</NavLink>
                     </Nav>

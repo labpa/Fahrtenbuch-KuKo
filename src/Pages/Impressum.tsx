@@ -10,8 +10,6 @@ const Impressum : FC = () => {
                     </div>
                 </div>
             </div>
-            {/*streifen*/}
-            <hr className={"border-end border-dark border-5 opacity-75"}/>
         </div>
     )
 }

@@ -14,6 +14,7 @@ import Footer from "./Components/Footer";
 import Impressum from "./Pages/Impressum";
 import Datenbank from "./Pages/Datenbank";
 import Eingabe from "./Pages/Eingabe";
+import Onlinefahrtenbuch from "./Pages/Online";
 
 
 const App: FC = () => {
@@ -28,6 +29,7 @@ const App: FC = () => {
     <Routes>
       <Route path={"/"} element={<Dashboard/>}/>
       <Route path={"/home"} element={<Fahrtenbuch/>}/>
+      <Route path={"/onlinefahrtenbuch"} element={<Onlinefahrtenbuch/>}/>
       <Route path={"/liste"} element={<Liste/>}/>
       <Route path={"/contact"} element={<Contact/>}/>
       <Route path={"/update/:drId"} element={<Update/>}/>
