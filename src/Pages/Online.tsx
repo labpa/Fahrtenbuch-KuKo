@@ -40,7 +40,9 @@ console.log(data)
         if(data){
             console.log(data);
             setFormError(null);
+            e.target.reset();
         }
+
     }
 
     //Abfrage der Daten
@@ -89,7 +91,6 @@ console.log(data)
                         <label>Vorname:</label>
                         <input
                             type={"text"}
-                            id={"vorname"}
                             value={vorname}
                             onChange={(e)=> setVorname(e.target.value)}
                         />
@@ -97,7 +98,6 @@ console.log(data)
                         <label>Nachname:</label>
                         <input
                             type={"text"}
-                            id={"nachname"}
                             value={nachname}
                             onChange={(e)=> setNachname(e.target.value)}
                         />
@@ -106,7 +106,6 @@ console.log(data)
                         <label>Nummernschild:</label>
                         <input
                             type={"text"}
-                            id={"nummernschild"}
                             value={nummernschild}
                             onChange={(e)=> setNummernschild(e.target.value)}
                         />
@@ -114,7 +113,6 @@ console.log(data)
                         <label>Baujahr:</label>
                         <input
                             type={"text"}
-                            id={"baujahr"}
                             value={baujahr}
                             onChange={(e)=> setBaujahr(e.target.value)}
                         />
@@ -123,7 +121,6 @@ console.log(data)
                         <label>Grund:</label>
                         <input
                             type={"text"}
-                            id={"grund"}
                             value={grund}
                             onChange={(e)=> setGrund(e.target.value)}
                         />
@@ -131,7 +128,6 @@ console.log(data)
                         <label>Datum:</label>
                         <input
                             type={"date"}
-                            id={"datum"}
                             value={datum}
                             onChange={(e)=> setDatum(e.target.value)}
                         />
@@ -140,7 +136,6 @@ console.log(data)
                         <label>KM Stand Begin:</label>
                         <input
                             type={"number"}
-                            id={"kmBegin"}
                             value={kmBegin}
                             onChange={(e)=> setKmBegin(e.target.value)}
                         />
@@ -148,13 +143,12 @@ console.log(data)
                         <label>KM Stand Ende:</label>
                         <input
                             type={"number"}
-                            id={"kmEnde"}
                             value={kmEnde}
                             onChange={(e)=> setKmEnde(e.target.value)}
                         />
                     </div>
                     <div>
-                        <button>Hinzufügen</button>
+                        <button onClick={getFahrt}>Hinzufügen</button>
                     </div>
 
                     {formError && <p>{formError}</p>}
@@ -183,8 +177,8 @@ console.log(data)
                         </thead>
                         <tbody>
                         {fahrten.map((fahrt : any)=>(
-                            <tr key={fahrt.fahrten_id}>
-                                <td>{fahrt.fahrten_id}</td>
+                            <tr key={fahrt.fahrt_id}>
+                                <td>{fahrt.fahrt_id}</td>
                                 <td>{fahrt.vorname}</td>
                                 <td>{fahrt.nachname}</td>
                                 <td>{fahrt.nummernschild}</td>
@@ -196,7 +190,7 @@ console.log(data)
                                 <td><button onClick={()=>handleDeleteFahrt(fahrt.fahrt_id)}>Löschen</button></td>
                                 <td>
                                     <Link to={`/bearbeiten/${fahrt.fahrt_id}`}>
-                                        <Button variant={"outline-dark"}>Bearbeiten</Button>
+                                        <Button  variant={"outline-dark"}>Bearbeiten</Button>
                                     </Link>
                                 </td>
 

@@ -1,7 +1,8 @@
-import React, {FC, useState} from "react";
+import React, {FC, useState, useEffect} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import supabase from "../config/SupabaseClient";
 
 const Bearbeiten : FC = () => {
-
     const [vorname, setVorname] = useState("");
     const [nachname, setNachname] = useState("");
     const [nummernschild, setNummernschild] = useState("");
@@ -10,15 +11,37 @@ const Bearbeiten : FC = () => {
     const [datum, setDatum] = useState("");
     const [kmBegin, setKmBegin] = useState<any>(0);
     const [kmEnde, setKmEnde] = useState<any>(0);
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+
+        const fetchFahrt = async () => {
+            const {data, error} = await supabase
+                .from('fahrten')
+                .select()
+                .eq('fahrt_id', id)
+                .single()
+
+            if(error){
+                navigate("/onlinefahrtenbuch", {replace:true})
+            }
+            if(data){
+                        setVorname(data.vorname)
+                        setNachname(data.nachname)
+                        setNummernschild(data.nummernschild)
+                        setBaujahr(data.baujahr)
+                        setGrund(data.grund)
+                        setDatum(data.datum)
+                        setKmBegin(data.kmBegin)
+                        setKmEnde(data.kmEnde)
+                        console.log(data);
+            }
+        }
+        fetchFahrt()
+    }, [id, navigate]);
 
 
-
-
-    const handleUpdate = () => {
-
-
-
-    }
 
     return(
         <div className={"container-sm justify-content-center"}>
@@ -26,13 +49,13 @@ const Bearbeiten : FC = () => {
 
                 <div className={"row"}>
                     <div className={"col p-2"}>
-                        <div><h1>Bearbeiten-Online</h1></div>
+                        <div><h1>Bearbeiten - {id} </h1></div>
                     </div>
                 </div>
             </div>
-            <form onSubmit={handleUpdate}>
 
 
+            <form>
                 <div>
                     <label>Vorname:</label>
                     <input
@@ -45,7 +68,6 @@ const Bearbeiten : FC = () => {
                     <label>Nachname:</label>
                     <input
                         type={"text"}
-                        id={"nachname"}
                         value={nachname}
                         onChange={(e)=> setNachname(e.target.value)}
                     />
@@ -54,7 +76,6 @@ const Bearbeiten : FC = () => {
                     <label>Nummernschild:</label>
                     <input
                         type={"text"}
-                        id={"nummernschild"}
                         value={nummernschild}
                         onChange={(e)=> setNummernschild(e.target.value)}
                     />
@@ -62,7 +83,6 @@ const Bearbeiten : FC = () => {
                     <label>Baujahr:</label>
                     <input
                         type={"text"}
-                        id={"baujahr"}
                         value={baujahr}
                         onChange={(e)=> setBaujahr(e.target.value)}
                     />
@@ -71,7 +91,6 @@ const Bearbeiten : FC = () => {
                     <label>Grund:</label>
                     <input
                         type={"text"}
-                        id={"grund"}
                         value={grund}
                         onChange={(e)=> setGrund(e.target.value)}
                     />
@@ -79,7 +98,6 @@ const Bearbeiten : FC = () => {
                     <label>Datum:</label>
                     <input
                         type={"date"}
-                        id={"datum"}
                         value={datum}
                         onChange={(e)=> setDatum(e.target.value)}
                     />
@@ -88,7 +106,6 @@ const Bearbeiten : FC = () => {
                     <label>KM Stand Begin:</label>
                     <input
                         type={"number"}
-                        id={"kmBegin"}
                         value={kmBegin}
                         onChange={(e)=> setKmBegin(e.target.value)}
                     />
@@ -96,13 +113,12 @@ const Bearbeiten : FC = () => {
                     <label>KM Stand Ende:</label>
                     <input
                         type={"number"}
-                        id={"kmEnde"}
                         value={kmEnde}
                         onChange={(e)=> setKmEnde(e.target.value)}
                     />
                 </div>
                 <div>
-                    <button>Hinzufügen</button>
+                    <button>Speichern</button>
                 </div>
 
                 {/*{formError && <p>{formError}</p>}*/}

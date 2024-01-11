@@ -38,7 +38,7 @@ const App: FC = () => {
       <Route path={"/impressum"} element={<Impressum/>}/>
       <Route path={"/datenbank"} element={<Datenbank/>}/>
       <Route path={"/eingabe"} element={<Eingabe/>}/>
-      <Route path={"/bearbeiten/:fahrt_id"} element={<Bearbeiten/>}/>
+      <Route path={"/bearbeiten/:id"} element={<Bearbeiten/>}/>
       <Route path={"*"} element={<Error/>}/>
     </Routes>
     <div>
