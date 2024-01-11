@@ -13,9 +13,44 @@ const Bearbeiten : FC = () => {
     const [kmEnde, setKmEnde] = useState<any>(0);
     const { id } = useParams();
     const navigate = useNavigate();
+    //fehler
+    const [formError, setFormError] = useState<string | null>(null)
 
+    //Bearbeiten
+    const handleSubmit = async (e : any) => {
+        e.preventDefault()
+
+        if(!vorname || !nachname || !nummernschild || !baujahr || !grund || !datum || !kmBegin || !kmEnde){
+            setFormError('Bitte alle Felder ausfüllen')
+            return;
+        }
+
+        const {data, error} = await supabase
+            .from('fahrten')
+            .update({vorname, nachname, nummernschild, baujahr, grund, datum, kmBegin, kmEnde})
+            .eq('fahrt_id', id)
+            .select()
+
+        if(error){
+            console.log(error);
+            setFormError("Bitte alle Felder ausfüllen!")
+
+        }
+        if(data){
+            console.log(data);
+            setFormError(null);
+            navigate("/onlinefahrtenbuch")
+        }
+
+    }
+
+
+
+
+
+
+    //Daten werden aus der Datenbank geladen und im entsprechenden Feld angezeigt. Nur ein Datensatz entsprechend gleichheit mit id
     useEffect(() => {
-
         const fetchFahrt = async () => {
             const {data, error} = await supabase
                 .from('fahrten')
@@ -55,7 +90,7 @@ const Bearbeiten : FC = () => {
             </div>
 
 
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label>Vorname:</label>
                     <input
@@ -121,7 +156,7 @@ const Bearbeiten : FC = () => {
                     <button>Speichern</button>
                 </div>
 
-                {/*{formError && <p>{formError}</p>}*/}
+                {formError && <p>{formError}</p>}
             </form>
 
 
