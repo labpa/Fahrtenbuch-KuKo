@@ -1,15 +1,14 @@
 import React, {FC, useEffect, useState} from "react";
 import supabase from "../config/SupabaseClient";
 import Button from "react-bootstrap/Button";
+import {Link} from "react-router-dom";
 
 const Onlinefahrtenbuch : FC = () => {
-    //fahrerin
+
     const [vorname, setVorname] = useState("");
     const [nachname, setNachname] = useState("");
-    //fahrzeug
     const [nummernschild, setNummernschild] = useState("");
     const [baujahr, setBaujahr] = useState("");
-    //fahrt
     const [grund, setGrund] = useState("");
     const [datum, setDatum] = useState("");
     const [kmBegin, setKmBegin] = useState<any>(0);
@@ -18,7 +17,7 @@ const Onlinefahrtenbuch : FC = () => {
     const [formError, setFormError] = useState<string | null>(null)
 
     //Ausgabe
-    const [fahrt, setFahrt] : any = useState([]);
+    const [fahrten, setFahrten] : any = useState([]);
 console.log(datum);
 
     //Eingabe der Daten
@@ -26,12 +25,12 @@ console.log(datum);
         e.preventDefault()
 
         //todo muss noch auf alle Felder angepasst werden zuerst aber upload fertig machen
-        if(!vorname || !nachname){
+        if(!vorname || !nachname || !nummernschild || !baujahr || !grund || !datum || !kmBegin || !kmEnde){
             setFormError('Bitte alle Felder ausfüllen')
             return;
         }
         const{data, error} = await supabase
-            .from('fahrt')
+            .from('fahrten')
             .insert([{vorname, nachname, nummernschild, baujahr, grund, datum, kmBegin, kmEnde}])
             .select();
 console.log(data)
@@ -50,15 +49,15 @@ console.log(data)
     }, []);
 
     const getFahrt = async () => {
-        const {data} = await supabase.from('fahrt').select();
-        setFahrt(data)
+        const {data} = await supabase.from('fahrten').select();
+        setFahrten(data)
         // console.log(data?.map(fa));
     }
 
     const handleDeleteFahrt = async (fahrt_id: any) => {
 
         const { error } = await supabase
-            .from('fahrt')
+            .from('fahrten')
             .delete()
             .eq('fahrt_id', fahrt_id)
 
@@ -81,72 +80,83 @@ console.log(data)
                     </div>
                 </div>
 
+
+
                 <form onSubmit={handleSubmit}>
-                    <label>Vorname:</label>
-                    <input
-                        type={"text"}
-                        id={"vorname"}
-                        value={vorname}
-                        onChange={(e)=> setVorname(e.target.value)}
-                    />
 
-                    <label>Nachname:</label>
-                    <input
-                        type={"text"}
-                        id={"nachname"}
-                        value={nachname}
-                        onChange={(e)=> setNachname(e.target.value)}
-                    />
 
-                    <label>Nummernschild:</label>
-                    <input
-                        type={"text"}
-                        id={"nummernschild"}
-                        value={nummernschild}
-                        onChange={(e)=> setNummernschild(e.target.value)}
-                    />
+                    <div>
+                        <label>Vorname:</label>
+                        <input
+                            type={"text"}
+                            id={"vorname"}
+                            value={vorname}
+                            onChange={(e)=> setVorname(e.target.value)}
+                        />
 
-                    <label>Baujahr:</label>
-                    <input
-                        type={"text"}
-                        id={"baujahr"}
-                        value={baujahr}
-                        onChange={(e)=> setBaujahr(e.target.value)}
-                    />
+                        <label>Nachname:</label>
+                        <input
+                            type={"text"}
+                            id={"nachname"}
+                            value={nachname}
+                            onChange={(e)=> setNachname(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label>Nummernschild:</label>
+                        <input
+                            type={"text"}
+                            id={"nummernschild"}
+                            value={nummernschild}
+                            onChange={(e)=> setNummernschild(e.target.value)}
+                        />
 
-                    <label>Grund:</label>
-                    <input
-                        type={"text"}
-                        id={"grund"}
-                        value={grund}
-                        onChange={(e)=> setGrund(e.target.value)}
-                    />
+                        <label>Baujahr:</label>
+                        <input
+                            type={"text"}
+                            id={"baujahr"}
+                            value={baujahr}
+                            onChange={(e)=> setBaujahr(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label>Grund:</label>
+                        <input
+                            type={"text"}
+                            id={"grund"}
+                            value={grund}
+                            onChange={(e)=> setGrund(e.target.value)}
+                        />
 
-                    <label>Datum:</label>
-                    <input
-                        type={"date"}
-                        id={"datum"}
-                        value={datum}
-                        onChange={(e)=> setDatum(e.target.value)}
-                    />
+                        <label>Datum:</label>
+                        <input
+                            type={"date"}
+                            id={"datum"}
+                            value={datum}
+                            onChange={(e)=> setDatum(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label>KM Stand Begin:</label>
+                        <input
+                            type={"number"}
+                            id={"kmBegin"}
+                            value={kmBegin}
+                            onChange={(e)=> setKmBegin(e.target.value)}
+                        />
 
-                    <label>KM Stand Begin:</label>
-                    <input
-                        type={"number"}
-                        id={"kmBegin"}
-                        value={kmBegin}
-                        onChange={(e)=> setKmBegin(e.target.value)}
-                    />
+                        <label>KM Stand Ende:</label>
+                        <input
+                            type={"number"}
+                            id={"kmEnde"}
+                            value={kmEnde}
+                            onChange={(e)=> setKmEnde(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <button>Hinzufügen</button>
+                    </div>
 
-                    <label>KM Stand Ende:</label>
-                    <input
-                        type={"number"}
-                        id={"kmEnde"}
-                        value={kmEnde}
-                        onChange={(e)=> setKmEnde(e.target.value)}
-                    />
-
-                    <button>Hinzufügen</button>
                     {formError && <p>{formError}</p>}
                 </form>
 
@@ -172,18 +182,23 @@ console.log(data)
                         </tr>
                         </thead>
                         <tbody>
-                        {fahrt.map((local : any)=>(
-                            <tr key={local.fahrt_id}>
-                                <td>{local.fahrt_id}</td>
-                                <td>{local.vorname}</td>
-                                <td>{local.nachname}</td>
-                                <td>{local.nummernschild}</td>
-                                <td>{local.grund}</td>
-                                <td>{local.datum}</td>
-                                <td>{local.baujahr}</td>
-                                <td>{local.kmBegin}</td>
-                                <td>{local.kmEnde}</td>
-                                <td><button onClick={()=>handleDeleteFahrt(local.fahrt_id)}>Löschen</button></td>
+                        {fahrten.map((fahrt : any)=>(
+                            <tr key={fahrt.fahrten_id}>
+                                <td>{fahrt.fahrten_id}</td>
+                                <td>{fahrt.vorname}</td>
+                                <td>{fahrt.nachname}</td>
+                                <td>{fahrt.nummernschild}</td>
+                                <td>{fahrt.grund}</td>
+                                <td>{fahrt.datum}</td>
+                                <td>{fahrt.baujahr}</td>
+                                <td>{fahrt.kmBegin}</td>
+                                <td>{fahrt.kmEnde}</td>
+                                <td><button onClick={()=>handleDeleteFahrt(fahrt.fahrt_id)}>Löschen</button></td>
+                                <td>
+                                    <Link to={`/bearbeiten/${fahrt.fahrt_id}`}>
+                                        <Button variant={"outline-dark"}>Bearbeiten</Button>
+                                    </Link>
+                                </td>
 
                             </tr>
                         ))}

@@ -15,6 +15,7 @@ import Impressum from "./Pages/Impressum";
 import Datenbank from "./Pages/Datenbank";
 import Eingabe from "./Pages/Eingabe";
 import Onlinefahrtenbuch from "./Pages/Online";
+import Bearbeiten from "./Pages/Bearbeiten";
 
 
 const App: FC = () => {
@@ -37,6 +38,7 @@ const App: FC = () => {
       <Route path={"/impressum"} element={<Impressum/>}/>
       <Route path={"/datenbank"} element={<Datenbank/>}/>
       <Route path={"/eingabe"} element={<Eingabe/>}/>
+      <Route path={"/bearbeiten/:fahrt_id"} element={<Bearbeiten/>}/>
       <Route path={"*"} element={<Error/>}/>
     </Routes>
     <div>

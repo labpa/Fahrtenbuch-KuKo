@@ -3,7 +3,7 @@ import {IInformation} from "../interfaces";
 import Button from "react-bootstrap/Button";
 import {Link, useParams} from "react-router-dom";
 import Select, {Options} from "react-select";
-import Error from "../Components/error";
+
 
 const Update: FC = () => {
 
