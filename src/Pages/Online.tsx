@@ -55,17 +55,17 @@ console.log(data)
         // console.log(data?.map(fa));
     }
 
-    // const loeschen = async () => {
-    //
-    //     const { error } = await supabase
-    //         .from('fahrerin')
-    //         .delete()
-    //         .eq('fahrerin_id', fahrerin.filter())
-    //
-    //     if(error){
-    //         console.log(error);
-    //     }
-    // }
+    const handleDeleteFahrt = async (fahrt_id: any) => {
+
+        const { error } = await supabase
+            .from('fahrt')
+            .delete()
+            .eq('fahrt_id', fahrt_id)
+
+        if(error){
+            console.log(error);
+        }
+    }
 
 
 
@@ -156,7 +156,7 @@ console.log(data)
                     <table className={"table table-hover"}>
                         <thead>
                         <tr>
-                            {/*<th scope={"col"}>ID</th>*/}
+                            <th scope={"col"}>ID</th>
                             <th scope={"col"}>Vorname</th>
                             <th scope={"col"}>Nachname</th>
                             <th scope={"col"}>Nummernschild</th>
@@ -174,7 +174,7 @@ console.log(data)
                         <tbody>
                         {fahrt.map((local : any)=>(
                             <tr key={local.fahrt_id}>
-                                {/*<td>{local.fahrt_id}</td>*/}
+                                <td>{local.fahrt_id}</td>
                                 <td>{local.vorname}</td>
                                 <td>{local.nachname}</td>
                                 <td>{local.nummernschild}</td>
@@ -183,7 +183,7 @@ console.log(data)
                                 <td>{local.baujahr}</td>
                                 <td>{local.kmBegin}</td>
                                 <td>{local.kmEnde}</td>
-                                <td><button>Löschen</button></td>
+                                <td><button onClick={()=>handleDeleteFahrt(local.fahrt_id)}>Löschen</button></td>
 
                             </tr>
                         ))}
