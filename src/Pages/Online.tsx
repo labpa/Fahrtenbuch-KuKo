@@ -2,6 +2,8 @@ import React, {FC, useEffect, useState} from "react";
 import supabase from "../config/SupabaseClient";
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import {Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
 
 const Onlinefahrtenbuch : FC = () => {
 
@@ -16,9 +18,15 @@ const Onlinefahrtenbuch : FC = () => {
     //fehler
     const [formError, setFormError] = useState<string | null>(null)
 
-    //Ausgabe
+    //Ausgabe -> Local State
     const [fahrten, setFahrten] : any = useState([]);
-console.log(datum);
+
+    // const handleDelete = (id : string) => {
+    //     setFahrten(prevFahrten => {
+    //         return prevFahrten.filter(fa => fa.id !== id)
+    //     })
+    // }
+
 
     //Eingabe der Daten
     const handleSubmit = async (e:any) => {
@@ -86,70 +94,71 @@ console.log(data)
 
                 <form onSubmit={handleSubmit}>
 
+                    <Container>
+                        <Row  className={"g-2 mb-3"}>
+                            <Col md>
+                                <FloatingLabel controlId="floatingInputGrid" label="Vorname">
+                                    <FormControl type="text" value={vorname} onChange={(e)=> setVorname(e.target.value)}/>
+                                </FloatingLabel>
+                            </Col>
+                            <Col>
+                                <FloatingLabel controlId="floatingInputGrid" label="Nachname">
+                                    <FormControl type="text" value={nachname} onChange={(e)=> setNachname(e.target.value)}/>
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
 
-                    <div>
-                        <label>Vorname:</label>
-                        <input
-                            type={"text"}
-                            value={vorname}
-                            onChange={(e)=> setVorname(e.target.value)}
-                        />
+                        <Row className={"g-2 mb-3"}>
+                            <Col md>
+                                <FloatingLabel controlId="floatingInputGrid" label="Nummernschild">
+                                    <FormControl type="text" value={nummernschild} onChange={(e)=> setNummernschild(e.target.value)}/>
+                                </FloatingLabel>
+                            </Col>
+                            <Col>
+                                <FloatingLabel controlId="floatingInputGrid" label="Baujahr">
+                                    <FormControl type="text" value={baujahr} onChange={(e)=> setBaujahr(e.target.value)}/>
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
 
-                        <label>Nachname:</label>
-                        <input
-                            type={"text"}
-                            value={nachname}
-                            onChange={(e)=> setNachname(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <label>Nummernschild:</label>
-                        <input
-                            type={"text"}
-                            value={nummernschild}
-                            onChange={(e)=> setNummernschild(e.target.value)}
-                        />
+                        <Row className={"g-2 mb-3"}>
+                            <Col md>
+                                <FloatingLabel controlId="floatingInputGrid" label="Grund">
+                                    <FormControl type="text" value={grund} onChange={(e)=> setGrund(e.target.value)}/>
+                                </FloatingLabel>
+                            </Col>
+                            <Col>
+                                <FloatingLabel controlId="floatingInputGrid" label="Datum">
+                                    <FormControl type="date" value={datum} onChange={(e)=> setDatum(e.target.value)}/>
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
 
-                        <label>Baujahr:</label>
-                        <input
-                            type={"text"}
-                            value={baujahr}
-                            onChange={(e)=> setBaujahr(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <label>Grund:</label>
-                        <input
-                            type={"text"}
-                            value={grund}
-                            onChange={(e)=> setGrund(e.target.value)}
-                        />
+                        <Row className={"g-2 mb-3"}>
+                            <Col md>
+                                <FloatingLabel controlId="floatingInputGrid" label="Kilometerstand Begin">
+                                    <FormControl type="number" value={kmBegin} onChange={(e)=> setKmBegin(e.target.value)}/>
+                                </FloatingLabel>
+                            </Col>
+                            <Col>
+                                <FloatingLabel controlId="floatingInputGrid" label="Kilometerstand Ende">
+                                    <FormControl type="number" value={kmEnde} onChange={(e)=> setKmEnde(e.target.value)}/>
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
 
-                        <label>Datum:</label>
-                        <input
-                            type={"date"}
-                            value={datum}
-                            onChange={(e)=> setDatum(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <label>KM Stand Begin:</label>
-                        <input
-                            type={"number"}
-                            value={kmBegin}
-                            onChange={(e)=> setKmBegin(e.target.value)}
-                        />
 
-                        <label>KM Stand Ende:</label>
-                        <input
-                            type={"number"}
-                            value={kmEnde}
-                            onChange={(e)=> setKmEnde(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <button onClick={getFahrt}>Hinzufügen</button>
-                    </div>
+
+
+
+
+
+                      <div>
+                          <Button variant={"outline-dark"} type={"submit"} onClick={getFahrt}>Hinzufügen</Button>
+                      </div>
+
+
+                    </Container>
 
                     {formError && <p>{formError}</p>}
                 </form>
@@ -187,7 +196,7 @@ console.log(data)
                                 <td>{fahrt.baujahr}</td>
                                 <td>{fahrt.kmBegin}</td>
                                 <td>{fahrt.kmEnde}</td>
-                                <td><button onClick={()=>handleDeleteFahrt(fahrt.fahrt_id)}>Löschen</button></td>
+                                <td><Button onClick={ () =>handleDeleteFahrt(fahrt.fahrt_id)} variant={"outline-dark"}>Löschen</Button></td>
                                 <td>
                                     <Link to={`/bearbeiten/${fahrt.fahrt_id}`}>
                                         <Button  variant={"outline-dark"}>Bearbeiten</Button>
