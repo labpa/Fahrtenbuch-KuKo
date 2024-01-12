@@ -21,11 +21,9 @@ const Onlinefahrtenbuch : FC = () => {
     //Ausgabe -> Local State
     const [fahrten, setFahrten] : any = useState([]);
 
-    // const handleDelete = (id : string) => {
-    //     setFahrten(prevFahrten => {
-    //         return prevFahrten.filter(fa => fa.id !== id)
-    //     })
-    // }
+    //Suchen
+    const [suchen, setSuchen] = useState("");
+
 
 
     //Eingabe der Daten
@@ -154,13 +152,9 @@ console.log(data)
                             <FormControl
                                 type="search"
                                 placeholder="Suchen"
-                                name="suchen"
+                                onChange={(e) => setSuchen(e.target.value)}
                             />
                         </div>
-
-
-
-
                     </Container>
 
                     {formError && <p>{formError}</p>}
@@ -190,7 +184,12 @@ console.log(data)
                         </tr>
                         </thead>
                         <tbody>
-                        {fahrten.map((fahrt : any)=>(
+                        {fahrten.filter((fahrt : any) => {
+                            return suchen.toLowerCase() === ''
+                            ? fahrt
+                            : fahrt.vorname.toLowerCase().includes(suchen.toLowerCase()) ||
+                                fahrt.nachname.toLowerCase().includes(suchen.toLowerCase())
+                        }).map((fahrt : any) =>(
                             <tr key={fahrt.fahrt_id}>
                                 {/*<td>{fahrt.fahrt_id}</td>*/}
                                 <td>{fahrt.vorname}</td>
@@ -210,7 +209,9 @@ console.log(data)
                                 </td>
 
                             </tr>
+
                         ))}
+
                         </tbody>
                     </Table>
 
