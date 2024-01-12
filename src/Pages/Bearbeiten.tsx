@@ -1,6 +1,8 @@
 import React, {FC, useState, useEffect} from "react";
+import {Col, Container, FloatingLabel, FormControl, Row} from "react-bootstrap";
 import {useNavigate, useParams} from "react-router-dom";
 import supabase from "../config/SupabaseClient";
+import Button from "react-bootstrap/Button";
 
 const Bearbeiten : FC = () => {
     const [vorname, setVorname] = useState("");
@@ -84,77 +86,72 @@ const Bearbeiten : FC = () => {
 
                 <div className={"row"}>
                     <div className={"col p-2"}>
-                        <div><h1>Bearbeiten - {id} </h1></div>
+                        <div><h1>Bearbeiten</h1></div>
                     </div>
                 </div>
             </div>
 
 
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Vorname:</label>
-                    <input
-                        type={"text"}
-                        id={"vorname"}
-                        value={vorname}
-                        onChange={(e)=> setVorname(e.target.value)}
-                    />
 
-                    <label>Nachname:</label>
-                    <input
-                        type={"text"}
-                        value={nachname}
-                        onChange={(e)=> setNachname(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Nummernschild:</label>
-                    <input
-                        type={"text"}
-                        value={nummernschild}
-                        onChange={(e)=> setNummernschild(e.target.value)}
-                    />
+                <Container>
+                    <Row className={"g-2 mb-3"}>
+                        <Col>
+                            <FloatingLabel controlId="floatingInputGrid" label="Vorname">
+                                <FormControl type="text" value={vorname} onChange={(e)=> setVorname(e.target.value)}/>
+                            </FloatingLabel>
+                        </Col>
+                        <Col>
+                            <FloatingLabel controlId="floatingInputGrid" label="Nachname">
+                                <FormControl type="text" value={nachname} onChange={(e)=> setNachname(e.target.value)}/>
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
+                    <Row className={"g-2 mb-3"}>
+                        <Col md>
+                            <FloatingLabel controlId="floatingInputGrid" label="Nummernschild">
+                                <FormControl type="text" value={nummernschild} onChange={(e)=> setNummernschild(e.target.value)}/>
+                            </FloatingLabel>
+                        </Col>
+                        <Col>
+                            <FloatingLabel controlId="floatingInputGrid" label="Baujahr">
+                                <FormControl type="text" value={baujahr} onChange={(e)=> setBaujahr(e.target.value)}/>
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
+                    <Row className={"g-2 mb-3"}>
+                        <Col md>
+                            <FloatingLabel controlId="floatingInputGrid" label="Grund">
+                                <FormControl type="text" value={grund} onChange={(e)=> setGrund(e.target.value)}/>
+                            </FloatingLabel>
+                        </Col>
+                        <Col>
+                            <FloatingLabel controlId="floatingInputGrid" label="Datum">
+                                <FormControl type="date" value={datum} onChange={(e)=> setDatum(e.target.value)}/>
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
+                    <Row className={"g-2 mb-3"}>
+                        <Col md>
+                            <FloatingLabel controlId="floatingInputGrid" label="Kilometerstand Begin">
+                                <FormControl type="number" value={kmBegin} onChange={(e)=> setKmBegin(e.target.value)}/>
+                            </FloatingLabel>
+                        </Col>
+                        <Col>
+                            <FloatingLabel controlId="floatingInputGrid" label="Kilometerstand Ende">
+                                <FormControl type="number" value={kmEnde} onChange={(e)=> setKmEnde(e.target.value)}/>
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
 
-                    <label>Baujahr:</label>
-                    <input
-                        type={"text"}
-                        value={baujahr}
-                        onChange={(e)=> setBaujahr(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Grund:</label>
-                    <input
-                        type={"text"}
-                        value={grund}
-                        onChange={(e)=> setGrund(e.target.value)}
-                    />
+                    <div className={"g-2 mb-3"}>
+                        <Button variant={"outline-dark"} type={"submit"}>Speichern</Button>
+                    </div>
 
-                    <label>Datum:</label>
-                    <input
-                        type={"date"}
-                        value={datum}
-                        onChange={(e)=> setDatum(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>KM Stand Begin:</label>
-                    <input
-                        type={"number"}
-                        value={kmBegin}
-                        onChange={(e)=> setKmBegin(e.target.value)}
-                    />
+                </Container>
 
-                    <label>KM Stand Ende:</label>
-                    <input
-                        type={"number"}
-                        value={kmEnde}
-                        onChange={(e)=> setKmEnde(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <button>Speichern</button>
-                </div>
+
+
 
                 {formError && <p>{formError}</p>}
             </form>

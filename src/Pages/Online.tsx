@@ -3,7 +3,7 @@ import supabase from "../config/SupabaseClient";
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import {Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
+import {Col, FloatingLabel, FormControl, FormLabel, Row, Stack, Table} from "react-bootstrap";
 
 const Onlinefahrtenbuch : FC = () => {
 
@@ -79,7 +79,7 @@ console.log(data)
 
 
     return (
-        <div>
+        <div className={"bs-body-bg"}>
             <div className={"container-sm justify-content-center"}>
                 <div className="d-flex justify-content-center">
 
@@ -95,9 +95,9 @@ console.log(data)
                 <form onSubmit={handleSubmit}>
 
                     <Container>
-                        <Row  className={"g-2 mb-3"}>
+                        <Row  className={"g-2 mb-3 "}>
                             <Col md>
-                                <FloatingLabel controlId="floatingInputGrid" label="Vorname">
+                                <FloatingLabel  controlId="floatingInputGrid" label="Vorname">
                                     <FormControl type="text" value={vorname} onChange={(e)=> setVorname(e.target.value)}/>
                                 </FloatingLabel>
                             </Col>
@@ -147,15 +147,18 @@ console.log(data)
                             </Col>
                         </Row>
 
-
-
-
-
-
-
-                      <div>
+                        <div className={"g-2 mb-3"}>
                           <Button variant={"outline-dark"} type={"submit"} onClick={getFahrt}>Hinzufügen</Button>
-                      </div>
+                        </div>
+                        <div>
+                            <FormControl
+                                type="search"
+                                placeholder="Suchen"
+                                name="suchen"
+                            />
+                        </div>
+
+
 
 
                     </Container>
@@ -166,10 +169,10 @@ console.log(data)
 
 
                 <div className={"content"}>
-                    <table className={"table table-hover"}>
+                    <Table className={"table table-hover"} responsive={"sm"}>
                         <thead>
                         <tr>
-                            <th scope={"col"}>ID</th>
+                            {/*<th scope={"col"}>ID</th>*/}
                             <th scope={"col"}>Vorname</th>
                             <th scope={"col"}>Nachname</th>
                             <th scope={"col"}>Nummernschild</th>
@@ -178,7 +181,9 @@ console.log(data)
                             <th scope={"col"}>Baujahr</th>
                             <th scope={"col"}>KM Beginn</th>
                             <th scope={"col"}>KM Ende</th>
+                            <th scope={"col"}>KM Gesamt</th>
                             <th scope={"col"}>Löschen</th>
+                            <th scope={"col"}>Bearbeiten</th>
 
 
 
@@ -187,7 +192,7 @@ console.log(data)
                         <tbody>
                         {fahrten.map((fahrt : any)=>(
                             <tr key={fahrt.fahrt_id}>
-                                <td>{fahrt.fahrt_id}</td>
+                                {/*<td>{fahrt.fahrt_id}</td>*/}
                                 <td>{fahrt.vorname}</td>
                                 <td>{fahrt.nachname}</td>
                                 <td>{fahrt.nummernschild}</td>
@@ -196,6 +201,7 @@ console.log(data)
                                 <td>{fahrt.baujahr}</td>
                                 <td>{fahrt.kmBegin}</td>
                                 <td>{fahrt.kmEnde}</td>
+                                <td>{fahrt.kmEnde - fahrt.kmBegin}</td>
                                 <td><Button onClick={ () =>handleDeleteFahrt(fahrt.fahrt_id)} variant={"outline-dark"}>Löschen</Button></td>
                                 <td>
                                     <Link to={`/bearbeiten/${fahrt.fahrt_id}`}>
@@ -206,7 +212,7 @@ console.log(data)
                             </tr>
                         ))}
                         </tbody>
-                    </table>
+                    </Table>
 
 
                 </div>
