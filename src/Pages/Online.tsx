@@ -148,24 +148,24 @@ console.log(data)
                         <div className={"g-2 mb-3"}>
                           <Button variant={"outline-dark"} type={"submit"} onClick={getFahrt}>Hinzufügen</Button>
                         </div>
+                        {formError && <p>{formError}</p>}
                         <div>
                             <FormControl
-                                type="search"
                                 placeholder="Suchen"
                                 onChange={(e) => setSuchen(e.target.value)}
                             />
                         </div>
                     </Container>
 
-                    {formError && <p>{formError}</p>}
+
                 </form>
 
 
 
-                <div className={"content"}>
+                <div className={"content g-2 mb-3"}>
                     <Table className={"table table-hover"} responsive={"sm"}>
                         <thead>
-                        <tr>
+                        <tr className={"g-2 mb-3"}>
                             {/*<th scope={"col"}>ID</th>*/}
                             <th scope={"col"}>Vorname</th>
                             <th scope={"col"}>Nachname</th>

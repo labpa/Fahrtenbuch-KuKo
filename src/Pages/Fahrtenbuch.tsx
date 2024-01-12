@@ -1,5 +1,4 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
-import '../App.css';
 import {IInformation} from "../interfaces";
 import DriverList from "../Components/DriverList";
 import uuid from 'react-uuid';

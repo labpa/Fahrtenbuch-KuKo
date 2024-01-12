@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Routes, Route, useParams} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Fahrtenbuch from "./Pages/Fahrtenbuch";
 import Liste from "./Pages/Liste";
 import Contact from "./Pages/Contact";
