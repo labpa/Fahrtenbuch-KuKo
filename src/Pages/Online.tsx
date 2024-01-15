@@ -30,7 +30,7 @@ const Onlinefahrtenbuch : FC = () => {
     const handleSubmit = async (e:any) => {
         e.preventDefault()
 
-        //todo muss noch auf alle Felder angepasst werden zuerst aber upload fertig machen
+
         if(!vorname || !nachname || !nummernschild || !baujahr || !grund || !datum || !kmBegin || !kmEnde){
             setFormError('Bitte alle Felder ausfüllen')
             return;
@@ -39,17 +39,31 @@ const Onlinefahrtenbuch : FC = () => {
             .from('fahrten')
             .insert([{vorname, nachname, nummernschild, baujahr, grund, datum, kmBegin, kmEnde}])
             .select();
-console.log(data)
+
         if(error){
             console.log(error);
         }
         if(data){
             console.log(data);
             setFormError(null);
-            e.target.reset();
+            // e.target.reset();
+            empty();
+            getFahrt();
         }
+    }
+
+    const empty = () => {
+        setNachname("");
+        setVorname("");
+        setNummernschild("");
+        setBaujahr("")
+        setGrund("");
+        setKmEnde(0);
+        setKmBegin(0);
+        setDatum("")
 
     }
+
 
     //Abfrage der Daten
     useEffect(() => {
@@ -59,18 +73,20 @@ console.log(data)
     const getFahrt = async () => {
         const {data} = await supabase.from('fahrten').select();
         setFahrten(data)
-        // console.log(data?.map(fa));
     }
 
     const handleDeleteFahrt = async (fahrt_id: any) => {
 
-        const { error } = await supabase
+        const {  error } = await supabase
             .from('fahrten')
             .delete()
             .eq('fahrt_id', fahrt_id)
 
         if(error){
             console.log(error);
+        }
+        else{
+            getFahrt();
         }
     }
 
@@ -146,7 +162,7 @@ console.log(data)
                         </Row>
 
                         <div className={"g-2 mb-3"}>
-                          <Button variant={"outline-dark"} type={"submit"} onClick={getFahrt}>Hinzufügen</Button>
+                          <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
                         </div>
                         {formError && <p>{formError}</p>}
                         <div>
@@ -163,7 +179,7 @@ console.log(data)
 
 
                 <div className={"content g-2 mb-3"}>
-                    <Table className={"table table-hover"} responsive={"sm"}>
+                    <Table className={"table table-hover"} responsive={"lg"}>
                         <thead>
                         <tr className={"g-2 mb-3"}>
                             {/*<th scope={"col"}>ID</th>*/}
