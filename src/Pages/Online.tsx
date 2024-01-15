@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import {Col, FloatingLabel, FormControl, FormLabel, Row, Stack, Table} from "react-bootstrap";
 
+
 const Onlinefahrtenbuch : FC = () => {
 
     const [vorname, setVorname] = useState("");
@@ -23,6 +24,10 @@ const Onlinefahrtenbuch : FC = () => {
 
     //Suchen
     const [suchen, setSuchen] = useState("");
+
+    const fehler = () => {
+        return <div> TEst Test TEst </div>
+    }
 
 
 
@@ -46,13 +51,13 @@ const Onlinefahrtenbuch : FC = () => {
         if(data){
             console.log(data);
             setFormError(null);
-            // e.target.reset();
-            empty();
+            clear();
             getFahrt();
         }
     }
 
-    const empty = () => {
+    //Setzt werte im Formular zurück
+    const clear = () => {
         setNachname("");
         setVorname("");
         setNummernschild("");
@@ -61,7 +66,6 @@ const Onlinefahrtenbuch : FC = () => {
         setKmEnde(0);
         setKmBegin(0);
         setDatum("")
-
     }
 
 
@@ -75,6 +79,7 @@ const Onlinefahrtenbuch : FC = () => {
         setFahrten(data)
     }
 
+    //Löscht mit der ID den entsprechenden Eintrag aus der Datenbank
     const handleDeleteFahrt = async (fahrt_id: any) => {
 
         const {  error } = await supabase
@@ -86,7 +91,7 @@ const Onlinefahrtenbuch : FC = () => {
             console.log(error);
         }
         else{
-            getFahrt();
+            await getFahrt();
         }
     }
 
