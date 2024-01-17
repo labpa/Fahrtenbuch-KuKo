@@ -18,6 +18,7 @@ import Datenbank from "./Pages/Datenbank";
 import Eingabe from "./Pages/Eingabe";
 import Onlinefahrtenbuch from "./Pages/Online";
 import Bearbeiten from "./Pages/Bearbeiten";
+import Buecher from "./Pages/Buecher";
 
 
 
@@ -42,6 +43,7 @@ const App: FC = () => {
       <Route path={"/datenbank"} element={<Datenbank/>}/>
       <Route path={"/eingabe"} element={<Eingabe/>}/>
       <Route path={"/bearbeiten/:id"} element={<Bearbeiten/>}/>
+      <Route path={"/buecher"} element={<Buecher/>}/>
       <Route path={"*"} element={<Error/>}/>
     </Routes>
     <div>

@@ -89,7 +89,7 @@ const Onlinefahrtenbuch : FC = () => {
         }
     }
 
-
+console.log(fahrten);
 
     return (
         <div className={"bs-body-bg"}>
