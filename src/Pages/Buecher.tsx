@@ -4,10 +4,12 @@ import {RootState} from "../app/store";
 import {FormControl, Table} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
+import {useAppDispatch} from "../app/hooks";
 
 const Buecher: React.FC = () =>{
     const books= useSelector((state: RootState)=>state.books);
     const [suchen, setSuchen] = useState("");
+    const dispatch = useAppDispatch();
     console.log(books);
 
 
@@ -21,6 +23,12 @@ const Buecher: React.FC = () =>{
                     onChange={(e) => setSuchen(e.target.value)}
                 />
             </div>
+
+
+
+
+
+
 
 
             <Table className={"table table-hover"} responsive={"lg"}>
