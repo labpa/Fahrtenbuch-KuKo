@@ -25,12 +25,6 @@ const Onlinefahrtenbuch : FC = () => {
     //Suchen
     const [suchen, setSuchen] = useState("");
 
-    const fehler = () => {
-        return <div> TEst Test TEst </div>
-    }
-
-
-
     //Eingabe der Daten
     const handleSubmit = async (e:any) => {
         e.preventDefault()
@@ -170,7 +164,7 @@ const Onlinefahrtenbuch : FC = () => {
                           <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
                         </div>
                         {formError && <p>{formError}</p>}
-                        <div>
+                        <div className={"g-2 mb-3"}>
                             <FormControl
                                 placeholder="Suchen"
                                 onChange={(e) => setSuchen(e.target.value)}
@@ -199,9 +193,6 @@ const Onlinefahrtenbuch : FC = () => {
                             <th scope={"col"}>KM Gesamt</th>
                             <th scope={"col"}>Löschen</th>
                             <th scope={"col"}>Bearbeiten</th>
-
-
-
                         </tr>
                         </thead>
                         <tbody>
