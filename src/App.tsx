@@ -1,6 +1,9 @@
 import React, {FC} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from "react-router-dom";
+import {Provider} from "react-redux";
+
+
 import Fahrtenbuch from "./Pages/Fahrtenbuch";
 import Liste from "./Pages/Liste";
 import Contact from "./Pages/Contact";
@@ -15,6 +18,7 @@ import Datenbank from "./Pages/Datenbank";
 import Eingabe from "./Pages/Eingabe";
 import Onlinefahrtenbuch from "./Pages/Online";
 import Bearbeiten from "./Pages/Bearbeiten";
+
 
 
 const App: FC = () => {
