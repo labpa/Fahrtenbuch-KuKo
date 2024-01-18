@@ -1,14 +1,18 @@
 import React, {FC, useState} from "react";
 import {useSelector} from "react-redux";
-import {FormControl} from "react-bootstrap";
-import {selectBooks} from "../features/books/booksSlice";
+import {Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
+import {remove, selectBooks} from "../features/books/booksSlice";
 import {Table, Button} from "react-bootstrap";
+import {useAppDispatch} from "../app/hooks";
+import Container from "react-bootstrap/Container";
 
 
 const Buecher: React.FC = () =>{
     const books= useSelector(selectBooks);
     const [suchen, setSuchen] = useState("");
+    const dispatch = useAppDispatch();
 
+    console.log(books);
 
     return(
         <div className={"bs-body-bg"}>
@@ -21,12 +25,45 @@ const Buecher: React.FC = () =>{
                     </div>
                 </div>
 
-                <div className={"g-2 mb-3"}>
-                    <FormControl
-                        placeholder="Suchen"
-                        onChange={(e) => setSuchen(e.target.value)}
-                    />
-                </div>
+                <form>
+                    <Container>
+                        <Row className={"g-2 mb-3"}>
+                            <Col>
+                                <FloatingLabel controlId="floatingInputGrid" label="Titel">
+                                    <FormControl type={"text"}/>
+                                </FloatingLabel>
+                            </Col>
+                            <Col>
+                                <FloatingLabel controlId="floatingInputGrid" label="Autor">
+                                    <FormControl type={"text"}/>
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
+                        <Row className={"g-2 mb-3"}>
+                            <Col>
+                                <FloatingLabel controlId="floatingInputGrid" label="ISBN">
+                                    <FormControl type={"text"}/>
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
+
+                        <div className={"g-2 mb-3"}>
+                            <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
+                        </div>
+
+
+                        <div className={"g-2 mb-3"}>
+                            <FormControl
+                                placeholder="Suchen"
+                                onChange={(e) => setSuchen(e.target.value)}
+                            />
+                        </div>
+                    </Container>
+                </form>
+
+
+
+
 
 
 
@@ -52,7 +89,7 @@ const Buecher: React.FC = () =>{
                             <td>{book.author}</td>
                             <td>{book.isbn}</td>
                             <td>
-                                <Button  variant={"outline-dark"}>Löschen</Button>
+                                <Button variant={"outline-dark"} onClick={() => dispatch(remove(book.id))}>Löschen</Button>
                             </td>
                             <td>
                                 <Button  variant={"outline-dark"}>Bearbeiten</Button>
@@ -61,8 +98,6 @@ const Buecher: React.FC = () =>{
                     ))}
                     </tbody>
                 </Table>
-
-
             </div>
         </div>
     )

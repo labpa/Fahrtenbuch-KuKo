@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from "react";
 import supabase from "../config/SupabaseClient";
-import VinylCard from "../Components/VinylCard";
+
 
 
 const Datenbank : FC = () => {

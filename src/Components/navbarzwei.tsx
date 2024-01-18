@@ -16,8 +16,8 @@ const NavbarZwei = () => {
                         <NavLink className={"nav-link"} to={"/liste"}>Liste</NavLink>
                         <NavLink className={"nav-link"} to={"/onlinefahrtenbuch"}>Onlinefahrtenbuch</NavLink>
                         <NavLink className={"nav-link"} to={"/test"}>Test</NavLink>
-                        <NavLink className={"nav-link"} to={"/datenbank"}>Datenbankspaß</NavLink>
-                        <NavLink className={"nav-link"} to={"/eingabe"}>Eingabe Datenbank</NavLink>
+                        {/*<NavLink className={"nav-link"} to={"/datenbank"}>Datenbankspaß</NavLink>*/}
+                        {/*<NavLink className={"nav-link"} to={"/eingabe"}>Eingabe Datenbank</NavLink>*/}
                         <NavLink className={"nav-link"} to={"/buecher"}>Bücher</NavLink>
                     </Nav>
                 </Navbar.Collapse>

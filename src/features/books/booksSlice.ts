@@ -8,6 +8,7 @@ export type BooksState = {
     ratingFilter: number;
 };
 
+
 export const booksSlice = createSlice({
     name: 'books',
     initialState: { books: booksData, ratingFilter: 0 },
@@ -36,15 +37,15 @@ export const selectBooks = (state: RootState) => state.books.books;
 export const selectRatingFilter = (state: RootState) =>
     state.books.ratingFilter;
 
-// export const selectByRating = createSelector(
-//     [selectBooks, selectRatingFilter],
-//     (books, ratingFilter) => {
-//         if (ratingFilter === 0) {
-//             return books;
-//         }
-//         return books.filter((book) => book.rating === ratingFilter);
-//     }
-// );
+export const selectByRating = createSelector(
+    [selectBooks, selectRatingFilter],
+    (books, ratingFilter) => {
+        if (ratingFilter === 0) {
+            return books;
+        }
+        return books.filter((book) => book.rating === ratingFilter);
+    }
+);
 
 export function selectBook(state: RootState): (id?: number) => InputBook {
     return (id?: number): InputBook => {
