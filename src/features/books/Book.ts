@@ -1,5 +1,5 @@
 export type Book = {
-    id: number;
+    id: any;
     title: string;
     author: string;
     isbn: string;
@@ -7,5 +7,5 @@ export type Book = {
 };
 
 export type InputBook = Omit<Book, 'id'> & {
-    id?: number;
+    id?: any;
 };

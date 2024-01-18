@@ -1,23 +1,31 @@
 import React, {FC, useState} from "react";
 import {useSelector} from "react-redux";
 import {Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
-import {remove, selectBooks} from "../features/books/booksSlice";
+import {remove, save, selectBooks} from "../features/books/booksSlice";
 import {Table, Button} from "react-bootstrap";
-import {useAppDispatch} from "../app/hooks";
+import {useAppDispatch,} from "../app/hooks";
 import Container from "react-bootstrap/Container";
-import {save} from "../features/books/booksSlice";
-
+import uuid from "react-uuid";
 
 const Buecher: React.FC = () =>{
     const books= useSelector(selectBooks);
-    const [suchen, setSuchen] = useState("");
-    const [titel, setTitel] = useState("");
-    const [autor, setAutor] = useState("");
+    const [suchen, setSuchen] = useState<string>("");
+    const [titel, setTitel] = useState<string>("");
+    const [autor, setAutor] = useState<string>("");
     const [isbn, setIsbn] = useState("");
     const dispatch = useAppDispatch();
 
-    console.log(books);
-    console.log(titel);
+const addBook = () => {
+    const newBook={ title: titel, author: autor, isbn: isbn}
+    dispatch(save(newBook));
+    clearBook();
+}
+
+const clearBook = () => {
+    setTitel("");
+    setAutor("");
+    setIsbn("");
+}
 
     return(
         <div className={"bs-body-bg"}>
@@ -29,15 +37,13 @@ const Buecher: React.FC = () =>{
                         </div>
                     </div>
                 </div>
-                <form>
-                {/*<form onSubmit={handleSubmit((data) =>{*/}
-                {/*    dispatch(save(data));*/}
-                {/*})}>*/}
+                <form
+                >
                     <Container>
                         <Row className={"g-2 mb-3"}>
                             <Col>
                                 <FloatingLabel controlId="floatingInputGrid" label="Titel">
-                                    <FormControl type={"text"} value={titel} onChange={(e)=> setTitel(e.target.value)}/>
+                                    <FormControl type={"text"} value={titel} onChange={(e) => setTitel(e.target.value)}/>
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -55,7 +61,7 @@ const Buecher: React.FC = () =>{
                         </Row>
 
                         <div className={"g-2 mb-3"}>
-                            <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
+                            <Button variant={"outline-dark"} onClick={addBook}>Hinzufügen</Button>
                         </div>
 
 

@@ -2,6 +2,8 @@ import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Book, InputBook } from './Book';
 import booksData from '../books/bookData'
+import uuid from "react-uuid";
+
 
 export type BooksState = {
     books: Book[];
@@ -24,7 +26,7 @@ export const booksSlice = createSlice({
                 );
                 state.books[index] = action.payload as Book;
             } else {
-                const nextId = Math.max(...state.books.map((book) => book.id)) + 1;
+                const nextId = uuid();
                 state.books.push({ ...action.payload, id: nextId });
             }
         },
