@@ -95,7 +95,6 @@ console.log(fahrten);
         <div className={"bs-body-bg"}>
             <div className={"container-sm justify-content-center"}>
                 <div className="d-flex justify-content-center">
-
                     <div className={"row"}>
                         <div className={"col p-2"}>
                             <div><h1>Onlinefahrtenbuch</h1></div>
