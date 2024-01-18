@@ -1,20 +1,21 @@
 import { Book } from './Book';
+import uuid from "react-uuid";
 
 const booksData: Book[] = [
     {
-        id: 1,
+        id: uuid(),
         title: 'JavaScript - das umfassende Handbuch',
         author: 'Philip Ackermann',
         isbn: '978-3836286299',
     },
     {
-        id: 2,
+        id: uuid(),
         title: 'Clean Code',
         author: 'Robert Martin',
         isbn: '978-0132350884',
     },
     {
-        id: 3,
+        id: uuid(),
         title: 'Design Patterns',
         author: 'Erich Gamma',
         isbn: '978-0201633610',
