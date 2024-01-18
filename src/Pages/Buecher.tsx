@@ -5,14 +5,19 @@ import {remove, selectBooks} from "../features/books/booksSlice";
 import {Table, Button} from "react-bootstrap";
 import {useAppDispatch} from "../app/hooks";
 import Container from "react-bootstrap/Container";
+import {save} from "../features/books/booksSlice";
 
 
 const Buecher: React.FC = () =>{
     const books= useSelector(selectBooks);
     const [suchen, setSuchen] = useState("");
+    const [titel, setTitel] = useState("");
+    const [autor, setAutor] = useState("");
+    const [isbn, setIsbn] = useState("");
     const dispatch = useAppDispatch();
 
     console.log(books);
+    console.log(titel);
 
     return(
         <div className={"bs-body-bg"}>
@@ -24,25 +29,27 @@ const Buecher: React.FC = () =>{
                         </div>
                     </div>
                 </div>
-
                 <form>
+                {/*<form onSubmit={handleSubmit((data) =>{*/}
+                {/*    dispatch(save(data));*/}
+                {/*})}>*/}
                     <Container>
                         <Row className={"g-2 mb-3"}>
                             <Col>
                                 <FloatingLabel controlId="floatingInputGrid" label="Titel">
-                                    <FormControl type={"text"}/>
+                                    <FormControl type={"text"} value={titel} onChange={(e)=> setTitel(e.target.value)}/>
                                 </FloatingLabel>
                             </Col>
                             <Col>
                                 <FloatingLabel controlId="floatingInputGrid" label="Autor">
-                                    <FormControl type={"text"}/>
+                                    <FormControl type={"text"} value={autor} onChange={(e)=> setAutor(e.target.value)}/>
                                 </FloatingLabel>
                             </Col>
                         </Row>
                         <Row className={"g-2 mb-3"}>
                             <Col>
                                 <FloatingLabel controlId="floatingInputGrid" label="ISBN">
-                                    <FormControl type={"text"}/>
+                                    <FormControl type={"text"} value={isbn} onChange={(e) => setIsbn(e.target.value)}/>
                                 </FloatingLabel>
                             </Col>
                         </Row>
@@ -62,11 +69,6 @@ const Buecher: React.FC = () =>{
                 </form>
 
 
-
-
-
-
-
                 <Table className={"table table-hover"} responsive={"lg"}>
                     <thead>
                     <tr className={"g-2 mb-3"}>
@@ -74,6 +76,8 @@ const Buecher: React.FC = () =>{
                         <th scope={"col"}>Titel</th>
                         <th scope={"col"}>Autor</th>
                         <th scope={"col"}>ISBN</th>
+                        <th scope={"col"}>Löschen</th>
+                        <th scope={"col"}>Bearbeiten</th>
                     </tr>
                     </thead>
                     <tbody>
