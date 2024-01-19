@@ -6,6 +6,7 @@ import {Table, Button} from "react-bootstrap";
 import {useAppDispatch,} from "../app/hooks";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
+import uuid from "react-uuid";
 
 const Buecher: React.FC = () =>{
     const books= useSelector(selectBooks);
@@ -16,7 +17,7 @@ const Buecher: React.FC = () =>{
     const dispatch = useAppDispatch();
 
 const addBook = () => {
-    const newBook={ title: titel, author: autor, isbn: isbn}
+    const newBook={title: titel, author: autor, isbn: isbn}
     dispatch(save(newBook));
     clearBook();
 }

@@ -4,7 +4,7 @@ import {Button, Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
 import {useAppDispatch} from "../app/hooks";
 import {useNavigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {selectBooks} from "../features/books/booksSlice";
+import {remove, save, selectBooks} from "../features/books/booksSlice";
 
 const BuecherUpdate : FC = () => {
     const [titel, setTitel] = useState<string>("");
@@ -12,26 +12,30 @@ const BuecherUpdate : FC = () => {
     const [isbn, setIsbn] = useState<string>("")
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    // const buecher = useSelector(selectBooks);
-    let {bookId} = useParams();
+    const buecher = useSelector(selectBooks);
+  const {id:bookId} = useParams();
+  const test = useParams();
 
 
-    const handleSubmit = () => {
 
+  //todo Bei jedem Speichern wird ein neues Object erzeugt. Bestehendes soll geändert werden. Kein neues erzeugen
+    const handleSubmit = (test: any) => {
+
+        const updateBook={title:titel, author:autor, isbn:isbn}
+        dispatch(save(updateBook));
+      navigate("/buecher");
     }
 
 
+    useEffect(() => {
+            let datensatz = buecher.find((entry:any) => entry.id === bookId);
+            if(datensatz){
+                setTitel(datensatz.title)
+                setAutor(datensatz.author)
+                setIsbn(datensatz.isbn)
+            }
+    }, [bookId]);
 
-
-
-    // useEffect(() => {
-    //     let buch = useSelector(selectBooks);
-    //     if(buch.find((entry: any) => entry.id === bookId)){
-    //         const datensatz = buch.find((entry: any) => entry.id === bookId);
-    //
-    //
-    //     }
-    // }, [bookId]);
 
     return(
         <div className={"bs-body-bg"}>
