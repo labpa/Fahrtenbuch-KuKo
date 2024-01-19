@@ -37,6 +37,9 @@ const Update: FC = () => {
     }
 
 
+
+
+
     // übergibt die id des zu bearbeitenden Datensatzes und setzt Values
     useEffect(() => {
         let getData = JSON.parse(localStorage.getItem('rideList') || '[]');

@@ -5,7 +5,7 @@ import {remove, save, selectBooks} from "../features/books/booksSlice";
 import {Table, Button} from "react-bootstrap";
 import {useAppDispatch,} from "../app/hooks";
 import Container from "react-bootstrap/Container";
-import uuid from "react-uuid";
+import {Link} from "react-router-dom";
 
 const Buecher: React.FC = () =>{
     const books= useSelector(selectBooks);
@@ -37,8 +37,7 @@ const clearBook = () => {
                         </div>
                     </div>
                 </div>
-                <form
-                >
+                <form>
                     <Container>
                         <Row className={"g-2 mb-3"}>
                             <Col>
@@ -102,7 +101,10 @@ const clearBook = () => {
                                 <Button variant={"outline-dark"} onClick={() => dispatch(remove(book.id))}>Löschen</Button>
                             </td>
                             <td>
-                                <Button  variant={"outline-dark"}>Bearbeiten</Button>
+                                <Link to={`/buecherupdate/${book.id}`}>
+                                    <Button  variant={"outline-dark"}>Bearbeiten</Button>
+                                </Link>
+
                             </td>
                         </tr>
                     ))}

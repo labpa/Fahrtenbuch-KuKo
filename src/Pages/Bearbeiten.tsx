@@ -72,7 +72,6 @@ const Bearbeiten : FC = () => {
                         setDatum(data.datum)
                         setKmBegin(data.kmBegin)
                         setKmEnde(data.kmEnde)
-                        console.log(data);
             }
         }
         fetchFahrt()
