@@ -1,52 +1,32 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Buch, InputBuch} from "./Buch";
 import supabase from "../../config/SupabaseClient";
 import {createApi, fakeBaseQuery} from "@reduxjs/toolkit/query/react";
 
-export type BuchState = {
-    buch: Buch[];
-}
 
+//DDaten werden von Supabase geholt
 
-export const buchSlice = createSlice({
-    name: 'buch',
-    initialState: {},
-    reducers: {
+const supabaseApi = createApi({
+    baseQuery: fakeBaseQuery(),
+    endpoints: (builder) => ({
+        getBuch: builder.query({
+            queryFn: async () => {
+                const {data, error} = await supabase
+                    .from('buch')
+                    . select()
 
-    }
+                if(error){
+                    throw {error};
+                }
+                return {data};
+            }
+        })
+    })
 })
 
-
-
-
-
-
-//todo Anbindung an Supabade
-
-// const supabaseApi = createApi({
-//     baseQuery: fakeBaseQuery(),
-//     endpoints: (builder) => ({
-//         getBuch: builder.query({
-//             queryFn: async () => {
-//                 const {data, error} = await supabase
-//                     .from('buch')
-//                     . select()
-//
-//                 if(error){
-//                     throw {error};
-//                 }
-//                 return {data};
-//             }
-//         })
-//     })
-// })
-//
-// export const { useGetBookQuery } = supabaseApi
-// export { supabaseApi }
+export const {useGetBuchQuery} = supabaseApi
+export { supabaseApi }
 
 
 
 
 
 
-export default buchSlice.reducer;

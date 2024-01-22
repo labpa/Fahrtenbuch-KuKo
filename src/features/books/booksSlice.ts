@@ -6,11 +6,6 @@ import uuid from "react-uuid";
 
 
 
-
-
-
-
-
 export type BooksState = {
     books: Book[];
 };

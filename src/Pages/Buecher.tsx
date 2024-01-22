@@ -6,8 +6,10 @@ import {Table, Button} from "react-bootstrap";
 import {useAppDispatch,} from "../app/hooks";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
-import {createApi} from "@reduxjs/toolkit/query";
-import supabase from "../config/SupabaseClient";
+
+
+//Import der Daten
+ import {useGetBuchQuery} from "../features/books/buchSlice";
 
 const Buecher: FC = () =>{
     const books= useSelector(selectBooks);
@@ -17,11 +19,13 @@ const Buecher: FC = () =>{
     const [isbn, setIsbn] = useState("");
     const dispatch = useAppDispatch();
 
-    //todo nur um die Verbindung zu Supabase zu kontrollieren
-    const [buch, setBuch] : any = useState ([]);
-    console.log(buch);
 
-    console.log(createApi);
+    //Daten von Supabase => hier todo
+    const {data} = useGetBuchQuery('');
+    console.log(data);
+
+
+
 
 const addBook = () => {
     const newBook={title: titel, author: autor, isbn: isbn}
@@ -34,22 +38,6 @@ const clearBook = () => {
     setAutor("");
     setIsbn("");
 }
-
-
-
-//Daten der Bücher von Supabase
-
-    useEffect(() => {
-        getBuch()
-    }, []);
-
-    const getBuch = async () => {
-    const {data} = await supabase.from('buch').select();
-    setBuch(data);
-    }
-
-
-
 
 
 
