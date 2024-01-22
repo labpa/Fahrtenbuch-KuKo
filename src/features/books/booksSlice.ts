@@ -1,14 +1,19 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Book, InputBook } from './Book';
 import booksData from '../books/bookData'
 import uuid from "react-uuid";
 
 
+
+
+
+
+
+
 export type BooksState = {
     books: Book[];
 };
-
 
 export const booksSlice = createSlice({
     name: 'books',
@@ -31,6 +36,11 @@ export const booksSlice = createSlice({
         },
     },
 });
+
+
+
+
+
 
 export const { remove, save} = booksSlice.actions;
 

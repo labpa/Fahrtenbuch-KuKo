@@ -1,12 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import nationReducer from '../features/nation/nationSlice'
 import booksReducer from '../features/books/booksSlice'
+import buchReducer from '../features/books/buchSlice'
 
 
 export const store = configureStore({
     reducer: {
-        nation: nationReducer,
         books: booksReducer,
+        buecher: buchReducer,
     },
     devTools: true,
 })

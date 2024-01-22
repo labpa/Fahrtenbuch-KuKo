@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
 import {remove, save, selectBooks} from "../features/books/booksSlice";
@@ -7,6 +7,7 @@ import {useAppDispatch,} from "../app/hooks";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
 import {createApi} from "@reduxjs/toolkit/query";
+import supabase from "../config/SupabaseClient";
 
 const Buecher: FC = () =>{
     const books= useSelector(selectBooks);
@@ -16,6 +17,11 @@ const Buecher: FC = () =>{
     const [isbn, setIsbn] = useState("");
     const dispatch = useAppDispatch();
 
+    //todo nur um die Verbindung zu Supabase zu kontrollieren
+    const [buch, setBuch] : any = useState ([]);
+    console.log(buch);
+
+    console.log(createApi);
 
 const addBook = () => {
     const newBook={title: titel, author: autor, isbn: isbn}
@@ -28,6 +34,24 @@ const clearBook = () => {
     setAutor("");
     setIsbn("");
 }
+
+
+
+//Daten der Bücher von Supabase
+
+    useEffect(() => {
+        getBuch()
+    }, []);
+
+    const getBuch = async () => {
+    const {data} = await supabase.from('buch').select();
+    setBuch(data);
+    }
+
+
+
+
+
 
     return(
         <div className={"bs-body-bg"}>
@@ -112,6 +136,11 @@ const clearBook = () => {
                     ))}
                     </tbody>
                 </Table>
+
+                <hr className={"border-end border-dark border-5 opacity-75"}/>
+                <hr className={"border-end border-dark border-5 opacity-75"}/>
+
+
             </div>
         </div>
     )
