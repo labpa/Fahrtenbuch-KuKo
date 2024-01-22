@@ -4,9 +4,7 @@ import {Button, Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
 import {useAppDispatch} from "../app/hooks";
 import {useNavigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {remove, save, selectBooks} from "../features/books/booksSlice";
-import {useForm} from "react-hooks-useform";
-import {InputBook} from "../features/books/Book";
+import {save, selectBooks} from "../features/books/booksSlice";
 
 const BuecherUpdate : FC = () => {
     const [titel, setTitel] = useState<string>("");
@@ -16,17 +14,11 @@ const BuecherUpdate : FC = () => {
     const dispatch = useAppDispatch();
     const buecher = useSelector(selectBooks);
   const {id:bookId} = useParams();
-  // const test = useParams();
-
-
-
-
-
 
 
   //todo Bei jedem Speichern wird ein neues Object erzeugt. Bestehendes soll geändert werden. Kein neues erzeugen
-    const handleSubmit = (bookId: any) => {
-        const updateBook={title:titel, author:autor, isbn:isbn}
+    const handleSubmit = () => {
+        const updateBook={id: bookId, title:titel, author:autor, isbn:isbn}
         dispatch(save(updateBook));
       navigate("/buecher");
     }
