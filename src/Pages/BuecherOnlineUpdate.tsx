@@ -1,20 +1,12 @@
 import React, {FC, useState} from "react";
-import {useGetBuchQuery} from "../features/books/buchApi";
-import {Button, Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import {Link} from "react-router-dom";
+import {Button, Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
 
-
-const BuecherOnline : FC = () => {
+const BuecherOnlineUpdate: FC = () => {
     const [vorname, setVorname] = useState<string>("");
     const [nachname, setNachname] = useState<string>("");
     const [titel, setTitel] = useState<string>("");
     const [isbn, setIsbn] = useState<string>("");
-
-    const {data} = useGetBuchQuery('');
-    console.log(data);
-    console.log(vorname, nachname, titel, isbn);
-
 
     return (
         <div className={"bs-body-bg"}>
@@ -52,48 +44,13 @@ const BuecherOnline : FC = () => {
                             </Col>
                         </Row>
                         <div className={"g-2 mb-3"}>
-                            <Button variant={"outline-dark"}>Hinzufügen</Button>
+                            <Button variant={"outline-dark"}>Speichern</Button>
                         </div>
                     </Container>
                 </form>
-
-
-                <Table className={"table table-hover"} responsive={"lg"}>
-                    <thead>
-                    <tr className={"g-2 mb-3"}>
-                        {/*<th scope={"col"}>ID</th>*/}
-                        <th scope={"col"}>Titel</th>
-                        <th scope={"col"}>ISBN</th>
-                        {/*<th scope={"col"}>Autor ID</th>*/}
-                        <th scope={"col"}>Autor</th>
-                        {/*<th scope={"col"}>Autor-Nachname</th>*/}
-                        <th scope={"col"}>Löschen</th>
-                        <th scope={"col"}>Bearbeiten</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {data?.map((buch: any, autor: any)=>(
-                        <tr key={buch.buch_id}>
-                            {/*<td>{buch.buch_id}</td>*/}
-                            <td>{buch.title}</td>
-                            <td>{buch.isbn}</td>
-                            {/*<td>{buch.autor_id}</td>*/}
-                            <td>{buch.autor.vorname + " "+ buch.autor.nachname}</td>
-                            {/*<td>{buch.autor.nachname}</td>*/}
-                            <td><Button variant={"outline-dark"} onClick={() => console.log(buch.buch_id)}>Löschen</Button></td>
-                            <td>
-                                <Link to={`/buecheronlineupdate/${buch.buch_id}`}>
-                                <Button variant={"outline-dark"}>Bearbeiten</Button>
-                                </Link>
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </Table>
 
             </div>
         </div>
     )
 }
-
-export default BuecherOnline;
+export default BuecherOnlineUpdate;
