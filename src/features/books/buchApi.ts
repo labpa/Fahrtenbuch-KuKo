@@ -1,9 +1,9 @@
 import supabase from "../../config/SupabaseClient";
 import {createApi, fakeBaseQuery} from "@reduxjs/toolkit/query/react";
+import {RootState} from "../../app/store";
 
 
-//DDaten werden von Supabase geholt
-
+//Daten werden von Supabase geholt
 const supabaseApi = createApi({
     baseQuery: fakeBaseQuery(),
     endpoints: (builder) => ({
@@ -18,12 +18,17 @@ const supabaseApi = createApi({
                 }
                 return {data};
             }
-        })
+        }),
+        // deleteBuch: builder.mutation({
+        //
+        // })
     })
 })
 
-export const {useGetBuchQuery} = supabaseApi
-export { supabaseApi }
+export const {useGetBuchQuery} = supabaseApi;
+export const selectBuch = (state: RootState) => state.api.queries.data; //todo -> Fragen
+export { supabaseApi };
+
 
 
 

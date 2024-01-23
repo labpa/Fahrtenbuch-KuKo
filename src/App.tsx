@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from "react-router-dom";
-import {Provider} from "react-redux";
+
 
 
 import Fahrtenbuch from "./Pages/Fahrtenbuch";
@@ -20,6 +20,7 @@ import Onlinefahrtenbuch from "./Pages/Online";
 import Bearbeiten from "./Pages/Bearbeiten";
 import Buecher from "./Pages/Buecher";
 import BuecherUpdate from "./Pages/BuecherUpdate";
+import BuecherOnline from "./Pages/BuecherOnline";
 
 
 
@@ -46,6 +47,7 @@ const App: FC = () => {
       <Route path={"/bearbeiten/:id"} element={<Bearbeiten/>}/>
       <Route path={"/buecher"} element={<Buecher/>}/>
       <Route path={"/buecherupdate/:id"} element={<BuecherUpdate/>}/>
+      <Route path={"/buecheronline"} element={<BuecherOnline/>}/>
       <Route path={"*"} element={<Error/>}/>
     </Routes>
     <div>

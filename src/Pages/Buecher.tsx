@@ -8,8 +8,10 @@ import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
 
 
-//Import der Daten
- import {useGetBuchQuery} from "../features/books/buchSlice";
+
+
+
+
 
 const Buecher: FC = () =>{
     const books= useSelector(selectBooks);
@@ -18,12 +20,6 @@ const Buecher: FC = () =>{
     const [autor, setAutor] = useState<string>("");
     const [isbn, setIsbn] = useState("");
     const dispatch = useAppDispatch();
-
-
-    //Daten von Supabase => hier todo
-    const {data} = useGetBuchQuery('');
-    console.log(data);
-
 
 
 
@@ -124,10 +120,6 @@ const clearBook = () => {
                     ))}
                     </tbody>
                 </Table>
-
-                <hr className={"border-end border-dark border-5 opacity-75"}/>
-                <hr className={"border-end border-dark border-5 opacity-75"}/>
-
 
             </div>
         </div>
