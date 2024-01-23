@@ -1,12 +1,36 @@
-import React, {FC, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import {Button, Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
+import {useGetBuchQuery} from "../features/books/buchApi";
+import {useNavigate, useParams} from "react-router-dom";
 
 const BuecherOnlineUpdate: FC = () => {
     const [vorname, setVorname] = useState<string>("");
     const [nachname, setNachname] = useState<string>("");
     const [titel, setTitel] = useState<string>("");
     const [isbn, setIsbn] = useState<string>("");
+    const navigate = useNavigate();
+    const { data } = useGetBuchQuery('');
+    const {id: buch_id} = useParams();
+
+
+    //todo Speichern integrieren
+    const handleSubmit = () => {
+        navigate("/buecheronline")
+    }
+
+
+    useEffect(() => {
+        let datensatz = data?.find((entry:any) => entry.buch_id === buch_id);
+        if(datensatz){
+            setIsbn(datensatz.isbn)
+            setTitel(datensatz.title)
+            setVorname(datensatz.autor.vorname)
+            setNachname(datensatz.autor.nachname)
+        }
+    }, [buch_id]);
+
+
 
     return (
         <div className={"bs-body-bg"}>
@@ -17,7 +41,7 @@ const BuecherOnlineUpdate: FC = () => {
                     </div>
                 </div>
 
-                <form>
+                <form onSubmit={handleSubmit}>
                     <Container>
                         <Row className={"g-2 mb-3"}>
                             <Col>
@@ -44,7 +68,7 @@ const BuecherOnlineUpdate: FC = () => {
                             </Col>
                         </Row>
                         <div className={"g-2 mb-3"}>
-                            <Button variant={"outline-dark"}>Speichern</Button>
+                            <Button variant={"outline-dark"} type={"submit"}>Speichern</Button>
                         </div>
                     </Container>
                 </form>

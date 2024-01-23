@@ -20,13 +20,24 @@ const supabaseApi = createApi({
             }
         }),
         // deleteBuch: builder.mutation({
-        //
+        //     builderFn: void: async () => {
+        //         const {error} = await supabase
+        //             .from('buch')
+        //             .delete()
+        //             .eq('id', id)
+        //         if (error){
+        //             console.log(error);
+        //         }
+        //         else {
+        //             await useGetBuchQuery;
+        //         }
+        //     }
         // })
     })
 })
 
 export const {useGetBuchQuery} = supabaseApi;
-export const selectBuch = (state: RootState) => state.api.queries.data; //todo -> Fragen
+// export const selectBuch = (state: RootState) => state.api.queries.data; //todo -> Fragen
 export { supabaseApi };
 
 

@@ -69,7 +69,9 @@ const Onlinefahrtenbuch : FC = () => {
     }, []);
 
     const getFahrt = async () => {
-        const {data} = await supabase.from('fahrten').select();
+        const {data} = await supabase
+            .from('fahrten')
+            .select();
         setFahrten(data)
     }
 

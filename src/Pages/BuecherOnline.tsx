@@ -3,6 +3,7 @@ import {useGetBuchQuery} from "../features/books/buchApi";
 import {Button, Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
+import supabase from "../config/SupabaseClient";
 
 
 const BuecherOnline : FC = () => {
@@ -10,10 +11,23 @@ const BuecherOnline : FC = () => {
     const [nachname, setNachname] = useState<string>("");
     const [titel, setTitel] = useState<string>("");
     const [isbn, setIsbn] = useState<string>("");
-
+    const [buecher, setBuecher] = useState<string>("");
     const {data} = useGetBuchQuery('');
-    console.log(data);
-    console.log(vorname, nachname, titel, isbn);
+
+
+    //todo muss nach buchApi umziehen. Nur gerade keine Ahnung wo wie was und wohin !!!
+    const handleDeleteBuch = async (buch_id : any) => {
+        const { error } = await supabase
+            .from('buch')
+            .delete()
+            .eq('buch_id', buch_id)
+        if(error){
+            console.log(error);
+        }
+        else{
+            console.log(buch_id + " wurde gelöscht");
+        }
+    }
 
 
     return (
@@ -72,7 +86,7 @@ const BuecherOnline : FC = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {data?.map((buch: any, autor: any)=>(
+                    {data?.map((buch: any)=>(
                         <tr key={buch.buch_id}>
                             {/*<td>{buch.buch_id}</td>*/}
                             <td>{buch.title}</td>
@@ -80,7 +94,7 @@ const BuecherOnline : FC = () => {
                             {/*<td>{buch.autor_id}</td>*/}
                             <td>{buch.autor.vorname + " "+ buch.autor.nachname}</td>
                             {/*<td>{buch.autor.nachname}</td>*/}
-                            <td><Button variant={"outline-dark"} onClick={() => console.log(buch.buch_id)}>Löschen</Button></td>
+                            <td><Button variant={"outline-dark"} onClick={() => handleDeleteBuch(buch.buch_id)}>Löschen</Button></td>
                             <td>
                                 <Link to={`/buecheronlineupdate/${buch.buch_id}`}>
                                 <Button variant={"outline-dark"}>Bearbeiten</Button>
@@ -90,7 +104,6 @@ const BuecherOnline : FC = () => {
                     ))}
                     </tbody>
                 </Table>
-
             </div>
         </div>
     )
