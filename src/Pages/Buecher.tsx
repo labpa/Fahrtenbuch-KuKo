@@ -18,7 +18,7 @@ const Buecher: FC = () =>{
     const [suchen, setSuchen] = useState<string>("");
     const [titel, setTitel] = useState<string>("");
     const [autor, setAutor] = useState<string>("");
-    const [isbn, setIsbn] = useState("");
+    const [isbn, setIsbn] = useState<string>("");
     const dispatch = useAppDispatch();
 
 

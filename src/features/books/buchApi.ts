@@ -11,7 +11,7 @@ const supabaseApi = createApi({
             queryFn: async () => {
                 const {data, error} = await supabase
                     .from('buch')
-                    . select()
+                    . select('*, autor(*) ')
 
                 if(error){
                     throw {error};
