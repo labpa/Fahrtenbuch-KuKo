@@ -20,6 +20,7 @@ const NavbarZwei = () => {
                         {/*<NavLink className={"nav-link"} to={"/eingabe"}>Eingabe Datenbank</NavLink>*/}
                         <NavLink className={"nav-link"} to={"/buecher"}>Bücher</NavLink>
                         <NavLink className={"nav-link"} to={"/buecheronline"}>Online Bücher</NavLink>
+                        <NavLink className={"nav-link"} to={"/produkte"}>Produkte</NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

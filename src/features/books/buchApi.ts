@@ -1,6 +1,6 @@
 import supabase from "../../config/SupabaseClient";
 import {createApi, fakeBaseQuery} from "@reduxjs/toolkit/query/react";
-import {RootState} from "../../app/store";
+// import {RootState} from "../../app/store";
 
 
 //Daten werden von Supabase geholt
@@ -19,20 +19,6 @@ const supabaseApi = createApi({
                 return {data};
             }
         }),
-        // deleteBuch: builder.mutation({
-        //     builderFn: void: async () => {
-        //         const {error} = await supabase
-        //             .from('buch')
-        //             .delete()
-        //             .eq('id', id)
-        //         if (error){
-        //             console.log(error);
-        //         }
-        //         else {
-        //             await useGetBuchQuery;
-        //         }
-        //     }
-        // })
     })
 })
 
