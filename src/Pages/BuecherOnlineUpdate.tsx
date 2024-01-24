@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import {Button, Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
-import {useGetBuchQuery} from "../features/books/buchApi";
+import {useGetBuchQuery, useRemoveBuchMutation} from "../features/books/buchApi";
 import {useNavigate, useParams} from "react-router-dom";
 
 const BuecherOnlineUpdate: FC = () => {
@@ -12,7 +12,8 @@ const BuecherOnlineUpdate: FC = () => {
     const navigate = useNavigate();
     const { data } = useGetBuchQuery('');
     const {id: buch_id} = useParams();
-
+//     const loeschen = useRemoveBuchMutation(buch_id);
+// console.log(loeschen);
 
     //todo Speichern integrieren
     const handleSubmit = () => {
