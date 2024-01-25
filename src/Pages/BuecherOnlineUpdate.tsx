@@ -12,8 +12,8 @@ const BuecherOnlineUpdate: FC = () => {
     const navigate = useNavigate();
     const { data } = useGetBuchQuery('');
     const {id: buch_id} = useParams();
-//     const loeschen = useRemoveBuchMutation(buch_id);
-// console.log(loeschen);
+
+
 
     //todo Speichern integrieren
     const handleSubmit = () => {

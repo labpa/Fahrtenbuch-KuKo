@@ -23,7 +23,7 @@ const Produkte: FC = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {/*{data?.map((produkt: any)=>(*/}
+                {/*{data.map((produkt: any)=>(*/}
                 {/*    <tr key={produkt.id}>*/}
                 {/*        <td> {produkt.title}</td>*/}
                 {/*        <td>{produkt.description}</td>*/}

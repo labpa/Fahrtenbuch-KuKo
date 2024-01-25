@@ -21,11 +21,11 @@ const supabaseApi = createApi({
             }
         }),
         removeBuch: builder.mutation({
-            query: async () => {
+            query: async (buch_id) => {
                 const { error } = await supabase
                     .from('buch')
                     .delete()
-                    .eq('buch_id', 'id')
+                    .eq('buch_id', buch_id)
                 if(error){
                     console.log(error);
                 }
@@ -33,18 +33,17 @@ const supabaseApi = createApi({
         }),
 
         saveBuch: builder.mutation({
-            query: async () => {
+            query: async  (isbn) => {
                 const { data, error } = await supabase
                     .from('buch')
-                    .insert([{ some_column: 'someValue', other_column: 'otherValue' }])
+                    .insert([{ isbn }])
                     .select()
 
                 if(error){
                     console.log(error);
                 }else{
-                    return data;
+                   console.log(data);
                 }
-
             }
         })
 
@@ -53,6 +52,7 @@ const supabaseApi = createApi({
 
 export const {useGetBuchQuery} = supabaseApi;
 export const {useRemoveBuchMutation} = supabaseApi;
+export const {useSaveBuchMutation} = supabaseApi;
 export { supabaseApi };
 
 
