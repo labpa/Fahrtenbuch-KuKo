@@ -1,58 +1,23 @@
-import supabase from "../../config/SupabaseClient";
-import {createApi, fakeBaseQuery} from "@reduxjs/toolkit/query/react";
+import {createApi,fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
-
-
-//Daten werden von Supabase geholt
 const supabaseApi = createApi({
     reducerPath: "BücherApi",
-    baseQuery: fakeBaseQuery(),
+    baseQuery: fetchBaseQuery({
+        baseUrl: 'https://havsdrwogfkzzlkemcvz.supabase.co',
+        headers: {Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8',
+        apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8'},
+    }),
     endpoints: (builder) => ({
         getBuch: builder.query({
-            queryFn: async () => {
-                const {data, error} = await supabase
-                    .from('buch')
-                    . select('*, autor(*) ')
-
-                if(error){
-                    throw {error};
-                }
-                return {data};
-            }
+            query: () => 'rest/v1/buch'
         }),
-        removeBuch: builder.mutation({
-            query: async (buch_id) => {
-                const { error } = await supabase
-                    .from('buch')
-                    .delete()
-                    .eq('buch_id', buch_id)
-                if(error){
-                    console.log(error);
-                }
-            }
-        }),
-
-        saveBuch: builder.mutation({
-            query: async  (isbn) => {
-                const { data, error } = await supabase
-                    .from('buch')
-                    .insert([{ isbn }])
-                    .select()
-
-                if(error){
-                    console.log(error);
-                }else{
-                   console.log(data);
-                }
-            }
+        deleteBuch: builder.mutation({
+            query: () => ''
         })
-
     })
 })
 
 export const {useGetBuchQuery} = supabaseApi;
-export const {useRemoveBuchMutation} = supabaseApi;
-export const {useSaveBuchMutation} = supabaseApi;
 export { supabaseApi };
 
 

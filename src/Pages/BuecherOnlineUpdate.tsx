@@ -1,7 +1,8 @@
 import React, {FC, useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import {Button, Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
-import {useGetBuchQuery, useRemoveBuchMutation} from "../features/books/buchApi";
+import {useGetBuchQuery} from "../features/books/buchApi";
+
 import {useNavigate, useParams} from "react-router-dom";
 
 const BuecherOnlineUpdate: FC = () => {
@@ -12,6 +13,7 @@ const BuecherOnlineUpdate: FC = () => {
     const navigate = useNavigate();
     const { data } = useGetBuchQuery('');
     const {id: buch_id} = useParams();
+
 
 
 
@@ -26,8 +28,6 @@ const BuecherOnlineUpdate: FC = () => {
         if(datensatz){
             setIsbn(datensatz.isbn)
             setTitel(datensatz.title)
-            setVorname(datensatz.autor.vorname)
-            setNachname(datensatz.autor.nachname)
         }
     }, [buch_id]);
 
