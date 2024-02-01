@@ -1,6 +1,5 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import { configureStore} from '@reduxjs/toolkit'
 import booksReducer from '../features/books/booksSlice'
-import {setupListeners} from "@reduxjs/toolkit/query";
 import {supabaseApi} from "../features/books/buchApi";
 import {productsApi} from "../apiSlice";
 

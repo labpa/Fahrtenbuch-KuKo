@@ -1,8 +1,9 @@
 import React, {FC, useState} from "react";
-import {useGetBuchQuery} from "../features/books/buchApi";
+import {useGetAutorQuery, useGetBuchQuery, useRemoveBuchMutation, useCreateBuchMutation} from "../features/books/buchApi";
 import {Button, Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
+import Select from "react-select";
 
 
 const BuecherOnline : FC = () => {
@@ -10,7 +11,17 @@ const BuecherOnline : FC = () => {
     const [nachname, setNachname] = useState<string>("");
     const [titel, setTitel] = useState<string>("");
     const [isbn, setIsbn] = useState<string>("");
-    const { data: books } = useGetBuchQuery('');
+    const { data: books} = useGetBuchQuery('');
+    const {data: autor} = useGetAutorQuery('');
+    const [removeBuch] = useRemoveBuchMutation();
+    const [createBuch]= useCreateBuchMutation();
+
+
+    console.log(autor);
+    // console.log(autor.map((test : any) => test.buch_id))
+
+
+
 
     return (
         <div className={"bs-body-bg"}>
@@ -23,6 +34,14 @@ const BuecherOnline : FC = () => {
 
                 <form>
                     <Container>
+                        <Row className={"g-2 mb-3"}>
+                            <Col>
+                                    <Select className={"exampleSelect1"}
+                                            placeholder={"Autor"}
+                                            // options={autor}
+                                    />
+                            </Col>
+                        </Row>
                         <Row className={"g-2 mb-3"}>
                             <Col>
                                 <FloatingLabel label={"Vorname"}>
@@ -60,13 +79,12 @@ const BuecherOnline : FC = () => {
                         <th scope={"col"}>ID</th>
                         <th scope={"col"}>Titel</th>
                         <th scope={"col"}>ISBN</th>
-                        {/*<th scope={"col"}>Autor ID</th>*/}
                         <th scope={"col"}>Autor</th>
-                        {/*<th scope={"col"}>Autor-Nachname</th>*/}
                         <th scope={"col"}>Löschen</th>
                         <th scope={"col"}>Bearbeiten</th>
                     </tr>
                     </thead>
+                    {/*console.log(autor.map((test : any) => autor.test.buch_id))*/}
                     <tbody>
                     {books?.map((buch: any)=>(
                         <tr key={buch.buch_id}>
@@ -74,9 +92,7 @@ const BuecherOnline : FC = () => {
                             <td>{buch.title}</td>
                             <td>{buch.isbn}</td>
                             <td>{buch.autor_id}</td>
-                            {/*<td>{buch.autor.vorname + " "+ buch.autor.nachname}</td>*/}
-                            {/*<td>{buch.autor.nachname}</td>*/}
-                            <td><Button variant={"outline-dark"} onClick={() => console.log(buch.buch_id)}>Löschen</Button></td>
+                            <td><Button variant={"outline-dark"} onClick={() => removeBuch(buch.buch_id)}>Löschen</Button></td>
                             <td>
                                 <Link to={`/buecheronlineupdate/${buch.buch_id}`}>
                                 <Button variant={"outline-dark"}>Bearbeiten</Button>

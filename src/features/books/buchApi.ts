@@ -1,4 +1,6 @@
 import {createApi,fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {url} from "inspector";
+
 
 const supabaseApi = createApi({
     reducerPath: "BücherApi",
@@ -11,13 +13,43 @@ const supabaseApi = createApi({
         getBuch: builder.query({
             query: () => 'rest/v1/buch'
         }),
-        deleteBuch: builder.mutation({
-            query: () => ''
-        })
+        // getAutor: builder.query({
+        //     query: (autor_id) => `rest/v1/autor?autor_id=eq.${autor_id}`
+        // }),
+        getAutor: builder.query({
+            query: () => 'rest/v1/autor'
+        }),
+
+        removeBuch: builder.mutation({
+            query: (buch_id) => ({
+                url: `rest/v1/buch?buch_id=eq.${buch_id}`,
+                method: 'delete',
+            })
+        }),
+
+        createBuch: builder.mutation({
+            query: ({titel, isbn}) => ({
+            url: `rest/v1/buch`,
+            method: 'post',
+            body: titel, isbn,
+            })
+        }),
+
+        updateBuch: builder.mutation({
+            query: ({titel, isbn}) => ({
+                url: '',
+                method: '',
+                body: titel, isbn
+            })
+        }),
+
+
+
+
     })
 })
 
-export const {useGetBuchQuery} = supabaseApi;
+export const {useGetBuchQuery, useGetAutorQuery, useRemoveBuchMutation, useCreateBuchMutation, useUpdateBuchMutation} = supabaseApi;
 export { supabaseApi };
 
 
