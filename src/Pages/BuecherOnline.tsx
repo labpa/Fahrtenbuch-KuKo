@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import {useGetAutorQuery, useGetBuchQuery, useRemoveBuchMutation, useCreateBuchMutation} from "../features/books/buchApi";
+import {useGetAutorQuery, useGetBuchQuery, useRemoveBuchMutation, useCreateBuchMutation, useCreateAutorMutation, useRemoveAutorMutation} from "../features/books/buchApi";
 import {Button, Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
@@ -9,19 +9,39 @@ import Select from "react-select";
 const BuecherOnline : FC = () => {
     const [vorname, setVorname] = useState<string>("");
     const [nachname, setNachname] = useState<string>("");
-    const [titel, setTitel] = useState<string>("");
+    const [title, setTitle] = useState<string>("");
     const [isbn, setIsbn] = useState<string>("");
     const { data: books} = useGetBuchQuery('');
     const {data: autor} = useGetAutorQuery('');
     const [removeBuch] = useRemoveBuchMutation();
     const [createBuch]= useCreateBuchMutation();
+    const [createAutor] = useCreateAutorMutation();
+    const [removeAutor] = useRemoveAutorMutation();
+
+    const handleSubmitBuch = (e: any) => {
+        e?.preventDefault();
+        createBuch({
+            payload: {
+                title: title,
+                isbn: isbn
+            }
+        })
+        setTitle("")
+        setIsbn("")
+    }
 
 
-    console.log(autor);
-    // console.log(autor.map((test : any) => test.buch_id))
-
-
-
+    const handleSubmitAutor = (e: any) => {
+        e?.preventDefault();
+        createAutor({
+            payload: {
+                vorname: vorname,
+                nachname: nachname
+            }
+        })
+        setVorname("")
+        setNachname("")
+    }
 
     return (
         <div className={"bs-body-bg"}>
@@ -32,16 +52,9 @@ const BuecherOnline : FC = () => {
                     </div>
                 </div>
 
-                <form>
+                <form onSubmit={handleSubmitAutor}>
+                    <div><h2 className={"g-2 mb-3"}>Autor</h2></div>
                     <Container>
-                        <Row className={"g-2 mb-3"}>
-                            <Col>
-                                    <Select className={"exampleSelect1"}
-                                            placeholder={"Autor"}
-                                            // options={autor}
-                                    />
-                            </Col>
-                        </Row>
                         <Row className={"g-2 mb-3"}>
                             <Col>
                                 <FloatingLabel label={"Vorname"}>
@@ -54,10 +67,46 @@ const BuecherOnline : FC = () => {
                                 </FloatingLabel>
                             </Col>
                         </Row>
+                        <div className={"g-2 mb-3"}>
+                            <Button variant={"outline-dark"} type={"submit"}>Erstellen</Button>
+                        </div>
+                    </Container>
+                </form>
+                <Table className={"table table-hover"} responsive={"lg"}>
+                    <thead>
+                    <tr className={"g-2 mb-3"}>
+                        <th scope={"col"}>Autor Id</th>
+                        <th scope={"col"}>Vorname</th>
+                        <th scope={"col"}>Nachname</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {autor?.map((autor:any)=>(
+                        <tr key={autor.autor_id}>
+                            <td>{autor.autor_id}</td>
+                            <td>{autor.vorname}</td>
+                            <td>{autor.nachname}</td>
+                            <td><Button variant={"outline-dark"} onClick={() => removeAutor(autor.autor_id)}>Löschen</Button></td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </Table>
+
+
+                <form onSubmit={handleSubmitBuch}>
+                    <div><h2>Buch</h2></div>
+                    <Container>
+                        <Row className={"g-2 mb-3"}>
+                            <Col>
+                                <Select
+                                    placeholder={"Autor"}
+                                />
+                            </Col>
+                        </Row>
                         <Row className={"g-2 mb-3"}>
                             <Col>
                                 <FloatingLabel label={"Titel"}>
-                                    <FormControl type={"text"} value={titel} onChange={(e)=> setTitel(e.target.value)}/>
+                                    <FormControl type={"text"} value={title} onChange={(e)=> setTitle(e.target.value)}/>
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -84,7 +133,6 @@ const BuecherOnline : FC = () => {
                         <th scope={"col"}>Bearbeiten</th>
                     </tr>
                     </thead>
-                    {/*console.log(autor.map((test : any) => autor.test.buch_id))*/}
                     <tbody>
                     {books?.map((buch: any)=>(
                         <tr key={buch.buch_id}>

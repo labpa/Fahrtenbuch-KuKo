@@ -7,7 +7,7 @@ import {useNavigate, useParams} from "react-router-dom";
 const BuecherOnlineUpdate: FC = () => {
     const [vorname, setVorname] = useState<string>("");
     const [nachname, setNachname] = useState<string>("");
-    const [titel, setTitel] = useState<string>("");
+    const [title, setTitle] = useState<string>("");
     const [isbn, setIsbn] = useState<string>("");
     const navigate = useNavigate();
     const { data } = useGetBuchQuery('');
@@ -16,10 +16,15 @@ const BuecherOnlineUpdate: FC = () => {
 
 
 
-
-
-    //todo Speichern integrieren
-    const handleSubmit = () => {
+    const handleSubmit = (e: any) => {
+        e?.preventDefault();
+        updateBuch({
+            buch_id,
+            payload: {
+                title: title,
+                isbn: isbn
+            }
+        })
         navigate("/buecheronline")
     }
 
@@ -28,7 +33,7 @@ const BuecherOnlineUpdate: FC = () => {
         let datensatz = data?.find((entry:any) => entry.buch_id === buch_id);
         if(datensatz){
             setIsbn(datensatz.isbn)
-            setTitel(datensatz.title)
+            setTitle(datensatz.title)
         }
     }, [buch_id]);
 
@@ -60,7 +65,7 @@ const BuecherOnlineUpdate: FC = () => {
                         <Row className={"g-2 mb-3"}>
                             <Col>
                                 <FloatingLabel label={"Titel"}>
-                                    <FormControl type={"text"} value={titel} onChange={(e)=> setTitel(e.target.value)}/>
+                                    <FormControl type={"text"} value={title} onChange={(e)=> setTitle(e.target.value)}/>
                                 </FloatingLabel>
                             </Col>
                             <Col>
