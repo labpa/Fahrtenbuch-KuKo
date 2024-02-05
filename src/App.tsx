@@ -28,9 +28,6 @@ import Produkte from "./Pages/Produkte";
 
 const App: FC = () => {
 
-
-
-
   return <div className="container-sm">
     <div className={"container-sm"}>
       <Navbarzwei/>

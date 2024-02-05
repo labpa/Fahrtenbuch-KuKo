@@ -19,9 +19,9 @@ const Fahrtenbuch: FC = () => {
     const [loadedFromLocalStorage, setLoadedFromLocalStorage] = useState<boolean>(false);
     const [files, setFiles] = useState<string | ArrayBuffer | null | undefined>(null)
     const [car, setCar] = useState<string>("");
-    let {drId} = useParams();
 
 
+console.log(car);
     //Array mit den Fahrzeugen
     const cars: Options<any> = [
         { value: "B-SP-1234", label: "B-SP-1234" },

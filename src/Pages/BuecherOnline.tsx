@@ -3,7 +3,7 @@ import {useGetAutorQuery, useGetBuchQuery, useRemoveBuchMutation, useCreateBuchM
 import {Button, Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
-import Select from "react-select";
+import Select, {Options} from "react-select";
 
 
 const BuecherOnline : FC = () => {
@@ -18,12 +18,24 @@ const BuecherOnline : FC = () => {
     const [createAutor] = useCreateAutorMutation();
     const [removeAutor] = useRemoveAutorMutation();
 
+    const [test, setTest]= useState<string>("");
+    const [senden, setSenden]= useState<string>("")
+
+    const handleChangeAutor = (selectedOption: any) => {
+        setTest(selectedOption.value)
+        setSenden(selectedOption.autor_id);
+    }
+
+
     const handleSubmitBuch = (e: any) => {
         e?.preventDefault();
         createBuch({
             payload: {
                 title: title,
-                isbn: isbn
+                isbn: isbn,
+                test: test,
+                autor_id: senden
+
             }
         })
         setTitle("")
@@ -98,13 +110,6 @@ const BuecherOnline : FC = () => {
                     <Container>
                         <Row className={"g-2 mb-3"}>
                             <Col>
-                                <Select
-                                    placeholder={"Autor"}
-                                />
-                            </Col>
-                        </Row>
-                        <Row className={"g-2 mb-3"}>
-                            <Col>
                                 <FloatingLabel label={"Titel"}>
                                     <FormControl type={"text"} value={title} onChange={(e)=> setTitle(e.target.value)}/>
                                 </FloatingLabel>
@@ -113,6 +118,17 @@ const BuecherOnline : FC = () => {
                                 <FloatingLabel label={"ISBN"}>
                                     <FormControl type={"text"} value={isbn} onChange={(e)=> setIsbn(e.target.value)}/>
                                 </FloatingLabel>
+                            </Col>
+                        </Row>
+                        <Row className={"g-2 mb-3"}>
+                            <Col>
+                                <Select placeholder={"Autor"}
+                                        onChange={handleChangeAutor}
+                                        getOptionLabel={option => option.vorname + " " +option.nachname}
+                                        getOptionValue={option => option.autor_id}
+                                        options={autor}
+                                />
+
                             </Col>
                         </Row>
                         <div className={"g-2 mb-3"}>
