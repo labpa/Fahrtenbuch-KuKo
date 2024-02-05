@@ -3,7 +3,7 @@ import {useGetAutorQuery, useGetBuchQuery, useRemoveBuchMutation, useCreateBuchM
 import {Button, Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
-import Select, {Options} from "react-select";
+import Select from "react-select";
 
 
 const BuecherOnline : FC = () => {
@@ -11,6 +11,10 @@ const BuecherOnline : FC = () => {
     const [nachname, setNachname] = useState<string>("");
     const [title, setTitle] = useState<string>("");
     const [isbn, setIsbn] = useState<string>("");
+
+    const [formError, setFormError] = useState<string | null>(null);
+    const [formErrorZwei, setFormErrorZwei]= useState<string | null>(null)
+
     const { data: books} = useGetBuchQuery('');
     const {data: autor} = useGetAutorQuery('');
     const [removeBuch] = useRemoveBuchMutation();
@@ -18,41 +22,50 @@ const BuecherOnline : FC = () => {
     const [createAutor] = useCreateAutorMutation();
     const [removeAutor] = useRemoveAutorMutation();
 
-    const [test, setTest]= useState<string>("");
     const [senden, setSenden]= useState<string>("")
 
     const handleChangeAutor = (selectedOption: any) => {
-        setTest(selectedOption.value)
         setSenden(selectedOption.autor_id);
     }
 
 
     const handleSubmitBuch = (e: any) => {
         e?.preventDefault();
+
+        if(!title || !isbn || !senden  ){
+            setFormError("Bitte alle Felder ausfüllen!")
+            return;
+        }
+
         createBuch({
             payload: {
                 title: title,
                 isbn: isbn,
-                test: test,
                 autor_id: senden
-
             }
         })
-        setTitle("")
-        setIsbn("")
+        setTitle("");
+        setIsbn("");
+        setFormError(null);
     }
 
 
     const handleSubmitAutor = (e: any) => {
         e?.preventDefault();
+
+        if(!vorname || !nachname){
+            setFormErrorZwei("Bitte alle Felder ausfüllen!")
+            return;
+        }
         createAutor({
             payload: {
                 vorname: vorname,
                 nachname: nachname
             }
         })
-        setVorname("")
-        setNachname("")
+        setVorname("");
+        setNachname("");
+        setFormErrorZwei(null);
     }
 
     return (
@@ -82,6 +95,7 @@ const BuecherOnline : FC = () => {
                         <div className={"g-2 mb-3"}>
                             <Button variant={"outline-dark"} type={"submit"}>Erstellen</Button>
                         </div>
+                        {formErrorZwei && <p className={"text-danger"}>{formErrorZwei}</p>}
                     </Container>
                 </form>
                 <Table className={"table table-hover"} responsive={"lg"}>
@@ -90,6 +104,7 @@ const BuecherOnline : FC = () => {
                         <th scope={"col"}>Autor Id</th>
                         <th scope={"col"}>Vorname</th>
                         <th scope={"col"}>Nachname</th>
+                        <th scope={"col"}>Löschen</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -134,6 +149,7 @@ const BuecherOnline : FC = () => {
                         <div className={"g-2 mb-3"}>
                             <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
                         </div>
+                        {formError && <p className={"text-danger"}>{formError}</p>}
                     </Container>
                 </form>
 

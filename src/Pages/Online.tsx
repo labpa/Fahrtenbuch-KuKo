@@ -17,7 +17,7 @@ const Onlinefahrtenbuch : FC = () => {
     const [kmBegin, setKmBegin] = useState<any>(0);
     const [kmEnde, setKmEnde] = useState<any>(0);
     //fehler
-    const [formError, setFormError] = useState<string | null>(null)
+    const [formError, setFormError] = useState<string | null>(null);
 
     //Ausgabe -> Local State
     const [fahrten, setFahrten] : any = useState([]);

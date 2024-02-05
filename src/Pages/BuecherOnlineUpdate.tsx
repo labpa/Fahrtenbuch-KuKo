@@ -1,18 +1,23 @@
 import React, {FC, useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import {Button, Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
-import {useGetBuchQuery, useUpdateBuchMutation} from "../features/books/buchApi";
+import {useGetAutorQuery, useGetBuchQuery, useUpdateBuchMutation} from "../features/books/buchApi";
 import {useNavigate, useParams} from "react-router-dom";
+import Select from "react-select";
 
 const BuecherOnlineUpdate: FC = () => {
-    const [vorname, setVorname] = useState<string>("");
-    const [nachname, setNachname] = useState<string>("");
     const [title, setTitle] = useState<string>("");
     const [isbn, setIsbn] = useState<string>("");
     const navigate = useNavigate();
-    const { data } = useGetBuchQuery('');
+    const { data: books } = useGetBuchQuery('');
+    const {data: autor} = useGetAutorQuery('');
     const {id: buch_id} = useParams();
     const [updateBuch] = useUpdateBuchMutation();
+    const [senden, setSenden] = useState<string>("");
+
+    const handleChangeAutor = (selectedOption : any)=> {
+        setSenden(selectedOption.autor_id);
+    }
 
 
 
@@ -22,7 +27,8 @@ const BuecherOnlineUpdate: FC = () => {
             buch_id,
             payload: {
                 title: title,
-                isbn: isbn
+                isbn: isbn,
+                autor_id: senden
             }
         })
         navigate("/buecheronline")
@@ -30,10 +36,11 @@ const BuecherOnlineUpdate: FC = () => {
 
 
     useEffect(() => {
-        let datensatz = data?.find((entry:any) => entry.buch_id === buch_id);
+        let datensatz = books?.find((entry:any) => entry.buch_id === buch_id);
         if(datensatz){
             setIsbn(datensatz.isbn)
             setTitle(datensatz.title)
+            setSenden(autor.autor_id) //todo FRAGE: Wie muss
         }
     }, [buch_id]);
 
@@ -52,18 +59,6 @@ const BuecherOnlineUpdate: FC = () => {
                     <Container>
                         <Row className={"g-2 mb-3"}>
                             <Col>
-                                <FloatingLabel label={"Vorname"}>
-                                    <FormControl type={"text"} value={vorname} onChange={(e)=> setVorname(e.target.value)}/>
-                                </FloatingLabel>
-                            </Col>
-                            <Col>
-                                <FloatingLabel label={"Nachname"}>
-                                    <FormControl type={"text"} value={nachname} onChange={(e)=> setNachname(e.target.value)}/>
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
-                        <Row className={"g-2 mb-3"}>
-                            <Col>
                                 <FloatingLabel label={"Titel"}>
                                     <FormControl type={"text"} value={title} onChange={(e)=> setTitle(e.target.value)}/>
                                 </FloatingLabel>
@@ -72,6 +67,17 @@ const BuecherOnlineUpdate: FC = () => {
                                 <FloatingLabel label={"ISBN"}>
                                     <FormControl type={"text"} value={isbn} onChange={(e)=> setIsbn(e.target.value)}/>
                                 </FloatingLabel>
+                            </Col>
+                        </Row>
+                        <Row className={"g-2 mb-3"}>
+                            <Col>
+                                <Select placeholder={"Autor"}
+                                        onChange={handleChangeAutor}
+                                        getOptionLabel={option => option.vorname + " " + option.nachname}
+                                        getOptionValue={option => option.autor_id}
+                                        options={autor}
+                                />
+
                             </Col>
                         </Row>
                         <div className={"g-2 mb-3"}>
