@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import {Button, Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
-import {useGetAutorQuery, useGetBuchQuery, useUpdateBuchMutation} from "../features/books/buchApi";
+import {useGetAutorQuery, useGetBuchQuery, useUpdateBuchMutation} from "../Api/buchApi";
 import {useNavigate, useParams} from "react-router-dom";
 import Select from "react-select";
 

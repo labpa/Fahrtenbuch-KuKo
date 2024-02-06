@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import {useGetAutorQuery, useGetBuchQuery, useRemoveBuchMutation, useCreateBuchMutation, useCreateAutorMutation, useRemoveAutorMutation} from "../features/books/buchApi";
+import {useGetAutorQuery, useGetBuchQuery, useRemoveBuchMutation, useCreateBuchMutation, useCreateAutorMutation, useRemoveAutorMutation} from "../Api/buchApi";
 import {Button, Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
@@ -158,7 +158,7 @@ const BuecherOnline : FC = () => {
                 <Table className={"table table-hover"} responsive={"lg"}>
                     <thead>
                     <tr className={"g-2 mb-3"}>
-                        <th scope={"col"}>ID</th>
+                        {/*<th scope={"col"}>ID</th>*/}
                         <th scope={"col"}>Titel</th>
                         <th scope={"col"}>ISBN</th>
                         <th scope={"col"}>Autor</th>
@@ -169,7 +169,7 @@ const BuecherOnline : FC = () => {
                     <tbody>
                     {books?.map((buch: any)=>(
                         <tr key={buch.buch_id}>
-                            <td>{buch.buch_id}</td>
+                            {/*<td>{buch.buch_id}</td>*/}
                             <td>{buch.title}</td>
                             <td>{buch.isbn}</td>
                             <td>{autor?.find((a: any) => a.autor_id === buch.autor_id)?.vorname} {autor?.find((a: any) => a.autor_id === buch.autor_id)?.nachname} </td>

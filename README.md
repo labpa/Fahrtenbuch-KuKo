@@ -91,7 +91,7 @@ Um sich innerhalb der App bewegen zu können ist es notwendig die Navigation inn
 ## Speichern der Daten
 ### Local Storage
 
-## Bearbeiten
+## OnlineBearbeiten
 
 ## Datenbank Supabase
 Um Daten in einer Datenbank speichern zu können habe ich mich für supabase als backend entscheiden.

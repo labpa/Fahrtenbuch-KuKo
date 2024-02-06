@@ -102,7 +102,7 @@ console.log(car);
         }))
     }
 
-    //Bearbeiten
+    //OnlineBearbeiten
     const updateRide = (idToUpdate:string):void => {
         setRideList(rideList.filter((id) => {
             return id.id !== idToUpdate
