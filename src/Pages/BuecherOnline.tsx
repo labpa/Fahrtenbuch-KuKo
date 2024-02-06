@@ -22,10 +22,10 @@ const BuecherOnline : FC = () => {
     const [createAutor] = useCreateAutorMutation();
     const [removeAutor] = useRemoveAutorMutation();
 
-    const [senden, setSenden]= useState<string>("")
+    const [senden, setSenden]= useState<string>("") //umbenennen
 
     const handleChangeAutor = (selectedOption: any) => {
-        setSenden(selectedOption.autor_id);
+        setSenden(selectedOption.value);
     }
 
 
@@ -139,9 +139,10 @@ const BuecherOnline : FC = () => {
                             <Col>
                                 <Select placeholder={"Autor"}
                                         onChange={handleChangeAutor}
-                                        getOptionLabel={option => option.vorname + " " +option.nachname}
-                                        getOptionValue={option => option.autor_id}
-                                        options={autor}
+                                        // getOptionLabel={option => option.vorname + " " +option.nachname}
+                                        // getOptionValue={option => option.autor_id}
+                                        // options={autor}
+                                        options={autor?.map((a: any) => ({value: a.autor_id, label: `${a.vorname} ${a.nachname}`}))}
                                 />
 
                             </Col>
@@ -171,7 +172,7 @@ const BuecherOnline : FC = () => {
                             <td>{buch.buch_id}</td>
                             <td>{buch.title}</td>
                             <td>{buch.isbn}</td>
-                            <td>{buch.autor_id}</td>
+                            <td>{autor?.find((a: any) => a.autor_id === buch.autor_id)?.vorname} {autor?.find((a: any) => a.autor_id === buch.autor_id)?.nachname} </td>
                             <td><Button variant={"outline-dark"} onClick={() => removeBuch(buch.buch_id)}>Löschen</Button></td>
                             <td>
                                 <Link to={`/buecheronlineupdate/${buch.buch_id}`}>
