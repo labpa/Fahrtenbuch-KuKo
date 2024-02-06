@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import {Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Select from "react-select";
-import {useGetFahrtQuery , useGetFahrerinQuery, useGetFahrzeugQuery, useCreateFahrerinMutation, useCreateFahrtMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation} from "../Api/fahrtApi";
+import {useGetFahrtQuery , useGetFahrerinQuery, useGetFahrzeugQuery, useCreateFahrerinMutation, useCreateFahrtMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation, useRemoveFahrzeugMutation, useRemoveFahrtMutation} from "../Api/fahrtApi";
 
 
 
@@ -17,8 +17,8 @@ const Onlinefahrtenbuch : FC = () => {
     const [marke, setMarke] = useState<string>("");
     const [modell, setModell] = useState<string>("");
     //Fahrt
-    const [kmBeginn, setKmBeginn] = useState<any>(0);
-    const [kmEnde, setKmEnde] = useState<any>(0);
+    const [kmBeginn, setKmBeginn] = useState<any>();
+    const [kmEnde, setKmEnde] = useState<any>();
     const [datum, setDatum] = useState<string>("");
     const [grund, setGrund] = useState<string>("");
 
@@ -29,6 +29,12 @@ const Onlinefahrtenbuch : FC = () => {
     const [createFahrerin] = useCreateFahrerinMutation();
     const [removeFahrerin] = useRemoveFahrerinMutation();
     const [createFahrzeug] = useCreateFahrzeugMutation();
+    const [removeFahrzeug] = useRemoveFahrzeugMutation();
+    const [removeFahrt] = useRemoveFahrtMutation();
+
+    const [auswahlFahrzeug, setAuswahlFahrzeug] = useState<string>();
+    const [auswahlFahrerin, setAuswahlFahrerin] = useState<string>();
+
 
     const handleSubmitFahrerin= (e: any) => {
         e?.preventDefault();
@@ -58,6 +64,33 @@ const Onlinefahrtenbuch : FC = () => {
         setBaujahr("");
         setModell("");
         setMarke("");
+    }
+
+    const handleSubmitFahrt = (e: any) => {
+        e?.preventDefault();
+
+        createFahrt({
+            payload: {
+                grund: grund,
+                kmbeginn: kmBeginn,
+                kmende: kmEnde,
+                datum: datum,
+                fahrzeug_id: auswahlFahrzeug,
+                fahrerin_id: auswahlFahrerin,
+            }
+        })
+        setGrund("");
+        setKmBeginn(0);
+        setKmEnde(0);
+        setDatum("");
+    }
+
+    const handleChangeFahrzeug = (selectedOption:any) =>{
+        setAuswahlFahrzeug(selectedOption.value);
+    }
+
+    const handleChangeFahrerin = (selectedOption: any) => {
+        setAuswahlFahrerin(selectedOption.value);
     }
 
 
@@ -172,7 +205,7 @@ const Onlinefahrtenbuch : FC = () => {
                             <td>{fahrzeug.marke}</td>
                             <td>{fahrzeug.modell}</td>
                             <td>{fahrzeug.baujahr}</td>
-                            <td><Button variant={"outline-dark"}>Löschen</Button></td>
+                            <td><Button variant={"outline-dark"} onClick={() => removeFahrzeug(fahrzeug.fahrzeug_id)}>Löschen</Button></td>
                             <td><Button variant={"outline-dark"}>Bearbeiten</Button></td>
 
 
@@ -183,7 +216,7 @@ const Onlinefahrtenbuch : FC = () => {
 
 
             {/*    Fahrt Formular*/}
-                <form>
+                <form onSubmit={handleSubmitFahrt}>
                     <div><h2>Fahrt</h2></div>
                     <Container>
 
@@ -214,17 +247,19 @@ const Onlinefahrtenbuch : FC = () => {
                         <Row className={"g-2 mb-3"}>
                             <Col>
                                 <Select placeholder={"Fahrzeug"}
+                                        onChange={handleChangeFahrzeug}
                                         options={fahrzeug?.map((a: any)=> ({value: a.fahrzeug_id, label: `${a.nummernschild}`}))}
                                 />
                             </Col>
                             <Col>
                                 <Select placeholder={"Fahrer:in"}
+                                        onChange={handleChangeFahrerin}
                                         options={fahrerin?.map((a:any)=> ({value: a.fahrerin_id, label: `${a.vorname} ${a.nachname}`}))}
                                 />
                             </Col>
                         </Row>
                         <div className={"g-2 mb-3"}>
-                            <Button variant={"outline-dark"}>Hinzufügen</Button>
+                            <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
                         </div>
                     </Container>
                 </form>
@@ -237,6 +272,7 @@ const Onlinefahrtenbuch : FC = () => {
                         <th scope={"col"}>KM-Beginn</th>
                         <th scope={"col"}>KM-Ende</th>
                         <th scope={"col"}>Grund</th>
+                        <th scope={"col"}>Datum</th>
                         <th scope={"col"}>Löschen</th>
                         <th scope={"col"}>Bearbeiten</th>
                     </tr>
@@ -246,11 +282,13 @@ const Onlinefahrtenbuch : FC = () => {
                         <tr key={fahrt.fahrt_id}>
                             {/*<td>{fahrt.fahrzeug_id}</td>*/}
                             <td>{fahrzeug?.find((a: any)=> a.fahrzeug_id === fahrt.fahrzeug_id)?.nummernschild}</td>
-                            <td>{fahrt.fahrerin_id}</td>
+                            <td>{fahrerin?.find((a: any)=> a.fahrerin_id === fahrt.fahrerin_id)?.vorname} {fahrerin?.find((a: any)=> a.fahrerin_id === fahrt.fahrerin_id)?.nachname}</td>
+                            {/*<td>{fahrt.fahrerin_id}</td>*/}
                             <td>{fahrt.kmbeginn}</td>
                             <td>{fahrt.kmende}</td>
                             <td>{fahrt.grund}</td>
-                            <td><Button variant={"outline-dark"}>Löschen</Button></td>
+                            <td>{fahrt.datum}</td>
+                            <td><Button variant={"outline-dark"} onClick={()=> removeFahrt(fahrt.fahrt_id)}>Löschen</Button></td>
                             <td><Button variant={"outline-dark"}>Bearbeiten</Button></td>
 
                         </tr>
