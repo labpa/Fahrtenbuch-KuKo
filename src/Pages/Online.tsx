@@ -1,9 +1,9 @@
-import React, {ChangeEvent, FC, useEffect, useState} from "react";
+import React, {FC, useState} from "react";
 import Container from "react-bootstrap/Container";
 import {Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Select from "react-select";
-import {useGetFahrtQuery} from "../Api/fahrtApi";
+import {useGetFahrtQuery , useGetFahrerinQuery, useGetFahrzeugQuery, useCreateFahrerinMutation, useCreateFahrtMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation} from "../Api/fahrtApi";
 
 
 
@@ -23,6 +23,44 @@ const Onlinefahrtenbuch : FC = () => {
     const [grund, setGrund] = useState<string>("");
 
     const {data: fahrt} = useGetFahrtQuery('');
+    const {data: fahrerin} = useGetFahrerinQuery('');
+    const {data: fahrzeug} = useGetFahrzeugQuery('');
+    const [createFahrt] = useCreateFahrtMutation();
+    const [createFahrerin] = useCreateFahrerinMutation();
+    const [removeFahrerin] = useRemoveFahrerinMutation();
+    const [createFahrzeug] = useCreateFahrzeugMutation();
+
+    const handleSubmitFahrerin= (e: any) => {
+        e?.preventDefault();
+
+        createFahrerin({
+            payload: {
+                vorname: vorname,
+                nachname: nachname,
+            }
+        })
+        setVorname("");
+        setNachname("");
+    }
+
+    const handleSubmitFahrzeug = (e: any) => {
+        e?.preventDefault();
+
+        createFahrzeug({
+            payload: {
+                nummernschild: nummernschild,
+                baujahr: baujahr,
+                modell: modell,
+                marke: marke,
+            }
+        })
+        setNummernschild("");
+        setBaujahr("");
+        setModell("");
+        setMarke("");
+    }
+
+
 
 
 
@@ -36,7 +74,7 @@ const Onlinefahrtenbuch : FC = () => {
                 </div>
 
                 {/*Fahrer:in Formular*/}
-                <form>
+                <form onSubmit={handleSubmitFahrerin}>
                     <div><h2 className={"g-2 mb-3"}>Fahrer:in</h2></div>
                     <Container>
                         <Row className={"g-2 mb-3"}>
@@ -52,13 +90,36 @@ const Onlinefahrtenbuch : FC = () => {
                             </Col>
                         </Row>
                         <div className={"g-2 mb-3"}>
-                            <Button variant={"outline-dark"}>Hinzufügen</Button>
+                            <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
                         </div>
                     </Container>
                 </form>
+                <Table className={"table table-hover"} responsive={"lg"}>
+                    <thead>
+                    <tr className={"g-2 mb-3"}>
+                        <th scope={"col"}>Fahrer:in ID</th>
+                        <th scope={"col"}>Vorname</th>
+                        <th scope={"col"}>Nachname</th>
+                        <th scope={"col"}>Löschen</th>
+                        <th scope={"col"}>Bearbeiten</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {fahrerin?.map((fahrerin: any)=>(
+                        <tr key={fahrerin.fahrerin_id}>
+                            <td>{fahrerin.fahrerin_id}</td>
+                            <td>{fahrerin.vorname}</td>
+                            <td>{fahrerin.nachname}</td>
+                            <td><Button variant={"outline-dark"} onClick={() => removeFahrerin(fahrerin.fahrerin_id)}>Löschen</Button></td>
+                            <td><Button variant={"outline-dark"} >Bearbeiten</Button></td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </Table>
 
-            {/*    Fahrzeug Formular*/}
-                <form>
+
+                {/*    Fahrzeug Formular*/}
+                <form onSubmit={handleSubmitFahrzeug}>
                     <div><h2>Fahrzeug</h2></div>
                     <Container>
                         <Row className={"g-2 mb-3"}>
@@ -86,25 +147,46 @@ const Onlinefahrtenbuch : FC = () => {
                             </Col>
                         </Row>
                         <div className={"g-2 mb-3"}>
-                            <Button variant={"outline-dark"}>Hinzufügen</Button>
+                            <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
                         </div>
                     </Container>
                 </form>
+
+                <Table className={"table table-hover"} responsive={"lg"}>
+                    <thead>
+                    <tr className={"g-2 mb-3"}>
+                        <th scope={"col"}>Fahrzeug ID</th>
+                        <th scope={"col"}>Nummernschild</th>
+                        <th scope={"col"}>Marke</th>
+                        <th scope={"col"}>Modell</th>
+                        <th scope={"col"}>Baujahr</th>
+                        <th scope={"col"}>Löschen</th>
+                        <th scope={"col"}>Bearbeiten</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {fahrzeug?.map((fahrzeug: any)=>(
+                        <tr key={fahrzeug.fahrzeug_id}>
+                            <td>{fahrzeug.fahrzeug_id}</td>
+                            <td>{fahrzeug.nummernschild}</td>
+                            <td>{fahrzeug.marke}</td>
+                            <td>{fahrzeug.modell}</td>
+                            <td>{fahrzeug.baujahr}</td>
+                            <td><Button variant={"outline-dark"}>Löschen</Button></td>
+                            <td><Button variant={"outline-dark"}>Bearbeiten</Button></td>
+
+
+                        </tr>
+                    ))}
+                    </tbody>
+                </Table>
+
 
             {/*    Fahrt Formular*/}
                 <form>
                     <div><h2>Fahrt</h2></div>
                     <Container>
-                        <Row className={"g-2 mb-3"}>
-                            <Col>
-                                <Select placeholder={"Fahrzeug"}
-                                />
-                            </Col>
-                            <Col>
-                                <Select placeholder={"Fahrer:in"}
-                                />
-                            </Col>
-                        </Row>
+
                         <Row className={"g-2 mb-3"}>
                             <Col>
                                 <FloatingLabel label={"km-Stand Beginn"}>
@@ -129,6 +211,18 @@ const Onlinefahrtenbuch : FC = () => {
                                 </FloatingLabel>
                             </Col>
                         </Row>
+                        <Row className={"g-2 mb-3"}>
+                            <Col>
+                                <Select placeholder={"Fahrzeug"}
+                                        options={fahrzeug?.map((a: any)=> ({value: a.fahrzeug_id, label: `${a.nummernschild}`}))}
+                                />
+                            </Col>
+                            <Col>
+                                <Select placeholder={"Fahrer:in"}
+                                        options={fahrerin?.map((a:any)=> ({value: a.fahrerin_id, label: `${a.vorname} ${a.nachname}`}))}
+                                />
+                            </Col>
+                        </Row>
                         <div className={"g-2 mb-3"}>
                             <Button variant={"outline-dark"}>Hinzufügen</Button>
                         </div>
@@ -143,16 +237,21 @@ const Onlinefahrtenbuch : FC = () => {
                         <th scope={"col"}>KM-Beginn</th>
                         <th scope={"col"}>KM-Ende</th>
                         <th scope={"col"}>Grund</th>
+                        <th scope={"col"}>Löschen</th>
+                        <th scope={"col"}>Bearbeiten</th>
                     </tr>
                     </thead>
                     <tbody>
                     {fahrt?.map((fahrt: any)=>(
                         <tr key={fahrt.fahrt_id}>
-                            <td>{fahrt.fahrzeug_id}</td>
+                            {/*<td>{fahrt.fahrzeug_id}</td>*/}
+                            <td>{fahrzeug?.find((a: any)=> a.fahrzeug_id === fahrt.fahrzeug_id)?.nummernschild}</td>
                             <td>{fahrt.fahrerin_id}</td>
                             <td>{fahrt.kmbeginn}</td>
                             <td>{fahrt.kmende}</td>
                             <td>{fahrt.grund}</td>
+                            <td><Button variant={"outline-dark"}>Löschen</Button></td>
+                            <td><Button variant={"outline-dark"}>Bearbeiten</Button></td>
 
                         </tr>
                     ))}

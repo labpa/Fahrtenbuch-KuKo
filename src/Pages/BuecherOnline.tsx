@@ -139,9 +139,6 @@ const BuecherOnline : FC = () => {
                             <Col>
                                 <Select placeholder={"Autor"}
                                         onChange={handleChangeAutor}
-                                        // getOptionLabel={option => option.vorname + " " +option.nachname}
-                                        // getOptionValue={option => option.autor_id}
-                                        // options={autor}
                                         options={autor?.map((a: any) => ({value: a.autor_id, label: `${a.vorname} ${a.nachname}`}))}
                                 />
 
