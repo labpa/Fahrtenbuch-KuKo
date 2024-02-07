@@ -17,8 +17,8 @@ const Onlinefahrtenbuch : FC = () => {
     const [marke, setMarke] = useState<string>("");
     const [modell, setModell] = useState<string>("");
     //Fahrt
-    const [kmBeginn, setKmBeginn] = useState<any>();
-    const [kmEnde, setKmEnde] = useState<any>();
+    const [kmBeginn, setKmBeginn] = useState<any>(0);
+    const [kmEnde, setKmEnde] = useState<any>(0);
     const [datum, setDatum] = useState<string>("");
     const [grund, setGrund] = useState<string>("");
 
@@ -35,7 +35,7 @@ const Onlinefahrtenbuch : FC = () => {
     const [auswahlFahrzeug, setAuswahlFahrzeug] = useState<string>();
     const [auswahlFahrerin, setAuswahlFahrerin] = useState<string>();
 
-
+console.log(fahrt);
     const handleSubmitFahrerin= (e: any) => {
         e?.preventDefault();
 
@@ -271,6 +271,7 @@ const Onlinefahrtenbuch : FC = () => {
                         <th scope={"col"}>Fahrer:in</th>
                         <th scope={"col"}>KM-Beginn</th>
                         <th scope={"col"}>KM-Ende</th>
+                        <th scope={"col"}>Strecke</th>
                         <th scope={"col"}>Grund</th>
                         <th scope={"col"}>Datum</th>
                         <th scope={"col"}>Löschen</th>
@@ -280,12 +281,11 @@ const Onlinefahrtenbuch : FC = () => {
                     <tbody>
                     {fahrt?.map((fahrt: any)=>(
                         <tr key={fahrt.fahrt_id}>
-                            {/*<td>{fahrt.fahrzeug_id}</td>*/}
                             <td>{fahrzeug?.find((a: any)=> a.fahrzeug_id === fahrt.fahrzeug_id)?.nummernschild}</td>
                             <td>{fahrerin?.find((a: any)=> a.fahrerin_id === fahrt.fahrerin_id)?.vorname} {fahrerin?.find((a: any)=> a.fahrerin_id === fahrt.fahrerin_id)?.nachname}</td>
-                            {/*<td>{fahrt.fahrerin_id}</td>*/}
                             <td>{fahrt.kmbeginn}</td>
                             <td>{fahrt.kmende}</td>
+                            <td>{fahrt.kmende - fahrt.kmbeginn}</td>
                             <td>{fahrt.grund}</td>
                             <td>{fahrt.datum}</td>
                             <td><Button variant={"outline-dark"} onClick={()=> removeFahrt(fahrt.fahrt_id)}>Löschen</Button></td>
