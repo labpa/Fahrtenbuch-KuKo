@@ -1,9 +1,10 @@
-import React, {FC, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import {Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Select from "react-select";
 import {useGetFahrtQuery , useGetFahrerinQuery, useGetFahrzeugQuery, useCreateFahrerinMutation, useCreateFahrtMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation, useRemoveFahrzeugMutation, useRemoveFahrtMutation} from "../Api/fahrtApi";
+import {Link} from "react-router-dom";
 
 
 
@@ -22,20 +23,25 @@ const Onlinefahrtenbuch : FC = () => {
     const [datum, setDatum] = useState<string>("");
     const [grund, setGrund] = useState<string>("");
 
-    const {data: fahrt} = useGetFahrtQuery('');
+
     const {data: fahrerin} = useGetFahrerinQuery('');
-    const {data: fahrzeug} = useGetFahrzeugQuery('');
-    const [createFahrt] = useCreateFahrtMutation();
     const [createFahrerin] = useCreateFahrerinMutation();
     const [removeFahrerin] = useRemoveFahrerinMutation();
+
+    const {data: fahrzeug} = useGetFahrzeugQuery('');
     const [createFahrzeug] = useCreateFahrzeugMutation();
     const [removeFahrzeug] = useRemoveFahrzeugMutation();
+
+    const {data: fahrt} = useGetFahrtQuery('');
+    const [createFahrt] = useCreateFahrtMutation();
     const [removeFahrt] = useRemoveFahrtMutation();
+
 
     const [auswahlFahrzeug, setAuswahlFahrzeug] = useState<string>();
     const [auswahlFahrerin, setAuswahlFahrerin] = useState<string>();
 
-console.log(fahrt);
+
+
     const handleSubmitFahrerin= (e: any) => {
         e?.preventDefault();
 
@@ -80,9 +86,9 @@ console.log(fahrt);
             }
         })
         setGrund("");
-        setKmBeginn(0);
-        setKmEnde(0);
         setDatum("");
+        setKmEnde(0);
+        setKmBeginn(0);
     }
 
     const handleChangeFahrzeug = (selectedOption:any) =>{
@@ -94,7 +100,20 @@ console.log(fahrt);
     }
 
 
+    const lastKm = () => {
+        let carRideList = fahrt.filter((rli: any) => rli.fahrzeug_id === auswahlFahrzeug);
 
+        let carKms = carRideList.map((crl: any)=> crl.kmende);
+
+        let maxKms = Math.max(...carKms)
+
+        setKmBeginn(maxKms);
+    }
+    useEffect(() => {
+        if(auswahlFahrzeug){
+            lastKm()
+        }
+    }, [auswahlFahrzeug]);
 
 
     return (
@@ -144,7 +163,12 @@ console.log(fahrt);
                             <td>{fahrerin.vorname}</td>
                             <td>{fahrerin.nachname}</td>
                             <td><Button variant={"outline-dark"} onClick={() => removeFahrerin(fahrerin.fahrerin_id)}>Löschen</Button></td>
-                            <td><Button variant={"outline-dark"} >Bearbeiten</Button></td>
+                            <td>
+                                <Link to={`/fahrerinbearbeiten/${fahrerin.fahrerin_id}`}>
+                                    <Button variant={"outline-dark"} >Bearbeiten</Button>
+                                </Link>
+                            </td>
+
                         </tr>
                     ))}
                     </tbody>
@@ -206,7 +230,11 @@ console.log(fahrt);
                             <td>{fahrzeug.modell}</td>
                             <td>{fahrzeug.baujahr}</td>
                             <td><Button variant={"outline-dark"} onClick={() => removeFahrzeug(fahrzeug.fahrzeug_id)}>Löschen</Button></td>
-                            <td><Button variant={"outline-dark"}>Bearbeiten</Button></td>
+                            <td>
+                                <Link to={`/fahrzeugbearbeiten/${fahrzeug.fahrzeug_id}`}>
+                                    <Button variant={"outline-dark"}>Bearbeiten</Button>
+                                </Link>
+                            </td>
 
 
                         </tr>
@@ -289,7 +317,11 @@ console.log(fahrt);
                             <td>{fahrt.grund}</td>
                             <td>{fahrt.datum}</td>
                             <td><Button variant={"outline-dark"} onClick={()=> removeFahrt(fahrt.fahrt_id)}>Löschen</Button></td>
-                            <td><Button variant={"outline-dark"}>Bearbeiten</Button></td>
+                            <td>
+                                <Link to={`/fahrtbearbeiten/${fahrt.fahrt_id}`}>
+                                    <Button variant={"outline-dark"}>Bearbeiten</Button>
+                                </Link>
+                            </td>
 
                         </tr>
                     ))}

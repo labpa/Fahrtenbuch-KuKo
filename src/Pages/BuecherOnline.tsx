@@ -173,7 +173,7 @@ const BuecherOnline : FC = () => {
                             <td><Button variant={"outline-dark"} onClick={() => removeBuch(buch.buch_id)}>Löschen</Button></td>
                             <td>
                                 <Link to={`/buecheronlineupdate/${buch.buch_id}`}>
-                                <Button variant={"outline-dark"}>Bearbeiten</Button>
+                                    <Button variant={"outline-dark"}>Bearbeiten</Button>
                                 </Link>
                             </td>
                         </tr>

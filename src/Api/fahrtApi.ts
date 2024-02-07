@@ -55,6 +55,15 @@ const supabaseApiFahrt = createApi({
             invalidatesTags: ['Fahrerin']
         }),
 
+        updateFahrerin: builder.mutation({
+            query: ({fahrerin_id, payload}) => ({
+                url: `rest/v1/fahrerin?fahrerin_id=eq.${fahrerin_id}`,
+                method: 'put',
+                body: {...payload, fahrerin_id}
+            }),
+            invalidatesTags: ['Fahrerin']
+        }),
+
 
         // Fahrzeug
         getFahrzeug: builder.query({
@@ -77,12 +86,21 @@ const supabaseApiFahrt = createApi({
                 method: 'delete',
             }),
             invalidatesTags: ['Fahrzeug']
-        })
+        }),
+
+        updateFahrzeug: builder.mutation({
+            query: ({fahrzeug_id, payload}) => ({
+                url: `rest/v1/fahrzeug?fahrzeug_id=eq.${fahrzeug_id}`,
+                method: 'put',
+                body: {...payload, fahrzeug_id}
+            }),
+            invalidatesTags: ['Fahrzeug']
+        }),
 
     })
 
 })
 export const {  useGetFahrtQuery, useGetFahrerinQuery, useGetFahrzeugQuery, useCreateFahrtMutation,
-                useCreateFahrerinMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation, useRemoveFahrzeugMutation, useRemoveFahrtMutation
+                useCreateFahrerinMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation, useRemoveFahrzeugMutation, useRemoveFahrtMutation, useUpdateFahrerinMutation, useUpdateFahrzeugMutation
                 } = supabaseApiFahrt;
 export {supabaseApiFahrt};

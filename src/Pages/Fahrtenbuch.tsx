@@ -21,7 +21,6 @@ const Fahrtenbuch: FC = () => {
     const [car, setCar] = useState<string>("");
 
 
-console.log(car);
     //Array mit den Fahrzeugen
     const cars: Options<any> = [
         { value: "B-SP-1234", label: "B-SP-1234" },
@@ -35,6 +34,15 @@ console.log(car);
     // Eingabe auswahl aus Array cary
     const handleChangeCar = (selectedOption: any) => {
         setCar(selectedOption.value)
+    }
+
+    // ermittelt den letzten km stand eines fahrzeuges
+    const lastKm = () => {
+        let carRideList = rideList.filter( rli => rli.fahrzeug === car);
+        console.log(carRideList);
+        let carKms = carRideList.map(crl => crl.rideEnd);
+        let maxKms = Math.max(...carKms);
+        setBegin(maxKms);
     }
 
     //useEffect bezieht sich auf handleChangeCar -> car Wenn sich car verändert wird lastKm() ausgeführt
@@ -110,13 +118,7 @@ console.log(car);
     }
 
 
-// ermittelt den letzten km stand einer fahrzeuges
-    const lastKm = () => {
-        let carRideList = rideList.filter( rli => rli.fahrzeug === car);
-        let carKms = carRideList.map(crl => crl.rideEnd);
-        let maxKms = Math.max(...carKms);
-        setBegin(maxKms);
-    }
+
 
     //Speichern in lokalem Speicher von Browser
     const saveInBrowser = (): void => {

@@ -22,6 +22,9 @@ import BuecherUpdate from "./Pages/BuecherUpdate";
 import BuecherOnline from "./Pages/BuecherOnline";
 import BuecherOnlineUpdate from "./Pages/BuecherOnlineUpdate";
 import Produkte from "./Pages/Produkte";
+import FahrerinBearbeiten from "./Pages/bearbeiten/FahrerinBearbeiten";
+import FahrtBearbeiten from "./Pages/bearbeiten/FahrtBearbeiten";
+import FahrzeugBearbeiten from "./Pages/bearbeiten/FahrzeugBearbeiten";
 
 
 
@@ -47,6 +50,9 @@ const App: FC = () => {
       <Route path={"/buecheronlineupdate/:id"} element={<BuecherOnlineUpdate/>}/>
       <Route path={"/buecheronline"} element={<BuecherOnline/>}/>
       <Route path={"/produkte"} element={<Produkte/>}/>
+      <Route path={"fahrerinbearbeiten/:id"} element={<FahrerinBearbeiten/>}/>
+      <Route path={"fahrzeugbearbeiten/:id"} element={<FahrzeugBearbeiten/>}/>
+      <Route path={"fahrtbearbeiten/:id"} element={<FahrtBearbeiten/>}/>
       <Route path={"*"} element={<Error/>}/>
     </Routes>
     <div>
