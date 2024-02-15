@@ -14,6 +14,7 @@ const BuecherOnlineUpdate: FC = () => {
     const {id: buch_id} = useParams();
     const [updateBuch] = useUpdateBuchMutation();
     const [senden, setSenden] = useState<string>("");
+    console.log(senden);
 
     const handleChangeAutor = (selectedOption : any)=> {
         setSenden(selectedOption.autor_id);

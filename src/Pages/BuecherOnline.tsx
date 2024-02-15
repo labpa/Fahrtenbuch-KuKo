@@ -125,6 +125,17 @@ const BuecherOnline : FC = () => {
                     <Container>
                         <Row className={"g-2 mb-3"}>
                             <Col>
+                                <Select placeholder={"Autor"}
+                                        styles={{
+                                            menu: provided => ({...provided, zIndex: 9999})
+                                        }}
+                                        onChange={handleChangeAutor}
+                                        options={autor?.map((a: any) => ({value: a.autor_id, label: `${a.vorname} ${a.nachname}`}))}
+                                />
+                            </Col>
+                        </Row>
+                        <Row className={"g-2 mb-3"}>
+                            <Col>
                                 <FloatingLabel label={"Titel"}>
                                     <FormControl type={"text"} value={title} onChange={(e)=> setTitle(e.target.value)}/>
                                 </FloatingLabel>
@@ -135,15 +146,7 @@ const BuecherOnline : FC = () => {
                                 </FloatingLabel>
                             </Col>
                         </Row>
-                        <Row className={"g-2 mb-3"}>
-                            <Col>
-                                <Select placeholder={"Autor"}
-                                        onChange={handleChangeAutor}
-                                        options={autor?.map((a: any) => ({value: a.autor_id, label: `${a.vorname} ${a.nachname}`}))}
-                                />
 
-                            </Col>
-                        </Row>
                         <div className={"g-2 mb-3"}>
                             <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
                         </div>

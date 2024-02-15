@@ -5,45 +5,56 @@ import Button from "react-bootstrap/Button";
 import Select from "react-select";
 import {useGetFahrtQuery , useGetFahrerinQuery, useGetFahrzeugQuery, useCreateFahrerinMutation, useCreateFahrtMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation, useRemoveFahrzeugMutation, useRemoveFahrtMutation} from "../Api/fahrtApi";
 import {Link} from "react-router-dom";
+import dayjs from "dayjs";
 
 
 
 const Onlinefahrtenbuch : FC = () => {
     //Fahrer:in
-    const [vorname, setVorname] = useState<string>("");
-    const [nachname, setNachname] = useState<string>("");
-    //Fahrzeug
-    const [nummernschild, setNummernschild] = useState<string>("");
-    const [baujahr, setBaujahr] = useState<string>("");
-    const [marke, setMarke] = useState<string>("");
-    const [modell, setModell] = useState<string>("");
-    //Fahrt
-    const [kmBeginn, setKmBeginn] = useState<any>(0);
-    const [kmEnde, setKmEnde] = useState<any>(0);
-    const [datum, setDatum] = useState<string>("");
-    const [grund, setGrund] = useState<string>("");
-
-
     const {data: fahrerin} = useGetFahrerinQuery('');
     const [createFahrerin] = useCreateFahrerinMutation();
     const [removeFahrerin] = useRemoveFahrerinMutation();
 
+    const [vorname, setVorname] = useState<string>("");
+    const [nachname, setNachname] = useState<string>("");
+    const [formErrorFahrerin, setFormErrorFahrerin] = useState<string | null>(null);
+
+    //Fahrzeug
     const {data: fahrzeug} = useGetFahrzeugQuery('');
     const [createFahrzeug] = useCreateFahrzeugMutation();
     const [removeFahrzeug] = useRemoveFahrzeugMutation();
 
+    const [nummernschild, setNummernschild] = useState<string>("");
+    const [baujahr, setBaujahr] = useState<string>("");
+    const [marke, setMarke] = useState<string>("");
+    const [modell, setModell] = useState<string>("");
+    const [formErrorFahrzeug, setFormErrorFahrzeug] = useState<string | null>(null);
+
+    //Fahrt
     const {data: fahrt} = useGetFahrtQuery('');
     const [createFahrt] = useCreateFahrtMutation();
     const [removeFahrt] = useRemoveFahrtMutation();
 
+    const [kmBeginn, setKmBeginn] = useState<any>(0);
+    const [kmEnde, setKmEnde] = useState<any>(0);
+    const [datum, setDatum] = useState<string>("");
+    const [grund, setGrund] = useState<string>("");
+    const [formErrorFahrt, setFormErrorFahrt] = useState<string | null>(null);
 
+    //Select Auswahl
     const [auswahlFahrzeug, setAuswahlFahrzeug] = useState<string>();
     const [auswahlFahrerin, setAuswahlFahrerin] = useState<string>();
 
 
 
+
     const handleSubmitFahrerin= (e: any) => {
         e?.preventDefault();
+
+        if(!vorname || !nachname){
+            setFormErrorFahrerin("Bitte alle Felder ausfüllen")
+            return;
+        }
 
         createFahrerin({
             payload: {
@@ -53,10 +64,15 @@ const Onlinefahrtenbuch : FC = () => {
         })
         setVorname("");
         setNachname("");
+        setFormErrorFahrerin(null);
     }
 
     const handleSubmitFahrzeug = (e: any) => {
         e?.preventDefault();
+        if(!nummernschild || !marke){
+            setFormErrorFahrzeug("Nummernschild und Marke sind Pflichtfelder")
+            return;
+        }
 
         createFahrzeug({
             payload: {
@@ -70,10 +86,15 @@ const Onlinefahrtenbuch : FC = () => {
         setBaujahr("");
         setModell("");
         setMarke("");
+        setFormErrorFahrzeug(null);
     }
 
     const handleSubmitFahrt = (e: any) => {
         e?.preventDefault();
+        if(!auswahlFahrzeug || !auswahlFahrerin || !datum || !kmBeginn || !kmEnde || !grund){
+            setFormErrorFahrt("Bitte alle Felder ausfüllen!")
+            return;
+        }
 
         createFahrt({
             payload: {
@@ -89,6 +110,7 @@ const Onlinefahrtenbuch : FC = () => {
         setDatum("");
         setKmEnde(0);
         setKmBeginn(0);
+        setFormErrorFahrt(null);
     }
 
     const handleChangeFahrzeug = (selectedOption:any) =>{
@@ -131,7 +153,7 @@ const Onlinefahrtenbuch : FC = () => {
                     <Container>
                         <Row className={"g-2 mb-3"}>
                             <Col>
-                                <FloatingLabel label={"Vorname"}>
+                                <FloatingLabel label={"Vorname"} >
                                     <FormControl type={"text"} value={vorname} onChange={(e)=> setVorname(e.target.value)}/>
                                 </FloatingLabel>
                             </Col>
@@ -144,12 +166,13 @@ const Onlinefahrtenbuch : FC = () => {
                         <div className={"g-2 mb-3"}>
                             <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
                         </div>
+                        {formErrorFahrerin && <p className={"text-danger"}>{formErrorFahrerin}</p>}
                     </Container>
                 </form>
                 <Table className={"table table-hover"} responsive={"lg"}>
                     <thead>
                     <tr className={"g-2 mb-3"}>
-                        <th scope={"col"}>Fahrer:in ID</th>
+                        {/*<th scope={"col"}>Fahrer:in ID</th>*/}
                         <th scope={"col"}>Vorname</th>
                         <th scope={"col"}>Nachname</th>
                         <th scope={"col"}>Löschen</th>
@@ -159,7 +182,7 @@ const Onlinefahrtenbuch : FC = () => {
                     <tbody>
                     {fahrerin?.map((fahrerin: any)=>(
                         <tr key={fahrerin.fahrerin_id}>
-                            <td>{fahrerin.fahrerin_id}</td>
+                            {/*<td>{fahrerin.fahrerin_id}</td>*/}
                             <td>{fahrerin.vorname}</td>
                             <td>{fahrerin.nachname}</td>
                             <td><Button variant={"outline-dark"} onClick={() => removeFahrerin(fahrerin.fahrerin_id)}>Löschen</Button></td>
@@ -206,13 +229,14 @@ const Onlinefahrtenbuch : FC = () => {
                         <div className={"g-2 mb-3"}>
                             <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
                         </div>
+                        {formErrorFahrzeug && <p className={"text-danger"}>{formErrorFahrzeug}</p>}
                     </Container>
                 </form>
 
                 <Table className={"table table-hover"} responsive={"lg"}>
                     <thead>
                     <tr className={"g-2 mb-3"}>
-                        <th scope={"col"}>Fahrzeug ID</th>
+                        {/*<th scope={"col"}>Fahrzeug ID</th>*/}
                         <th scope={"col"}>Nummernschild</th>
                         <th scope={"col"}>Marke</th>
                         <th scope={"col"}>Modell</th>
@@ -224,7 +248,7 @@ const Onlinefahrtenbuch : FC = () => {
                     <tbody>
                     {fahrzeug?.map((fahrzeug: any)=>(
                         <tr key={fahrzeug.fahrzeug_id}>
-                            <td>{fahrzeug.fahrzeug_id}</td>
+                            {/*<td>{fahrzeug.fahrzeug_id}</td>*/}
                             <td>{fahrzeug.nummernschild}</td>
                             <td>{fahrzeug.marke}</td>
                             <td>{fahrzeug.modell}</td>
@@ -249,6 +273,26 @@ const Onlinefahrtenbuch : FC = () => {
                     <Container>
 
                         <Row className={"g-2 mb-3"}>
+                            <Row className={"g-2 mb-3"}>
+                                <Col>
+                                    <Select placeholder={"Fahrzeug"}
+                                            styles={{
+                                                menu: provided => ({...provided, zIndex: 9999})
+                                            }}
+                                            onChange={handleChangeFahrzeug}
+                                            options={fahrzeug?.map((a: any)=> ({value: a.fahrzeug_id, label: `${a.nummernschild}`}))}
+                                    />
+                                </Col>
+                                <Col>
+                                    <Select placeholder={"Fahrer:in"}
+                                            styles={{
+                                                menu: provided => ({...provided, zIndex: 9999})
+                                            }}
+                                            onChange={handleChangeFahrerin}
+                                            options={fahrerin?.map((a:any)=> ({value: a.fahrerin_id, label: `${a.vorname} ${a.nachname}`}))}
+                                    />
+                                </Col>
+                            </Row>
                             <Col>
                                 <FloatingLabel label={"km-Stand Beginn"}>
                                     <FormControl type={"number"} value={kmBeginn} onChange={(e)=> setKmBeginn(e.target.value)}/>
@@ -272,23 +316,11 @@ const Onlinefahrtenbuch : FC = () => {
                                 </FloatingLabel>
                             </Col>
                         </Row>
-                        <Row className={"g-2 mb-3"}>
-                            <Col>
-                                <Select placeholder={"Fahrzeug"}
-                                        onChange={handleChangeFahrzeug}
-                                        options={fahrzeug?.map((a: any)=> ({value: a.fahrzeug_id, label: `${a.nummernschild}`}))}
-                                />
-                            </Col>
-                            <Col>
-                                <Select placeholder={"Fahrer:in"}
-                                        onChange={handleChangeFahrerin}
-                                        options={fahrerin?.map((a:any)=> ({value: a.fahrerin_id, label: `${a.vorname} ${a.nachname}`}))}
-                                />
-                            </Col>
-                        </Row>
+
                         <div className={"g-2 mb-3"}>
                             <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
                         </div>
+                        {formErrorFahrt && <p className={"text-danger"}>{formErrorFahrt}</p>}
                     </Container>
                 </form>
 
@@ -316,7 +348,7 @@ const Onlinefahrtenbuch : FC = () => {
                             {/*<td>{fahrt.kmende}</td>*/}
                             {/*<td>{fahrt.kmende - fahrt.kmbeginn}</td>*/}
                             {/*<td>{fahrt.grund}</td>*/}
-                            <td>{fahrt.datum}</td>
+                            <td>{dayjs(fahrt.datum).format("D.M.YYYY")}</td>
                             {/*<td><Button variant={"outline-dark"} onClick={()=> removeFahrt(fahrt.fahrt_id)}>Löschen</Button></td>*/}
                             {/*<td>*/}
                             {/*    <Link to={`/fahrtbearbeiten/${fahrt.fahrt_id}`}>*/}

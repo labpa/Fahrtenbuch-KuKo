@@ -55,7 +55,6 @@ const Update: FC = () => {
                 rideDay: datensatz.rideDay })
         }else {
             console.log("No Data!");
-
         }
     }, [drId]);
 

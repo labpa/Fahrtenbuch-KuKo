@@ -32,6 +32,15 @@ const supabaseApiFahrt = createApi({
             invalidatesTags: ['Fahrt']
         }),
 
+        updateFahrt: builder.mutation({
+           query: ({fahrt_id, payload}) => ({
+               url: `rest/v1/fahrt?fahrt_id=eq.${fahrt_id}`,
+               method: 'put',
+               body: {...payload, fahrt_id}
+           }),
+            invalidatesTags: ['Fahrt']
+        }),
+
          // Fahrerin
          getFahrerin: builder.query({
              query: () => 'rest/v1/fahrerin',
@@ -101,6 +110,6 @@ const supabaseApiFahrt = createApi({
 
 })
 export const {  useGetFahrtQuery, useGetFahrerinQuery, useGetFahrzeugQuery, useCreateFahrtMutation,
-                useCreateFahrerinMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation, useRemoveFahrzeugMutation, useRemoveFahrtMutation, useUpdateFahrerinMutation, useUpdateFahrzeugMutation
+                useCreateFahrerinMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation, useRemoveFahrzeugMutation, useRemoveFahrtMutation, useUpdateFahrerinMutation, useUpdateFahrzeugMutation, useUpdateFahrtMutation
                 } = supabaseApiFahrt;
 export {supabaseApiFahrt};

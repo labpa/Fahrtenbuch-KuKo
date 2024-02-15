@@ -4,6 +4,7 @@ import {Link, useParams} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import {Col, Row} from "react-bootstrap";
+import dayjs from "dayjs";
 
 const FahrtDetail : FC = () => {
     const {data: fahrt} = useGetFahrtQuery('');
@@ -51,7 +52,7 @@ const FahrtDetail : FC = () => {
                     </Row>
                     <Row className={"g-2 mb-3"}>
                         <Col><label>Datum</label></Col>
-                        <Col>{datum}</Col>
+                        <Col>{dayjs(datum).format("D.M.YYYY")}</Col>
                     </Row>
                     <Row className={"g-2 mb-3"}>
                         <Col><label>Grund der Fahrt</label></Col>
@@ -82,7 +83,7 @@ const FahrtDetail : FC = () => {
                         </Col>
                         <Col>
                             <Link to={"/onlinefahrtenbuch"}>
-                                <Button variant={"outline-dark"}>Abbrechen</Button>
+                                <Button variant={"outline-dark"}>Zurück</Button>
                             </Link>
                         </Col>
                     </Row>
