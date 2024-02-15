@@ -75,6 +75,27 @@ const FahrtBearbeiten : FC = () => {
                     <Container>
                         <Row className={"g-2 mb-3"}>
                             <Col>
+                                <Select placeholder={"Fahrzeug"}
+                                        styles={{
+                                            menu: provided => ({...provided, zIndex: 9999})
+                                        }}
+                                        onChange={handleChangeFahrzeug}
+                                        options={fahrzeug?.map((a:any)=>({value: a.fahrzeug_id, label: `${a.nummernschild}`}))}
+                                />
+                            </Col>
+                            <Col>
+                                <Select placeholder={"Fahrer:in"}
+                                        styles={{
+                                            menu: provided => ({...provided, zIndex: 9999})
+                                        }}
+                                        onChange={handleChangeFahrerin}
+                                        value={fahrerin?.find((c: any) => c.vorname === fahrerin.vorname )}
+                                        options={fahrerin?.map((a:any)=>({value: a.fahrerin_id, label: `${a.vorname} ${a.nachname}`}))}
+                                />
+                            </Col>
+                        </Row>
+                        <Row className={"g-2 mb-3"}>
+                            <Col>
                                 <FloatingLabel label={"km-Stand Beginn"}>
                                     <FormControl type={"number"} value={kmBeginn} onChange={(e)=> setKmBeginn(e.target.value)} />
                                 </FloatingLabel>
@@ -97,21 +118,7 @@ const FahrtBearbeiten : FC = () => {
                                 </FloatingLabel>
                             </Col>
                         </Row>
-                        <Row className={"g-2 mb-3"}>
-                            <Col>
-                                <Select placeholder={"Fahrzeug"}
-                                        onChange={handleChangeFahrzeug}
-                                        options={fahrzeug?.map((a:any)=>({value: a.fahrzeug_id, label: `${a.nummernschild}`}))}
-                                />
-                            </Col>
-                            <Col>
-                                <Select placeholder={"Fahrer:in"}
-                                        onChange={handleChangeFahrerin}
-                                        value={fahrerin?.find((c: any) => c.vorname === fahrerin.vorname )}
-                                        options={fahrerin?.map((a:any)=>({value: a.fahrerin_id, label: `${a.vorname} ${a.nachname}`}))}
-                                />
-                            </Col>
-                        </Row>
+
 
                         <div className={"row"}>
                             <div className={"col"}>
