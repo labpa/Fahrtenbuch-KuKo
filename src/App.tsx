@@ -25,6 +25,7 @@ import Produkte from "./Pages/Produkte";
 import FahrerinBearbeiten from "./Pages/bearbeiten/FahrerinBearbeiten";
 import FahrtBearbeiten from "./Pages/bearbeiten/FahrtBearbeiten";
 import FahrzeugBearbeiten from "./Pages/bearbeiten/FahrzeugBearbeiten";
+import FahrtDetail from "./Pages/details/FahrtDetail";
 
 
 
@@ -53,6 +54,7 @@ const App: FC = () => {
       <Route path={"fahrerinbearbeiten/:id"} element={<FahrerinBearbeiten/>}/>
       <Route path={"fahrzeugbearbeiten/:id"} element={<FahrzeugBearbeiten/>}/>
       <Route path={"fahrtbearbeiten/:id"} element={<FahrtBearbeiten/>}/>
+      <Route path={"fahrtdetail/:id"} element={<FahrtDetail/>}/>
       <Route path={"*"} element={<Error/>}/>
     </Routes>
     <div>

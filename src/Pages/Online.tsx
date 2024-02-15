@@ -297,13 +297,14 @@ const Onlinefahrtenbuch : FC = () => {
                     <tr className={"g-2 mb-3"}>
                         <th scope={"col"}>Fahrzeug</th>
                         <th scope={"col"}>Fahrer:in</th>
-                        <th scope={"col"}>KM-Beginn</th>
-                        <th scope={"col"}>KM-Ende</th>
-                        <th scope={"col"}>Strecke</th>
-                        <th scope={"col"}>Grund</th>
+                        {/*<th scope={"col"}>KM-Beginn</th>*/}
+                        {/*<th scope={"col"}>KM-Ende</th>*/}
+                        {/*<th scope={"col"}>Strecke</th>*/}
+                        {/*<th scope={"col"}>Grund</th>*/}
                         <th scope={"col"}>Datum</th>
-                        <th scope={"col"}>Löschen</th>
-                        <th scope={"col"}>Bearbeiten</th>
+                        {/*<th scope={"col"}>Löschen</th>*/}
+                        {/*<th scope={"col"}>Bearbeiten</th>*/}
+                        <th scope={"col"}>Details</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -311,15 +312,20 @@ const Onlinefahrtenbuch : FC = () => {
                         <tr key={fahrt.fahrt_id}>
                             <td>{fahrzeug?.find((a: any)=> a.fahrzeug_id === fahrt.fahrzeug_id)?.nummernschild}</td>
                             <td>{fahrerin?.find((a: any)=> a.fahrerin_id === fahrt.fahrerin_id)?.vorname} {fahrerin?.find((a: any)=> a.fahrerin_id === fahrt.fahrerin_id)?.nachname}</td>
-                            <td>{fahrt.kmbeginn}</td>
-                            <td>{fahrt.kmende}</td>
-                            <td>{fahrt.kmende - fahrt.kmbeginn}</td>
-                            <td>{fahrt.grund}</td>
+                            {/*<td>{fahrt.kmbeginn}</td>*/}
+                            {/*<td>{fahrt.kmende}</td>*/}
+                            {/*<td>{fahrt.kmende - fahrt.kmbeginn}</td>*/}
+                            {/*<td>{fahrt.grund}</td>*/}
                             <td>{fahrt.datum}</td>
-                            <td><Button variant={"outline-dark"} onClick={()=> removeFahrt(fahrt.fahrt_id)}>Löschen</Button></td>
+                            {/*<td><Button variant={"outline-dark"} onClick={()=> removeFahrt(fahrt.fahrt_id)}>Löschen</Button></td>*/}
+                            {/*<td>*/}
+                            {/*    <Link to={`/fahrtbearbeiten/${fahrt.fahrt_id}`}>*/}
+                            {/*        <Button variant={"outline-dark"}>Bearbeiten</Button>*/}
+                            {/*    </Link>*/}
+                            {/*</td>*/}
                             <td>
-                                <Link to={`/fahrtbearbeiten/${fahrt.fahrt_id}`}>
-                                    <Button variant={"outline-dark"}>Bearbeiten</Button>
+                                <Link to={`/fahrtdetail/${fahrt.fahrt_id}`}>
+                                    <Button variant={"outline-dark"}>Details</Button>
                                 </Link>
                             </td>
 

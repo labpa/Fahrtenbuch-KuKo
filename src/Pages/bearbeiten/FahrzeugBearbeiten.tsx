@@ -86,6 +86,7 @@ const FahrzeugBearbeiten : FC = () => {
                                         <Button variant={"outline-dark"} type={"submit"}>Speichern</Button>
                                     </div>
                                     <div className={"p-3"}>
+
                                         <Link to={"/onlinefahrtenbuch"}>
                                             <Button variant={"outline-dark"}>Abbrechen</Button>
                                         </Link>
