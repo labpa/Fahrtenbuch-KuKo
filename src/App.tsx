@@ -26,6 +26,7 @@ import FahrerinBearbeiten from "./Pages/bearbeiten/FahrerinBearbeiten";
 import FahrtBearbeiten from "./Pages/bearbeiten/FahrtBearbeiten";
 import FahrzeugBearbeiten from "./Pages/bearbeiten/FahrzeugBearbeiten";
 import FahrtDetail from "./Pages/details/FahrtDetail";
+import LoginScreen from "./Pages/Login";
 
 
 
@@ -37,6 +38,7 @@ const App: FC = () => {
     </div>
     <Routes>
       <Route path={"/"} element={<Dashboard/>}/>
+      <Route path={"/login"} element={<LoginScreen/>}/>
       <Route path={"/home"} element={<Fahrtenbuch/>}/>
       <Route path={"/onlinefahrtenbuch"} element={<Onlinefahrtenbuch/>}/>
       <Route path={"/liste"} element={<Liste/>}/>
