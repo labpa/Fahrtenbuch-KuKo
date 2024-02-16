@@ -12,7 +12,7 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {},
-    extraReducers: {},
+    // extraReducers: {}, //todo need help!
 })
 
 export default authSlice.reducer
