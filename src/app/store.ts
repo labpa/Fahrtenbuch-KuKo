@@ -3,11 +3,13 @@ import booksReducer from '../features/books/booksSlice'
 import {supabaseApi} from "../Api/buchApi";
 import {productsApi} from "../apiSlice";
 import {supabaseApiFahrt} from "../Api/fahrtApi";
+import authReducer from '../features/auth/authSlice';
 
 
 export const store = configureStore({
     reducer: {
         books: booksReducer,
+        auth: authReducer,
         [supabaseApi.reducerPath]: supabaseApi.reducer,
         [productsApi.reducerPath]: productsApi.reducer,
         [supabaseApiFahrt.reducerPath]: supabaseApiFahrt.reducer,
