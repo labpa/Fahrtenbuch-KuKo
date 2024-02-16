@@ -20,7 +20,7 @@ const Header : FC = () => {
                 </div>
                 <div className={"p-2"}>
                     <Nav.Item as={"li"}>
-                        <NavLink to={"/profil"}>Profil</NavLink>
+                        <NavLink to={"/user"}>User</NavLink>
                     </Nav.Item>
                 </div>
             </Stack>

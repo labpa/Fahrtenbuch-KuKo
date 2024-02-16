@@ -28,6 +28,7 @@ import FahrzeugBearbeiten from "./Pages/bearbeiten/FahrzeugBearbeiten";
 import FahrtDetail from "./Pages/details/FahrtDetail";
 import LoginScreen from "./Components/Login";
 import Registrieren from "./Pages/Registrieren";
+import User from "./Pages/User";
 
 
 
@@ -40,6 +41,7 @@ const App: FC = () => {
     <Routes>
       <Route path={"/"} element={<Dashboard/>}/>
       <Route path={"/login"} element={<LoginScreen/>}/>
+      <Route path={"/user"} element={<User/>}/>
       <Route path={"/registrieren"} element={<Registrieren/>}/>
       <Route path={"/home"} element={<Fahrtenbuch/>}/>
       <Route path={"/onlinefahrtenbuch"} element={<Onlinefahrtenbuch/>}/>
