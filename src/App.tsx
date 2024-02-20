@@ -26,7 +26,7 @@ import FahrerinBearbeiten from "./Pages/bearbeiten/FahrerinBearbeiten";
 import FahrtBearbeiten from "./Pages/bearbeiten/FahrtBearbeiten";
 import FahrzeugBearbeiten from "./Pages/bearbeiten/FahrzeugBearbeiten";
 import FahrtDetail from "./Pages/details/FahrtDetail";
-import LoginScreen from "./Components/Login";
+import LoginScreen from "./Components/CompLogin";
 import Registrieren from "./Pages/Registrieren";
 import User from "./Pages/User";
 

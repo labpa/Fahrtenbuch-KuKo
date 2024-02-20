@@ -4,7 +4,7 @@ import {Col, Image, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import auto from "../images/auto.jpg";
 import Header from "../Components/Header";
-import LoginScreen from "../Components/Login";
+import LoginScreen from "../Components/CompLogin";
 import CompRegistrieren from "../Components/CompRegistrieren";
 
 const Registrieren : FC = () => {

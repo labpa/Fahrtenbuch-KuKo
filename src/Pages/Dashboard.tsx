@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import auto from "../images/auto.jpg";
 import Container from "react-bootstrap/Container";
 import {Col, Image, Row} from "react-bootstrap";
-import LoginScreen from "../Components/Login";
+import LoginScreen from "../Components/CompLogin";
 import Header from "../Components/Header";
 
 const dashboard: FC = () =>{
