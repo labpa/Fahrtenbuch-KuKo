@@ -1,17 +1,27 @@
-import React, {FC, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import {userLogin} from "../features/auth/authActions";
-import {useAppDispatch} from "../app/hooks";
+import {useAppDispatch, useAppSelector} from "../app/hooks";
+import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+
 
 
 const LoginScreen : FC = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
+    const {userinfo} = useAppSelector((state: any) => state.auth);
 
+    useEffect(() => {
+        if(userinfo){
+            navigate('/user')
+        }
+    }, [navigate, userinfo]);
 
 
     const handleLoginEvent = (e : any) => {
