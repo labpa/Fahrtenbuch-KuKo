@@ -5,12 +5,14 @@ const supabaseAuthApi = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://havsdrwogfkzzlkemcvz.supabase.co',
-        // apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8',
 
         prepareHeaders: (headers, {getState}) => {
-            const token = (getState() as RootState).auth.userToken
+            const token = localStorage.getItem("access_Token");
+            headers.set('apiKey', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8')
+           console.log(token);
             if(token){
-                headers.set('authorization', 'Bearer &{token')
+                headers.set('authorization', `Bearer ${token}`)
+
                 return headers;
             }
         },
@@ -20,7 +22,7 @@ const supabaseAuthApi = createApi({
     endpoints: (builder) => ({
         getUserDetails : builder.query({
             query: () =>({
-                url: 'rest/v1/user',
+                url: 'auth/v1/user',
                 method: 'GET'
             })
         })

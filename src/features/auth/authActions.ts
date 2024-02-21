@@ -13,7 +13,7 @@ export const registerUser = createAsyncThunk<any, any>(
                     apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8'
                 },
             }
-            const data =  await axios.post(
+            const data: any =  await axios.post(
                 `${backendUrl}/auth/v1/signup`,
                 {firstName, email, password},
                 config
@@ -39,11 +39,12 @@ export const userLogin = createAsyncThunk<any, any>(
                     apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8'
                 },
             }
-            const data = await axios.post(
+            const data: any = await axios.post(
                 `${backendUrl}/auth/v1/token?grant_type=password`,
                 {email, password},
                 config
             )
+            localStorage.setItem('access_Token', data.data.access_token);
             return data;
         } catch (error: any) {
             if (error.response && error.response.data.message) {

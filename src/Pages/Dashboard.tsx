@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import {Col, Image, Row} from "react-bootstrap";
 import LoginScreen from "../Components/CompLogin";
 import Header from "../Components/Header";
+import Button from "react-bootstrap/Button";
 
 const dashboard: FC = () =>{
 
@@ -22,7 +23,6 @@ const dashboard: FC = () =>{
                         <Col></Col>
                     </Row>
                 </Container>
-        <Header/>
         <LoginScreen/>
     </div>
 }

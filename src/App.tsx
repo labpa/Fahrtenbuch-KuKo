@@ -29,6 +29,7 @@ import FahrtDetail from "./Pages/details/FahrtDetail";
 import LoginScreen from "./Components/CompLogin";
 import Registrieren from "./Pages/Registrieren";
 import User from "./Pages/User";
+import ProtectedRoute from "./Pages/details/ProtectedRoute";
 
 
 
@@ -41,9 +42,15 @@ const App: FC = () => {
     <Routes>
       <Route path={"/"} element={<Dashboard/>}/>
       <Route path={"/login"} element={<LoginScreen/>}/>
-      <Route path={"/user"} element={<User/>}/>
+
+      <Route element={<ProtectedRoute/>}>
+        <Route path={"/user"} element={<User/>}/>
+        <Route path={"/home"} element={<Fahrtenbuch/>}/>
+      </Route>
+
+      {/*<Route path={"/user"} element={<User/>}/>*/}
       <Route path={"/registrieren"} element={<Registrieren/>}/>
-      <Route path={"/home"} element={<Fahrtenbuch/>}/>
+      {/*<Route path={"/home"} element={<Fahrtenbuch/>}/>*/}
       <Route path={"/onlinefahrtenbuch"} element={<Onlinefahrtenbuch/>}/>
       <Route path={"/liste"} element={<Liste/>}/>
       <Route path={"/contact"} element={<Contact/>}/>

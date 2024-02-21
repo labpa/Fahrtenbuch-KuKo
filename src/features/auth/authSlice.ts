@@ -1,6 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {registerUser, userLogin} from "./authActions";
 
+const userToken = localStorage.getItem("access_Token")
+? localStorage.getItem("access_Token")
+    : null
+
 const initialState = {
     loading: false,
     userinfo: null,
@@ -12,7 +16,14 @@ const initialState = {
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+        logout: () => {
+            localStorage.removeItem("access_Token");
+        },
+        setCredentials: (state, {payload})=> {
+            state.userinfo = payload
+        }
+    },
     extraReducers: (builder) => {
         //Registrieren
         builder.addCase(registerUser.pending, (state)=> {
@@ -42,7 +53,8 @@ const authSlice = createSlice({
             state.loading = false
             state.error = payload
         })
+
     },
 })
-
+export const {logout, setCredentials} = authSlice.actions
 export default authSlice.reducer
