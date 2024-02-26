@@ -30,6 +30,7 @@ import LoginScreen from "./Components/CompLogin";
 import Registrieren from "./Pages/Registrieren";
 import User from "./Pages/User";
 import ProtectedRoute from "./Pages/details/ProtectedRoute";
+import Status from "./Components/Status"
 
 
 
@@ -39,6 +40,9 @@ const App: FC = () => {
     <div className={"container-sm"}>
       <Navbarzwei/>
     </div>
+    <div>
+      <Status/>
+    </div>
     <Routes>
       <Route path={"/"} element={<Dashboard/>}/>
       <Route path={"/login"} element={<LoginScreen/>}/>
@@ -46,12 +50,14 @@ const App: FC = () => {
       <Route element={<ProtectedRoute/>}>
         <Route path={"/user"} element={<User/>}/>
         <Route path={"/home"} element={<Fahrtenbuch/>}/>
+        <Route path={"/onlinefahrtenbuch"} element={<Onlinefahrtenbuch/>}/>
+        <Route path={"/buecheronline"} element={<BuecherOnline/>}/>
       </Route>
 
       {/*<Route path={"/user"} element={<User/>}/>*/}
       <Route path={"/registrieren"} element={<Registrieren/>}/>
       {/*<Route path={"/home"} element={<Fahrtenbuch/>}/>*/}
-      <Route path={"/onlinefahrtenbuch"} element={<Onlinefahrtenbuch/>}/>
+
       <Route path={"/liste"} element={<Liste/>}/>
       <Route path={"/contact"} element={<Contact/>}/>
       <Route path={"/update/:drId"} element={<Update/>}/>
@@ -62,7 +68,7 @@ const App: FC = () => {
       <Route path={"/buecher"} element={<Buecher/>}/>
       <Route path={"/buecherupdate/:id"} element={<BuecherUpdate/>}/>
       <Route path={"/buecheronlineupdate/:id"} element={<BuecherOnlineUpdate/>}/>
-      <Route path={"/buecheronline"} element={<BuecherOnline/>}/>
+
       <Route path={"/produkte"} element={<Produkte/>}/>
       <Route path={"fahrerinbearbeiten/:id"} element={<FahrerinBearbeiten/>}/>
       <Route path={"fahrzeugbearbeiten/:id"} element={<FahrzeugBearbeiten/>}/>

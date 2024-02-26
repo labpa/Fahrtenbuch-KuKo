@@ -5,9 +5,6 @@ import Container from "react-bootstrap/Container";
 import {userLogin} from "../features/auth/authActions";
 import {useAppDispatch, useAppSelector} from "../app/hooks";
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
-
-
 
 const LoginScreen : FC = () => {
     const [email, setEmail] = useState<string>("");
@@ -31,53 +28,34 @@ const LoginScreen : FC = () => {
 
     return(
         <div className={"bs-body-bg"}>
-            <div className={"container-sm justify-content-center"}>
-                <div className="d-flex justify-content-center">
-                    <div className={"row"}>
-                        <div><h1>Login</h1></div>
-                    </div>
-                </div>
-                <form onSubmit={handleLoginEvent}>
-                    <Container>
-                        <Row className={"g-2 mb-3"}>
-                            <Col></Col>
-                            <Col>
-                                <FloatingLabel label={"Email Adresse"}>
-                                    <FormControl type={"email"}
-                                                 placeholder={"beispiel@beispiel.com"}
-                                                 value={email}
-                                                 onChange={(e)=> setEmail(e.target.value)}
-                                    />
-                                </FloatingLabel>
-                            </Col>
-                            <Col></Col>
-                        </Row>
-                        <Row className={"g-2 mb-3"}>
-                            <Col></Col>
-                            <Col>
-                                <FloatingLabel label={"Password"}>
-                                    <FormControl type={"password"}
-                                                 placeholder={"Password"}
-                                                 value={password}
-                                                 onChange={(e)=> setPassword(e.target.value)}
-                                    />
-                                </FloatingLabel>
-                            </Col>
-                            <Col></Col>
-                        </Row>
-                        <Row className={"g-2 mb-3"}>
-                            <Col></Col>
-                            <Col>
-                                <div className="d-flex justify-content-center">
-                                    <Button type={"submit"} variant={"outline-dark"} className={"g-2 mb-3"}>Anmelden</Button>
-                                </div>
-                            </Col>
-                            <Col></Col>
-                        </Row>
-                    </Container>
-                </form>
-
-            </div>
+            <Container>
+                <Row className="justify-content-md-center mt-5">
+                    <Col xs={12} md={6}>
+                        <h1 className="text-center mb-4">Login</h1>
+                        <form onSubmit={handleLoginEvent}>
+                            <FloatingLabel label="Email Adresse">
+                                <FormControl
+                                    type="email"
+                                    placeholder="beispiel@beispiel.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </FloatingLabel>
+                            <FloatingLabel label="Password" className="mt-3">
+                                <FormControl
+                                    type="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </FloatingLabel>
+                            <div className="d-grid mt-4 g-2 mb-3">
+                                <Button type="submit" variant="outline-dark">Anmelden</Button>
+                            </div>
+                        </form>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     )
 }

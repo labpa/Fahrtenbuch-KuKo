@@ -17,8 +17,9 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        logout: () => {
+        logout: (state) => {
             localStorage.removeItem("access_Token");
+            state.userinfo = null;
         },
         setCredentials: (state, {payload})=> {
             state.userinfo = payload

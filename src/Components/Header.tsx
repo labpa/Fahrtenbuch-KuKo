@@ -40,21 +40,22 @@ console.log(data);
                         <div className={"bg-body-tertiary"}>
                             <Row>
                                 <Col>
-                                    <span className={"text-light"}>
-                                        {isFetching
-                                        ? `Fetching your profile...`
-                                        : userinfo !== null
-                                        ? ` Logged in as ${userinfo.email}`
-                                        : "You're not logged in"}
-                                    </span>
+                                    {/*<span className={"text-light"}>*/}
+                                    {/*    {isFetching*/}
+                                    {/*    ? `Fetching your profile...`*/}
+                                    {/*    : userinfo !== null*/}
+                                    {/*    ? ` Logged in as ${userinfo.email}`*/}
+                                    {/*    : "You're not logged in"}*/}
+                                    {/*</span>*/}
                                 </Col>
                                 <Col></Col>
-                                <Col>
-                                    {userinfo? (<Button variant={"outline-light"} onClick={()=> test()}>Logout</Button>)
-                                        : (
-                                            <NavLink to={"/login"}>Login</NavLink>
-                                        )}
-                                </Col>
+                                <Col></Col>
+                                {/*<Col>*/}
+                                {/*    {userinfo? (<Button variant={"outline-light"} onClick={()=> test()}>Logout</Button>)*/}
+                                {/*        : (*/}
+                                {/*            <NavLink to={"/login"}>Login</NavLink>*/}
+                                {/*        )}*/}
+                                {/*</Col>*/}
                             </Row>
                         </div>
                     </div>
