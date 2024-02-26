@@ -19,7 +19,7 @@ const Header : FC = () => {
     const {data, isFetching} = useGetUserDetailsQuery('userDetails', {
         pollingInterval: 900000,
     })
-console.log(data);
+// console.log(data);
     useEffect(() => {
         if(data){
             dispatch(setCredentials(data))

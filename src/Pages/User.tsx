@@ -9,7 +9,7 @@ import {useAppSelector} from "../app/hooks";
 const User : FC = () => {
 
     const {userinfo} : {userinfo: any} = useAppSelector((state)=> state.auth)
-    console.log(userinfo);
+    // console.log(userinfo);
     return(
         <div className={"container-sm justify-content-center"}>
             <Container>

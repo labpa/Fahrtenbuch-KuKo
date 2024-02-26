@@ -1,6 +1,27 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
+// const getToken = () => {
+//     const token = localStorage.getItem("access_Token");
+//     return token ? `Bearer ${token}` : "";
+// }
+
+// console.log(token); //todo Vermutlich soll Token in Authorization
+
 const supabaseApiFahrt = createApi({
+    // reducerPath: "FahrtApi",
+    // baseQuery: fetchBaseQuery({
+    //     baseUrl: 'https://havsdrwogfkzzlkemcvz.supabase.co',
+    //     prepareHeaders: (headers) => {
+    //         const token = getToken();
+    //         if (token) {
+    //             headers.set('Authorization', token);
+    //         }
+    //         headers.set('Content-Type', 'application/json');
+    //         return headers;
+    //     },
+    // }),
+
+
     reducerPath: "FahrtApi",
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://havsdrwogfkzzlkemcvz.supabase.co',

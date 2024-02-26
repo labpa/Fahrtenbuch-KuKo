@@ -14,6 +14,8 @@ const LoginScreen : FC = () => {
 
     const {userinfo} = useAppSelector((state: any) => state.auth);
 
+    // console.log(userinfo);
+
     useEffect(() => {
         if(userinfo){
             navigate('/user')
