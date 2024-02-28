@@ -22,7 +22,7 @@ const Header : FC = () => {
 // console.log(data);
     useEffect(() => {
         if(data){
-            dispatch(setCredentials(data))
+            // dispatch(setCredentials(data))
         }
     }, [data, dispatch]);
 

@@ -20,6 +20,7 @@ const authSlice = createSlice({
         logout: (state) => {
             localStorage.removeItem("access_Token");
             state.userinfo = null;
+            state.userToken = null;
         },
         setCredentials: (state, {payload})=> {
             state.userinfo = payload

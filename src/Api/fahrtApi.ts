@@ -1,33 +1,30 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
-// const getToken = () => {
-//     const token = localStorage.getItem("access_Token");
-//     return token ? `Bearer ${token}` : "";
-// }
-
-// console.log(token); //todo Vermutlich soll Token in Authorization
+const getToken = () => {
+    const token = localStorage.getItem("access_Token");
+    return token ? `Bearer ${token}` : "";
+}
 
 const supabaseApiFahrt = createApi({
-    // reducerPath: "FahrtApi",
-    // baseQuery: fetchBaseQuery({
-    //     baseUrl: 'https://havsdrwogfkzzlkemcvz.supabase.co',
-    //     prepareHeaders: (headers) => {
-    //         const token = getToken();
-    //         if (token) {
-    //             headers.set('Authorization', token);
-    //         }
-    //         headers.set('Content-Type', 'application/json');
-    //         return headers;
-    //     },
-    // }),
-
-
     reducerPath: "FahrtApi",
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://havsdrwogfkzzlkemcvz.supabase.co',
-        headers: {Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8',
-        apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8'},
+        prepareHeaders: (headers) => {
+            const token = getToken();
+            if (token) {
+                headers.set('Authorization',token);
+            }
+            headers.set('apikey', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8');
+            headers.set('Content-Type', 'application/json');
+            return headers;
+        },
     }),
+    // reducerPath: "FahrtApi",
+    // baseQuery: fetchBaseQuery({
+    //     baseUrl: 'https://havsdrwogfkzzlkemcvz.supabase.co',
+    //     headers: {Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8',
+    //     apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8'},
+    // }),
     tagTypes: ['Fahrt', 'Fahrerin', 'Fahrzeug'],
     endpoints: (builder) => ({
         // Fahrt
@@ -130,7 +127,19 @@ const supabaseApiFahrt = createApi({
     })
 
 })
-export const {  useGetFahrtQuery, useGetFahrerinQuery, useGetFahrzeugQuery, useCreateFahrtMutation,
-                useCreateFahrerinMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation, useRemoveFahrzeugMutation, useRemoveFahrtMutation, useUpdateFahrerinMutation, useUpdateFahrzeugMutation, useUpdateFahrtMutation
-                } = supabaseApiFahrt;
+export const {
+    useGetFahrtQuery,
+    useGetFahrerinQuery,
+    useGetFahrzeugQuery,
+    useCreateFahrtMutation,
+    useCreateFahrerinMutation,
+    useRemoveFahrerinMutation,
+    useCreateFahrzeugMutation,
+    useRemoveFahrzeugMutation,
+    useRemoveFahrtMutation,
+    useUpdateFahrerinMutation,
+    useUpdateFahrzeugMutation,
+    useUpdateFahrtMutation
+} = supabaseApiFahrt;
+
 export {supabaseApiFahrt};

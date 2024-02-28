@@ -8,7 +8,6 @@ import {Link} from "react-router-dom";
 import dayjs from "dayjs";
 
 
-
 const Onlinefahrtenbuch : FC = () => {
     //Fahrer:in
     const {data: fahrerin} = useGetFahrerinQuery('');
@@ -45,6 +44,8 @@ const Onlinefahrtenbuch : FC = () => {
     const [auswahlFahrzeug, setAuswahlFahrzeug] = useState<string>();
     const [auswahlFahrerin, setAuswahlFahrerin] = useState<string>();
 
+
+    console.log(fahrerin);
 
 
 
@@ -365,13 +366,6 @@ const Onlinefahrtenbuch : FC = () => {
                     ))}
                     </tbody>
                 </Table>
-
-
-
-
-
-
-
 
             </div>
         </div>

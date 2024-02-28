@@ -20,7 +20,7 @@ const Status : FC = () => {
 
     useEffect(() => {
         if(data){
-            dispatch(setCredentials(data))
+            // dispatch(setCredentials(data))
         }
     }, [data, dispatch]);
 
