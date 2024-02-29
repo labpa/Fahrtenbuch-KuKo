@@ -9,7 +9,7 @@ import {useAppSelector} from "../app/hooks";
 const User : FC = () => {
 
     const {userinfo} : {userinfo: any} = useAppSelector((state)=> state.auth)
-    // console.log(userinfo);
+
     return(
         <div className={"container-sm justify-content-center"}>
             <Container>
@@ -37,7 +37,7 @@ const User : FC = () => {
                 <Col></Col>
                 <Col>
                     <span>
-                        Welcome <strong>{userinfo?.email}!</strong> You can view this page because you're logged in
+                        Welcome <strong>{userinfo} !</strong> You can view this page because you're logged in
                     </span>
                 </Col>
                 <Col></Col>

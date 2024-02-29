@@ -48,7 +48,7 @@ const authSlice = createSlice({
         })
         builder.addCase(userLogin.fulfilled, (state, {payload} : any) => {
             state.loading = false
-            state.userinfo = payload
+            state.userinfo = payload.data.access_token && payload.data.user.email
             state.userToken= payload.userToken
         })
         builder.addCase(userLogin.rejected, (state, {payload} : any)=> {

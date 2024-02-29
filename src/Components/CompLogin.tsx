@@ -14,7 +14,7 @@ const LoginScreen : FC = () => {
 
     const {userinfo} = useAppSelector((state: any) => state.auth);
 
-    // console.log(userinfo);
+    // console.log(userinfo); //todo hier weiter
 
     useEffect(() => {
         if(userinfo){
