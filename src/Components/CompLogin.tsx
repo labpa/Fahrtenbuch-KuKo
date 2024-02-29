@@ -11,21 +11,36 @@ const LoginScreen : FC = () => {
     const [password, setPassword] = useState<string>("");
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const [error, setError] = useState<string>("");
 
-    const {userinfo} = useAppSelector((state: any) => state.auth);
+    const {userinfo, error : authError} = useAppSelector((state: any) => state.auth);
 
-    // console.log(userinfo); //todo hier weiter
 
+    //Wenn Anmeldung erfolgreich -> Navigiere zu /user
     useEffect(() => {
         if(userinfo){
             navigate('/user')
         }
     }, [navigate, userinfo]);
 
+    //Fehler abfangen
+    useEffect(() => {
+        if(authError){
+            setError("Anmeldung fehlgeschlagen. Passwort und E-Mail kontrollieren");
+        }else {
+            setError("");
+        }
+    }, [authError]);
+
 
     const handleLoginEvent = (e : any) => {
         e?.preventDefault();
-        dispatch(userLogin({email, password}))
+        try {
+            dispatch(userLogin({email, password}));
+        } catch(error){
+            console.error("Login Error:", error);
+        }
+
     }
 
     return(
@@ -54,6 +69,7 @@ const LoginScreen : FC = () => {
                             <div className="d-grid mt-4 g-2 mb-3">
                                 <Button type="submit" variant="outline-dark">Anmelden</Button>
                             </div>
+                            {error && <div className="alert alert-danger">{error}</div>}
                         </form>
                     </Col>
                 </Row>

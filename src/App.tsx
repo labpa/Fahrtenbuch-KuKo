@@ -44,37 +44,52 @@ const App: FC = () => {
       <Status/>
     </div>
     <Routes>
-      <Route path={"/"} element={<Dashboard/>}/>
-      <Route path={"/login"} element={<LoginScreen/>}/>
+      //Für die App Relevant
+      <Route path={"/"} element={<Dashboard/>}/> //Dashboard            // Dashboard
+      <Route path={"/login"} element={<LoginScreen/>}/>                // Login
+      <Route path={"/registrieren"} element={<Registrieren/>}/>       // Registrieren
+      <Route path={"/contact"} element={<Contact/>}/>                // Kontaktseite
+      <Route path={"/impressum"} element={<Impressum/>}/>           // todo Impressum
+      <Route path={"*"} element={<Error/>}/>                       // Fehlermeldung
 
-      <Route element={<ProtectedRoute/>}>
-        <Route path={"/user"} element={<User/>}/>
-        <Route path={"/home"} element={<Fahrtenbuch/>}/>
-        <Route path={"/onlinefahrtenbuch"} element={<Onlinefahrtenbuch/>}/>
-        <Route path={"/buecheronline"} element={<BuecherOnline/>}/>
-      </Route>
-
-      {/*<Route path={"/user"} element={<User/>}/>*/}
-      <Route path={"/registrieren"} element={<Registrieren/>}/>
-      {/*<Route path={"/home"} element={<Fahrtenbuch/>}/>*/}
-
-      <Route path={"/liste"} element={<Liste/>}/>
-      <Route path={"/contact"} element={<Contact/>}/>
-      <Route path={"/update/:drId"} element={<Update/>}/>
-      <Route path={"/test"} element={<Test/>}/>
-      <Route path={"/impressum"} element={<Impressum/>}/>
-      <Route path={"/datenbank"} element={<Datenbank/>}/>
-      <Route path={"/eingabe"} element={<Eingabe/>}/>
-      <Route path={"/buecher"} element={<Buecher/>}/>
+      // todo kann weg!
+      //Bücher offline todo entfernen
+      <Route path={"/buecher"} element={<Buecher/>}/> //
       <Route path={"/buecherupdate/:id"} element={<BuecherUpdate/>}/>
-      <Route path={"/buecheronlineupdate/:id"} element={<BuecherOnlineUpdate/>}/>
 
-      <Route path={"/produkte"} element={<Produkte/>}/>
-      <Route path={"fahrerinbearbeiten/:id"} element={<FahrerinBearbeiten/>}/>
-      <Route path={"fahrzeugbearbeiten/:id"} element={<FahrzeugBearbeiten/>}/>
-      <Route path={"fahrtbearbeiten/:id"} element={<FahrtBearbeiten/>}/>
-      <Route path={"fahrtdetail/:id"} element={<FahrtDetail/>}/>
-      <Route path={"*"} element={<Error/>}/>
+      //Ausgabe Vinyl Sammlung todo entfernen
+      <Route path={"/eingabe"} element={<Eingabe/>}/>       // Eingabe der Daten
+      <Route path={"/datenbank"} element={<Datenbank/>}/>   // Ausgabe der Daten
+
+      // Playground / Testzone todo entfernen
+      <Route path={"/test"} element={<Test/>}/>
+
+      // Produkte todo entfernen
+      <Route path={"/produkte"} element={<Produkte/>}/>   // Übung Daten abholen :D
+
+
+      // Ab hier Nur nach Login
+      <Route element={<ProtectedRoute/>}>
+        //User
+        <Route path={"/user"} element={<User/>}/>
+
+        //Fahrtenbuch Offline
+        <Route path={"/home"} element={<Fahrtenbuch/>}/>
+        <Route path={"/update/:drId"} element={<Update/>}/>
+        <Route path={"/liste"} element={<Liste/>}/>
+
+        //Fahrtenbuch Online
+        <Route path={"/onlinefahrtenbuch"} element={<Onlinefahrtenbuch/>}/>
+        <Route path={"fahrerinbearbeiten/:id"} element={<FahrerinBearbeiten/>}/>
+        <Route path={"fahrzeugbearbeiten/:id"} element={<FahrzeugBearbeiten/>}/>
+        <Route path={"fahrtbearbeiten/:id"} element={<FahrtBearbeiten/>}/>
+        <Route path={"fahrtdetail/:id"} element={<FahrtDetail/>}/>
+
+        // Bücher Online
+        <Route path={"/buecheronline"} element={<BuecherOnline/>}/>
+        <Route path={"/buecheronlineupdate/:id"} element={<BuecherOnlineUpdate/>}/>
+
+      </Route>
     </Routes>
     <div>
       <Footer/>
