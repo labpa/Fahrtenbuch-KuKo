@@ -137,28 +137,28 @@ ER-Diagramm mit der endgültigen Datenbank für das Fahrtenbuch
 #### Policy Supabase
 
 --INSERT
-create policy insert_policy
-on schema_name.table_name
-for insert to authenticated
-with check (true);
+create policy insert_policy  
+on schema_name.table_name  
+for insert to authenticated  
+with check (true);  
 
 --VIEW
-CREATE POLICY view_policy
-ON schema_name.table_name
-FOR SELECT TO authenticated
-USING (true);
+CREATE POLICY view_policy  
+ON schema_name.table_name  
+FOR SELECT TO authenticated  
+USING (true);  
 
 -- UPDATE
-CREATE POLICY update_policy
-ON schema_name.table_name
-FOR UPDATE TO authenticated
-USING (true);
+CREATE POLICY update_policy  
+ON schema_name.table_name  
+FOR UPDATE TO authenticated  
+USING (true);  
 
 --DELETE
-CREATE POLICY delete_policy
-ON schema_name.table_name
-FOR DELETE TO authenticated
-USING (true);
+CREATE POLICY delete_policy  
+ON schema_name.table_name  
+FOR DELETE TO authenticated  
+USING (true);  
 
 ### App
 + erstellen von .env Datei.
