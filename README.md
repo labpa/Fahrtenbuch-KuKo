@@ -134,6 +134,32 @@ ER-Diagramm mit der endgültigen Datenbank für das Fahrtenbuch
   + km-begin *int8*
   + km-ende *int8*
 
+#### Policy Supabase
+
+--INSERT
+create policy insert_policy
+on schema_name.table_name
+for insert to authenticated
+with check (true);
+
+--VIEW
+CREATE POLICY view_policy
+ON schema_name.table_name
+FOR SELECT TO authenticated
+USING (true);
+
+-- UPDATE
+CREATE POLICY update_policy
+ON schema_name.table_name
+FOR UPDATE TO authenticated
+USING (true);
+
+--DELETE
+CREATE POLICY delete_policy
+ON schema_name.table_name
+FOR DELETE TO authenticated
+USING (true);
+
 ### App
 + erstellen von .env Datei.
   + Über diese Datei wird die Verbindung zur Datenbank aufgebaut. Die .env Datei enthält den Public Key und die Url
