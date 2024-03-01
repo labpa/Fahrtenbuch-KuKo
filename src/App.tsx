@@ -31,6 +31,7 @@ import Registrieren from "./Pages/Registrieren";
 import User from "./Pages/User";
 import ProtectedRoute from "./Pages/details/ProtectedRoute";
 import Status from "./Components/Status"
+import NeuesPasswort from "./Pages/NeuesPasswort";
 
 
 
@@ -50,7 +51,8 @@ const App: FC = () => {
       <Route path={"/registrieren"} element={<Registrieren/>}/>       // Registrieren
       <Route path={"/contact"} element={<Contact/>}/>                // Kontaktseite
       <Route path={"/impressum"} element={<Impressum/>}/>           // todo Impressum
-      <Route path={"*"} element={<Error/>}/>                       // Fehlermeldung
+      <Route path={"/neuespasswort"} element={<NeuesPasswort/>}/>  // Neues Password
+      <Route path={"*"} element={<Error/>}/>                      // Fehlermeldung
 
       // todo kann weg!
       //Bücher offline todo entfernen

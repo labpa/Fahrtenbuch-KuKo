@@ -16,16 +16,29 @@ const supabaseAuthApi = createApi({
             }
         },
     }),
-
     tagTypes: ['User'],
     endpoints: (builder) => ({
+
         getUserDetails : builder.query({
             query: () =>({
                 url: 'auth/v1/user',
                 method: 'GET'
             })
+        }),
+
+        //todo hier weiter url stimmt wohl noch nicht oder falscher ort dafür
+        resetPassword: builder.mutation({
+            query: (email : any) => ({
+                url: '/auth/v1/password/forgot',
+                method: 'POST',
+                body: {email},
+            })
         })
+
+
+
+
     }),
 })
-export const {useGetUserDetailsQuery} = supabaseAuthApi;
+export const {useGetUserDetailsQuery, useResetPasswordMutation} = supabaseAuthApi;
 export {supabaseAuthApi};

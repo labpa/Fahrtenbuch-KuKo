@@ -40,60 +40,16 @@ const Header : FC = () => {
                         <div className={"bg-body-tertiary"}>
                             <Row>
                                 <Col>
-                                    {/*<span className={"text-light"}>*/}
-                                    {/*    {isFetching*/}
-                                    {/*    ? `Fetching your profile...`*/}
-                                    {/*    : userinfo !== null*/}
-                                    {/*    ? ` Logged in as ${userinfo.email}`*/}
-                                    {/*    : "You're not logged in"}*/}
-                                    {/*</span>*/}
                                 </Col>
                                 <Col></Col>
                                 <Col></Col>
-                                {/*<Col>*/}
-                                {/*    {userinfo? (<Button variant={"outline-light"} onClick={()=> test()}>Logout</Button>)*/}
-                                {/*        : (*/}
-                                {/*            <NavLink to={"/login"}>Login</NavLink>*/}
-                                {/*        )}*/}
-                                {/*</Col>*/}
                             </Row>
                         </div>
                     </div>
 
-                    {/*<Row>*/}
-                    {/*    <Col>*/}
-                    {/*        <span>*/}
-                    {/*            {isFetching*/}
-                    {/*            ? `Fetching your profile...`*/}
-                    {/*            : userinfo !== null*/}
-                    {/*            ? ` Logged in as ${userinfo.email}`*/}
-                    {/*            : "You're not logged in"}*/}
-                    {/*        </span>*/}
-                    {/*    </Col>*/}
-                    {/*    <Col>*/}
-                    {/*        {userinfo? (<Button variant={"outline-dark"} onClick={()=> test()}>Logout</Button>)*/}
-                    {/*            : (*/}
-                    {/*                <NavLink to={"/login"}>Login</NavLink>*/}
-                    {/*            )}*/}
-                    {/*    </Col>*/}
-                    {/*</Row>*/}
                     <Row>
                         <Stack direction={"horizontal"} gap={3}>
-                            {/*<div className={"p-2"}>*/}
-                            {/*    <Nav.Item as={"li"}>*/}
-                            {/*        <NavLink to={"/"}>Login</NavLink>*/}
-                            {/*    </Nav.Item>*/}
-                            {/*</div>*/}
-                            {/*<div className={"p-2"}>*/}
-                            {/*    <Nav.Item as={"li"}>*/}
-                            {/*        <NavLink to={"/registrieren"}>Registrieren</NavLink>*/}
-                            {/*    </Nav.Item>*/}
-                            {/*</div>*/}
-                            {/*<div className={"p-2"}>*/}
-                            {/*    <Nav.Item as={"li"}>*/}
-                            {/*        <NavLink to={"/user"}>User</NavLink>*/}
-                            {/*    </Nav.Item>*/}
-                            {/*</div>*/}
+
                         </Stack>
                     </Row>
                 </Nav>

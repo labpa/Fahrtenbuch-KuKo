@@ -34,7 +34,7 @@ const Status : FC = () => {
                 <Container>
                     <Nav activeKey="/" as={"ul"}>
                         <Row className={"align-items-center"}>
-                            <Col sm={8}>
+                            <Col sm={15}>
                             <span>
                                 {isFetching
                                     ? <div className={"text-danger"}>Fetching your profile...</div>
@@ -43,7 +43,7 @@ const Status : FC = () => {
                                         : <div className={"text-danger"}>Nicht Angemeldet</div>}
                             </span>
                             </Col>
-                            <Col sm={4} className={"d-flex justify-content-end"} >
+                            <Col sm={15} className={"d-flex justify-content-end"} >
                                 <div className={""}>
                                     {userinfo? (<Button variant={"outline-dark"} onClick={handleLogout}>Logout</Button>)
                                         : (

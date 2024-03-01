@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import {userLogin} from "../features/auth/authActions";
 import {useAppDispatch, useAppSelector} from "../app/hooks";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const LoginScreen : FC = () => {
     const [email, setEmail] = useState<string>("");
@@ -26,7 +26,7 @@ const LoginScreen : FC = () => {
     //Fehler abfangen
     useEffect(() => {
         if(authError){
-            setError("Anmeldung fehlgeschlagen. Passwort und E-Mail kontrollieren");
+            setError("Anmeldung fehlgeschlagen. Passwort und E-Mail kontrollieren!");
         }else {
             setError("");
         }
@@ -69,7 +69,7 @@ const LoginScreen : FC = () => {
                             <div className="d-grid mt-4 g-2 mb-3">
                                 <Button type="submit" variant="outline-dark">Anmelden</Button>
                             </div>
-                            {error && <div className="alert alert-danger">{error}</div>}
+                            {error && <div className="alert alert-danger">{error} <Link to={"/neuespasswort"}>Passwort Vergessen?</Link> </div>}
                         </form>
                     </Col>
                 </Row>
