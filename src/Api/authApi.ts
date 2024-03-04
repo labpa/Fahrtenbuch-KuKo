@@ -8,10 +8,9 @@ const supabaseAuthApi = createApi({
         prepareHeaders: (headers, {getState}) => {
             const token = localStorage.getItem("access_Token");
             headers.set('apiKey', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8')
-           // console.log(token);
             if(token){
                 headers.set('authorization', `Bearer ${token}`)
-
+                console.log(token);
                 return headers;
             }
         },
@@ -29,16 +28,37 @@ const supabaseAuthApi = createApi({
         //todo hier weiter url stimmt wohl noch nicht oder falscher ort dafür
         resetPassword: builder.mutation({
             query: (email : any) => ({
-                url: '/auth/v1/password/forgot',
+                url: 'auth/v1/password/forgot',
                 method: 'POST',
                 body: {email},
             })
-        })
+        }),
 
+        //registerUser Funktioniert
+        registerUser: builder.mutation({
+            query: ({firstname, email, password}) => ({
+                url: '/auth/v1/signup',
+                method: 'POST',
+                body: {firstname, email, password}
+            }),
+        }),
 
-
-
+        //loginUser funktioniert todo: Access_Token muss gespeichert werden.
+        loginUser: builder.mutation({
+            query: ({email, password}) => ({
+                url: '/auth/v1/token?grant_type=password',
+                method: 'POST',
+                body: {grand_type: 'password', email, password},
+            }),
+        }),
     }),
+
 })
-export const {useGetUserDetailsQuery, useResetPasswordMutation} = supabaseAuthApi;
+export const {
+    useGetUserDetailsQuery,
+    useResetPasswordMutation,
+    useLoginUserMutation,
+    useRegisterUserMutation
+} = supabaseAuthApi;
+
 export {supabaseAuthApi};

@@ -1,7 +1,7 @@
 import {FC, useEffect} from "react";
 import {useAppSelector} from "../app/hooks";
 import {useGetUserDetailsQuery} from "../Api/authApi";
-import {setCredentials, logout} from "../features/auth/authSlice";
+import {logout} from "../features/auth/authSlice";
 import {useDispatch} from "react-redux";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -15,14 +15,13 @@ const Status : FC = () => {
     const navigate = useNavigate();
 
     const {data, isFetching} = useGetUserDetailsQuery('userDetails', {
-        pollingInterval: 900000,
+        pollingInterval: 9000000000,
     })
 
-    useEffect(() => {
-        if(data){
-            // dispatch(setCredentials(data))
-        }
-    }, [data, dispatch]);
+    // useEffect(() => {
+    //     if(data){
+    //     }
+    // }, [data, dispatch]);
 
     const handleLogout = () => {
         dispatch(logout());
@@ -39,7 +38,7 @@ const Status : FC = () => {
                                 {isFetching
                                     ? <div className={"text-danger"}>Fetching your profile...</div>
                                     : userinfo !== null
-                                        ? <div className={"text-success"}>Logged in as {userinfo}</div>
+                                        ? <div className={"text-success"}>Logged in as {userinfo.user.email}</div>
                                         : <div className={"text-danger"}>Nicht Angemeldet</div>}
                             </span>
                             </Col>

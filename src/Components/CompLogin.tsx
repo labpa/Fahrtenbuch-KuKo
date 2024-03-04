@@ -6,19 +6,23 @@ import {userLogin} from "../features/auth/authActions";
 import {useAppDispatch, useAppSelector} from "../app/hooks";
 import {Link, useNavigate} from "react-router-dom";
 
+import {useLoginUserMutation} from "../Api/authApi";
+
 const LoginScreen : FC = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [error, setError] = useState<string>("");
+    const [login] = useLoginUserMutation();
 
     const {userinfo, error : authError} = useAppSelector((state: any) => state.auth);
-
+    // console.log(userinfo);
 
     //Wenn Anmeldung erfolgreich -> Navigiere zu /user
     useEffect(() => {
         if(userinfo){
+            // localStorage.setItem("access_Token", userinfo.token);
             navigate('/user')
         }
     }, [navigate, userinfo]);
@@ -32,7 +36,7 @@ const LoginScreen : FC = () => {
         }
     }, [authError]);
 
-
+//Alte Version funktioniert!
     const handleLoginEvent = (e : any) => {
         e?.preventDefault();
         try {
@@ -40,8 +44,19 @@ const LoginScreen : FC = () => {
         } catch(error){
             console.error("Login Error:", error);
         }
-
     }
+
+
+    //todo: hier gehts weiter!!!!
+// const handleLoginEvent = async (e: any) => {
+//     e?.preventDefault();
+//     try {
+//         await login({ email, password});
+//
+//     } catch(error){
+//         console.error("Login Error:", error);
+//     }
+// }
 
     return(
         <div className={"bs-body-bg"}>

@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import auto from "../images/auto.jpg";
 import Header from "../Components/Header";
 import {useAppSelector} from "../app/hooks";
+import Alert from 'react-bootstrap/Alert';
 
 const User : FC = () => {
 
@@ -29,16 +30,21 @@ const User : FC = () => {
             <Row>
                 <Col></Col>
                 <Col>
-                    <figure>{userinfo?.email?.toUpperCase()}</figure>
+                    <div>
+                        {[
+                            'success',
+                        ].map((variant) => (
+                            <Alert key={variant} variant={variant}>
+                                Welcome <strong>{userinfo.user.email} !</strong> You can view this page because you're logged in
+                            </Alert>
+                        ))}
+                    </div>
                 </Col>
                 <Col></Col>
             </Row>
             <Row>
                 <Col></Col>
                 <Col>
-                    <span>
-                        Welcome <strong>{userinfo} !</strong> You can view this page because you're logged in
-                    </span>
                 </Col>
                 <Col></Col>
             </Row>

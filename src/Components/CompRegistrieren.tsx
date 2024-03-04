@@ -2,24 +2,27 @@ import React, {FC, useState} from "react";
 import Container from "react-bootstrap/Container";
 import {Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import {registerUser} from "../features/auth/authActions";
-import {useAppDispatch} from "../app/hooks";
+import {useRegisterUserMutation} from "../Api/authApi";
 
 const CompRegistrieren : FC = () => {
     const [firstname, setFirstname] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
-    const dispatch = useAppDispatch();
-    
+    const [registerUser] = useRegisterUserMutation();
+
+
+    //NEU -> funktioniert auch :D
     const submitForm = (e : any) => {
         e?.preventDefault();
         if(password !== confirmPassword){
             alert('Password mismatch')
         }
-        dispatch(registerUser({firstname, email, password}));
+        registerUser({firstname, email, password})
         clearField();
     }
+
+
     const clearField = () => {
         setFirstname("");
         setEmail("");
