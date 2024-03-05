@@ -1,11 +1,11 @@
-import {FC, useEffect} from "react";
+import {FC} from "react";
 import {useAppSelector} from "../app/hooks";
 import {useGetUserDetailsQuery} from "../Api/authApi";
 import {logout} from "../features/auth/authSlice";
 import {useDispatch} from "react-redux";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import {Col, Row, Stack} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {Link, useNavigate} from "react-router-dom";
 
@@ -18,10 +18,6 @@ const Status : FC = () => {
         pollingInterval: 9000000000,
     })
 
-    // useEffect(() => {
-    //     if(data){
-    //     }
-    // }, [data, dispatch]);
 
     const handleLogout = () => {
         dispatch(logout());
@@ -50,7 +46,6 @@ const Status : FC = () => {
                                 <div className={""}>
                                     {userinfo? (<Button variant={"outline-dark"} onClick={handleLogout}>Logout</Button>)
                                         : (
-                                            // <NavLink to={"/login"}>Login</NavLink>
                                             <div><span></span></div>
                                         )}
                                 </div>

@@ -11,9 +11,9 @@ import {useLoginUserMutation} from "../Api/authApi";
 const LoginScreen : FC = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [error, setError] = useState<string>("");
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const [error, setError] = useState<string>("");
     const [login] = useLoginUserMutation();
 
 
@@ -21,13 +21,11 @@ const handleLoginEvent = async (e: any) => {
     e?.preventDefault();
     try {
         login({ email, password}).unwrap().then((response)=> {
-            // console.log(response);
             dispatch(setCredentials(response));
             navigate("/user");
         })
-    } catch(error){
-        console.error("Login Error:", error);
-        setError("Invalid email or password")
+    } catch (error){
+        setError("Falsche Anmeldeinformationen")
     }
 }
 
@@ -57,7 +55,12 @@ const handleLoginEvent = async (e: any) => {
                             <div className="d-grid mt-4 g-2 mb-3">
                                 <Button type="submit" variant="outline-dark">Anmelden</Button>
                             </div>
-                            {error && <div className="alert alert-danger">{error} <Link to={"/neuespasswort"}>Passwort Vergessen?</Link> </div>}
+                            {/* Hier wird die Fehlermeldung angezeigt, wenn ein Fehler auftritt */}
+                            {error && (
+                                <div className="alert alert-danger">
+                                    {error} <Link to={"/neuespasswort"}>Passwort Vergessen?</Link>{" "}
+                                </div>
+                            )}
                         </form>
                     </Col>
                 </Row>

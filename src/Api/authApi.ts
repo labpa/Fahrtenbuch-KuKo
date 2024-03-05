@@ -10,7 +10,6 @@ const supabaseAuthApi = createApi({
             headers.set('apiKey', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8')
             if(token){
                 headers.set('authorization', `Bearer ${token}`)
-                console.log(token);
                 return headers;
             }
         },
@@ -25,10 +24,10 @@ const supabaseAuthApi = createApi({
             })
         }),
 
-        //wip
+        //todo: hier weiter url still wrong
         resetPassword: builder.mutation({
-            query: (email : any) => ({
-                url: 'auth/v1/password/forgot',
+            query: (email) => ({
+                url: 'auth/v1/password/recovery',
                 method: 'POST',
                 body: {email},
             })

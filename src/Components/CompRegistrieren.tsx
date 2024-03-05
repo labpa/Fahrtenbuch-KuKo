@@ -12,7 +12,6 @@ const CompRegistrieren : FC = () => {
     const [registerUser] = useRegisterUserMutation();
 
 
-
     const submitForm = (e : any) => {
         e?.preventDefault();
         if(password !== confirmPassword){
@@ -21,7 +20,6 @@ const CompRegistrieren : FC = () => {
         registerUser({firstname, email, password})
         clearField();
     }
-
 
     const clearField = () => {
         setFirstname("");
