@@ -19,6 +19,8 @@ const FahrtDetail : FC = () => {
     const [grund, setGrund] = useState<string>("");
     const [kmbeginn, setKmBeginn] = useState<number>(0);
     const [kmEnde, setKmEnde] = useState<number>(0);
+    const [creator, setCreator] = useState<string>("");
+    const [creatorEmail, setCreatorEmail] = useState<string>("");
 
     useEffect(() => {
         let datensatz = fahrt?.find((entry: any)=> entry.fahrt_id === fahrt_id);
@@ -29,6 +31,8 @@ const FahrtDetail : FC = () => {
             setGrund(datensatz.grund);
             setKmBeginn(datensatz.kmbeginn);
             setKmEnde(datensatz.kmende);
+            setCreator(datensatz.created_from)
+            setCreatorEmail(datensatz.created_from_email)
         }
     }, [fahrt_id]);
 
@@ -69,6 +73,10 @@ const FahrtDetail : FC = () => {
                     <Row className={"g-2 mb-3"}>
                         <Col><label>Gefahrene km</label></Col>
                         <Col>{kmEnde - kmbeginn} km</Col>
+                    </Row>
+                    <Row className={"g-2 mb-3"}>
+                        <Col><label>Erstellt von: </label></Col>
+                        <Col>{creatorEmail}</Col>
                     </Row>
                     <Row className={"g-2 mb-3"}>
                         <Col>

@@ -6,8 +6,8 @@ import {useResetPasswordMutation} from "../Api/authApi";
 
 const NeuesPasswort : FC = () => {
     const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [confirmPassword, setConfirmPassword] = useState<string>("");
+    // const [password, setPassword] = useState<string>("");
+    // const [confirmPassword, setConfirmPassword] = useState<string>("");
 
     const [newPassword] = useResetPasswordMutation();
 

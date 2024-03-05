@@ -36,9 +36,12 @@ const Status : FC = () => {
                                     : userinfo !== null
                                         ? <div className={"text-success"}>Angemeldet als: &nbsp;
                                             <Link to={"/user"}>
-                                               {userinfo.user.email}
+                                               {userinfo.user.email} &nbsp;
                                             </Link>
+                                            <strong>ID: {userinfo.user.id}</strong>
+
                                             </div>
+
                                         : <div className={"text-danger"}>Nicht Angemeldet</div>}
                             </span>
                             </Col>

@@ -22,7 +22,7 @@ const handleLoginEvent = async (e: any) => {
     try {
         login({ email, password}).unwrap().then((response)=> {
             dispatch(setCredentials(response));
-            navigate("/user");
+            navigate("/onlinefahrtenbuch");
         })
     } catch (error){
         setError("Falsche Anmeldeinformationen")

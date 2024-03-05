@@ -27,7 +27,7 @@ const supabaseAuthApi = createApi({
         //todo: hier weiter url still wrong
         resetPassword: builder.mutation({
             query: (email) => ({
-                url: 'auth/v1/password/recovery',
+                url: 'auth/v1/token/recovery',
                 method: 'POST',
                 body: {email},
             })

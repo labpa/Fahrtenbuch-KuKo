@@ -8,15 +8,28 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        //Abmelden
         logout: (state) => {
-            localStorage.removeItem("access_Token");
-            state.userinfo = null;
-            // state.userToken = null;
+            try {
+                localStorage.removeItem("access_Token");
+                state.userinfo = null;
+                // state.userToken = null;
+            } catch (error){
+                console.error("Error logout:", error);
+            }
+
         },
+
+        //Anmeldeinformationen "setzen" -> Speichern in Local Storage
         setCredentials: (state, {payload})=> {
-            localStorage.setItem("access_Token", payload.access_token)
-            state.userinfo = payload
-        }
+            try {
+                localStorage.setItem("access_Token", payload.access_token)
+                state.userinfo = payload
+            } catch (error){
+                console.error("Error setting credentials:", error);
+            }
+        },
+
     },
 })
 

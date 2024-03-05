@@ -6,6 +6,7 @@ import Select from "react-select";
 import {useGetFahrtQuery , useGetFahrerinQuery, useGetFahrzeugQuery, useCreateFahrerinMutation, useCreateFahrtMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation, useRemoveFahrzeugMutation, useRemoveFahrtMutation} from "../Api/fahrtApi";
 import {Link} from "react-router-dom";
 import dayjs from "dayjs";
+import {useAppSelector} from "../app/hooks";
 
 
 const Onlinefahrtenbuch : FC = () => {
@@ -44,9 +45,8 @@ const Onlinefahrtenbuch : FC = () => {
     const [auswahlFahrzeug, setAuswahlFahrzeug] = useState<string>();
     const [auswahlFahrerin, setAuswahlFahrerin] = useState<string>();
 
-
-    // console.log(fahrerin);
-
+    //App
+    const {userinfo} : {userinfo: any} = useAppSelector((state)=> state.auth)
 
 
     const handleSubmitFahrerin= (e: any) => {
@@ -61,6 +61,8 @@ const Onlinefahrtenbuch : FC = () => {
             payload: {
                 vorname: vorname,
                 nachname: nachname,
+                created_from: userinfo.user.id,
+                created_from_email: userinfo.user.email,
             }
         })
         setVorname("");
@@ -81,6 +83,8 @@ const Onlinefahrtenbuch : FC = () => {
                 baujahr: baujahr,
                 modell: modell,
                 marke: marke,
+                created_from: userinfo.user.id,
+                created_from_email: userinfo.user.email,
             }
         })
         setNummernschild("");
@@ -105,6 +109,8 @@ const Onlinefahrtenbuch : FC = () => {
                 datum: datum,
                 fahrzeug_id: auswahlFahrzeug,
                 fahrerin_id: auswahlFahrerin,
+                created_from: userinfo.user.id,
+                created_from_email: userinfo.user.email,
             }
         })
         setGrund("");
@@ -369,11 +375,6 @@ const Onlinefahrtenbuch : FC = () => {
 
             </div>
         </div>
-
-
-
-
-
 
     )
 }

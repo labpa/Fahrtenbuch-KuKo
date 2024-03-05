@@ -6,6 +6,7 @@ import auto from "../images/auto.jpg";
 import Header from "../Components/Header";
 import {useAppSelector} from "../app/hooks";
 import Alert from 'react-bootstrap/Alert';
+import dayjs from "dayjs";
 
 const User : FC = () => {
 
@@ -31,24 +32,18 @@ const User : FC = () => {
                 <Col></Col>
                 <Col>
                     <div>
-                        {[
-                            'success',
-                        ].map((variant) => (
-                            <Alert key={variant} variant={variant}>
-                                Welcome <strong>{userinfo.user.email} !</strong> You can view this page because you're logged in
+                            <Alert variant={"success"}>
+                                <p> Herzlich Wilkommen </p>
+                                <p> <strong>{userinfo.user.email} !</strong></p>
+                                <p>Siese Seite wird dir angezeigt, weil du Angemeldet bist.</p>
+                                <p>Du bist Angemeldet seit: <strong>{dayjs(userinfo.user.last_sign_in_at).locale('de').format('DD.MM.YYYY HH:mm:ss')}</strong></p>
+                                <p>Deine User Id von Supabase: <strong>{userinfo.user.id}</strong></p>
+
                             </Alert>
-                        ))}
                     </div>
                 </Col>
                 <Col></Col>
             </Row>
-            <Row>
-                <Col></Col>
-                <Col>
-                </Col>
-                <Col></Col>
-            </Row>
-
         </div>
     )
 }
