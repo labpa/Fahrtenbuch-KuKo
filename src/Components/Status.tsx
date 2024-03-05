@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import {Col, Row, Stack} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const Status : FC = () => {
     const {userinfo} = useAppSelector((state: any) => state.auth);
@@ -38,7 +38,11 @@ const Status : FC = () => {
                                 {isFetching
                                     ? <div className={"text-danger"}>Fetching your profile...</div>
                                     : userinfo !== null
-                                        ? <div className={"text-success"}>Logged in as {userinfo.user.email}</div>
+                                        ? <div className={"text-success"}>Angemeldet als: &nbsp;
+                                            <Link to={"/user"}>
+                                               {userinfo.user.email}
+                                            </Link>
+                                            </div>
                                         : <div className={"text-danger"}>Nicht Angemeldet</div>}
                             </span>
                             </Col>

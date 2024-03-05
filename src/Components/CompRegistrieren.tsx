@@ -12,7 +12,7 @@ const CompRegistrieren : FC = () => {
     const [registerUser] = useRegisterUserMutation();
 
 
-    //NEU -> funktioniert auch :D
+
     const submitForm = (e : any) => {
         e?.preventDefault();
         if(password !== confirmPassword){

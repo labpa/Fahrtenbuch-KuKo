@@ -25,7 +25,7 @@ const supabaseAuthApi = createApi({
             })
         }),
 
-        //todo hier weiter url stimmt wohl noch nicht oder falscher ort dafür
+        //wip
         resetPassword: builder.mutation({
             query: (email : any) => ({
                 url: 'auth/v1/password/forgot',

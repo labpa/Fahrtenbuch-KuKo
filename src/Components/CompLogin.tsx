@@ -2,9 +2,9 @@ import React, {FC, useEffect, useState} from "react";
 import {Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import {userLogin} from "../features/auth/authActions";
-import {useAppDispatch, useAppSelector} from "../app/hooks";
+import {useAppDispatch} from "../app/hooks";
 import {Link, useNavigate} from "react-router-dom";
+import {setCredentials} from "../features/auth/authSlice";
 
 import {useLoginUserMutation} from "../Api/authApi";
 
@@ -16,47 +16,20 @@ const LoginScreen : FC = () => {
     const [error, setError] = useState<string>("");
     const [login] = useLoginUserMutation();
 
-    const {userinfo, error : authError} = useAppSelector((state: any) => state.auth);
-    // console.log(userinfo);
 
-    //Wenn Anmeldung erfolgreich -> Navigiere zu /user
-    useEffect(() => {
-        if(userinfo){
-            // localStorage.setItem("access_Token", userinfo.token);
-            navigate('/user')
-        }
-    }, [navigate, userinfo]);
-
-    //Fehler abfangen
-    useEffect(() => {
-        if(authError){
-            setError("Anmeldung fehlgeschlagen. Passwort und E-Mail kontrollieren!");
-        }else {
-            setError("");
-        }
-    }, [authError]);
-
-//Alte Version funktioniert!
-    const handleLoginEvent = (e : any) => {
-        e?.preventDefault();
-        try {
-            dispatch(userLogin({email, password}));
-        } catch(error){
-            console.error("Login Error:", error);
-        }
+const handleLoginEvent = async (e: any) => {
+    e?.preventDefault();
+    try {
+        login({ email, password}).unwrap().then((response)=> {
+            // console.log(response);
+            dispatch(setCredentials(response));
+            navigate("/user");
+        })
+    } catch(error){
+        console.error("Login Error:", error);
+        setError("Invalid email or password")
     }
-
-
-    //todo: hier gehts weiter!!!!
-// const handleLoginEvent = async (e: any) => {
-//     e?.preventDefault();
-//     try {
-//         await login({ email, password});
-//
-//     } catch(error){
-//         console.error("Login Error:", error);
-//     }
-// }
+}
 
     return(
         <div className={"bs-body-bg"}>
