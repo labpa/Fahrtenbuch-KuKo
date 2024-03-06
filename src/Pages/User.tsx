@@ -7,10 +7,22 @@ import Header from "../Components/Header";
 import {useAppSelector} from "../app/hooks";
 import Alert from 'react-bootstrap/Alert';
 import dayjs from "dayjs";
+import {useGetUserDetailsQuery, useGetUsersQuery} from "../Api/authApi";
+import {useGetProfilesQuery} from "../Api/fahrtApi";
 
 const User : FC = () => {
 
     const {userinfo} : {userinfo: any} = useAppSelector((state)=> state.auth)
+
+    //todo -> kann später wieder weg
+    const {data: user} = useGetUserDetailsQuery('')
+    // console.log(user);
+
+    const {data: users}= useGetUsersQuery('');
+    // console.log(users);
+
+    const {data: profiles} = useGetProfilesQuery('');
+    // console.log(profiles);
 
     return(
         <div className={"container-sm justify-content-center"}>

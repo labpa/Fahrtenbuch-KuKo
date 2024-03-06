@@ -1,5 +1,11 @@
 import React, {FC, useEffect, useState} from "react";
-import {useGetFahrerinQuery, useGetFahrtQuery, useGetFahrzeugQuery, useRemoveFahrtMutation} from "../../Api/fahrtApi";
+import {
+    useGetFahrerinQuery,
+    useGetFahrtQuery,
+    useGetFahrzeugQuery,
+    useGetProfilesQuery,
+    useRemoveFahrtMutation
+} from "../../Api/fahrtApi";
 import {Link, useParams} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -21,6 +27,12 @@ const FahrtDetail : FC = () => {
     const [kmEnde, setKmEnde] = useState<number>(0);
     const [creator, setCreator] = useState<string>("");
     const [creatorEmail, setCreatorEmail] = useState<string>("");
+
+    const {data: profiles} = useGetProfilesQuery('');
+    console.log(profiles);
+
+
+
 
     useEffect(() => {
         let datensatz = fahrt?.find((entry: any)=> entry.fahrt_id === fahrt_id);
@@ -76,7 +88,7 @@ const FahrtDetail : FC = () => {
                     </Row>
                     <Row className={"g-2 mb-3"}>
                         <Col><label>Erstellt von: </label></Col>
-                        <Col>{creatorEmail}</Col>
+                        <Col>{creator}</Col>
                     </Row>
                     <Row className={"g-2 mb-3"}>
                         <Col>

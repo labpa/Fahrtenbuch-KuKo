@@ -21,18 +21,7 @@ const supabaseApiFahrt = createApi({
             return headers;
         },
     }),
-
-
-    // reducerPath: "FahrtApi",
-    // baseQuery: fetchBaseQuery({
-    //     baseUrl: 'https://havsdrwogfkzzlkemcvz.supabase.co',
-    //     headers: {Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8',
-    //     apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdnNkcndvZ2Zrenpsa2VtY3Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ4MzEwOTAsImV4cCI6MjAyMDQwNzA5MH0.CHbFOql-glKAKE_J_DENJHCMZFunAfd-COzXK96Yjd8'},
-    // }),
-
-
-
-    tagTypes: ['Fahrt', 'Fahrerin', 'Fahrzeug'],
+    tagTypes: ['Fahrt', 'Fahrerin', 'Fahrzeug', 'Profiles'],
     endpoints: (builder) => ({
         // Fahrt
         getFahrt: builder.query({
@@ -130,6 +119,11 @@ const supabaseApiFahrt = createApi({
             }),
             invalidatesTags: ['Fahrzeug']
         }),
+        //Profiles
+        getProfiles: builder.query({
+            query: ()=> 'rest/v1/profiles',
+            providesTags: ['Profiles']
+        }),
 
     })
 
@@ -146,7 +140,8 @@ export const {
     useRemoveFahrtMutation,
     useUpdateFahrerinMutation,
     useUpdateFahrzeugMutation,
-    useUpdateFahrtMutation
+    useUpdateFahrtMutation,
+    useGetProfilesQuery
 } = supabaseApiFahrt;
 
 export {supabaseApiFahrt};

@@ -19,14 +19,13 @@ const LoginScreen : FC = () => {
 
 const handleLoginEvent = async (e: any) => {
     e?.preventDefault();
-    try {
         login({ email, password}).unwrap().then((response)=> {
             dispatch(setCredentials(response));
             navigate("/onlinefahrtenbuch");
-        })
-    } catch (error){
-        setError("Falsche Anmeldeinformationen")
-    }
+        }).catch(error =>{
+            console.error(error);
+            setError("Anmeldung fehlgeschlagen! Bitte überprüfe deine E-Mail-Adresse und dein Passwort.");
+        });
 }
 
     return(

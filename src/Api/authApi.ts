@@ -19,15 +19,21 @@ const supabaseAuthApi = createApi({
 
         getUserDetails : builder.query({
             query: () =>({
-                url: 'auth/v1/user',
+                url: '/auth/v1/user',
                 method: 'GET'
             })
+        }),
+
+        //todo: Versuch Liste aller User zu bekommen
+        getUsers: builder.query({
+            query: () => 'rest/v1/profiles',
+            providesTags: ['User']
         }),
 
         //todo: hier weiter url still wrong
         resetPassword: builder.mutation({
             query: (email) => ({
-                url: 'auth/v1/token/recovery',
+                url: '/auth/v1/token/recovery',
                 method: 'POST',
                 body: {email},
             })
@@ -42,7 +48,7 @@ const supabaseAuthApi = createApi({
             }),
         }),
 
-        //loginUser funktioniert todo: Access_Token muss gespeichert werden.
+        //loginUser funktioniert
         loginUser: builder.mutation({
             query: ({email, password}) => ({
                 url: '/auth/v1/token?grant_type=password',
@@ -55,9 +61,16 @@ const supabaseAuthApi = createApi({
 })
 export const {
     useGetUserDetailsQuery,
+    useGetUsersQuery,
     useResetPasswordMutation,
     useLoginUserMutation,
     useRegisterUserMutation
 } = supabaseAuthApi;
 
 export {supabaseAuthApi};
+
+//todo: Fehler anzeigen lassen wie es bisher war
+//todo: alle user aus der Tabelle holen -> so wie die fahrten fahrzeuge und fahrerinnnen
+//todo: in Details einfügen
+//todo: in Details die Tabellen miteinander Joinen und anstatt ID die E-Mail anzeigen lassen.
+//todo: ändern anzeige und speichern von email zu id!
