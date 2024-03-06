@@ -69,8 +69,4 @@ export const {
 
 export {supabaseAuthApi};
 
-//todo: Fehler anzeigen lassen wie es bisher war
-//todo: alle user aus der Tabelle holen -> so wie die fahrten fahrzeuge und fahrerinnnen
-//todo: in Details einfügen
-//todo: in Details die Tabellen miteinander Joinen und anstatt ID die E-Mail anzeigen lassen.
-//todo: ändern anzeige und speichern von email zu id!
+//todo: FRAGE! getUsers funktioniert hier so nicht. Weiter in Fahrt Api!

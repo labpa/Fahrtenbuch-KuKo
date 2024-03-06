@@ -29,7 +29,7 @@ import FahrtDetail from "./Pages/details/FahrtDetail";
 import LoginScreen from "./Components/CompLogin";
 import Registrieren from "./Pages/Registrieren";
 import User from "./Pages/User";
-import ProtectedRoute from "./Pages/details/ProtectedRoute";
+import ProtectedRoute from "./Pages/protection/ProtectedRoute";
 import Status from "./Components/Status"
 import NeuesPasswort from "./Pages/NeuesPasswort";
 

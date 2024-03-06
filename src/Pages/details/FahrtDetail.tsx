@@ -28,10 +28,8 @@ const FahrtDetail : FC = () => {
     const [creator, setCreator] = useState<string>("");
     const [creatorEmail, setCreatorEmail] = useState<string>("");
 
+    // todo: Tabelle die auth.users Öffentlich macht
     const {data: profiles} = useGetProfilesQuery('');
-    console.log(profiles);
-
-
 
 
     useEffect(() => {
@@ -88,7 +86,8 @@ const FahrtDetail : FC = () => {
                     </Row>
                     <Row className={"g-2 mb-3"}>
                         <Col><label>Erstellt von: </label></Col>
-                        <Col>{creator}</Col>
+                        {/*<Col>{creator}</Col>*/}
+                        <Col>{profiles?.find((a: any) => a.id=== creator)?.email}</Col>
                     </Row>
                     <Row className={"g-2 mb-3"}>
                         <Col>

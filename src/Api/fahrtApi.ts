@@ -119,6 +119,7 @@ const supabaseApiFahrt = createApi({
             }),
             invalidatesTags: ['Fahrzeug']
         }),
+
         //Profiles
         getProfiles: builder.query({
             query: ()=> 'rest/v1/profiles',
@@ -145,3 +146,6 @@ export const {
 } = supabaseApiFahrt;
 
 export {supabaseApiFahrt};
+
+//todo: FRAGE -> Profiles wurde hier erstellt, da die Daten aus auth.user in diese Tabelle übertragen wurden Kann das hier bleiben?
+//todo: Trigger um auth.users mit profiles zu synchronisieren hatte nicht funktioniert. HILFE

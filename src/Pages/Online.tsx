@@ -62,7 +62,6 @@ const Onlinefahrtenbuch : FC = () => {
                 vorname: vorname,
                 nachname: nachname,
                 created_from: userinfo.user.id,
-                created_from_email: userinfo.user.email,
             }
         })
         setVorname("");
@@ -84,7 +83,6 @@ const Onlinefahrtenbuch : FC = () => {
                 modell: modell,
                 marke: marke,
                 created_from: userinfo.user.id,
-                created_from_email: userinfo.user.email,
             }
         })
         setNummernschild("");
@@ -110,7 +108,6 @@ const Onlinefahrtenbuch : FC = () => {
                 fahrzeug_id: auswahlFahrzeug,
                 fahrerin_id: auswahlFahrerin,
                 created_from: userinfo.user.id,
-                created_from_email: userinfo.user.email,
             }
         })
         setGrund("");
