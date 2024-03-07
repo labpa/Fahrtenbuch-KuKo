@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import {Col, Image, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
@@ -7,22 +7,26 @@ import Header from "../Components/Header";
 import {useAppSelector} from "../app/hooks";
 import Alert from 'react-bootstrap/Alert';
 import dayjs from "dayjs";
-import {useGetUserDetailsQuery, useGetUsersQuery} from "../Api/authApi";
+
 import {useGetProfilesQuery} from "../Api/fahrtApi";
 
 const User : FC = () => {
+    const [vorname, setVorname] = useState<string>("");
+    const [nachname, setNachname] = useState<string>("");
 
     const {userinfo} : {userinfo: any} = useAppSelector((state)=> state.auth)
-
-    //todo -> kann später wieder weg
-    const {data: user} = useGetUserDetailsQuery('')
-    // console.log(user);
-
-    const {data: users}= useGetUsersQuery('');
-    // console.log(users);
+    const user_id = userinfo.user.id;
 
     const {data: profiles} = useGetProfilesQuery('');
-    // console.log(profiles);
+
+
+    useEffect(() => {
+        let datensatz = profiles?.find((entry: any) => entry.id === user_id)
+        if(datensatz){
+            setVorname(datensatz.first_name);
+            setNachname(datensatz.last_name);
+        }
+    }, [user_id]);
 
     return(
         <div className={"container-sm justify-content-center"}>
@@ -50,6 +54,11 @@ const User : FC = () => {
                                 <p>Siese Seite wird dir angezeigt, weil du Angemeldet bist.</p>
                                 <p>Du bist Angemeldet seit: <strong>{dayjs(userinfo.user.last_sign_in_at).locale('de').format('DD.MM.YYYY HH:mm:ss')}</strong></p>
                                 <p>Deine User Id von Supabase: <strong>{userinfo.user.id}</strong></p>
+                                <p>Vorname: {vorname}</p>
+                                <p>Nachname: {nachname}</p>
+                                <Link to={"/userbearbeiten"}>
+                                    Bearbeiten
+                                </Link>
 
                             </Alert>
                     </div>

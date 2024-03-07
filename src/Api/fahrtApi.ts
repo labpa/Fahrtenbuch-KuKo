@@ -126,6 +126,15 @@ const supabaseApiFahrt = createApi({
             providesTags: ['Profiles']
         }),
 
+        updateProfiles: builder.mutation({
+            query: ({id, payload}) => ({
+                url: `rest/v1/profiles?id=eq.${id}`,
+                method: 'put',
+                body: {...payload, id}
+            }),
+            invalidatesTags: ['Profiles']
+        })
+
     })
 
 })
@@ -142,32 +151,8 @@ export const {
     useUpdateFahrerinMutation,
     useUpdateFahrzeugMutation,
     useUpdateFahrtMutation,
-    useGetProfilesQuery
+    useGetProfilesQuery,
+    useUpdateProfilesMutation,
 } = supabaseApiFahrt;
 
 export {supabaseApiFahrt};
-
-//todo: FRAGE -> Profiles wurde hier erstellt, da die Daten aus auth.user in diese Tabelle übertragen wurden Kann das hier bleiben?
-//todo: Trigger um auth.users mit profiles zu synchronisieren hatte nicht funktioniert. HILFE
-
-
-//todo: Trigger für Supabase
-
-// CREATE OR REPLACE FUNCTION sync_profile_trigger_function()
-// RETURNS TRIGGER AS $$
-// BEGIN
-// INSERT INTO public.profiles (id, first_name, last_name, email)
-// VALUES (NEW.id, '', '', NEW.email);
-// RETURN NEW;
-// END;
-// $$ LANGUAGE plpgsql;
-//
-// CREATE TRIGGER sync_profile_trigger
-// AFTER INSERT ON auth.users
-// FOR EACH ROW EXECUTE FUNCTION sync_profile_trigger_function();
-
-//todo: Trigger entfernen
-
-// DROP TRIGGER IF EXISTS sync_profile_trigger ON auth.users;
-// DROP FUNCTION IF EXISTS sync_profile_trigger_function();
-

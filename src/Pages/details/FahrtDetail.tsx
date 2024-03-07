@@ -26,7 +26,7 @@ const FahrtDetail : FC = () => {
     const [kmbeginn, setKmBeginn] = useState<number>(0);
     const [kmEnde, setKmEnde] = useState<number>(0);
     const [creator, setCreator] = useState<string>("");
-    const [creatorEmail, setCreatorEmail] = useState<string>("");
+
 
     // todo: Tabelle die auth.users Öffentlich macht
     const {data: profiles} = useGetProfilesQuery('');
@@ -41,8 +41,7 @@ const FahrtDetail : FC = () => {
             setGrund(datensatz.grund);
             setKmBeginn(datensatz.kmbeginn);
             setKmEnde(datensatz.kmende);
-            setCreator(datensatz.created_from)
-            setCreatorEmail(datensatz.created_from_email)
+            setCreator(datensatz.created_from);
         }
     }, [fahrt_id]);
 

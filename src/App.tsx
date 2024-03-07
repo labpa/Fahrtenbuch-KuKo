@@ -32,6 +32,7 @@ import User from "./Pages/User";
 import ProtectedRoute from "./Pages/protection/ProtectedRoute";
 import Status from "./Components/Status"
 import NeuesPasswort from "./Pages/NeuesPasswort";
+import UserBearbeiten from "./Pages/bearbeiten/UserBearbeiten";
 
 
 
@@ -74,6 +75,7 @@ const App: FC = () => {
       <Route element={<ProtectedRoute/>}>
         //User
         <Route path={"/user"} element={<User/>}/>
+        <Route path={"/userbearbeiten"} element={<UserBearbeiten/>}/>
 
         //Fahrtenbuch Offline
         <Route path={"/home"} element={<Fahrtenbuch/>}/>

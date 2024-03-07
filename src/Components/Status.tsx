@@ -38,8 +38,6 @@ const Status : FC = () => {
                                             <Link to={"/user"}>
                                                {userinfo.user.email} &nbsp;
                                             </Link>
-                                            <strong>ID: {userinfo.user.id}</strong>
-
                                             </div>
 
                                         : <div className={"text-danger"}>Nicht Angemeldet</div>}
