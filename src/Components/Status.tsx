@@ -54,7 +54,7 @@ const Status : FC = () => {
                         </Row>
                     </Nav>
                 </Container>
-        </div>
+            </div>
     )
 }
 export default Status;

@@ -6,8 +6,6 @@ const getToken = () => {
 }
 
 const supabaseApiFahrt = createApi({
-
-
     reducerPath: "FahrtApi",
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://havsdrwogfkzzlkemcvz.supabase.co',

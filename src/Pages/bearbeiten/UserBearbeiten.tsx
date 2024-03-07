@@ -7,6 +7,7 @@ import { useGetProfilesQuery, useUpdateProfilesMutation } from "../../Api/fahrtA
 const UserBearbeiten: FC = () => {
     const [vorname, setVorname] = useState<string>("");
     const [nachname, setNachname] = useState<string>("");
+    const [kommentar, setKommentar] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>("");
     const navigate = useNavigate();
@@ -20,6 +21,7 @@ const UserBearbeiten: FC = () => {
             if (datensatz) {
                 setVorname(datensatz.first_name);
                 setNachname(datensatz.last_name);
+                setKommentar(datensatz.kommentar);
             }
             setLoading(false);
         }
@@ -35,6 +37,7 @@ const UserBearbeiten: FC = () => {
                 payload: {
                     first_name: vorname,
                     last_name: nachname,
+                    kommentar: kommentar,
                 }
             });
             navigate("/user");
@@ -67,6 +70,20 @@ const UserBearbeiten: FC = () => {
                                 <FloatingLabel label={"Nachname"}>
                                     <FormControl type={"text"} value={nachname} onChange={(e) => setNachname(e.target.value)} />
                                 </FloatingLabel>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <FloatingLabel label={"Kommentar"}>
+                                    <FormControl
+                                        as="textarea"
+                                        className="form-control-lg"
+                                        style={{ height: "300px" }}
+                                        value={kommentar}
+                                        onChange={(e) => setKommentar(e.target.value)}
+                                    />
+                                </FloatingLabel>
+
                             </Col>
                         </Row>
                         <div className={"row"}>

@@ -16,13 +16,16 @@ const User : FC = () => {
 
     const [vorname, setVorname] = useState<string>("");
     const [nachname, setNachname] = useState<string>("");
+    const [kommentar, setKommentar] = useState<string>("");
 
     useEffect(() => {
         if (user_id && profiles) {
             let datensatz = profiles.find((entry: any) => entry.id === user_id);
             if (datensatz) {
+                console.log(datensatz);
                 setVorname(datensatz.first_name);
                 setNachname(datensatz.last_name);
+                setKommentar(datensatz.kommentar);
             }
         }
     }, [user_id, profiles]);
@@ -41,27 +44,53 @@ const User : FC = () => {
                     <Col></Col>
                 </Row>
             </Container>
-            <Row>
-                <Col></Col>
-                <Col>
-                    <div>
-                            <Alert variant={"success"}>
-                                <p>Herzlich Wilkommen <strong>{vorname} {nachname}</strong></p>
-                                <p>Vorname: <strong>{vorname}</strong></p>
-                                <p>Nachname: <strong>{nachname}</strong></p>
-                                <p>E-Mail: <strong>{userinfo.user.email}</strong></p>
-                                <p>Login: <strong>{dayjs(userinfo.user.last_sign_in_at).locale('de').format('DD.MM.YYYY HH:mm:ss')}</strong></p>
-                                <p>ID: <strong>{userinfo.user.id}</strong></p>
+            {/*<Row>*/}
+            {/*    <Col></Col>*/}
+            {/*    <Col>*/}
+            {/*        <div style={{ maxWidth: "400px" }}>*/}
+            {/*            <Alert variant={"success"}>*/}
+            {/*                <p>Herzlich willkommen, <strong>{vorname} {nachname}</strong>!</p>*/}
+            {/*                <ul>*/}
+            {/*                    <li><strong>Vorname:</strong> {vorname}</li>*/}
+            {/*                    <li><strong>Nachname:</strong> {nachname}</li>*/}
+            {/*                    <li><strong>E-Mail:</strong> {userinfo.user.email}</li>*/}
+            {/*                    <li><strong>Login:</strong> {dayjs(userinfo.user.last_sign_in_at).locale('de').format('DD.MM.YYYY HH:mm:ss')}</li>*/}
+            {/*                    <li><strong>ID:</strong> {userinfo.user.id}</li>*/}
+            {/*                    <li style={{ wordWrap: "break-word" }}>Kommentar: {kommentar}</li>*/}
+            {/*                </ul>*/}
+            {/*                <Link to={"/userbearbeiten"}>*/}
+            {/*                    Bearbeiten*/}
+            {/*                </Link>*/}
+            {/*            </Alert>*/}
+            {/*        </div>*/}
+            {/*    </Col>*/}
+            {/*    <Col></Col>*/}
+            {/*</Row>*/}
 
-                                <Link to={"/userbearbeiten"}>
-                                    Bearbeiten
-                                </Link>
 
-                            </Alert>
-                    </div>
+
+            <Row className="justify-content-center">
+                <Col md={8}>
+                    <Alert variant={"success"} className="text-left">
+                        <p>Herzlich willkommen, <strong>{vorname} {nachname}</strong>!</p>
+                        <ul className="list-unstyled">
+                            <li><strong>Vorname:</strong> {vorname}</li>
+                            <li><strong>Nachname:</strong> {nachname}</li>
+                            <li><strong>E-Mail:</strong> {userinfo.user.email}</li>
+                            <li><strong>Login:</strong> {dayjs(userinfo.user.last_sign_in_at).locale('de').format('DD.MM.YYYY HH:mm:ss')}</li>
+                            <li><strong>ID:</strong> {userinfo.user.id}</li>
+                            <li className="text-break"><strong>Kommentar: </strong>{kommentar}</li>
+                        </ul>
+                        <div className="text-center">
+                            <Link to={"/userbearbeiten"} className="btn btn-outline-dark">
+                                Bearbeiten
+                            </Link>
+                        </div>
+                    </Alert>
                 </Col>
-                <Col></Col>
             </Row>
+
+
         </div>
     )
 }
