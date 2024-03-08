@@ -7,7 +7,7 @@ import {useAppSelector} from "../app/hooks";
 import Alert from 'react-bootstrap/Alert';
 import dayjs from "dayjs";
 
-import {useGetProfilesQuery} from "../Api/fahrtApi";
+import {useGetProfilesQuery} from "../Api/profilesApi";
 
 const User : FC = () => {
     const {userinfo} : {userinfo: any} = useAppSelector((state)=> state.auth);

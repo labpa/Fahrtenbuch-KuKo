@@ -30,4 +30,3 @@ const NavbarZwei = () => {
 }
 
 export default NavbarZwei;
-

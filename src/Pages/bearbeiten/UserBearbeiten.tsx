@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { Container, Row, Col, FloatingLabel, FormControl, Button, Spinner, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
-import { useGetProfilesQuery, useUpdateProfilesMutation } from "../../Api/fahrtApi";
+import {useGetProfilesQuery, useUpdateProfilesMutation} from "../../Api/profilesApi";
 
 const UserBearbeiten: FC = () => {
     const [vorname, setVorname] = useState<string>("");

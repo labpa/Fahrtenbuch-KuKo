@@ -3,9 +3,10 @@ import {
     useGetFahrerinQuery,
     useGetFahrtQuery,
     useGetFahrzeugQuery,
-    useGetProfilesQuery,
     useRemoveFahrtMutation
 } from "../../Api/fahrtApi";
+
+import {useGetProfilesQuery} from "../../Api/profilesApi";
 import {Link, useParams} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";

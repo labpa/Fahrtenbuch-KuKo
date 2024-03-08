@@ -118,21 +118,6 @@ const supabaseApiFahrt = createApi({
             invalidatesTags: ['Fahrzeug']
         }),
 
-        //Profiles
-        getProfiles: builder.query({
-            query: ()=> 'rest/v1/profiles',
-            providesTags: ['Profiles']
-        }),
-
-        updateProfiles: builder.mutation({
-            query: ({id, payload}) => ({
-                url: `rest/v1/profiles?id=eq.${id}`,
-                method: 'put',
-                body: {...payload, id}
-            }),
-            invalidatesTags: ['Profiles']
-        })
-
     })
 
 })
@@ -149,8 +134,7 @@ export const {
     useUpdateFahrerinMutation,
     useUpdateFahrzeugMutation,
     useUpdateFahrtMutation,
-    useGetProfilesQuery,
-    useUpdateProfilesMutation,
+
 } = supabaseApiFahrt;
 
 export {supabaseApiFahrt};
