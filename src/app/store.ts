@@ -1,7 +1,6 @@
 import { configureStore} from '@reduxjs/toolkit'
-import booksReducer from '../features/books/booksSlice'
-import {supabaseApi} from "../Api/buchApi";
-import {productsApi} from "../apiSlice";
+
+
 import {supabaseApiFahrt} from "../Api/fahrtApi";
 import {supabaseAuthApi} from "../Api/authApi"
 import authReducer from '../features/auth/authSlice';
@@ -10,15 +9,14 @@ import authReducer from '../features/auth/authSlice';
 
 export const store = configureStore({
     reducer: {
-        books: booksReducer,
+
         auth: authReducer,
-        [supabaseApi.reducerPath]: supabaseApi.reducer,
-        [productsApi.reducerPath]: productsApi.reducer,
+
         [supabaseApiFahrt.reducerPath]: supabaseApiFahrt.reducer,
         [supabaseAuthApi.reducerPath]: supabaseAuthApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(supabaseApi.middleware, productsApi.middleware, supabaseApiFahrt.middleware, supabaseAuthApi.middleware),
+        getDefaultMiddleware().concat(supabaseApiFahrt.middleware, supabaseAuthApi.middleware),
 
     devTools: true,
 })

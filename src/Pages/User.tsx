@@ -44,31 +44,6 @@ const User : FC = () => {
                     <Col></Col>
                 </Row>
             </Container>
-            {/*<Row>*/}
-            {/*    <Col></Col>*/}
-            {/*    <Col>*/}
-            {/*        <div style={{ maxWidth: "400px" }}>*/}
-            {/*            <Alert variant={"success"}>*/}
-            {/*                <p>Herzlich willkommen, <strong>{vorname} {nachname}</strong>!</p>*/}
-            {/*                <ul>*/}
-            {/*                    <li><strong>Vorname:</strong> {vorname}</li>*/}
-            {/*                    <li><strong>Nachname:</strong> {nachname}</li>*/}
-            {/*                    <li><strong>E-Mail:</strong> {userinfo.user.email}</li>*/}
-            {/*                    <li><strong>Login:</strong> {dayjs(userinfo.user.last_sign_in_at).locale('de').format('DD.MM.YYYY HH:mm:ss')}</li>*/}
-            {/*                    <li><strong>ID:</strong> {userinfo.user.id}</li>*/}
-            {/*                    <li style={{ wordWrap: "break-word" }}>Kommentar: {kommentar}</li>*/}
-            {/*                </ul>*/}
-            {/*                <Link to={"/userbearbeiten"}>*/}
-            {/*                    Bearbeiten*/}
-            {/*                </Link>*/}
-            {/*            </Alert>*/}
-            {/*        </div>*/}
-            {/*    </Col>*/}
-            {/*    <Col></Col>*/}
-            {/*</Row>*/}
-
-
-
             <Row className="justify-content-center">
                 <Col md={8}>
                     <Alert variant={"success"} className="text-left">
@@ -89,8 +64,6 @@ const User : FC = () => {
                     </Alert>
                 </Col>
             </Row>
-
-
         </div>
     )
 }

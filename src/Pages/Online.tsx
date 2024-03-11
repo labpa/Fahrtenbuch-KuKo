@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
-import {Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
+import {ButtonGroup, Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Select from "react-select";
 import {useGetFahrtQuery , useGetFahrerinQuery, useGetFahrzeugQuery, useCreateFahrerinMutation, useCreateFahrtMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation, useRemoveFahrzeugMutation, useRemoveFahrtMutation} from "../Api/fahrtApi";
@@ -173,35 +173,32 @@ const Onlinefahrtenbuch : FC = () => {
                         {formErrorFahrerin && <p className={"text-danger"}>{formErrorFahrerin}</p>}
                     </Container>
                 </form>
-                <Table className={"table table-hover"} responsive={"lg"}>
-                    <thead>
-                    <tr className={"g-2 mb-3"}>
-                        {/*<th scope={"col"}>Fahrer:in ID</th>*/}
-                        <th scope={"col"}>Vorname</th>
-                        <th scope={"col"}>Nachname</th>
-                        <th scope={"col"}>Löschen</th>
-                        <th scope={"col"}>Bearbeiten</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {fahrerin?.map((fahrerin: any)=>(
-                        <tr key={fahrerin.fahrerin_id}>
-                            {/*<td>{fahrerin.fahrerin_id}</td>*/}
-                            <td>{fahrerin.vorname}</td>
-                            <td>{fahrerin.nachname}</td>
-                            <td><Button variant={"outline-dark"} onClick={() => removeFahrerin(fahrerin.fahrerin_id)}>Löschen</Button></td>
-                            <td>
-                                <Link to={`/fahrerinbearbeiten/${fahrerin.fahrerin_id}`}>
-                                    <Button variant={"outline-dark"} >Bearbeiten</Button>
-                                </Link>
-                            </td>
 
+
+                <Table className={"table table-hover"} responsive={"sm"}>
+                    <tbody>
+                    {fahrerin?.map((fahrerin: any) => (
+                        <tr key={fahrerin.fahrerin_id}>
+                            <td>
+                                <strong>Vorname:</strong> {fahrerin.vorname} <br />
+                                <strong>Nachname:</strong> {fahrerin.nachname} <br />
+
+                            </td>
+                            <td>
+                                <div className="d-grid gap-2">
+                                    <Button variant={"outline-dark"} style={{ width: '100%' }} onClick={() => removeFahrerin(fahrerin.fahrerin_id)}>
+                                        Löschen
+                                    </Button>
+                                    <Link to={`/fahrerinbearbeiten/${fahrerin.fahrerin_id}`}>
+                                        <Button variant={"outline-dark"} style={{ width: '100%' }}>Bearbeiten</Button>
+                                    </Link>
+                                </div>
+                            </td>
                         </tr>
                     ))}
                     </tbody>
                 </Table>
-
-
+                
                 {/*    Fahrzeug Formular*/}
                 <form onSubmit={handleSubmitFahrzeug}>
                     <div><h2>Fahrzeug</h2></div>
@@ -237,38 +234,32 @@ const Onlinefahrtenbuch : FC = () => {
                     </Container>
                 </form>
 
-                <Table className={"table table-hover"} responsive={"lg"}>
-                    <thead>
-                    <tr className={"g-2 mb-3"}>
-                        {/*<th scope={"col"}>Fahrzeug ID</th>*/}
-                        <th scope={"col"}>Nummernschild</th>
-                        <th scope={"col"}>Marke</th>
-                        <th scope={"col"}>Modell</th>
-                        <th scope={"col"}>Baujahr</th>
-                        <th scope={"col"}>Löschen</th>
-                        <th scope={"col"}>Bearbeiten</th>
-                    </tr>
-                    </thead>
+                <Table className={"table table-hover"} responsive={"sm"}>
                     <tbody>
-                    {fahrzeug?.map((fahrzeug: any)=>(
+                    {fahrzeug?.map((fahrzeug: any) => (
                         <tr key={fahrzeug.fahrzeug_id}>
-                            {/*<td>{fahrzeug.fahrzeug_id}</td>*/}
-                            <td>{fahrzeug.nummernschild}</td>
-                            <td>{fahrzeug.marke}</td>
-                            <td>{fahrzeug.modell}</td>
-                            <td>{fahrzeug.baujahr}</td>
-                            <td><Button variant={"outline-dark"} onClick={() => removeFahrzeug(fahrzeug.fahrzeug_id)}>Löschen</Button></td>
                             <td>
-                                <Link to={`/fahrzeugbearbeiten/${fahrzeug.fahrzeug_id}`}>
-                                    <Button variant={"outline-dark"}>Bearbeiten</Button>
-                                </Link>
+                                <strong>Nummernschild:</strong> {fahrzeug.nummernschild} <br />
+                                <strong>Marke:</strong> {fahrzeug.marke} <br />
+                                <strong>Modell:</strong> {fahrzeug.modell} <br />
+                                <strong>Baujahr:</strong> {fahrzeug.baujahr}
                             </td>
-
-
+                            <td>
+                                <div className="d-grid gap-2">
+                                    <Button variant={"outline-dark"} style={{ width: '100%' }} onClick={() => removeFahrzeug(fahrzeug.fahrzeug_id)}>
+                                        Löschen
+                                    </Button>
+                                    <Link to={`/fahrzeugbearbeiten/${fahrzeug.fahrzeug_id}`}>
+                                        <Button variant={"outline-dark"} style={{ width: '100%' }}>Bearbeiten</Button>
+                                    </Link>
+                                </div>
+                            </td>
                         </tr>
                     ))}
                     </tbody>
                 </Table>
+
+
 
 
             {/*    Fahrt Formular*/}
@@ -328,43 +319,20 @@ const Onlinefahrtenbuch : FC = () => {
                     </Container>
                 </form>
 
-                <Table className={"table table-hover"} responsive={"lg"}>
-                    <thead>
-                    <tr className={"g-2 mb-3"}>
-                        <th scope={"col"}>Fahrzeug</th>
-                        <th scope={"col"}>Fahrer:in</th>
-                        {/*<th scope={"col"}>KM-Beginn</th>*/}
-                        {/*<th scope={"col"}>KM-Ende</th>*/}
-                        {/*<th scope={"col"}>Strecke</th>*/}
-                        {/*<th scope={"col"}>Grund</th>*/}
-                        <th scope={"col"}>Datum</th>
-                        {/*<th scope={"col"}>Löschen</th>*/}
-                        {/*<th scope={"col"}>Bearbeiten</th>*/}
-                        <th scope={"col"}>Details</th>
-                    </tr>
-                    </thead>
+                <Table className={"table table-hover"} responsive={"sm"}>
                     <tbody>
-                    {fahrt?.map((fahrt: any)=>(
+                    {fahrt?.map((fahrt: any) => (
                         <tr key={fahrt.fahrt_id}>
-                            <td>{fahrzeug?.find((a: any)=> a.fahrzeug_id === fahrt.fahrzeug_id)?.nummernschild}</td>
-                            <td>{fahrerin?.find((a: any)=> a.fahrerin_id === fahrt.fahrerin_id)?.vorname} {fahrerin?.find((a: any)=> a.fahrerin_id === fahrt.fahrerin_id)?.nachname}</td>
-                            {/*<td>{fahrt.kmbeginn}</td>*/}
-                            {/*<td>{fahrt.kmende}</td>*/}
-                            {/*<td>{fahrt.kmende - fahrt.kmbeginn}</td>*/}
-                            {/*<td>{fahrt.grund}</td>*/}
-                            <td>{dayjs(fahrt.datum).format("D.M.YYYY")}</td>
-                            {/*<td><Button variant={"outline-dark"} onClick={()=> removeFahrt(fahrt.fahrt_id)}>Löschen</Button></td>*/}
-                            {/*<td>*/}
-                            {/*    <Link to={`/fahrtbearbeiten/${fahrt.fahrt_id}`}>*/}
-                            {/*        <Button variant={"outline-dark"}>Bearbeiten</Button>*/}
-                            {/*    </Link>*/}
-                            {/*</td>*/}
+                            <td>
+                                <strong>Fahrzeug:</strong> {fahrzeug?.find((a: any) => a.fahrzeug_id === fahrt.fahrzeug_id)?.nummernschild} <br />
+                                <strong>Fahrer:in:</strong> {fahrerin?.find((a: any) => a.fahrerin_id === fahrt.fahrerin_id)?.vorname} {fahrerin?.find((a: any) => a.fahrerin_id === fahrt.fahrerin_id)?.nachname} <br />
+                                <strong>Datum:</strong> {dayjs(fahrt.datum).format("D.M.YYYY")}
+                            </td>
                             <td>
                                 <Link to={`/fahrtdetail/${fahrt.fahrt_id}`}>
-                                    <Button variant={"outline-dark"}>Details</Button>
+                                    <Button variant={"outline-dark"} style={{ width: '100%' }}>Details</Button>
                                 </Link>
                             </td>
-
                         </tr>
                     ))}
                     </tbody>
