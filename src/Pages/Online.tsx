@@ -184,16 +184,34 @@ const Onlinefahrtenbuch : FC = () => {
                                 <strong>Nachname:</strong> {fahrerin.nachname} <br />
 
                             </td>
+
                             <td>
-                                <div className="d-grid gap-2">
-                                    <Button variant={"outline-dark"} style={{ width: '100%' }} onClick={() => removeFahrerin(fahrerin.fahrerin_id)}>
-                                        Löschen
-                                    </Button>
-                                    <Link to={`/fahrerinbearbeiten/${fahrerin.fahrerin_id}`}>
-                                        <Button variant={"outline-dark"} style={{ width: '100%' }}>Bearbeiten</Button>
-                                    </Link>
+                                <div className="d-flex justify-content-end">
+                                    <div className="d-grid gap-2">
+                                        <Button variant={"outline-dark"} style={{ width: '200px' }} onClick={() => removeFahrerin(fahrerin.fahrerin_id)}>
+                                            Löschen
+                                        </Button>
+                                        <Link to={`/fahrerinbearbeiten/${fahrerin.fahrerin_id}`}>
+                                            <Button variant={"outline-dark"} style={{ width: '200px' }}>Bearbeiten</Button>
+                                        </Link>
+                                    </div>
                                 </div>
                             </td>
+
+
+
+
+
+                            {/*<td>*/}
+                            {/*    <div className="d-grid gap-2">*/}
+                            {/*        <Button  variant={"outline-dark"} style={{ width: '250px' }} onClick={() => removeFahrerin(fahrerin.fahrerin_id)}>*/}
+                            {/*            Löschen*/}
+                            {/*        </Button>*/}
+                            {/*        <Link to={`/fahrerinbearbeiten/${fahrerin.fahrerin_id}`}>*/}
+                            {/*            <Button variant={"outline-dark"} style={{ width: '250px' }}>Bearbeiten</Button>*/}
+                            {/*        </Link>*/}
+                            {/*    </div>*/}
+                            {/*</td>*/}
                         </tr>
                     ))}
                     </tbody>
@@ -227,6 +245,7 @@ const Onlinefahrtenbuch : FC = () => {
                                 </FloatingLabel>
                             </Col>
                         </Row>
+
                         <div className={"g-2 mb-3"}>
                             <Button variant={"outline-dark"} type={"submit"}>Hinzufügen</Button>
                         </div>
@@ -245,13 +264,15 @@ const Onlinefahrtenbuch : FC = () => {
                                 <strong>Baujahr:</strong> {fahrzeug.baujahr}
                             </td>
                             <td>
-                                <div className="d-grid gap-2">
-                                    <Button variant={"outline-dark"} style={{ width: '100%' }} onClick={() => removeFahrzeug(fahrzeug.fahrzeug_id)}>
-                                        Löschen
-                                    </Button>
-                                    <Link to={`/fahrzeugbearbeiten/${fahrzeug.fahrzeug_id}`}>
-                                        <Button variant={"outline-dark"} style={{ width: '100%' }}>Bearbeiten</Button>
-                                    </Link>
+                                <div className={"d-flex justify-content-end"}>
+                                    <div className="d-grid gap-2">
+                                        <Button variant={"outline-dark"} style={{ width: '200px' }} onClick={() => removeFahrzeug(fahrzeug.fahrzeug_id)}>
+                                            Löschen
+                                        </Button>
+                                        <Link to={`/fahrzeugbearbeiten/${fahrzeug.fahrzeug_id}`}>
+                                            <Button variant={"outline-dark"} style={{ width: '200px' }}>Bearbeiten</Button>
+                                        </Link>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -329,9 +350,11 @@ const Onlinefahrtenbuch : FC = () => {
                                 <strong>Datum:</strong> {dayjs(fahrt.datum).format("D.M.YYYY")}
                             </td>
                             <td>
-                                <Link to={`/fahrtdetail/${fahrt.fahrt_id}`}>
-                                    <Button variant={"outline-dark"} style={{ width: '100%' }}>Details</Button>
-                                </Link>
+                                <div className={"d-flex justify-content-end"}>
+                                    <Link to={`/fahrtdetail/${fahrt.fahrt_id}`}>
+                                        <Button variant={"outline-dark"} style={{ width: '200px' }}>Details</Button>
+                                    </Link>
+                                </div>
                             </td>
                         </tr>
                     ))}

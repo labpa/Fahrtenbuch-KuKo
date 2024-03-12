@@ -2,7 +2,7 @@ import { configureStore} from '@reduxjs/toolkit'
 
 
 import {supabaseApiFahrt} from "../Api/fahrtApi";
-import {supabaseAuthApi} from "../Api/authApi"
+import {supabaseAuthApi} from "../Api/authApi";
 import authReducer from '../features/auth/authSlice';
 
 

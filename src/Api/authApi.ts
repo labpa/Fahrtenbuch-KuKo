@@ -68,5 +68,3 @@ export const {
 } = supabaseAuthApi;
 
 export {supabaseAuthApi};
-
-//todo: FRAGE! getUsers funktioniert hier so nicht. Weiter in Fahrt Api!
