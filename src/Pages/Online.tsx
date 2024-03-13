@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
-import {ButtonGroup, Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
+import {Col, FloatingLabel, FormControl, Row, Table} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Select from "react-select";
 import {useGetFahrtQuery , useGetFahrerinQuery, useGetFahrzeugQuery, useCreateFahrerinMutation, useCreateFahrtMutation, useRemoveFahrerinMutation, useCreateFahrzeugMutation, useRemoveFahrzeugMutation, useRemoveFahrtMutation} from "../Api/fahrtApi";
@@ -128,11 +128,8 @@ const Onlinefahrtenbuch : FC = () => {
 
     const lastKm = () => {
         let carRideList = fahrt.filter((rli: any) => rli.fahrzeug_id === auswahlFahrzeug);
-
         let carKms = carRideList.map((crl: any)=> crl.kmende);
-
         let maxKms = Math.max(...carKms)
-
         setKmBeginn(maxKms);
     }
     useEffect(() => {
@@ -197,21 +194,6 @@ const Onlinefahrtenbuch : FC = () => {
                                     </div>
                                 </div>
                             </td>
-
-
-
-
-
-                            {/*<td>*/}
-                            {/*    <div className="d-grid gap-2">*/}
-                            {/*        <Button  variant={"outline-dark"} style={{ width: '250px' }} onClick={() => removeFahrerin(fahrerin.fahrerin_id)}>*/}
-                            {/*            Löschen*/}
-                            {/*        </Button>*/}
-                            {/*        <Link to={`/fahrerinbearbeiten/${fahrerin.fahrerin_id}`}>*/}
-                            {/*            <Button variant={"outline-dark"} style={{ width: '250px' }}>Bearbeiten</Button>*/}
-                            {/*        </Link>*/}
-                            {/*    </div>*/}
-                            {/*</td>*/}
                         </tr>
                     ))}
                     </tbody>

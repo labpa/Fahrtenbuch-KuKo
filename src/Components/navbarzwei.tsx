@@ -16,8 +16,8 @@ const NavbarZwei = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <NavLink className={"nav-link"} to={"home"}>Fahrtenbuch-Offline<span className={"visually-hidden"}>(current)</span></NavLink>
-                            <NavLink className={"nav-link"} to={"/liste"}>Liste</NavLink>
+                            {/*<NavLink className={"nav-link"} to={"home"}>Fahrtenbuch-Offline<span className={"visually-hidden"}>(current)</span></NavLink>*/}
+                            {/*<NavLink className={"nav-link"} to={"/liste"}>Liste</NavLink>*/}
                             <NavLink className={"nav-link"} to={"/onlinefahrtenbuch"}>Fahrtenbuch</NavLink>
                         </Nav>
                     </Navbar.Collapse>

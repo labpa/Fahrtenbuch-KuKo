@@ -4,8 +4,8 @@ import {Col, FloatingLabel, FormControl, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useGetFahrerinQuery, useGetFahrtQuery, useGetFahrzeugQuery, useUpdateFahrtMutation} from "../../Api/fahrtApi";
-import Select, {Options} from "react-select";
-import {selectOptions} from "@testing-library/user-event/dist/select-options";
+import Select from "react-select";
+
 
 const FahrtBearbeiten : FC = () => {
     const {data: fahrt} = useGetFahrtQuery('');
@@ -18,47 +18,24 @@ const FahrtBearbeiten : FC = () => {
     const [datum, setDatum] = useState<string>("");
     const [grund, setGrund] = useState<string>("");
 
-
-    const [updateFahrzeug, setUpdateFahrzeug]= useState<string>("");
+    const [updateFahrzeug, setUpdateFahrzeug]= useState<any>(null);
+    const [updateFahrerin, setUpdateFahrerin] = useState<any>(null);
 
     const {id: fahrt_id} = useParams();
     const navigate = useNavigate();
 
-
-
-
-
-    //todo: Anzeige Nummernschild
-    const [fahrzeug_id, setFahrzeug_id] = useState<string>("");
-
-    const selectedFahrzeugLabel = fahrzeug
-        ?.filter((a: any) => a.fahrzeug_id === fahrzeug_id)
-        .map((a: any) => a.nummernschild)[0];
-
-    console.log(selectedFahrzeugLabel);
-
-
-    //todo: Anzeige Name der Fahrerin
-    const [fahrerin_id, setFahrerin_id] = useState<string>("");
-
-    const selectedFahrerinLabel = fahrerin
-        ?.filter((a: any) => a.fahrerin_id === fahrerin_id)
-        .map((a: any) => `${a.vorname} ${a.nachname}`)
-        .join(', ');
-    console.log(selectedFahrerinLabel);
-
-
-
-
-
     useEffect(() => {
         let datensatz= fahrt?.find((entry: any) => entry.fahrt_id === fahrt_id);
         if(datensatz){
-            setFahrzeug_id(datensatz.fahrzeug_id); //todo
             setDatum(datensatz.datum);
             setGrund(datensatz.grund)
             setKmBeginn(datensatz.kmbeginn);
             setKmEnde(datensatz.kmende);
+
+            setUpdateFahrzeug(fahrzeug?.find((a : any) => a.fahrzeug_id === datensatz.fahrzeug_id));
+            setUpdateFahrerin(fahrerin?.find((a : any) => a.fahrerin_id === datensatz.fahrerin_id));
+
+            console.log(fahrzeug?.find((a : any) => a.fahrzeug_id === datensatz.fahrzeug_id) );
 
         } else {
             console.log("No Data!");
@@ -74,22 +51,21 @@ const FahrtBearbeiten : FC = () => {
                 kmende: kmEnde,
                 datum: datum,
                 grund: grund,
-                fahrerin_id: fahrerin_id,
-                fahrzeug_id: updateFahrzeug,
+                fahrerin_id: updateFahrerin.fahrerin_id,
+                fahrzeug_id: updateFahrzeug.fahrzeug_id,
             }
         })
         navigate(`/onlinefahrtenbuch`)
     }
 
     const handleChangeFahrzeug = (selectedOption: any) => {
-        setUpdateFahrzeug(selectedOption.value);
-        // console.log(selectedOption);
+        setUpdateFahrzeug(fahrzeug?.find((a : any) => a.fahrzeug_id === selectedOption.value));
     }
 
     const handleChangeFahrerin = (selectedOption: any) => {
-        setFahrerin_id(selectedOption.value);
-        // console.log(selectedOption);
+        setUpdateFahrerin(fahrerin?.find((a : any) => a.fahrerin_id === selectedOption.value));
     }
+
 
 
     return(
@@ -109,7 +85,7 @@ const FahrtBearbeiten : FC = () => {
                                             menu: provided => ({...provided, zIndex: 9999})
                                         }}
                                         onChange={handleChangeFahrzeug}
-                                        value={{value: fahrzeug_id, label: selectedFahrzeugLabel}}
+                                        value={updateFahrzeug ? {value: updateFahrzeug.fahrzeug_id, label: updateFahrzeug.nummernschild} : null}
                                         options={fahrzeug?.map((a:any)=>({value: a.fahrzeug_id, label: `${a.nummernschild}`}))}
                                 />
                             </Col>
@@ -119,7 +95,7 @@ const FahrtBearbeiten : FC = () => {
                                             menu: provided => ({...provided, zIndex: 9999})
                                         }}
                                         onChange={handleChangeFahrerin}
-                                        value={{value: fahrerin_id, label: selectedFahrerinLabel }}
+                                        value={updateFahrerin ? {value: updateFahrerin.fahrerin_id, label: `${updateFahrerin.vorname} ${updateFahrerin.nachname}`} : null}
                                         options={fahrerin?.map((a:any)=>({value: a.fahrerin_id, label: `${a.vorname} ${a.nachname}`}))}
                                 />
                             </Col>
@@ -148,8 +124,6 @@ const FahrtBearbeiten : FC = () => {
                                 </FloatingLabel>
                             </Col>
                         </Row>
-
-
                         <div className={"row"}>
                             <div className={"col"}>
                                 <div className={"d-flex"}>
@@ -167,11 +141,6 @@ const FahrtBearbeiten : FC = () => {
 
                     </Container>
                 </form>
-
-
-
-
-
             </div>
         </div>
     )
