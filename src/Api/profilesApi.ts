@@ -19,5 +19,4 @@ const extendApi = supabaseApiFahrt.injectEndpoints({
     overrideExisting: false,
 })
 
-export const {    useGetProfilesQuery,
-    useUpdateProfilesMutation} = extendApi
+export const {useGetProfilesQuery, useUpdateProfilesMutation} = extendApi
